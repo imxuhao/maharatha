@@ -857,19 +857,19 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
                         new MenuItemDefinition(
                             PageNames.App.Organization.CreditCardEntryOpenStatements,
                             L("CreditCardOpenStatement"),
-                            url: "creditcard.Entry.ccOpenStatements",
+                            url: "creditcard.entry.ccopenstatements",
                             icon: "icon-briefcase",
                             requiredPermissionName: AppPermissions.Pages_CreditCard_Entry_OpenStatements),
                         new MenuItemDefinition(
                             PageNames.App.Organization.CreditCardEntryCreditCardHistory,
                             L("CreditCardHistory"),
-                            url: "creditcard.Entry.ccdhistory",
+                            url: "creditcard.entry.ccdhistory",
                             icon: "icon-briefcase",
                             requiredPermissionName: AppPermissions.Pages_CreditCard_Entry_CreditCardHistory),
                          new MenuItemDefinition(
                             PageNames.App.Organization.CreditCardEntryCreditCardCompanies,
                             L("CreditCardCompanies"),
-                            url: "creditcard.Entry.ccdcompanies",
+                            url: "creditcard.entry.ccdcompanies",
                             icon: "icon-briefcase",
                             requiredPermissionName: AppPermissions.Pages_CreditCard_Entry_CreditCardCompanies)
 

@@ -1,23 +1,17 @@
 ﻿/**
- * The viewController class for Credit card open statements.
+ * The viewController class for Credit Card History Grid.
  * Author: kamal
  * Date: 28/04/2016
  */
 /**
- * @class Chaching.view.creditcard.entry.OpenStatementGridController
- * ViewController class for Credit card open statements.
- * @alias controller.creditcard-entry-openstatementgrid
+ * @class Chaching.view.creditcard.entry.CreditCardHistoryGridController
+ * ViewController class for Credit card history.
+ * @alias controller.creditcard-entry-creditcardhistorygrid
  */
-Ext.define('Chaching.view.creditcard.entry.OpenStatementGridController', {
+Ext.define('Chaching.view.creditcard.entry.CreditCardHistoryGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
-    alias: 'controller.creditcard-entry-openstatementgrid',
+    alias: 'controller.creditcard-entry-creditcardhistorygrid',
     doAfterCreateAction: function (createNewMode, formPanel, isEdit, record) {
-    },
-    getNewTransactionsFromCCAccount: function (menu, item, e, eOpts) {
-
-    },
-    uploadCreditCardTransClick: function (menu, item, e, eOpts) {
-
     },
     onStatementDateClick: function (tableView, td, cellIndex, record, tr, rowIndex, e, eOpts) {
         var me = this,

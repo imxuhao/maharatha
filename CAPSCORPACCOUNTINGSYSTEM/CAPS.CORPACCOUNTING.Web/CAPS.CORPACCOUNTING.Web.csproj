@@ -3658,6 +3658,8 @@
     <Content Include="ExtWeb\Chaching\app\model\banking\banksetup\BankSetupModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\base\TransactionDetailsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\base\TransactionHeaderModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\creditcard\entry\CreditCardCompanyModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\creditcard\entry\CreditCardHistoryModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\creditcard\entry\OpenStatementModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\creditcard\entry\StatementDetailModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\customers\CustomersModel.js" />
@@ -3726,6 +3728,8 @@
     <Content Include="ExtWeb\Chaching\app\store\banking\banksetup\BankCheckNumberStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\base\BaseTreeStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\base\TransactionDetailsStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\creditcard\entry\CreditCardCompanyStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\creditcard\entry\CreditCardHistoryStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\creditcard\entry\OpenStatementStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\creditcard\entry\StatementDetailStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\customers\CustomersStore.js" />
@@ -3886,6 +3890,11 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\common\grid\ChachingTransactionDetailGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\common\grid\ChachingTransactionDetailGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\common\grid\ChachingTransactionDetailGridModel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\creditcard\CreditCardEntryTabPanel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\creditcard\entry\CreditCardCompanyGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\creditcard\entry\CreditCardCompanyGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\creditcard\entry\CreditCardHistoryGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\creditcard\entry\CreditCardHistoryGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\creditcard\entry\OpenStatementGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\creditcard\entry\OpenStatementGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\creditcard\entry\StatementGrid.js" />

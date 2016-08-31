@@ -190,7 +190,7 @@
     <text name="EnableLdapAuthentication" value="Enable LDAP Authentication." />
     <text name="OtherSettings" value="Other Settings" />
     <text name="AuditLogs" value="Audit Logs" />
-    <text name="ClearFilterBtn" value="CLEAR FILTER"/>
+    <text name="ClearFilterBtn" value="CLEAR FILTER"/> 
     <text name="Success" value="Success" />
     <text name="Time" value="Time" />
     <text name="Service" value="Service" />
@@ -1056,8 +1056,8 @@
     <text name="CheckType" value="Check type" />
     <text name="DepositCheck" value="Deposit check" />
     <text name="PaymentCheck" value="Payment check" />
-    <text name="ChargeDate" value="Charge date" />
-    <text name="DateClose" value="Date close" />
+    <text name="ChargeDate" value="Charge Date" />
+    <text name="DateClose" value="Date Close" />
     <text name="TenantCreationWarningMessage" value="You cannot change tenant group for this tenant in future. Do you want to save this tenant in tenant group?" />
     <text name="DeleteWarningMessage" value="Do you really want to delete this record?." />
     <text name="TenantInformationMessage" value="Please select user to login as this tenant." />
@@ -1230,16 +1230,16 @@
     <text name="RateTypeOverrideIds" value="Rate_Type_Override_Ids" />
     <text name="NewAccountIds" value="New_Account_Ids" />
     <text name="FlagsIds" value="Flags_Ids" />
-    <text name="RollUpDivisionIds" value="RollUp_Division_Ids" />
-    <text name="RollUpAccountIds" value="RollUp_Account_Ids" />
+     <text name="RollUpDivisionIds" value="RollUp_Division_Ids" />
+      <text name="RollUpAccountIds" value="RollUp_Account_Ids" />
 
     <text name="ProjectTypeIds" value="Project_Type_Ids" />
     <text name="StatusIds" value="Status_Ids" />
     <text name="BudgetFormatIds" value="Budget_Format_Ids" />
     <text name="TaxCreditIds" value="Tax_Credit_Ids" />
-    <text name="BudgetFormatRequired" value=",Budget Format is Required" />
-    <text name="DuplicatedivisionName" value=",Duplicate Division Name -" />
-    <text name="DuplicatedivisionNumber" value="Duplicate Division Number -" />
+     <text name="BudgetFormatRequired" value=",Budget Format is Required" />
+      <text name="DuplicatedivisionName" value=",Duplicate Division Name -" />
+        <text name="DuplicatedivisionNumber" value="Duplicate Division Number -" />
     <text name="EditPettyCash" value="Edit PC" />
     <text name="CreatePettyCash" value="Create PC" />
     <text name="ViewPettyCash" value="View PC" />
@@ -1270,6 +1270,23 @@
     <text name="CreditCardApGenerated" value="A/P Generated" />
     <text name="CreditCardBuildAp" value="Build A/P" />
     <text name="CreditCardTotal" value="Credit Card Total" />
+    <text name="CreditCardHistory" value="Credit Card History" />
+    <text name="AccountLine" value="Account/Line" />
+    <text name="CreditCardApPayment#" value="AP Payment #" />
+    <text name="CreditCardApCodingJobDivision" value="AP Coding Job/Division" />
+     <text name="CreditCardApCodingAccountLine" value="AP Coding Account/Line" />
+     <text name="APCodingSubAccount1" value="AP Code Sub Acc-1" />
+    <text name="APCodingSubAccount2" value="AP Code Sub Acc-2" />
+    <text name="APCodingSubAccount3" value="AP Code Sub Acc-3" />
+    <text name="APCodingSubAccount4" value="AP Code Sub Acc-4" />
+    <text name="APCodingSubAccount5" value="AP Code Sub Acc-5" />
+    <text name="APCodingSubAccount6" value="AP Code Sub Acc-6" />
+    <text name="APCodingSubAccount7" value="AP Code Sub Acc-7" />
+    <text name="APCodingSubAccount8" value="AP Code Sub Acc-8" />
+    <text name="APCodingSubAccount9" value="AP Code Sub Acc-9" />
+    <text name="APCodingSubAccount10" value="AP Code Sub Acc-10" />
     <text name="Classifications" value="Classifications" />
+    <text name="CreditCardCompanies" value="Credit Card Companies" />
+    
   </texts>
 </localizationDictionary>

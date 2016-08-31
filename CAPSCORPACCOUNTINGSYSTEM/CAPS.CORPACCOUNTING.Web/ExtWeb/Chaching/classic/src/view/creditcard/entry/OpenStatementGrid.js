@@ -15,8 +15,8 @@ Ext.define('Chaching.view.creditcard.entry.OpenStatementGrid', {
         'Chaching.view.creditcard.entry.OpenStatementGridController',
         'Ext.menu.Menu'
     ],
-    xtype: 'creditcard.entry',
-    name: 'CreditCard.Entry',
+    xtype: 'creditcard.entry.ccopenstatements',
+    name: 'CreditCard.Entry.OpenStatements',
     controller: 'creditcard-entry-openstatementgrid',
     modulePermissions: {
         read: abp.auth.isGranted('Pages.CreditCard.Entry'),

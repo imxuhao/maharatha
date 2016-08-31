@@ -8,8 +8,8 @@ Ext.define('Chaching.model.projects.projectmaintenance.ProjectModel', {
     },
     fields: [
         { name: 'jobId', type: 'int', isPrimaryKey: true },
-        { name: 'jobNumber', type: 'string' },
-        { name: 'caption', type: 'string' },
+        { name: 'jobNumber', type: 'string', hidden: false, width: '10%', minWidth: 90,headerText:app.localize('Job#') },
+        { name: 'caption', type: 'string', hidden: false, width: '10%', minWidth: 90,headerText:app.localize('Caption') },
         { name: 'rollupCenterId', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'isCorporateDefault', type: 'boolean' },
         { name: 'chartOfAccountId', type: 'int', defaultValue: null, convert: nullHandler },

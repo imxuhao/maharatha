@@ -1,5 +1,4 @@
 Ext.define('Chaching.view.pettycash.entry.PettyCashFormController', {
-    extend: 'Ext.app.ViewController',
+    extend: 'Chaching.view.common.form.ChachingTransactionFormPanelController',
     alias: 'controller.pettycash-entry-pettycashform'
-    
 });

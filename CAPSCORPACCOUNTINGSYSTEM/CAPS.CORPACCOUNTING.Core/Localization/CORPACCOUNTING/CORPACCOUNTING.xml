@@ -1244,7 +1244,7 @@
     <text name="Envelope#" value="Envelope #" />
     <text name="EnvelopeDate" value="Envelope date" />
     <text name="EnvelopeTotal" value="Envelope total" />
-    <text name="AdvanceAmount" value="Advance amount" />
+    <text name="AdvanceAmount" value="Adv. Amount" />
     
     <text name="CreditCardOpenStatement" value="Open Statements" />
     <text name="CreditCardStatement" value="CC Statements" />

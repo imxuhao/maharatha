@@ -6,6 +6,7 @@ Ext.define('Chaching.store.projects.projectmaintenance.ProjectsStore', {
     model: 'Chaching.model.Jobcasting.JobCommercialsModel',
     proxy: {
         type: 'chachingProxy',
+        urlToGetRecordById:abp.appPath + 'api/services/app/jobUnit/GetJobUnitById',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         extraParams: {
             organizationUnitId:null

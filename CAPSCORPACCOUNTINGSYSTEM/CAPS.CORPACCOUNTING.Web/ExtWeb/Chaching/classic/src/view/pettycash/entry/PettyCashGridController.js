@@ -1,5 +1,6 @@
 Ext.define('Chaching.view.pettycash.entry.PettyCashGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
-    alias: 'controller.pettycash-entry-pettycashgrid'
+    alias: 'controller.pettycash-entry-pettycashgrid',
+    loadDetailsStore: function (record, formPanel) { }
     
 });

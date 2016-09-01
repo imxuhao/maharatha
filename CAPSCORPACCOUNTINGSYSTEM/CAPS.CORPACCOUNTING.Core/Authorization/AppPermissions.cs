@@ -85,13 +85,17 @@
         public const string Pages_Financials_Accounts_Accounts_Create = "Pages.Financials.Accounts.Accounts.Create";
         public const string Pages_Financials_Accounts_Accounts_Edit = "Pages.Financials.Accounts.Accounts.Edit";
         public const string Pages_Financials_Accounts_Accounts_Delete = "Pages.Financials.Accounts.Accounts.Delete";
-
+        public const string Pages_Financials_Accounts_Accounts_Import = "Pages.Financials.Accounts.Accounts.Import"; 
+        public const string Pages_Financials_Accounts_Accounts_Attach = "Pages.Financials.Accounts.Accounts.Attach";
+        
         // PERMISSIONS FOR DIVISIONS
 
         public const string Pages_Financials_Accounts_Divisions = "Pages.Financials.Accounts.Divisions";
         public const string Pages_Financials_Accounts_Divisions_Create = "Pages.Financials.Accounts.Divisions.Create";
         public const string Pages_Financials_Accounts_Divisions_Edit = "Pages.Financials.Accounts.Divisions.Edit";
         public const string Pages_Financials_Accounts_Divisions_Delete = "Pages.Financials.Accounts.Divisions.Delete";
+        public const string Pages_Financials_Accounts_Divisions_Import = "Pages.Financials.Accounts.Divisions.Import";
+        public const string Pages_Financials_Accounts_Divisions_Attach = "Pages.Financials.Accounts.Divisions.Attach";
 
         // PERMISSIONS FOR TYPEOFCLASSIFICATION
 
@@ -106,6 +110,7 @@
         public const string Pages_Financials_Journals_Entry_Create = "Pages.Financials.Journals.Entry.Create";
         public const string Pages_Financials_Journals_Entry_Edit = "Pages.Financials.Journals.Entry.Edit";
         public const string Pages_Financials_Journals_Entry_Delete = "Pages.Financials.Journals.Entry.Delete";
+        public const string Pages_Financials_Journals_Entry_Attach = "Pages.Financials.Journals.Entry.Attach";
 
         // PERMISSIONS FOR BANKING SEARCHTRANSACTIONS
         public const string Pages_Financials_Inquiry = "Pages.Financials.Inquiry";
@@ -147,6 +152,18 @@
         public const string Pages_Projects_ProjectMaintenance_Projects_Create = "Pages.Projects.ProjectMaintenance.Projects.Create";
         public const string Pages_Projects_ProjectMaintenance_Projects_Edit = "Pages.Projects.ProjectMaintenance.Projects.Edit";
         public const string Pages_Projects_ProjectMaintenance_Projects_Delete = "Pages.Projects.ProjectMaintenance.Projects.Delete";
+        public const string Pages_Projects_ProjectMaintenance_Projects_Import = "Pages.Projects.ProjectMaintenance.Projects.Import";
+        public const string Pages_Projects_ProjectMaintenance_Projects_Attach = "Pages.Projects.ProjectMaintenance.Projects.Attach";
+
+
+        // PERMISSIONS FOR Lines
+
+        public const string Pages_Projects_ProjectMaintenance_Lines = "Pages.Projects.ProjectMaintenance.Lines";
+        public const string Pages_Projects_ProjectMaintenance_Lines_Create = "Pages.Projects.ProjectMaintenance.Lines.Create";
+        public const string Pages_Projects_ProjectMaintenance_Lines_Edit = "Pages.Projects.ProjectMaintenance.Lines.Edit";
+        public const string Pages_Projects_ProjectMaintenance_Lines_Delete = "Pages.Projects.ProjectMaintenance.Lines.Delete";
+        public const string Pages_Projects_ProjectMaintenance_Lines_Import = "Pages.Projects.ProjectMaintenance.Lines.Import";
+        public const string Pages_Projects_ProjectMaintenance_Lines_Attach = "Pages.Projects.ProjectMaintenance.Lines.Attach";
 
         // PERMISSIONS FOR PROJECTS PROJECTCOAS
         public const string Pages_Projects_ProjectMaintenance_ProjectCOAs = "Pages.Projects.ProjectMaintenance.ProjectCOAs";
@@ -172,6 +189,7 @@
         public const string Pages_Receivables_Customers_Create = "Pages.Receivables.Customers.Create";
         public const string Pages_Receivables_Customers_Edit = "Pages.Receivables.Customers.Edit";
         public const string Pages_Receivables_Customers_Delete = "Pages.Receivables.Customers.Delete";
+        public const string Pages_Receivables_Customers_Attach = "Pages.Receivables.Customers.Attach";
 
         public const string Pages_Receivables_Customers_History = "Pages.Receivables.Customers.History";
         public const string Pages_Receivables_Customers_History_Create = "Pages.Receivables.Customers.History.Create";
@@ -183,7 +201,8 @@
         public const string Pages_Receivables_Invoices_Entry_Create = "Pages.Receivables.Invoices.Entry.Create";
         public const string Pages_Receivables_Invoices_Entry_Edit = "Pages.Receivables.Invoices.Entry.Edit";
         public const string Pages_Receivables_Invoices_Entry_Delete = "Pages.Receivables.Invoices.Entry.Delete";
-
+        public const string Pages_Receivables_Invoices_Entry_Attach = "Pages.Receivables.Invoices.Entry.Attach";
+        
         public const string Pages_Receivables_Inquiry = "Pages.Receivables.Inquiry";
         public const string Pages_Receivables_Inquiry_ARInvoiceInquiry = "Pages.Receivables.Inquiry.ARInvoiceInquiry";
         public const string Pages_Receivables_Inquiry_CustomerSummary = "Pages.Receivables.Inquiry.CustomerSummary";
@@ -221,11 +240,13 @@
         public const string Pages_Payables_Vendors_Create = "Pages.Payables.Vendors.Create";
         public const string Pages_Payables_Vendors_Edit = "Pages.Payables.Vendors.Edit";
         public const string Pages_Payables_Vendors_Delete = "Pages.Payables.Vendors.Delete";
+        public const string Pages_Payables_Vendors_Attach = "Pages.Payables.Vendors.Attach";
 
         public const string Pages_Payables_Invoices = "Pages.Payables.Invoices";
         public const string Pages_Payables_Invoices_Create = "Pages.Payables.Invoices.Create";
         public const string Pages_Payables_Invoices_Edit = "Pages.Payables.Invoices.Edit";
         public const string Pages_Payables_Invoices_Delete = "Pages.Payables.Invoices.Delete";
+        public const string Pages_Payables_Invoices_Attach = "Pages.Payables.Invoices.Attach";
 
         public const string Pages_Payables_Inquiry = "Pages.Payables.Inquiry";
         public const string Pages_Payables_Inquiry_APInvoiceInquiry = "Pages.Payables.Inquiry.APInvoiceInquiry";
@@ -249,6 +270,7 @@
         public const string Pages_PurchaseOrders_Entry_Create = "Pages.PurchaseOrders.Entry.Create";
         public const string Pages_PurchaseOrders_Entry_Edit = "Pages.PurchaseOrders.Entry.Edit";
         public const string Pages_PurchaseOrders_Entry_Delete = "Pages.PurchaseOrders.Entry.Delete";
+        public const string Pages_PurchaseOrders_Entry_Attach = "Pages.PurchaseOrders.Entry.Attach";
         #endregion
 
         #region Purchasing Tab
@@ -267,6 +289,7 @@
         public const string Pages_PettyCash_Entry_Create = "Pages.PettyCash.Entry.Create";
         public const string Pages_PettyCash_Entry_Edit = "Pages.PettyCash.Entry.Edit";
         public const string Pages_PettyCash_Entry_Delete = "Pages.PettyCash.Entry.Delete";
+        public const string Pages_PettyCash_Entry_Attach = "Pages.PettyCash.Entry.Attach";
 
         public const string Pages_PettyCash_PCVendors_History = "Pages.PettyCash.PCVendors.History";
         public const string Pages_PettyCash_Inquiry = "Pages.PettyCash.Inquiry";
@@ -281,8 +304,15 @@
 
 
         public const string Pages_CreditCard_Inquiry = "Pages.CreditCard.Inquiry";
+
         public const string Pages_CreditCard_Entry_CreditCardHistory = "Pages.CreditCard.Entry.CreditCardHistory";
+
         public const string Pages_CreditCard_Entry_CreditCardCompanies = "Pages.CreditCard.Entry.CreditCardCompanies";
+        public const string Pages_CreditCard_Entry_CreditCardCompanies_Create = "Pages.CreditCard.Entry.CreditCardCompanies.Create";
+        public const string Pages_CreditCard_Entry_CreditCardCompanies_Edit = "Pages.CreditCard.Entry.CreditCardCompanies.Edit";
+        public const string Pages_CreditCard_Entry_CreditCardCompanies_Delete = "Pages.CreditCard.Entry.CreditCardCompanies.Delete";
+        public const string Pages_CreditCard_Entry_CreditCardCompanies_Attach = "Pages.CreditCard.Entry.CreditCardCompanies.Attach";
+
         public const string Pages_CreditCard_Entry_OpenStatements = "Pages.CreditCard.Entry.OpenStatements";
         public const string Pages_CreditCard_Inquiry_CreditCardUploadInfo = "Pages.CreditCard.Inquiry.CreditCardUploadInfo";
         public const string Pages_CreditCard_Preferences = "Pages.CreditCard.Preferences";
@@ -295,7 +325,8 @@
         public const string Pages_Payroll_Entry_Create = "Pages.Payroll.Entry.Create";
         public const string Pages_Payroll_Entry_Edit = "Pages.Payroll.Entry.Edit";
         public const string Pages_Payroll_Entry_Delete = "Pages.Payroll.Entry.Delete";
-      
+        public const string Pages_Payroll_Entry_Attach = "Pages.Payroll.Entry.Attach";
+
         public const string Pages_Payroll_Inquiry = "Pages.Payroll.Inquiry";
         public const string Pages_Payroll_Inquiry_PayrollHistory = "Pages.Payroll.Inquiry.PayrollHistory ";
         public const string Pages_Payroll_Inquiry_PayrollUploadInfo = "Pages.Payroll.Inquiry.PayrollUploadInfo";
@@ -352,15 +383,6 @@
         public const string Pages_Banking_BankSetup_Delete = "Pages.Banking.BankSetup.Delete";
 
 
-        #endregion
-
-
-        #region Imports
-        public const string Pages_Imports = "Pages.Imports";
-        //public const string Pages_Uploads_Accounts = "Pages.Uploads.Accounts";
-        //public const string Pages_Uploads_Lines = "Pages.Uploads.Lines";
-        //public const string Pages_Uploads_Jobs = "Pages.Uploads.Jobs";
-        //public const string Pages_Uploads_Divisions = "Pages.Uploads.Divisions";
         #endregion
 
     }

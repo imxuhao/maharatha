@@ -3499,6 +3499,21 @@
              <param name="excelProperties"></param>
              <param name="columnName"></param>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddDropDownValidationToSheet(System.String,OfficeOpenXml.ExcelWorksheet,CAPS.CORPACCOUNTING.ExcelTemplates.Excelproperties,System.String,System.Int32,System.Int32,System.Int32,System.String,System.Int32,System.Boolean)">
+            <summary>
+            Add DropDownList into Data Sheet.
+            </summary>
+            <param name="sheet"></param>
+            <param name="excelFormula"></param>
+            <param name="startRowIndex"></param>
+            <param name="endRowIndex"></param>
+            <param name="excelColumn"></param>
+             <param name="excelProperties"></param>
+             <param name="columnName"></param>
+              <param name="column"></param>
+               <param name="listcount"></param>
+                <param name="hideColumn"></param>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddValidationtoSheet(System.String,OfficeOpenXml.ExcelWorksheet,CAPS.CORPACCOUNTING.ExcelTemplates.Excelproperties,System.Int32,System.Int32,System.Int32)">
             <summary>
             add validation to DataSheet
@@ -3510,7 +3525,18 @@
             <param name="excelColumn"></param>
             <param name="columnName"></param>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddFormulaToSheet(System.String,OfficeOpenXml.ExcelWorksheet,System.String,System.Int32,System.Int32,System.Boolean,System.Int32)">
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddValidationtoSheet(System.String,OfficeOpenXml.ExcelWorksheet,CAPS.CORPACCOUNTING.ExcelTemplates.Excelproperties,System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            add validation to DataSheet
+            </summary>
+            <param name="sheet"></param>
+            <param name="excelProperties"></param>
+            <param name="startRowIndex"></param>
+            <param name="endRowIndex"></param>
+            <param name="excelColumn"></param>
+            <param name="columnName"></param>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddFormulaToSheet(System.String,OfficeOpenXml.ExcelWorksheet,System.String,System.Int32,System.Int32,System.Boolean,System.Int32,System.Boolean)">
             <summary>
             add excel formula to Data Sheet
             </summary>
@@ -3520,6 +3546,19 @@
             <param name="startRowIndex"></param>
             <param name="endRowIndex"></param>
             <param name="excelColumn"></param>
+             <param name="hideColumn"></param>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddFormulaToSheet(System.String,OfficeOpenXml.ExcelWorksheet,System.String,System.Int32,System.Int32,System.Boolean,System.Int32,System.String,System.Boolean)">
+            <summary>
+            add excel formula to Data Sheet
+            </summary>
+            <param name="columnName"></param>
+            <param name="sheet"></param>
+            <param name="excelFormula"></param>
+            <param name="startRowIndex"></param>
+            <param name="endRowIndex"></param>
+            <param name="excelColumn"></param>
+             <param name="hideColumn"></param>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.GetDropDownListFormula(System.String,System.String,System.Int32,System.Int32)">
             <summary>
@@ -3599,6 +3638,14 @@
             <param name="properties"></param>
             <param name="excelFromula"></param>
             <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddHeader(OfficeOpenXml.ExcelWorksheet,System.Int32,System.String)">
+            <summary>
+            Add Header To Excel Sheet
+            </summary>
+            <param name="sheet"></param>
+            <param name="columnIndex"></param>
+            <param name="headerText"></param>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.ConvertExcelToDataTable(OfficeOpenXml.ExcelPackage,System.String)">
             <summary>

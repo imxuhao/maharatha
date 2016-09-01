@@ -1288,6 +1288,7 @@
     <text name="Classifications" value="Classifications" />
     <text name="CreditCardCompanies" value="Credit Card Companies" />
     <text name="ApplyFilter" value="Apply Filter" />
+    <text name="Attach" value="Attach" />
     
     <text name="CreateNewClassification" value="Create new classification" />
     <text name="AccountClassificationDescription" value="Account Classification Description" />

@@ -693,6 +693,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                     IsICTDivision = job.job.IsICTDivision,
                     TypeofProjectId = job.job.TypeofProjectId,
                     TaxRecoveryId = job.job.TaxRecoveryId,
+                    DivisionJobNumber=job.job.DivisionJobNumber,
+                    JobStatusName = job.job.DivisionJobNumber,
+                    TypeOfCurrency = job.job.TypeOfCurrency,
+                    TypeofProjectName = job.job.TypeofProjectName,
+                    BudgetFormatCaption = job.job.BudgetFormatCaption,
                     ErrorMessage = job.ErrorMesage.TrimEnd(',').TrimStart(',')
                 };
 

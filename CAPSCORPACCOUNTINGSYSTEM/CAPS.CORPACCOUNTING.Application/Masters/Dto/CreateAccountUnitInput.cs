@@ -120,10 +120,31 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the TypeOfCurrencyRateId field. </summary>
         public short? TypeOfCurrencyRateId { get; set; }
 
+    #region These fields are used only while using bulkInsert
+        /// <summary>Gets or sets the TypeofConsolidation field. </summary>
+        public string TypeofConsolidation { get; set; }
+
+        /// <summary>Gets or sets the TypeOfCurrency field. </summary>
+        public string TypeOfCurrency { get; set; }
+
+        /// <summary>Gets or sets the TypeOfAccount field. </summary>
+        public string TypeOfAccount { get; set; }
+
+
+        /// <summary>Gets or sets the TypeOfCurrencyRate field. </summary>
+        public string TypeOfCurrencyRate { get; set; }
+
+        /// <summary>Gets or sets the RollUpAccountCaption field. </summary>
+        public string RollUpAccountCaption { get; set; }
+
+        /// <summary>Gets or sets the RollUpDivision field. </summary>
+        public string RollUpDivision { get; set; }
+
         /// <summary>
         /// This field we are using in Import case
         /// </summary>
         public int ExcelRowNumber { get; set; }
+    #endregion
 
     }
 }

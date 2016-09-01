@@ -77,6 +77,33 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         /// <summary>Gets or sets the TaxCreditId field. </summary>
         public int? TaxCreditId { get; set; }
 
+
+        /// <summary>Gets or sets the TypeOfCurrencyId field. </summary>
+        public string TypeOfCurrency { get; set; }
+
+        /// <summary>Gets or sets the TaxCredit field. </summary>
+        public string TaxCredit { get; set; }
+
+
+        /// <summary>Gets or sets the RollupAccount field. </summary>
+        public string AccountNumber { get; set; }
+       
+
+        /// <summary>Gets or sets the budgetFormatCaption field. </summary>
+        public string BudgetFormatCaption { get; set; }
+
+        /// <summary>
+        ///  Gets or sets the JobStatusName 
+        /// </summary>
+        public string JobStatusName { get; set; }
+        /// <summary>
+        ///  Gets or sets the TypeofProjectName
+        /// </summary>
+        public string TypeofProjectName { get; set; }
+
+        /// <summary>Gets or sets the DivisionJobNumber field. </summary>
+        public string DivisionJobNumber { get; set; }
+
         /// <summary>
         ///Gets or sets the  ExcelRowNumber
         /// </summary>

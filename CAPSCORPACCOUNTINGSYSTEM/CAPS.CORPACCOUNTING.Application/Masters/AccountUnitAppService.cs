@@ -324,68 +324,21 @@ namespace CAPS.CORPACCOUNTING.Accounts
             result.AccountId = accountUnit.Id;
             return result;
         }
-
         /// <summary>
-        /// Importing the Accounts From Excel
+        /// Inserting BulkAccount
         /// </summary>
-        /// <param name="accountTable"></param>
-        /// <param name="coaId"></param>
+        /// <param name="listAccountUnitDtos"></param>
         /// <returns></returns>
-        public async Task<List<AccountUnitDto>> ImportAccounts(DataTable accountTable, int coaId)
-        {
-            var classificationlist = await GetTypeOfAccountList();
-            var currencylist = await GetTypeOfCurrencyList();
-            var consolidationList = EnumList.GetTypeofConsolidationList();
-            var typeOfCurrencyRateList = await GetTypeOfCurrencyRateList();
-            var linkedAccountList = await GetLinkAccountListByCoaId(new AutoSearchInput() { Id = coaId });
-
-            var accountsList = (from tbl in accountTable.AsEnumerable()
-                                join classification in classificationlist on tbl.Field<string>(L("Classification")) equals classification.Name
-                                  into classifications
-                                from classificationunit in classifications.DefaultIfEmpty()
-                                join currency in currencylist on tbl.Field<string>(L("Currency")) equals currency.Name
-                                         into currencies
-                                from currencyunit in currencies.DefaultIfEmpty()
-                                join consolidation in consolidationList on tbl.Field<string>(L("Consolidation")) equals consolidation.Name
-                                         into consolidations
-                                from consolidationunit in consolidations.DefaultIfEmpty()
-
-                                join typeOfCurrencyRate in typeOfCurrencyRateList on tbl.Field<string>(L("RateTypeOverride")) equals typeOfCurrencyRate.Name
-                                         into typeOfCurrencyRates
-                                from typeOfCurrencyRateunit in typeOfCurrencyRates.DefaultIfEmpty()
-
-                                join linkedAccount in linkedAccountList on tbl.Field<string>(L("NewAccount")) equals linkedAccount.Name
-                                         into linkedAccounts
-                                from linkedAccountunit in linkedAccounts.DefaultIfEmpty()
-                                select new CreateAccountUnitInput
-                                {
-                                    ExcelRowNumber = Convert.ToInt32(tbl.Field<string>(L("No"))),
-                                    Caption = string.IsNullOrEmpty(tbl.Field<string>(L("Description"))) ? string.Empty : tbl.Field<string>(L("Description")),
-                                    TypeOfCurrencyId = ReferenceEquals(currencyunit, null) ? (short?)null : Convert.ToInt16(currencyunit.Value),
-                                    TypeofConsolidationId = ReferenceEquals(consolidationunit, null) ? (TypeofConsolidation?)null : (TypeofConsolidation)Convert.ToInt32(consolidationunit.Value),
-                                    LinkAccountId = ReferenceEquals(linkedAccountunit, null) ? (int?)null : Convert.ToInt32(linkedAccountunit.Value),
-                                    TypeOfCurrencyRateId = ReferenceEquals(typeOfCurrencyRateunit, null) ? (short?)null : Convert.ToInt16(typeOfCurrencyRateunit.Value),
-                                    IsEnterable = !string.IsNullOrEmpty(tbl.Field<string>(L("JournalsAllowed"))) && Helper.ConvertToBoolean(tbl.Field<string>(L("JournalsAllowed"))),
-                                    ChartOfAccountId = coaId,
-                                    AccountNumber = string.IsNullOrEmpty(tbl.Field<string>(L("AccountNumber"))) ? string.Empty : tbl.Field<string>(L("AccountNumber")),
-                                    TypeOfAccountId = ReferenceEquals(classificationunit, null) ? (int?)null : Convert.ToInt32(classificationunit.Value),
-                                    IsAccountRevalued = !string.IsNullOrEmpty(tbl.Field<string>(L("Multi-CurrencyReval"))) && Helper.ConvertToBoolean(tbl.Field<string>(L("Multi-CurrencyReval"))),
-                                    IsElimination = !string.IsNullOrEmpty(tbl.Field<string>(L("EliminationAccount"))) && Helper.ConvertToBoolean(tbl.Field<string>(L("EliminationAccount"))),
-                                    IsRollupAccount = !string.IsNullOrEmpty(tbl.Field<string>(L("RollUpAccount"))) && Helper.ConvertToBoolean(tbl.Field<string>(L("RollUpAccount")))
-                                }).ToList();
-
-            return await BulkAccountInsert(new CreateAccountListInput { AccountList = accountsList });
-        }
-
-
-
 
         public async Task<List<AccountUnitDto>> BulkAccountInsert(CreateAccountListInput listAccountUnitDtos)
         {
             List<AccountUnit> accountList = new List<AccountUnit>();
            var createAccountList = listAccountUnitDtos.AccountList.Select((item, index) => { item.ExcelRowNumber = index; return item; }).ToList();
            
+            //ErrorAccountList
             var erroredAccountList = await ValidateDuplicateRecords(createAccountList);
+            
+            //ValidAccountList
             var accounts = listAccountUnitDtos.AccountList.Where(p => erroredAccountList.All(p2 => p2.AccountNumber != p.AccountNumber)).ToList();
             int  accountCode = Convert.ToInt32(await _accountUnitManager.GetNextChildCodeAsync(parentId: null, coaId: listAccountUnitDtos.AccountList[0].ChartOfAccountId));
             foreach (var accountUnit in accounts)
@@ -414,51 +367,36 @@ namespace CAPS.CORPACCOUNTING.Accounts
         private async Task<List<AccountUnitDto>> ValidateDuplicateRecords(List<CreateAccountUnitInput> accountsList)
         {
             var accountunitDtoList = new List<AccountUnitDto>();
+            //making commaseperated string of AccountNumbers
             var accountNumberList = string.Join(",", accountsList.Select(p => p.AccountNumber).ToArray());
-            var descriptionList = string.Join(",", accountsList.Select(p => p.Caption).ToArray());
-
+            //Get the Accounts from Cache
             var duplicateAccounts = await _accountcache.GetAccountCacheItemAsync(
                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId)));
+
+            //filtering acconts with Corporate COA
             var duplicateAccountItems =
                 duplicateAccounts.Where(p => p.ChartOfAccountId == accountsList[0].ChartOfAccountId).ToList();
 
+            //Getting Duplicate AccountList
             var duplicateAccountList =
                 duplicateAccountItems.Where(
-                    p => accountNumberList.Contains(p.AccountNumber) || descriptionList.Contains(p.Caption)).ToList();
+                    p => accountNumberList.Contains(p.AccountNumber)).ToList();
 
-            //duplicateAccountCaptions of AccountsList
-            var duplicateAccountCaptionList = (from p in accountsList
-                                               join p2 in duplicateAccountList on p.Caption equals p2.Caption
-                                               select new { Caption = p.Caption, AccountNumber = string.Empty, RowNumber = p.ExcelRowNumber, ErrorMesage = L("DuplicateDescription") + p.Caption }).ToList();
-            //duplicateAccountNumbers of AccountsList
+            //Constructing Duplicate AccountEntity List with Error
             var duplicateAccountsAccountNumberList = (from p in accountsList
                                                       join p2 in duplicateAccountList on p.AccountNumber equals p2.AccountNumber
-                                                      select new { Caption = string.Empty, AccountNumber = p.AccountNumber, RowNumber = p.ExcelRowNumber, ErrorMesage = L("DuplicateAccountNumber") + p.AccountNumber }).ToList();
+                                                      select new {account=p, ErrorMesage = L("DuplicateAccountNumber") + p.AccountNumber }).ToList();
 
-            var accountUnits = (from account in accountsList
-                                join duplicatecaption in duplicateAccountCaptionList
-                                on account.ExcelRowNumber equals duplicatecaption.RowNumber
-                                                      into duplicatecaptionaccount
-                                from duplicatecaptionaccountunit in duplicatecaptionaccount.DefaultIfEmpty()
-                                join duplicatenum in duplicateAccountsAccountNumberList
-                               on account.ExcelRowNumber equals duplicatenum.RowNumber
-                                                     into duplicateaccountnumber
-                                from duplicateaccountnumberunit in duplicateaccountnumber.DefaultIfEmpty()
-                                select new
-                                {
-                                    account,
-                                    ErrorMesage =
-                                    (!ReferenceEquals(duplicateaccountnumberunit, null) ? duplicateaccountnumberunit.ErrorMesage : "") +
-                                    (!ReferenceEquals(duplicatecaptionaccountunit, null) ? duplicatecaptionaccountunit.ErrorMesage : "")
-
-                                }).ToList();
-
-            var errorAccounts = accountUnits.Where(u => u.ErrorMesage.Trim().Length > 0).ToList();
-
-
-            foreach (var account in errorAccounts)
+            //Constructing OutPutDto with ErrorMessage
+            foreach (var account in duplicateAccountsAccountNumberList)
             {
                 var accountdto = account.account.MapTo<AccountUnit>().MapTo<AccountUnitDto>();
+                accountdto.TypeOfAccount = account.account.TypeOfAccount;
+                accountdto.TypeOfCurrency = account.account.TypeOfCurrency;
+                accountdto.TypeofConsolidation = account.account.TypeofConsolidation;
+                accountdto.TypeOfCurrencyRate = account.account.TypeOfCurrencyRate;
+                accountdto.RollUpDivision = account.account.RollUpDivision;
+                accountdto.RollUpAccountCaption = account.account.RollUpAccountCaption;
                 accountdto.ErrorMessage = account.ErrorMesage.TrimEnd(',').TrimStart(',');
                 accountunitDtoList.Add(accountdto);
             }

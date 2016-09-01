@@ -3,7 +3,7 @@ using Abp.AutoMapper;
 using System.Collections.Generic;
 
 namespace CAPS.CORPACCOUNTING.JobCosting.Dto
-{   
+{
     [AutoMapFrom(typeof(JobUnit))]
     public class JobUnitDto : IOutputDto
     {
@@ -64,10 +64,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         /// <summary> Gets or sets the JobDetails.</summary>
         public List<JobCommercialUnitDto> JobDetails { get; set; }
         private string DetailReport { get; set; } = "Detail Report";
-       
+
         /// <summary> Gets or sets the Director.</summary>
         public string DirectorName { get; set; }
-       
+
         /// <summary> Gets or sets the Agency.</summary>
         public string Agency { get; set; }
         /// <summary>
@@ -91,11 +91,27 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 
         /// <summary>Gets or sets the TaxCreditId field. </summary>
         public int? TaxCreditId { get; set; }
+
+        #region These fields are for ImportFunctionality
+        /// <summary>Gets or sets the TaxCredit field. </summary>
+        public string TaxCredit { get; set; }
+
+
+        /// <summary>Gets or sets the RollupAccount field. </summary>
+        public string AccountNumber { get; set; }
+       
+
+        /// <summary>Gets or sets the budgetFormatCaption field. </summary>
+        public string BudgetFormatCaption { get; set; }
+
+        /// <summary>Gets or sets the DivisionJobNumber field. </summary>
+        public string DivisionJobNumber { get; set; }
+
         /// <summary>
         /// Gets or sets the ErrorMessage. 
         /// This property will be used in BulkInsertion
         /// </summary>
         public string ErrorMessage { get; set; }
-
+        #endregion
     }
 }

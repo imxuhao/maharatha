@@ -31,7 +31,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         private readonly JobUnitManager _jobUnitManager;
         private readonly IRepository<JobUnit> _jobUnitRepository;
         private readonly IRepository<CoaUnit> _coaUnitRepository;
-        private readonly IRepository<TypeOfCurrencyUnit,short> _typeOfCurrencyUnitRepository;
+        private readonly IRepository<TypeOfCurrencyUnit, short> _typeOfCurrencyUnitRepository;
         private readonly DivisionCache _divisioncache;
         private readonly ICustomDivisionRepository _customDivisionRepository;
         private readonly ICacheManager _cacheManager;
@@ -39,11 +39,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             IRepository<CoaUnit> coaUnitRepository,
             IRepository<TypeOfCurrencyUnit, short> typeOfCurrencyUnitRepository, DivisionCache divisioncache,
             ICustomDivisionRepository customDivisionRepository, ICacheManager cacheManager)
-        {   
+        {
             _jobUnitManager = jobUnitManager;
             _jobUnitRepository = jobUnitRepository;
             _coaUnitRepository = coaUnitRepository;
-            _typeOfCurrencyUnitRepository=typeOfCurrencyUnitRepository;
+            _typeOfCurrencyUnitRepository = typeOfCurrencyUnitRepository;
             _divisioncache = divisioncache;
             _customDivisionRepository = customDivisionRepository;
             _cacheManager = cacheManager;
@@ -57,15 +57,15 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_Divisions_Create)]
         public async Task<IdOutputDto<int>> CreateDivisionUnit(CreateJobUnitInput input)
         {
-            var chartofaccount = _coaUnitRepository.FirstOrDefault(p => p.IsCorporate == true );
+            var chartofaccount = _coaUnitRepository.FirstOrDefault(p => p.IsCorporate == true);
             if (ReferenceEquals(chartofaccount, null))
             {
                 throw new UserFriendlyException(L("Please setup chartofaccount"));
             }
             var jobUnit = new JobUnit(jobnumber: input.JobNumber, caption: input.Caption, iscorporatedefault: input.IsCorporateDefault, rollupaccountid: input.RollupAccountId,
                 typeofcurrencyid: input.TypeOfCurrencyId, rollupjobid: input.RollupJobId, typeofjobstatusid: input.TypeOfJobStatusId, typeofbidsoftwareid: input.TypeOfBidSoftwareId,
-                isapproved: input.IsApproved, isactive: input.IsActive, isictdivision: input.IsICTDivision, organizationunitid:input.OrganizationUnitId, typeofprojectid: input.TypeofProjectId,
-                taxrecoveryid: input.TaxRecoveryId, chartofaccountid: chartofaccount.Id, rollupcenterid: input.RollupCenterId,isdivision:true, taxcreditid:input.TaxCreditId);
+                isapproved: input.IsApproved, isactive: input.IsActive, isictdivision: input.IsICTDivision, organizationunitid: input.OrganizationUnitId, typeofprojectid: input.TypeofProjectId,
+                taxrecoveryid: input.TaxRecoveryId, chartofaccountid: chartofaccount.Id, rollupcenterid: input.RollupCenterId, isdivision: true, taxcreditid: input.TaxCreditId);
             IdOutputDto<int> response = new IdOutputDto<int>()
             {
                 JobId = await _jobUnitManager.CreateAsync(jobUnit)
@@ -81,15 +81,15 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_Divisions_Edit)]
         public async Task<IdOutputDto<int>> UpdateDivisionUnit(UpdateJobUnitInput input)
         {
-            var jobUnit = await _jobUnitRepository.GetAsync(input.JobId);            
+            var jobUnit = await _jobUnitRepository.GetAsync(input.JobId);
             #region Setting the values to be updated
 
             jobUnit.JobNumber = input.JobNumber;
-            jobUnit.Caption = input.Caption;            
-            jobUnit.TypeOfCurrencyId = input.TypeOfCurrencyId;           
-            jobUnit.IsActive = input.IsActive;          
+            jobUnit.Caption = input.Caption;
+            jobUnit.TypeOfCurrencyId = input.TypeOfCurrencyId;
+            jobUnit.IsActive = input.IsActive;
             jobUnit.OrganizationUnitId = input.OrganizationUnitId;
-            jobUnit.IsDivision = true;         
+            jobUnit.IsDivision = true;
 
             #endregion
 
@@ -113,26 +113,26 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [UnitOfWork]
         [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_Divisions_Delete)]
         public async Task DeleteDivisionUnit(IdInput input)
-        {           
+        {
             await _jobUnitManager.DeleteAsync(input.Id);
         }
-        
+
         [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_Divisions)]
         public async Task<PagedResultOutput<JobUnitDto>> GetDivisionUnits(SearchInputDto input)
         {
-            var query = from job in _jobUnitRepository.GetAll()        
-                        join   currency in _typeOfCurrencyUnitRepository.GetAll() on job.TypeOfCurrencyId equals currency.Id
+            var query = from job in _jobUnitRepository.GetAll()
+                        join currency in _typeOfCurrencyUnitRepository.GetAll() on job.TypeOfCurrencyId equals currency.Id
                         into currency
                         from currencyData in currency.DefaultIfEmpty()
-                        select new { Job = job,currency= currencyData.Description };
+                        select new { Job = job, currency = currencyData.Description };
             if (!ReferenceEquals(input.Filters, null))
             {
                 SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
                 query = Helper.CreateFilters(query, mapSearchFilters);
             }
-            query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), item => item.Job.OrganizationUnitId==input.OrganizationUnitId )
-                .Where(item=>item.Job.IsDivision==true);
-                
+            query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), item => item.Job.OrganizationUnitId == input.OrganizationUnitId)
+                .Where(item => item.Job.IsDivision == true);
+
 
             var resultCount = await query.CountAsync();
             var results = await query
@@ -143,7 +143,25 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
             return new PagedResultOutput<JobUnitDto>(resultCount, results.Select(item =>
             {
-                var dto = item.Job.MapTo<JobUnitDto>();
+                var dto = new JobUnitDto
+                {
+                    JobId = item.Job.Id,
+                    JobNumber = item.Job.JobNumber,
+                    Caption = item.Job.Caption,
+                    RollupCenterId = item.Job.RollupCenterId,
+                    IsCorporateDefault = item.Job.IsCorporateDefault,
+                    ChartOfAccountId = item.Job.ChartOfAccountId,
+                    RollupAccountId = item.Job.RollupAccountId,
+                    TypeOfCurrencyId = item.Job.TypeOfCurrencyId,
+                    RollupJobId = item.Job.RollupJobId,
+                    TypeOfJobStatusId = item.Job.TypeOfJobStatusId,
+                    TypeOfBidSoftwareId = item.Job.TypeOfBidSoftwareId,
+                    IsActive = item.Job.IsActive,
+                    IsApproved = item.Job.IsApproved,
+                    IsICTDivision = item.Job.IsICTDivision,
+                    TypeofProjectId = item.Job.TypeofProjectId,
+                    TaxRecoveryId = item.Job.TaxRecoveryId
+                };
                 dto.JobId = item.Job.Id;
                 dto.TypeOfCurrency = item.currency;
                 return dto;
@@ -164,7 +182,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 throw new UserFriendlyException(L("Please setup chartofaccount"));
             }
             var createDividionList = listDivisionUnitDtos.DivisionList.Select((item, index) => { item.ExcelRowNumber = index; return item; }).ToList();
-            var errorjobList = await ValidateDuplicateRecords(createDividionList);
+            var errorjobList = await ValidateDuplicateRecords(createDividionList,chartofaccount.Id);
             var divisions = listDivisionUnitDtos.DivisionList.Where(p => errorjobList.All(p2 => p2.JobNumber != p.JobNumber)).ToList();
             foreach (var accountUnit in divisions)
             {
@@ -188,58 +206,69 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// Checking DuplicateRecords
         /// </summary>
         /// <param name="divisionsList"></param>
+        ///  <param name="coaId"></param>
         /// <returns></returns>
-        private async Task<List<JobUnitDto>> ValidateDuplicateRecords(List<CreateJobUnitInput> divisionsList)
+        private async Task<List<JobUnitDto>> ValidateDuplicateRecords(List<CreateJobUnitInput> divisionsList,int coaId)
         {
-            var divisionunitDtoList = new List<JobUnitDto>();
             var divisionNumberList = string.Join(",", divisionsList.Select(p => p.JobNumber).ToArray());
             var descriptionList = string.Join(",", divisionsList.Select(p => p.Caption).ToArray());
 
+            //Geting all divisions from cache
             var duplicatedivisions = await _divisioncache.GetDivisionCacheItemAsync(
                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(AbpSession.GetTenantId())));
             var duplicatedivisionItems = duplicatedivisions.Where(p => p.IsDivision == true).ToList();
 
+            //get duplicate division list
             var duplicatedivisionList =
                 duplicatedivisionItems.Where(
                     p => divisionNumberList.Contains(p.JobNumber) || descriptionList.Contains(p.Caption)).ToList();
 
             //duplicatedivisionNames of divisionList
             var duplicatedivisionCaptionList = (from p in divisionsList
-                                           join p2 in duplicatedivisionList on p.Caption equals p2.Caption
-                                           select new { Caption = p.Caption, divisionNumber = string.Empty, RowNumber = p.ExcelRowNumber, ErrorMesage = L("DuplicatedivisionName") + p.Caption }).ToList();
+                                                join p2 in duplicatedivisionList on p.Caption equals p2.Caption
+                                                select new { Caption = p.Caption, divisionNumber = string.Empty, RowNumber = p.ExcelRowNumber, ErrorMesage = L("DuplicatedivisionName") + p.Caption }).ToList();
             //duplicatedivisionNumbers of divisionList
             var duplicatedivisionsdivisionNumberList = (from p in divisionsList
-                                              join p2 in duplicatedivisionList on p.JobNumber equals p2.JobNumber
-                                              select new { Caption = string.Empty, divisionNumber = p.JobNumber, RowNumber = p.ExcelRowNumber, ErrorMesage = L("DuplicatedivisionNumber") + p.JobNumber }).ToList();
+                                                        join p2 in duplicatedivisionList on p.JobNumber equals p2.JobNumber
+                                                        select new { Caption = string.Empty, divisionNumber = p.JobNumber, RowNumber = p.ExcelRowNumber, ErrorMesage = L("DuplicatedivisionNumber") + p.JobNumber }).ToList();
 
             var divisionUnits = (from division in divisionsList
-                            join duplicatecaption in duplicatedivisionCaptionList
-                            on division.ExcelRowNumber equals duplicatecaption.RowNumber
-                                                  into duplicatecaptiondivision
-                            from duplicatecaptiondivisionunit in duplicatecaptiondivision.DefaultIfEmpty()
-                            join duplicatenum in duplicatedivisionsdivisionNumberList
-                           on division.ExcelRowNumber equals duplicatenum.RowNumber
-                                                 into duplicatedivisionnumber
-                            from duplicatedivisionnumberunit in duplicatedivisionnumber.DefaultIfEmpty()
-                            select new
-                            {
-                                division,
-                                ErrorMesage =
-                                    (!ReferenceEquals(duplicatedivisionnumberunit, null) ? duplicatedivisionnumberunit.ErrorMesage : "") +
-                                    (!ReferenceEquals(duplicatecaptiondivisionunit, null) ? duplicatecaptiondivisionunit.ErrorMesage : "") 
-                            }).Distinct().ToList();
+                                 join duplicatecaption in duplicatedivisionCaptionList
+                                 on division.ExcelRowNumber equals duplicatecaption.RowNumber
+                                                       into duplicatecaptiondivision
+                                 from duplicatecaptiondivisionunit in duplicatecaptiondivision.DefaultIfEmpty()
+                                 join duplicatenum in duplicatedivisionsdivisionNumberList
+                                on division.ExcelRowNumber equals duplicatenum.RowNumber
+                                                      into duplicatedivisionnumber
+                                 from duplicatedivisionnumberunit in duplicatedivisionnumber.DefaultIfEmpty()
+                                 select new
+                                 {
+                                     division,
+                                     ErrorMesage =
+                                         (!ReferenceEquals(duplicatedivisionnumberunit, null) ? duplicatedivisionnumberunit.ErrorMesage : "") +
+                                         (!ReferenceEquals(duplicatecaptiondivisionunit, null) ? duplicatecaptiondivisionunit.ErrorMesage : "")
+                                 }).Distinct().ToList();
 
             //invalid divisionList
             var errordivisions = divisionUnits.Where(u => u.ErrorMesage.Trim().Length > 0).ToList();
 
-
-            foreach (var division in errordivisions)
+            return errordivisions.Select(division => new JobUnitDto
             {
-                var divisiondto = division.division.MapTo<JobUnit>().MapTo<JobUnitDto>();
-                divisiondto.ErrorMessage = division.ErrorMesage.TrimEnd(',').TrimStart(',');
-                divisionunitDtoList.Add(divisiondto);
-            }
-            return divisionunitDtoList;
+                JobNumber = division.division.JobNumber, Caption = division.division.Caption,
+                RollupCenterId = division.division.RollupCenterId,
+                IsCorporateDefault = division.division.IsCorporateDefault,
+                ChartOfAccountId = coaId, RollupAccountId = division.division.RollupAccountId,
+                TypeOfCurrencyId = division.division.TypeOfCurrencyId, RollupJobId = division.division.RollupJobId,
+                TypeOfJobStatusId = division.division.TypeOfJobStatusId,
+                TypeOfBidSoftwareId = division.division.TypeOfBidSoftwareId,
+                IsActive = division.division.IsActive,
+                IsApproved = division.division.IsApproved,
+                IsICTDivision = division.division.IsICTDivision,
+                TypeofProjectId = division.division.TypeofProjectId,
+                TaxRecoveryId = division.division.TaxRecoveryId,
+                TypeOfCurrency = division.division.TypeOfCurrency,
+                ErrorMessage = division.ErrorMesage.TrimEnd(',').TrimStart(',')
+            }).ToList();
         }
 
     }

@@ -14,10 +14,6 @@ namespace CAPS.CORPACCOUNTING.Masters
     public class AccountUnitManager : DomainService
     {
         private readonly ICustomAccountRepository _customAccountRepository;
-        public string ErrorMessage = string.Empty;
-        public bool IsRecordfromExcel = false;
-
-
         public AccountUnitManager(IRepository<AccountUnit, long> accountunitrepository, IRepository<CoaUnit> coaUnitRepository, ICustomAccountRepository customAccountRepository)
         {
             _customAccountRepository = customAccountRepository;
@@ -38,14 +34,11 @@ namespace CAPS.CORPACCOUNTING.Masters
         }
 
 
-        public virtual async Task<string> CreateAccountListAsync(AccountUnit accountUnit)
+        public virtual async Task CreateAccountListAsync(AccountUnit accountUnit)
         {
-            ErrorMessage = string.Empty;
             accountUnit.Code = await GetNextChildCodeAsync(accountUnit.ParentId, accountUnit.ChartOfAccountId);
             await ValidateAccountUnitAsync(accountUnit);
-            if (ErrorMessage.Length <= 0)
-                await AccountUnitRepository.InsertAsync(accountUnit);
-            return ErrorMessage.TrimEnd(',').TrimStart(',');
+            await AccountUnitRepository.InsertAsync(accountUnit);
         }
 
         public virtual async Task UpdateAsync(AccountUnit accountUnit)
@@ -141,29 +134,17 @@ namespace CAPS.CORPACCOUNTING.Masters
             //In Coa IsNumberic is true, AccountNumber shold be Numeric
             if (coaUnit.IsNumeric && !long.TryParse(accountUnit.AccountNumber, out accountNumber))
             {
-                if (!IsRecordfromExcel)
-                    throw new UserFriendlyException(L("Account Number should be numeric.", accountUnit.Caption));
-                ErrorMessage = "Account Number should be numeric." + accountUnit.AccountNumber;
+                throw new UserFriendlyException(L("Account Number should be numeric.", accountUnit.Caption));
             }
-
 
             // Validating duplicate account number and description of account with the same COAId and decription
             var siblings = (await FindChildrenAsync(accountUnit.ParentId))
                 .Where(ou => ou.Id != accountUnit.Id && ou.ChartOfAccountId == accountUnit.ChartOfAccountId)
                 .ToList();
 
-            if (siblings.Any(ou => ou.Caption == accountUnit.Caption))
-            {
-                if (!IsRecordfromExcel)
-                    throw new UserFriendlyException(L("Duplicate Account Description", accountUnit.Caption));
-                ErrorMessage = ErrorMessage + "," + "Duplicate Account Description" + accountUnit.Caption;
-            }
-
             if (siblings.Any(ou => ou.AccountNumber == accountUnit.AccountNumber))
             {
-                if (!IsRecordfromExcel)
-                    throw new UserFriendlyException(L("Duplicate Account Number", accountUnit.Caption));
-                ErrorMessage = ErrorMessage + "," +"Duplicate Account Number" + accountUnit.AccountNumber;
+                throw new UserFriendlyException(L("Duplicate Account Number", accountUnit.Caption));
             }
 
             #region Validating if Parent and Child have the same COAID
@@ -174,15 +155,13 @@ namespace CAPS.CORPACCOUNTING.Masters
                     await AccountUnitRepository.GetAsync(Convert.ToInt64(accountUnit.ParentId));
                 if (parentaccountUnit.ChartOfAccountId != accountUnit.ChartOfAccountId)
                 {
-                    if (!IsRecordfromExcel)
-                        throw new UserFriendlyException(L("Invalid Chart of Account", accountUnit.Caption));
-                    ErrorMessage = ErrorMessage + "," + "Invalid Chart of Account";
+                    throw new UserFriendlyException(L("Invalid Chart of Account", accountUnit.Caption));
                 }
             }
             #endregion
         }
 
-      
+
 
     }
 }

@@ -35,7 +35,7 @@
     <text name="SavedSuccessfully" value="Saved successfully." />
     <text name="AreYouSure" value="Are you sure?" />
     <text name="YesDelete" value="Yes, delete!" />
-    <text name="DeletingUser" value="Deleting user" />
+    <text name="DeletingUser" value="Delete user" />
     <text name="UsersHeaderInfo" value="Manage users and permissions." />
     <text name="CreateNewUser" value="Create New User" />
     <text name="UserName" value="User Name" />
@@ -68,16 +68,16 @@
     <text name="AdminPassword" value="Admin Password" />
     <text name="AdminPasswordRepeat" value="Admin Password (repeat)" />
     <text name="EditTenant" value="Edit Tenant" />
-    <text name="ChangingPermissions" value="Changing permissions" />
-    <text name="EditingUser" value="Editing user" />
-    <text name="CreatingNewUser" value="Creating New User" />
+    <text name="ChangingPermissions" value="Change permissions" />
+    <text name="EditingUser" value="Edit user" />
+    <text name="CreatingNewUser" value="Create New User" />
     <text name="Edit" value="Edit" />
     <text name="EditingTenant" value="Editing tenant" />
     <text name="CreatingNewTenant" value="Creating New Tenant" />
     <text name="DeletingTenant" value="Deleting tenant" />
-    <text name="EditingRole" value="Editing role" />
-    <text name="CreatingNewRole" value="Creating new role" />
-    <text name="DeletingRole" value="Deleting role" />
+    <text name="EditingRole" value="Edit role" />
+    <text name="CreatingNewRole" value="Create new role" />
+    <text name="DeletingRole" value="Delete role" />
     <text name="CreationTime" value="Creation Time" />
     <text name="SearchWithThreeDot" value="Search..." />
     <text name="ResetSpecialPermissions" value="Reset special permissions" />
@@ -256,10 +256,10 @@
     <text name="LanguagesHeaderInfo" value="Manage user interface languages." />
     <text name="CreateNewLanguage" value="Create New Language" />
     <text name="Code" value="Code" />
-    <text name="CreatingNewLanguage" value="Creating New Language" />
-    <text name="EditingLanguage" value="Editing language" />
-    <text name="DeletingLanguages" value="Deleting language" />
-    <text name="ChangingTexts" value="Changing texts" />
+    <text name="CreatingNewLanguage" value="Create New Language" />
+    <text name="EditingLanguage" value="Edit language" />
+    <text name="DeletingLanguages" value="Delete language" />
+    <text name="ChangingTexts" value="Change texts" />
     <text name="SuccessfullySaved" value="Successfully saved." />
     <text name="Language" value="Language" />
     <text name="Flag" value="Flag" />

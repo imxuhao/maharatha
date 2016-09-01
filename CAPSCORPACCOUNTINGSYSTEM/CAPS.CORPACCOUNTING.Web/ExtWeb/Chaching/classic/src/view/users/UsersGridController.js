@@ -366,6 +366,7 @@ Ext.define('Chaching.view.users.UsersGridController', {
                         'Accept': 'application/json'
                     },
                     success: function (response) {
+                        abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
                         gridStore.reload();
                     },
                     failure: function (response) {

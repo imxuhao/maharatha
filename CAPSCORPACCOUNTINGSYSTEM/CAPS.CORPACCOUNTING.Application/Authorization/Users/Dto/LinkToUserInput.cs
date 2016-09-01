@@ -7,7 +7,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Dto
     {
         public string TenancyName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The Username Or Email Address field is required.")]
         public string UsernameOrEmailAddress { get; set; }
 
         [Required]

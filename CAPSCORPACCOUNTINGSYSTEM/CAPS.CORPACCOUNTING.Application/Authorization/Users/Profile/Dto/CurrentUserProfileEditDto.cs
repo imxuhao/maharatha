@@ -19,7 +19,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto
         [StringLength(User.MaxUserNameLength)]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The Email Address field is required.")]
         [StringLength(User.MaxEmailAddressLength)]
         public string EmailAddress { get; set; }
 

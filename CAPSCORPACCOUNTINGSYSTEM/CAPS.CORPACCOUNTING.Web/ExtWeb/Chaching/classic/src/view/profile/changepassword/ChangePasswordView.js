@@ -9,7 +9,7 @@ Ext.define('Chaching.view.profile.changepassword.ChangePasswordView', {
     ],
 
     controller: 'changepassword-changepasswordview',
-    height: 400,
+    height: 320,
     width: 450,
     layout: 'fit',
     title: app.localize("ChangePassword"),

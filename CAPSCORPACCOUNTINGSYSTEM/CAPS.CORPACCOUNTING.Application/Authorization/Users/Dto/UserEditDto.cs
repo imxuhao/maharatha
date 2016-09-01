@@ -25,8 +25,8 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Dto
         [StringLength(AbpUserBase.MaxUserNameLength)]
         public string UserName { get; set; }
 
-        [Required]
-        [EmailAddress]
+        [Required (ErrorMessage = "The Email Address field is required.")]
+        [EmailAddress (ErrorMessage = "The Email Address field is not a valid e-mail address.")]
         [StringLength(AbpUserBase.MaxEmailAddressLength)]
         public string EmailAddress { get; set; }
 

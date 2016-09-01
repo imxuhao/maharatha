@@ -48,7 +48,7 @@ Ext.define('Chaching.view.editions.EditionsGridController', {
                     url: abp.appPath + 'api/services/app/edition/CreateOrUpdateEdition',
                     jsonData: Ext.encode(input),
                     success: function(){
-                        abp.notify.success(app.localize('Success'));
+                        abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
                         me.doPostSaveOperations();
                         
                     },

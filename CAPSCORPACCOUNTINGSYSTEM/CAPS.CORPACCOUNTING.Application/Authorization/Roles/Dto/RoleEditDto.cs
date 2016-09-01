@@ -8,7 +8,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Roles.Dto
     {
         public int? Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The Display Name field is required.")]
         public string DisplayName { get; set; }
         
         public bool IsDefault { get; set; }

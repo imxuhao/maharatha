@@ -35,18 +35,6 @@
     editingMode: 'row',
     columnLines: true,
     multiColumnSort: true,
-    editWndTitleConfig: {
-        title: app.localize('EditClassification'),
-        iconCls: 'fa fa-pencil'
-    },
-    createWndTitleConfig: {
-        title: app.localize('CreateNewClassification'),
-        iconCls: 'fa fa-plus'
-    },
-    viewWndTitleConfig: {
-        title: app.localize('ViewClassification'),
-        iconCls: 'fa fa-th'
-    },
     createNewMode: 'inline',
     columns: [
         {

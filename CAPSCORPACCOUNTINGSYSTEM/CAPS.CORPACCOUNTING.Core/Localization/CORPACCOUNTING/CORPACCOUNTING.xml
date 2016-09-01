@@ -1289,5 +1289,11 @@
     <text name="CreditCardCompanies" value="Credit Card Companies" />
     <text name="ApplyFilter" value="Apply Filter" />
     
+    <text name="CreateNewClassification" value="Create new classification" />
+    <text name="AccountClassificationDescription" value="Account Classification Description" />
+    <text name="IsCurrencyCodeRequired" value="Is Currency Code Required" />
+    <text name="IsPaymentType" value="Is Payment Type" />
+
+
   </texts>
 </localizationDictionary>

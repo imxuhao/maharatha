@@ -9,7 +9,7 @@ Ext.define('Chaching.view.roles.RolesFormController', {
             treePanel.setHeight(newHeight - 100);
         }
     },
-    onTreeCheckChange:function (node, checked, e, eOpts) {
+    onTreeCheckChange: function (node, checked, e, eOpts) {
         var me = this;
         var parentNode = node.parentNode;
         node.cascadeBy(function (n) {
@@ -23,16 +23,22 @@ Ext.define('Chaching.view.roles.RolesFormController', {
             form = view.getForm(),
             fields = form.getFields().items;
         //form.title = form.title.replace('View', 'Edit');
-       
+
         //change the title of view when moving from view to edit mode
         me.changeTitleFromViewModeToEditMode(view);
         //end of change title code
         Ext.each(fields, function (field) {
             if (field.name !== 'isDefault')
-            if (field.xtype !== "hiddenfield" && !field.isFilterField) {
-                field.setDisabled(false);
-                if (typeof (field.setEmptyText) === "function") {
-                    field.setEmptyText(field.originalEmptyText);
+                if (field.xtype !== "hiddenfield" && !field.isFilterField) {
+                    field.setDisabled(false);
+                    if (typeof (field.setEmptyText) === "function") {
+                        field.setEmptyText(field.originalEmptyText);
+                    }
+                }
+            var rec = form.getRecord();
+            if (field.name == 'isDefault'){
+                if ((abp.session.tenantId == null && rec.data.name != 'Admin') || (abp.session.tenantId != null && rec.data.name != 'AppSupport')) {
+                    field.setDisabled(false);
                 }
             }
         });
@@ -51,6 +57,7 @@ Ext.define('Chaching.view.roles.RolesFormController', {
         }
 
     },
+
     doPreSaveOperation: function (record, values, idPropertyField) {
         var me = this,
              view = me.getView(),
@@ -68,5 +75,5 @@ Ext.define('Chaching.view.roles.RolesFormController', {
         record.data.grantedPermissionNames = grantedPermissionNames;
         return record;
     }
-    
+
 });

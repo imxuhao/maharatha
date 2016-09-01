@@ -14,7 +14,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
         read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
         create: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),
         edit: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Edit'),
-        destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete')
+        destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete'),
+        imports: true
     },
     padding: 5,
     gridId: 14,

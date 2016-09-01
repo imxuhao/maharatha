@@ -1,6 +1,13 @@
 ﻿Ext.define('Chaching.utilities.ChachingGlobals', {
     alternateClassName : ['ChachingGlobals'],
     singleton: true,
+    config: {
+        centerPanel: null,
+        westPanel: null,
+        northPanel: null,
+        appViewPort: null,
+        menuList:null
+    },
     settingsScope : {
         application: 1, //Represents a setting that can be configured/changed for the application level.
         tenant: 2, //Represents a setting that can be configured/changed for each Tenant. This is reserved

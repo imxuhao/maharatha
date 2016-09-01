@@ -4,6 +4,7 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormC
     onSaveClicked: function (btn) {
         var me = this,
         view = me.getView(),
+        centerPort=ChachingGlobals.getCenterPanel(),
         data = view.dataobject;
         if (Ext.isEmpty(view.getForm().findField('changeProfilePicture').getValue())) {
             abp.message.error(app.localize('SelectUserProfilePicture'), app.localize('Error'));
@@ -18,6 +19,10 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormC
                 var res = Ext.decode(response.responseText);
                 if (res.success) {
                     me.getProfilePicture();
+                    if (centerPort) {
+                        var userGrid = centerPort.child('component[routeId=users]');
+                        if (userGrid) userGrid.getStore().reload();
+                    }
                 } else {
                     abp.message.error(res.error.message);
                 }

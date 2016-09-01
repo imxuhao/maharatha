@@ -11,7 +11,8 @@ Ext.define('Chaching.view.financials.accounts.DivisionsGrid', {
         read: abp.auth.isGranted('Pages.Financials.Accounts.Divisions'),
         create: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Create'),
         edit: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Edit'),
-        destroy: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Delete')
+        destroy: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Delete'),
+        imports: true
     },
     store:'financials.accounts.DivisionsStore',
     padding: 5,

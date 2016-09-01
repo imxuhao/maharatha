@@ -241,6 +241,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                 menu: new Ext.menu.Menu({
                     ui: 'accounts',
                     items: [
+                        { text: abp.localization.localize("DownloadTemplate").toUpperCase(), iconCls: 'fa fa-table', itemId: 'downloadTemplate', handler: 'onDownloadTemplateClick', hidden: !me.importConfig.isRequireImport },
                         { text: abp.localization.localize("ExportToExcel").toUpperCase(), iconCls: 'fa fa-file-excel-o', itemId: 'ExportExcel', handler: 'onExportToExcelClick' },
                         { text: abp.localization.localize("ExportToPDF").toUpperCase(), iconCls: 'fa fa-file-pdf-o', itemId: 'ExportPDF', handler: 'onExportToPDFClick' }
                     ]
@@ -248,18 +249,16 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             };
             headerTbButtons.push(exportBtn);
         }
-        if (me.importConfig.isRequireImport) {
+        if (me.importConfig.isRequireImport&&me.modulePermissions.imports) {
             var importBtn = {
                 xtype: 'splitbutton',
                 ui: 'actionButton',
                 iconCls: 'fa fa-upload',
                 iconAlign: 'left',
-               // text: app.localize("Import").toUpperCase(),
                 tooltip: app.localize('Import'),
                 menu: new Ext.menu.Menu({
                     ui: 'accounts',
                     items: [
-                        { text: abp.localization.localize("DownloadTemplate").toUpperCase(), iconCls: 'fa fa-file-excel-o', itemId: 'downloadTemplate', handler : 'onDownloadTemplateClick' },
                         {
                             text: abp.localization.localize("ImportTemplateFile").toUpperCase(),
                             iconCls: 'fa fa-file-archive-o',
@@ -715,7 +714,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             dataIndex: 'errorMessage',
             hideable: false,
             movable: false,
-            sortable: false,
+            sortable: true,
             groupable: false,
             menuDisabled: true,
             renderer: Chaching.utilities.ChachingRenderers.errorMessageColumnRenderer,

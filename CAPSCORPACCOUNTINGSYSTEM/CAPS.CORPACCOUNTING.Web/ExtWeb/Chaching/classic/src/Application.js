@@ -157,6 +157,10 @@ Ext.define('Chaching.Application', {
                             mainCardPanel = refs.mainCardPanel,
                             hashTag = window.location.hash.replace('#', ''),
                             hasComponent = mainCardPanel.child('component[routeId=' + hashTag + ']');
+                        ChachingGlobals.setCenterPanel(mainCardPanel);
+                        ChachingGlobals.setWestPanel(refs.treelistContainer);
+                        ChachingGlobals.setMenuList(refs.navigationTreeList);
+                        ChachingGlobals.setAppViewPort(mainView);
                         if (!hasComponent) {
                             mainViewController.setCurrentView(hashTag);
                             hasComponent = mainCardPanel.child('component[routeId=' + hashTag + ']');

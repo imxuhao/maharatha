@@ -29,6 +29,7 @@ Ext.define('Chaching.view.main.ChachingViewport', {
     items: [
         {
             region: 'north',
+            reference:'headerPort',
             height: 70,
             items: [
                 {

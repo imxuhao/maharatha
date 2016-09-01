@@ -20,7 +20,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
         read: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects'),
         create: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Create'),
         edit: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Edit'),
-        destroy: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Delete')
+        destroy: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Delete'),
+        imports:true
     },
     padding: 5,
     gridId:16,

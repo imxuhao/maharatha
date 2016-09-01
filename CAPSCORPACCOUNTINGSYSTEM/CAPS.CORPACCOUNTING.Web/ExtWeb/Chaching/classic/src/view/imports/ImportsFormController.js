@@ -146,9 +146,9 @@ Ext.define('Chaching.view.imports.ImportsFormController', {
                                     errorCount += 1;
                                     var exiErr = record.get('errorMessage');
                                     if (exiErr)
-                                        err = exiErr + '; ' + app.localize('DuplicateRecord');
+                                        err = exiErr + '; ' + record.get(field.name) +' '+ field.name+' is been duplicated.';//app.localize('DuplicateRecord');
                                     else
-                                        err = app.localize('DuplicateRecord');
+                                        err = record.get(field.name) + ' ' + field.name + ' is been duplicated.';
 
                                     record.set('errorMessage', err);
                                 }

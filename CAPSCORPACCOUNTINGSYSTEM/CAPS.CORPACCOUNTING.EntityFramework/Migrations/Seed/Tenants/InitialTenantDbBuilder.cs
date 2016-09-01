@@ -23,7 +23,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed.Tenants
             new EnumGenerator(_context).Create();
             new DefaultGridListCreator(_context).Create();
             new DefaultTypeOfAccountClassificationCreator(_context).Create();
-            new DefaultTypeOfAccountCreator(_context).Create();
+            new DefaultTypeOfAccountCreator(_context,_tenantId).Create();
             //new DefaultTypeOfCountryCreator(_context).Create();
             new DefaultCountryCreator(_context).Create();
             new DefaultRegionCreator(_context).Create();

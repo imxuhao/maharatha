@@ -6,6 +6,8 @@ using System.Data;
 using Abp.Application.Services.Dto;
 using OfficeOpenXml.DataValidation;
 using System.Text;
+using System.Drawing;
+using OfficeOpenXml.Style;
 
 namespace CAPS.CORPACCOUNTING.ExcelTemplates
 {
@@ -95,7 +97,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
     {
         const string listDataExcelSheet = "DropDownListInformation";
         const string strPassword = @"Sumit";
-       
+
 
         /// <summary>
         /// Get Boolean values as List
@@ -134,7 +136,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                 }
             }
         }
-       
+
 
         /// <summary>
         /// Add DropDownList into Data Sheet.
@@ -155,7 +157,45 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
             validation.Error = excelProperties.Error;
             validation.Formula.ExcelFormula = excelFormula;
         }
+
+
+        /// <summary>
+        /// Add DropDownList into Data Sheet.
+        /// </summary>
+        /// <param name="sheet"></param>
+        /// <param name="excelFormula"></param>
+        /// <param name="startRowIndex"></param>
+        /// <param name="endRowIndex"></param>
+        /// <param name="excelColumn"></param>
+        ///  <param name="excelProperties"></param>
+        ///  <param name="columnName"></param>
+        ///   <param name="column"></param>
+        ///    <param name="listcount"></param>
+        ///     <param name="hideColumn"></param>
+
+        public static void AddDropDownValidationToSheet(string columnName, ExcelWorksheet sheet, Excelproperties excelProperties, string excelFormula, int startRowIndex, int endRowIndex, int excelColumn, string column, int listcount = 0, bool hideColumn = false)
+        {
+            AddHeader(sheet, excelColumn, columnName);
+            string range = column + startRowIndex.ToString() + ":" + column + endRowIndex.ToString();
+            sheet.Cells[range].Style.Locked = false;
+            //Hide column
+            sheet.Column(excelColumn).Hidden = hideColumn;
+            if (listcount > 0)
+            {
                
+                //string range = column + ":" + column;
+                var validation = sheet.DataValidations.AddListValidation(range);
+              
+                //var validation = sheet.Cells[startRowIndex, excelColumn, endRowIndex, excelColumn].DataValidation.AddListDataValidation();
+                validation.ShowErrorMessage = excelProperties.ShowErrorMessage;
+                validation.ErrorStyle = excelProperties.ErrorStyle;
+                validation.ErrorTitle = excelProperties.ErrorTitle;
+                validation.Error = excelProperties.Error;
+                validation.Formula.ExcelFormula = excelFormula;
+            }
+           
+        }
+
         /// <summary>
         /// add validation to DataSheet
         /// </summary>
@@ -168,7 +208,32 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         public static void AddValidationtoSheet(string columnName, ExcelWorksheet sheet, Excelproperties excelProperties, int startRowIndex, int endRowIndex, int excelColumn)
         {
             var validation = sheet.Cells[startRowIndex, excelColumn, endRowIndex, excelColumn].DataValidation.AddCustomDataValidation();
-            
+
+            validation.ShowErrorMessage = excelProperties.ShowErrorMessage;
+            validation.ErrorStyle = excelProperties.ErrorStyle;
+            validation.ErrorTitle = excelProperties.ErrorTitle;
+            validation.Error = excelProperties.Error;
+            validation.Formula.ExcelFormula = excelProperties.ExcelFormula;
+        }
+
+
+        /// <summary>
+        /// add validation to DataSheet
+        /// </summary>
+        /// <param name="sheet"></param>
+        /// <param name="excelProperties"></param>
+        /// <param name="startRowIndex"></param>
+        /// <param name="endRowIndex"></param>
+        /// <param name="excelColumn"></param>
+        /// <param name="columnName"></param>
+        public static void AddValidationtoSheet(string columnName, ExcelWorksheet sheet, Excelproperties excelProperties, int startRowIndex, int endRowIndex, int excelColumn, string column)
+        {
+            AddHeader(sheet, excelColumn, columnName);
+            string range = column + startRowIndex.ToString() + ":" + column + endRowIndex.ToString();
+            // var validation = sheet.DataValidations.AddListValidation(range);
+            var validation = sheet.DataValidations.AddCustomValidation(range);
+            //var validation = sheet.Cells[startRowIndex, excelColumn, endRowIndex, excelColumn].DataValidation.AddCustomDataValidation();
+            sheet.Cells[range].Style.Locked = false;
             validation.ShowErrorMessage = excelProperties.ShowErrorMessage;
             validation.ErrorStyle = excelProperties.ErrorStyle;
             validation.ErrorTitle = excelProperties.ErrorTitle;
@@ -185,9 +250,31 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         /// <param name="startRowIndex"></param>
         /// <param name="endRowIndex"></param>
         /// <param name="excelColumn"></param>
-        public static void AddFormulaToSheet(string columnName, ExcelWorksheet sheet, string excelFormula, int startRowIndex, int endRowIndex, bool hideColumn, int excelColumn)
+        ///  <param name="hideColumn"></param>
+        public static void AddFormulaToSheet(string columnName, ExcelWorksheet sheet, string excelFormula, int startRowIndex, int endRowIndex, bool hideColumn, int excelColumn, bool locked = true)
         {
             sheet.Cells[startRowIndex, excelColumn, endRowIndex, excelColumn].Formula = excelFormula;
+            // sheet.Cells[startRowIndex, excelColumn, endRowIndex, excelColumn].Style.Locked = locked;
+            sheet.Column(excelColumn).Hidden = hideColumn;
+        }
+
+        /// <summary>
+        /// add excel formula to Data Sheet
+        /// </summary>
+        /// <param name="columnName"></param>
+        /// <param name="sheet"></param>
+        /// <param name="excelFormula"></param>
+        /// <param name="startRowIndex"></param>
+        /// <param name="endRowIndex"></param>
+        /// <param name="excelColumn"></param>
+        ///  <param name="hideColumn"></param>
+        public static void AddFormulaToSheet(string columnName, ExcelWorksheet sheet, string excelFormula, int startRowIndex, int endRowIndex, bool hideColumn, int excelColumn, string column, bool locked = true)
+        {
+            AddHeader(sheet, excelColumn, columnName);
+            //string range = column + ":" + column;
+            string range = column + startRowIndex.ToString() + ":" + column + endRowIndex.ToString();
+            sheet.Cells[range].Formula = excelFormula;
+            sheet.Cells[range].Style.Locked = locked;
             sheet.Column(excelColumn).Hidden = hideColumn;
         }
 
@@ -318,6 +405,26 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
             return properties;
 
         }
+
+        /// <summary>
+        /// Add Header To Excel Sheet
+        /// </summary>
+        /// <param name="sheet"></param>
+        /// <param name="columnIndex"></param>
+        /// <param name="headerText"></param>
+        public static void AddHeader(ExcelWorksheet sheet, int columnIndex, string headerText)
+        {
+            sheet.Cells[1, columnIndex].Value = headerText;
+            sheet.Cells[1, columnIndex].Style.Font.Bold = true;
+            sheet.Cells[1, columnIndex].Style.Font.Color.SetColor(Color.White);
+            sheet.Cells[1, columnIndex].Style.WrapText = false;
+            sheet.Cells[1, columnIndex].AutoFitColumns();
+            sheet.Cells[1, columnIndex].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+            sheet.Cells[1, columnIndex].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            sheet.Cells[1, columnIndex].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            sheet.Cells[1, columnIndex].Style.Fill.BackgroundColor.SetColor(Color.FromArgb(127, 176, 218));
+        }
+
         /// <summary>
         /// Converting Excel file to DataTable
         /// </summary>
@@ -367,5 +474,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
 
             return table;
         }
+
+
     }
 }

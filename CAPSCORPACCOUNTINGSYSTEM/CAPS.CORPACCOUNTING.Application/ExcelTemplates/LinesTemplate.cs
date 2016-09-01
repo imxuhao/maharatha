@@ -69,6 +69,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                 excelPackage =>
                 {
                     var sheet = excelPackage.Workbook.Worksheets.Add(L("LinesTemplate"));
+                    sheet.Protection.IsProtected = true;
                     var listDataSheet = excelPackage.Workbook.Worksheets.Add(L("DropDownListInformation"));
                     listDataSheet.Hidden = OfficeOpenXml.eWorkSheetHidden.Hidden;
 
@@ -78,24 +79,6 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                     ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, divisionList, new KeyValuePair<string, string>(L("RollUpDivisionNames"), L("RollUpDivisionIds")), new KeyValuePair<string, string>("G", "H"));
                     ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, rollUpAccountList, new KeyValuePair<string, string>(L("RollUpAccountNames"), L("RollUpAccountIds")), new KeyValuePair<string, string>("I", "J"));
                     ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, booleanList, new KeyValuePair<string, string>(L("FlagsNames"), L("FlagsIds")), new KeyValuePair<string, string>("K", "L"));
-
-                    //Create Header Row
-                    AddHeader(
-                        sheet,
-                        L("LineNumber"),
-                        L("Caption"),
-                        L("Classification"),
-                          L("ClassificationValue"),
-                        L("Consolidation"),
-                        L("ConsolidationValue"),
-                        L("RollUpAccount"),
-                        L("RollUpAccountValue"),
-                        L("RollUpDivision"),
-                        L("RollUpDivisionValue"),
-                        L("Currency"),
-                        L("CurrencyValue"),
-                        L("JournalsAllowed")
-                    );
 
 
                     //reference list columns to Excel Sheet
@@ -116,7 +99,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                             ErrorTitle = L("ValidationMessage"),
                             ErrorStyle = ExcelDataValidationWarningStyle.stop
                         }
-                            , startRowIndex, endRowIndex, 1);
+                            , startRowIndex, endRowIndex, 1, "A");
 
                     ExcelHelper.AddValidationtoSheet(L("Caption"), sheet,
                       new Excelproperties
@@ -132,44 +115,51 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                           ErrorTitle = L("ValidationMessage"),
                           ErrorStyle = ExcelDataValidationWarningStyle.stop
                       }
-                      , startRowIndex, endRowIndex, 2);
+                      , startRowIndex, endRowIndex, 2, "B");
 
 
                     var excelDdlErrorMsgSettings = new Excelproperties
                     {
                         ShowErrorMessage = true,
-                        Error = L("AllowMaxLength"),
+                        Error = L("ExcelDropDownListErrorMsg"),
                         ErrorTitle = L("ValidationMessage"),
                         ErrorStyle = ExcelDataValidationWarningStyle.stop
                     };
 
 
-                    if (classificationlist.Count > 0)
-                        ExcelHelper.AddDropDownValidationToSheet(L("Classification"), sheet, excelDdlErrorMsgSettings, ExcelHelper.GetDropDownListFormula(L("DropDownListInformation"), "A", 2, classificationlist.Count + 1), startRowIndex, endRowIndex, 3);
+
+                    ExcelHelper.AddDropDownValidationToSheet(L("Classification"), sheet, excelDdlErrorMsgSettings, ExcelHelper.GetDropDownListFormula(L("DropDownListInformation"), "A", 2, classificationlist.Count + 1), startRowIndex, endRowIndex, 3, "C", listcount: classificationlist.Count);
+
+                    ExcelHelper.AddDropDownValidationToSheet(L("Consolidation"), sheet, excelDdlErrorMsgSettings, ExcelHelper.GetDropDownListFormula(L("DropDownListInformation"), "E", 2, consolidationList.Count + 1), startRowIndex, endRowIndex, 4, "D", listcount: 1);
+
+                    ExcelHelper.AddDropDownValidationToSheet(L("RollUpAccount"), sheet, excelDdlErrorMsgSettings, ExcelHelper.GetDropDownListFormula(L("DropDownListInformation"), "I", 2, rollUpAccountList.Count + 1), startRowIndex, endRowIndex, 5, "E", listcount: rollUpAccountList.Count);
+
+                    ExcelHelper.AddDropDownValidationToSheet(L("RollUpDivision"), sheet, excelDdlErrorMsgSettings, ExcelHelper.GetDropDownListFormula(L("DropDownListInformation"), "G", 2, divisionList.Count + 1), startRowIndex, endRowIndex, 6, "F", listcount: divisionList.Count);
+
+                    ExcelHelper.AddDropDownValidationToSheet(L("Currency"), sheet, excelDdlErrorMsgSettings, ExcelHelper.GetDropDownListFormula(L("DropDownListInformation"), "C", 2, currencylist.Count + 1), startRowIndex, endRowIndex, 7, "G", listcount: 1);
+
+                    ExcelHelper.AddDropDownValidationToSheet(L("JournalsAllowed"), sheet, excelDdlErrorMsgSettings, ExcelHelper.GetDropDownListFormula(L("DropDownListInformation"), "K", 2, booleanList.Count + 1), startRowIndex, endRowIndex, 8, "H", listcount: 1);
+
+
+                    #region dropdown list values add to sheet
+
                     ExcelHelper.AddFormulaToSheet(L("ClassificationValue"), sheet,
-                    ExcelHelper.GetVLOOKUPFormula(L("DropDownListInformation"), "C2", new string[] { "A", "B" }, 2, classificationlist.Count + 1), startRowIndex, endRowIndex, true, 4);
+                    ExcelHelper.GetVLOOKUPFormula(L("DropDownListInformation"), "C2", new string[] { "A", "B" }, 2, classificationlist.Count + 1), startRowIndex, endRowIndex, true,11,"K",locked:true);
 
-                    ExcelHelper.AddDropDownValidationToSheet(L("Consolidation"), sheet, excelDdlErrorMsgSettings, ExcelHelper.GetDropDownListFormula(L("DropDownListInformation"), "E", 2, consolidationList.Count + 1), startRowIndex, endRowIndex, 5);
                     ExcelHelper.AddFormulaToSheet(L("ConsolidationValue"), sheet,
-                    ExcelHelper.GetVLOOKUPFormula(L("DropDownListInformation"), "E2", new string[] { "E", "F" }, 2, consolidationList.Count + 1), startRowIndex, endRowIndex, true, 6);
+                    ExcelHelper.GetVLOOKUPFormula(L("DropDownListInformation"), "D2", new string[] { "E", "F" }, 2, consolidationList.Count + 1), startRowIndex, endRowIndex, true, 12,"L", locked: true);
 
-                    if (rollUpAccountList.Count > 0)
-                        ExcelHelper.AddDropDownValidationToSheet(L("RollUpAccount"), sheet, excelDdlErrorMsgSettings, ExcelHelper.GetDropDownListFormula(L("DropDownListInformation"), "I", 2, rollUpAccountList.Count + 1), startRowIndex, endRowIndex, 7);
                     ExcelHelper.AddFormulaToSheet(L("RollUpAccountValue"), sheet,
-                      ExcelHelper.GetVLOOKUPFormula(L("DropDownListInformation"), "G2", new string[] { "I", "J" }, 2, rollUpAccountList.Count + 1), startRowIndex, endRowIndex, true, 8);
+                    ExcelHelper.GetVLOOKUPFormula(L("DropDownListInformation"), "E2", new string[] { "I", "J" }, 2, rollUpAccountList.Count + 1), startRowIndex, endRowIndex, true, 13, "M", locked: true);
 
-
-                    if (rollUpAccountList.Count > 0)
-                        ExcelHelper.AddDropDownValidationToSheet(L("RollUpDivision"), sheet, excelDdlErrorMsgSettings, ExcelHelper.GetDropDownListFormula(L("DropDownListInformation"), "G", 2, divisionList.Count + 1), startRowIndex, endRowIndex, 9);
                     ExcelHelper.AddFormulaToSheet(L("RollUpDivisionValue"), sheet,
-                         ExcelHelper.GetVLOOKUPFormula(L("DropDownListInformation"), "I2", new string[] { "G", "H" }, 2, divisionList.Count + 1), startRowIndex, endRowIndex, true, 10);
+                    ExcelHelper.GetVLOOKUPFormula(L("DropDownListInformation"), "F2", new string[] { "G", "H" }, 2, divisionList.Count + 1), startRowIndex, endRowIndex, true, 14, "N", locked: true);
 
-                    ExcelHelper.AddDropDownValidationToSheet(L("Currency"), sheet, excelDdlErrorMsgSettings, ExcelHelper.GetDropDownListFormula(L("DropDownListInformation"), "C", 2, currencylist.Count + 1), startRowIndex, endRowIndex, 11);
                     ExcelHelper.AddFormulaToSheet(L("CurrencyValue"), sheet,
-                         ExcelHelper.GetVLOOKUPFormula(L("DropDownListInformation"), "K2", new string[] { "C", "D" }, 2, currencylist.Count + 1), startRowIndex, endRowIndex, true, 12);
+                    ExcelHelper.GetVLOOKUPFormula(L("DropDownListInformation"), "G2", new string[] { "C", "D" }, 2, currencylist.Count + 1), startRowIndex, endRowIndex, true, 15, "O", locked: true);
 
 
-                    ExcelHelper.AddDropDownValidationToSheet(L("JournalsAllowed"),sheet, excelDdlErrorMsgSettings, ExcelHelper.GetDropDownListFormula(L("DropDownListInformation"), "K", 2, booleanList.Count + 1), startRowIndex, endRowIndex, 13);
+                    #endregion
 
                 });
         }

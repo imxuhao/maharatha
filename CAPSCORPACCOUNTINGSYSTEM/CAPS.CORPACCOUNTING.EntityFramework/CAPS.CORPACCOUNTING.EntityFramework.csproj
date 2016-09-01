@@ -1367,6 +1367,10 @@
     <Compile Include="Migrations\201608231232113_Remove_TenantIds_In_Country_TypeOfCurrency_Region_TypeOfAccount_Tables.Designer.cs">
       <DependentUpon>201608231232113_Remove_TenantIds_In_Country_TypeOfCurrency_Region_TypeOfAccount_Tables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608311241040_Modify_TypeOfAccount_Table.cs" />
+    <Compile Include="Migrations\201608311241040_Modify_TypeOfAccount_Table.Designer.cs">
+      <DependentUpon>201608311241040_Modify_TypeOfAccount_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultSecurityGroupCreator.cs" />
@@ -2307,6 +2311,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608231232113_Remove_TenantIds_In_Country_TypeOfCurrency_Region_TypeOfAccount_Tables.resx">
       <DependentUpon>201608231232113_Remove_TenantIds_In_Country_TypeOfCurrency_Region_TypeOfAccount_Tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608311241040_Modify_TypeOfAccount_Table.resx">
+      <DependentUpon>201608311241040_Modify_TypeOfAccount_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

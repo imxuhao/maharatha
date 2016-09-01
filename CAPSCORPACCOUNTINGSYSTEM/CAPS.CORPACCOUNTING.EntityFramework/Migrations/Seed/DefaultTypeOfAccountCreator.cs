@@ -12,13 +12,14 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
         public static List<TypeOfAccountUnit> InitialTypeOfAccountList { get; private set; }
 
         private readonly CORPACCOUNTINGDbContext _context;
+        private int _tenantId;
 
-        public DefaultTypeOfAccountCreator(CORPACCOUNTINGDbContext context)
+        public DefaultTypeOfAccountCreator(CORPACCOUNTINGDbContext context, int tenantId)
         {
             _context = context;
-            TypeOfAccountList(0);
+            _tenantId = tenantId;
+            TypeOfAccountList();
         }
-
         public void Create()
         {
             CreateTypeOfAccountList();
@@ -31,10 +32,9 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
                 AddTypeOfAccountListIfNotExists(typeOfAccount);
             }
         }
-
         private void AddTypeOfAccountListIfNotExists(TypeOfAccountUnit typeOfAccount)
         {
-            if (_context.TypeOfAccountUnit.Any(l => l.Description == typeOfAccount.Description))
+            if (_context.TypeOfAccountUnit.Any(l => l.TenantId == _tenantId && l.Description == typeOfAccount.Description))
             {
                 return;
             }
@@ -44,8 +44,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
             _context.SaveChanges();
         }
 
-
-        private static void TypeOfAccountList(int tenantId)
+        private static void TypeOfAccountList()
         {
             InitialTypeOfAccountList = new List<TypeOfAccountUnit>
             {

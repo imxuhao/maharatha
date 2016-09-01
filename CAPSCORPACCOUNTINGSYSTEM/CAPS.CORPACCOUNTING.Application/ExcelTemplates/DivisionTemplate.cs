@@ -51,20 +51,12 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                 excelPackage =>
                 {
                     var sheet = excelPackage.Workbook.Worksheets.Add(L("DivisionTemplate"));
+                    sheet.Protection.IsProtected = true;
                     var listDataSheet = excelPackage.Workbook.Worksheets.Add(L("DropDownListInformation"));
                     listDataSheet.Hidden = OfficeOpenXml.eWorkSheetHidden.Hidden;
 
                     ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, currencylist, new KeyValuePair<string, string>(L("CurrencyNames"), L("CurrencyIds")), new KeyValuePair<string, string>("C", "D"));
                     ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, booleanList, new KeyValuePair<string, string>(L("FlagsNames"), L("FlagsIds")), new KeyValuePair<string, string>("E", "F"));
-
-                    AddHeader(
-                        sheet,
-                    L("Number"),
-                    L("Description"),
-                    L("Currency"),
-                     L("CurrencyValue"),
-                    L("Active")
-                    );
 
 
                     //reference list columns to Excel Sheet
@@ -85,7 +77,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                             ErrorTitle = L("ValidationMessage"),
                             ErrorStyle = ExcelDataValidationWarningStyle.stop
                         }
-                            , startRowIndex, endRowIndex, 1);
+                            , startRowIndex, endRowIndex, 1,"A");
 
                     ExcelHelper.AddValidationtoSheet(L("Description"), sheet,
                       new Excelproperties
@@ -100,20 +92,24 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                           ErrorTitle = L("ValidationMessage"),
                           ErrorStyle = ExcelDataValidationWarningStyle.stop
                       }
-                      , startRowIndex, endRowIndex, 2);
+                      , startRowIndex, endRowIndex, 2,"B");
 
                     var excelDdlErrorMsgSettings = new Excelproperties
                     {
                         ShowErrorMessage = true,
-                        Error = L("AllowMaxLength"),
+                        Error = L("ExcelDropDownListErrorMsg"),
                         ErrorTitle = L("ValidationMessage"),
                         ErrorStyle = ExcelDataValidationWarningStyle.stop
                     };
 
-                        ExcelHelper.AddDropDownValidationToSheet(L("Currency"), sheet, excelDdlErrorMsgSettings, ExcelHelper.GetDropDownListFormula(L("DropDownListInformation"), "C", 2, currencylist.Count + 1), startRowIndex, endRowIndex, 3);
-                        ExcelHelper.AddFormulaToSheet(L("CurrencyValue"), sheet,
-                        ExcelHelper.GetVLOOKUPFormula(L("DropDownListInformation"), "C2", new string[] { "C", "D" }, 2, currencylist.Count + 1),startRowIndex, endRowIndex, true, 4);
-                        ExcelHelper.AddDropDownValidationToSheet(L("Active"),sheet, excelDdlErrorMsgSettings, ExcelHelper.GetDropDownListFormula(L("DropDownListInformation"), "E", 2, booleanList.Count + 1), startRowIndex, endRowIndex, 5);
+                        ExcelHelper.AddDropDownValidationToSheet(L("Currency"), sheet, excelDdlErrorMsgSettings, ExcelHelper.GetDropDownListFormula(L("DropDownListInformation"), "C", 2, currencylist.Count + 1), startRowIndex, endRowIndex, 3,"C",listcount:1);
+                       
+                        ExcelHelper.AddDropDownValidationToSheet(L("Active"),sheet, excelDdlErrorMsgSettings, ExcelHelper.GetDropDownListFormula(L("DropDownListInformation"), "E", 2, booleanList.Count + 1), startRowIndex, endRowIndex, 4,"D",listcount:1);
+
+                    #region dropdown list values add to sheet
+                    ExcelHelper.AddFormulaToSheet(L("CurrencyValue"), sheet,
+                       ExcelHelper.GetVLOOKUPFormula(L("DropDownListInformation"), "C2", new string[] { "C", "D" }, 2, currencylist.Count + 1), startRowIndex, endRowIndex, true, 7,"G",locked:true);
+                    #endregion
                 });
         }
     }

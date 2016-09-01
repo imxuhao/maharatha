@@ -21,7 +21,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed.Host
             new DefaultGridListCreator(_context).Create();
            
             new DefaultTypeOfAccountClassificationCreator(_context).Create();
-            new DefaultTypeOfAccountCreator(_context).Create();
+            new DefaultTypeOfAccountCreator(_context,1).Create();
            // new DefaultTypeOfCountryCreator(_context).Create();
             new DefaultCountryCreator(_context).Create();
             new DefaultRegionCreator(_context).Create();

@@ -19,7 +19,7 @@ Ext.define('Chaching.view.creditcard.entry.OpenStatementGrid', {
     name: 'CreditCard.Entry.OpenStatements',
     controller: 'creditcard-entry-openstatementgrid',
     modulePermissions: {
-        read: abp.auth.isGranted('Pages.CreditCard.Entry'),
+        read: abp.auth.isGranted('Pages.CreditCard.Entry.OpenStatements'),
         create: true,//abp.auth.isGranted('Pages.CreditCard.Entry.Create'),
         edit: false,//abp.auth.isGranted('Pages.CreditCard.Entry.Edit'),
         destroy: abp.auth.isGranted('Pages.CreditCard.Entry.Delete')

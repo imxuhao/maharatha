@@ -18,7 +18,7 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardHistoryGrid', {
     name: 'CreditCard.Entry.CreditCardHistory',
     controller: 'creditcard-entry-creditcardhistorygrid',
     modulePermissions: {
-        read: true,//abp.auth.isGranted('Pages.CreditCard.Entry.CreditCardHistory'),
+        read: abp.auth.isGranted('Pages.CreditCard.Entry.CreditCardHistory'),
         create: true,//abp.auth.isGranted('Pages.CreditCard.Entry.CreditCardHistory.Create'),
         edit: true,//abp.auth.isGranted('Pages.CreditCard.Entry.CreditCardHistory.Edit'),
         destroy: abp.auth.isGranted('Pages.CreditCard.Entry.CreditCardHistory.Delete')

@@ -129,7 +129,8 @@ Ext.define('Chaching.Application', {
         'creditcard.entry.StatementDetailStore',
         'creditcard.entry.CreditCardHistoryStore',
         'creditcard.entry.CreditCardCompanyStore',
-        'financials.accounts.ClassificationsStore'
+        'financials.accounts.ClassificationsStore',
+        'utilities.BatchListStore'
     ],
     //mainView: 'Chaching.view.main.ChachingViewport',
     launch: function () {

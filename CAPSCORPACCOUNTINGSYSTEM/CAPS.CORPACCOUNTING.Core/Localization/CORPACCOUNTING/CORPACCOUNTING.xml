@@ -1274,7 +1274,17 @@
     <text name="AccountLine" value="Account/Line" />
     <text name="CreditCardApPayment#" value="AP Payment #" />
     <text name="CreditCardApCodingJobDivision" value="AP Coding Job/Division" />
-     <text name="CreditCardApCodingAccountLine" value="AP Coding Account/Line" />
+    <text name="CreditCardApCodingAccountLine" value="AP Coding Account/Line" />
+    <text name="CreditCardType" value="Card Type" />
+    <text name="CreditCardAccountNumber" value="Last 7 of Account #" />
+    <text name="ClearingAccount" value="Clearing Account" />
+    <text name="CreditCardVendor" value="Credit Card Vendor" />
+    <text name="CreditCardSyncUploadMethod" value="Sync/Upload Method" />
+    <text name="CreditCardClosedAccount" value="Closed Account" />
+    <text name="CreateCreditCardCompany" value="Create Credit Card Company" />
+    <text name="EditCreditCardCompany" value="Edit Credit Card Company" />
+    <text name="ViewCreditCardCompany" value="View Credit Card Company" />
+    
      <text name="APCodingSubAccount1" value="AP Code Sub Acc-1" />
     <text name="APCodingSubAccount2" value="AP Code Sub Acc-2" />
     <text name="APCodingSubAccount3" value="AP Code Sub Acc-3" />

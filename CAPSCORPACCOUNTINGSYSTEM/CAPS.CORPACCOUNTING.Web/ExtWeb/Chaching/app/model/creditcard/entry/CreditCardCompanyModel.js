@@ -10,6 +10,14 @@ Ext.define('Chaching.model.creditcard.entry.CreditCardCompanyModel', {
         { name: 'creditCardCompany', type: 'string' },
         { name: 'accountName', type: 'string'},
         { name: 'accountNumber', type: 'string'},
-        { name: 'batch', type: 'string' }
+        { name: 'batch', type: 'string' },
+        { name: 'cardTypeId', type: 'int' },
+        { name: 'cardType', type: 'string' },
+        { name: 'accountId', type: 'int' },
+        { name: 'jobId', type: 'int' },
+        { name: 'vendorId', type: 'int' },
+        { name: 'typeOfUploadFileId', type: 'int' },
+        { name: 'batchId', type: 'int' },
+        { name: 'isClosedAccount', type: 'boolean' }
     ]
 });

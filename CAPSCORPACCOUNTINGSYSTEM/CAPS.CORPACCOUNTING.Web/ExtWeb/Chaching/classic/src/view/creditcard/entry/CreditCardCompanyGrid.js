@@ -18,9 +18,9 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyGrid', {
     name: 'CreditCard.Entry.CreditCardCompanies',
     controller: 'creditcard-entry-creditcardcompanygrid',
     modulePermissions: {
-        read: true,//abp.auth.isGranted('Pages.CreditCard.Entry.CreditCardCompanies'),
-        create: true,//abp.auth.isGranted('Pages.CreditCard.Entry.CreditCardCompanies.Create'),
-        edit: true,//abp.auth.isGranted('Pages.CreditCard.Entry.CreditCardCompanies.Edit'),
+        read: abp.auth.isGranted('Pages.CreditCard.Entry.CreditCardCompanies'),
+        create: abp.auth.isGranted('Pages.CreditCard.Entry.CreditCardCompanies.Create'),
+        edit: abp.auth.isGranted('Pages.CreditCard.Entry.CreditCardCompanies.Edit'),
         destroy: abp.auth.isGranted('Pages.CreditCard.Entry.CreditCardCompanies.Delete')
     },
     padding: 5,
@@ -49,15 +49,15 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyGrid', {
     columnLines: true,
     multiColumnSort: true,
     editWndTitleConfig: {
-        title: app.localize('EditCCStatement').initCap(),
+        title: app.localize('EditCreditCardCompany'),
         iconCls: 'fa fa-pencil'
     },
     createWndTitleConfig: {
-        title: app.localize('CreateCCStatement').initCap(),
+        title: app.localize('CreateCreditCardCompany'),
         iconCls: 'fa fa-plus'
     },
     viewWndTitleConfig: {
-        title: app.localize('ViewCCStatement'),
+        title: app.localize('ViewCreditCardCompany'),
         iconCls: 'fa fa-th'
     },
     createNewMode: 'tab',

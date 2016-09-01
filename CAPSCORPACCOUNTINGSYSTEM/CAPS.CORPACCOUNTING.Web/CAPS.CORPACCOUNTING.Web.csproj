@@ -3807,6 +3807,7 @@
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\TaxRebateStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\VendorsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\JobDivisionStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\utilities\BatchListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\CheckStockListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\JournalTypeListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\PaymentTermsListStore.js" />
@@ -3891,6 +3892,8 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\common\grid\ChachingTransactionDetailGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\common\grid\ChachingTransactionDetailGridModel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\creditcard\CreditCardEntryTabPanel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\creditcard\entry\CreditCardComapnyForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\creditcard\entry\CreditCardCompanyFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\creditcard\entry\CreditCardCompanyGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\creditcard\entry\CreditCardCompanyGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\creditcard\entry\CreditCardHistoryGrid.js" />

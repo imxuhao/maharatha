@@ -24,8 +24,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
     /// Classification Application Service
     /// </summary>
     /// 
-    [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_TypeofClassification)]
-    public class ClassificationUnitAppService : CORPACCOUNTINGServiceBase, IClassificationUnitAppService
+    public class ClassificationUnitAppService : CORPACCOUNTINGAppServiceBase, IClassificationUnitAppService
     {
 
         private readonly TypeOfAccountUnitManager _typeOfAccountUnitManager;
@@ -65,6 +64,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public async Task<int> CreateClassificationUnit(CreateTypeOfAccountInputUnit input)
         {
             var typeOfAccountUnit = input.MapTo<TypeOfAccountUnit>();
+            typeOfAccountUnit.TenantId = AbpSession.TenantId;
             var typeOfAccountId = await _typeOfAccountUnitManager.CreateAsync(typeOfAccountUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
             return typeOfAccountId;
@@ -82,6 +82,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         {
             var typeOfAccountUnit = await _typeOfAccountUnitRepository.GetAsync(input.TypeOfAccountId);
             Mapper.Map(input, typeOfAccountUnit);
+            typeOfAccountUnit.TenantId = AbpSession.TenantId;
             await _typeOfAccountUnitManager.UpdateAsync(typeOfAccountUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
         }
@@ -102,6 +103,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_TypeofClassification)]
         public async Task<PagedResultOutput<TypeOfAccountUnitDto>> GetClassificationUnits(SearchInputDto input)
         {
             var query = from typeofaccount in _typeOfAccountUnitRepository.GetAll()
@@ -109,7 +111,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
                         on typeofaccount.TypeOfAccountClassificationId equals typeofaccclassfication.Id
                         into typeofaccountss
                         from typeofaccounts in typeofaccountss.DefaultIfEmpty()
-                        select new { typeofaccounts = typeofaccount, TypeOfAccountClassification = typeofaccounts.Description };
+                        select new { typeofaccounts = typeofaccount, typeOfAccountClassification = typeofaccounts.Description };
 
             if (!ReferenceEquals(input.Filters, null))
             {
@@ -128,7 +130,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
             {
                 var dto = item.typeofaccounts.MapTo<TypeOfAccountUnitDto>();
                 dto.TypeOfAccountId = item.typeofaccounts.Id;
-                dto.TypeOfAccountClassificationDesc = item.TypeOfAccountClassification;
+                dto.TypeOfAccountClassificationDesc = item.typeOfAccountClassification;
                 return dto;
             }).ToList());
         }

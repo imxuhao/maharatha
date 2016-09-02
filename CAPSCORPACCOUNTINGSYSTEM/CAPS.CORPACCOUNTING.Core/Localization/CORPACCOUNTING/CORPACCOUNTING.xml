@@ -1304,7 +1304,7 @@
     <text name="AccountClassificationDescription" value="Account Classification Description" />
     <text name="IsCurrencyCodeRequired" value="Is Currency Code Required" />
     <text name="IsPaymentType" value="Is Payment Type" />
-
+    <text name="AREntryForm" value="AR Entry" />
 
   </texts>
 </localizationDictionary>

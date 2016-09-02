@@ -5,8 +5,8 @@
         var form = undefined;
         var viewModel = undefined;
         if (formPanel) {
-            form = formPanel.getForm();
-            viewModel = formPanel.getViewModel();
+            //form = formPanel.getForm();
+            //viewModel = formPanel.getViewModel();
         }
         if (form && viewModel) {
 

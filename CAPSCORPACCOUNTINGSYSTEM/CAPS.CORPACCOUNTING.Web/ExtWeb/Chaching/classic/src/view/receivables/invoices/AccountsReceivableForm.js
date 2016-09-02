@@ -3,189 +3,29 @@
  */
 Ext.define('Chaching.view.receivables.invoices.AccountsReceivableForm', {
     extend: 'Chaching.view.common.form.ChachingTransactionFormPanel',
-    alias: ['widget.receivables.invoices.create', 'widget.receivables.invoices.edit'],
+    //alias: ['widget.receivables.invoices.create', 'widget.receivables.invoices.edit'],
     requires: [
         'Chaching.view.receivables.invoices.AccountsReceivableFormController',
         'Chaching.view.receivables.invoices.AccountsReceivableDetailGrid'
     ],
-
+    xtype:'accountreceivableentryform',
+    name:'Receivables.Invoices.Entry',
     controller: 'receivables-invoices-accountsreceivableform',
     modulePermissions: {
         read: abp.auth.isGranted('Pages.Receivables.Invoices'),
-        create: abp.auth.isGranted('Pages.Receivables.Invoices.Create'),
-        edit: abp.auth.isGranted('Pages.Receivables.Invoices.Edit'),
-        destroy: abp.auth.isGranted('Pages.Receivables.Invoices.Delete')
+        create: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Create'),
+        edit: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Edit'),
+        destroy: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Delete')
     },
     openInPopupWindow: false,
     layout: 'fit',
     autoScroll: false,
     border: false,
     frame: false,
-    bbar: [
-    {
-        xtype: 'panel',
-        ui: 'summaryPanel',
-        itemId: 'summaryPanel',
-        layout: { type: 'hbox' },
-        title: app.localize('InvoiceBuilder'),
-        collapsed: true,
-        collapsible: true,
-        collapseMode: 'header',
-        collapseDirection: 'bottom',//right
-        animCollapse: 0,
-        headerPosition: 'top',
-        //flex: 1,
-        width: '100%',
-        border: true,
-        autoScroll: true,
-        titleCollapse: true,
-        items: [
-        {
-            xtype: 'gridpanel',
-            title: app.localize('RecentPayables'),
-            width: '100%',
-            ui: 'summaryPanel',
-            cls: 'chaching-transactiongrid',
-            flex: 1,
-            padding: '5 5 0 0',
-            store: {
-                ///TODO:Replace with live data
-                fields: [{ name: 'referenceNumber' }, { name: 'transactionDate' }, { name: 'amount' }],
-                data: [
-                    { referenceNumber: '123', transactionDate: '08-01-2016', amount: '100' },
-                    { referenceNumber: '456', transactionDate: '08-01-2016', amount: '102' },
-                    { referenceNumber: '789', transactionDate: '08-01-2016', amount: '1000' },
-                    { referenceNumber: '101', transactionDate: '08-01-2016', amount: '2054' },
-                    { referenceNumber: '102', transactionDate: '08-01-2016', amount: '4520' }
-                ]
-            },
-            columns: [
-            {
-                xtype: 'gridcolumn',
-                text: app.localize('Invoice#'),
-                dataIndex: 'referenceNumber',
-                width: '24%'
-            }, {
-                xtype: 'gridcolumn',
-                text: app.localize('TransDate'),
-                dataIndex: 'transactionDate',
-                renderer: ChachingRenderers.renderDateOnly,
-                width: '35%'
-            }, {
-                xtype: 'gridcolumn',
-                text: app.localize('Amount'),
-                dataIndex: 'amount',
-                width: '40%'
-            }]
-        }, {
-            xtype: 'gridpanel',
-            title: app.localize('Payments'),
-            width: '100%',
-            ui: 'summaryPanel',
-            cls: 'chaching-transactiongrid',
-            flex: 1,
-            padding: '5 5 0 0',
-            store: {
-                fields: [{ name: 'checkNumber' }, { name: 'checkDate' }, { name: 'isPaid' }, { name: 'amount' }],
-                data: [
-                    { checkNumber: '123', checkDate: '08-01-2016', amount: '100', isPaid: false },
-                    { checkNumber: '456', checkDate: '08-01-2016', amount: '102', isPaid: false },
-                    { checkNumber: '789', checkDate: '08-01-2016', amount: '1000', isPaid: true },
-                    { checkNumber: '101', checkDate: '08-01-2016', amount: '2054', isPaid: false },
-                    { checkNumber: '102', checkDate: '08-01-2016', amount: '4520', isPaid: true }
-                ]
-            },
-            columns: [
-            {
-                xtype: 'gridcolumn',
-                text: app.localize('Check#'),
-                dataIndex: 'checkNumber',
-                width: '25%'
-            }, {
-                xtype: 'gridcolumn',
-                text: app.localize('CheckDate'),
-                renderer: ChachingRenderers.renderDateOnly,
-                dataIndex: 'checkDate',
-                width: '30%'
-            }, {
-                xtype: 'gridcolumn',
-                text: app.localize('IsPaid'),
-                renderer: ChachingRenderers.rightWrongMarkRenderer,
-                dataIndex: 'isPaid',
-                width: '19%'
-            }, {
-                xtype: 'gridcolumn',
-                text: app.localize('Amount'),
-                dataIndex: 'amount',
-                width: '25%'
-            }]
-        }, {
-            xtype: 'gridpanel',
-            title: app.localize('RecentPO'),
-            width: '100%',
-            itemId: 'recentPos',
-            ui: 'summaryPanel',
-            cls: 'chaching-transactiongrid',
-            flex: 1,
-            padding: '5 0 0 0',
-            viewConfig: {
-                plugins: {
-                    ddGroup: 'grid-to-form',
-                    ptype: 'gridviewdragdrop',
-                    enableDrop: false
-                }
-            },
-            tools: [
-            {
-                type: 'save',
-                tooltip: app.localize('ProcessSelected'),
-                handler: 'onProcessPoClicked'
-            }],
-            store: new Chaching.store.purchaseorders.entry.PurchaseOrderStore(),
-            /*store: {
-                fields: [{ name: 'purchaseOrderReference' }, { name: 'description' }, { name: 'transactionDate' }, { name: 'remainingAmount' }, { name: 'process' }, { name: 'controlTotal', mapping: 'remainingAmount' }],
-                data: [
-                   { purchaseOrderReference: '123', transactionDate: '08-01-2016', remainingAmount: '100', description: 'ABC' },
-                   { purchaseOrderReference: '456', transactionDate: '08-01-2016', remainingAmount: '102', description: 'ABC' },
-                   { purchaseOrderReference: '789', transactionDate: '08-01-2016', remainingAmount: '1000', description: 'ABC' },
-                   { purchaseOrderReference: '101', transactionDate: '08-01-2016', remainingAmount: '2054', description: 'ABC' },
-                   { purchaseOrderReference: '102', transactionDate: '08-01-2016', remainingAmount: '4520', description: 'ABC' }
-                ]
-            },*/
-            columns: [
-            {
-                xtype: 'gridcolumn',
-                text: app.localize('Agency/Customer'),
-                dataIndex: 'purchaseOrderReference',
-                width: '14%'
-            }, {
-                xtype: 'gridcolumn',
-                text: app.localize('Desciption'),
-                dataIndex: 'description',
-                width: '26%'
-            }, {
-                xtype: 'gridcolumn',
-                text: app.localize('TransDate'),
-                dataIndex: 'transactionDate',
-                renderer: ChachingRenderers.renderDateOnly,
-                width: '26%'
-            }, {
-                xtype: 'gridcolumn',
-                text: app.localize('RemainingAmount'),
-                dataIndex: 'remainingAmount',
-                width: '25%'
-            }, {
-                xtype: 'checkcolumn',
-                dataIndex: 'process',
-                width: '8%'
-            }]
-        }]
-    }],
     onBoxReady: function () {
         this.callParent(arguments);
         var form = this,
             body = form.body;
-
         this.formPanelDropTarget = new Ext.dd.DropTarget(body, {
             ddGroup: 'grid-to-form',
             notifyEnter: function (ddSource, e, data) {
@@ -196,10 +36,8 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableForm', {
             notifyDrop: function (ddSource, e, data) {
                 // Reference the record (single selection) for readability
                 var selectedRecord = ddSource.dragData.records[0];
-
                 // Load the record into the form
                 form.getForm().loadRecord(selectedRecord);
-
                 // Delete record from the source store.  not really required.
                 //ddSource.view.store.remove(selectedRecord);
                 return true;
@@ -277,7 +115,7 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableForm', {
                 xtype: 'container',
                 layout: {
                     type: 'column',
-                    columns: 4
+                    columns: 3
                 },
                 items: [
                     {

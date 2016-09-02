@@ -25,7 +25,6 @@ namespace CAPS.CORPACCOUNTING.Accounting
     /// <summary>
     /// SubAccount AppService
     /// </summary>
-    [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_SubAccounts)]
     public class SubAccountUnitAppService : CORPACCOUNTINGServiceBase, ISubAccountUnitAppService
     {
 

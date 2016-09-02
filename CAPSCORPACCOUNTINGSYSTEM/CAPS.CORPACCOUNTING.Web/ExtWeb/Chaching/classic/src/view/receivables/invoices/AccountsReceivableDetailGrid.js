@@ -21,6 +21,14 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableDetailGrid', {
         text: app.localize('PO#'),
         dataIndex: 'referenceNumber',
         name: 'referenceNumber'
-    }],
-    columnOrder: ['amount', 'jobNumber', 'accountNumber', 'subAccountNumber1', 'typeOf1099T4', 'itemMemo', 'taxRebateNumber', 'referenceNumber', 'isAsset']
+    },
+    {
+        xtype: 'gridcolumn',
+        text: app.localize('Location'),
+        dataIndex: 'location',
+        name: 'location'
+    }
+
+    ],
+    columnOrder: ['jobNumber', 'accountNumber', 'subAccountNumber1', 'location', 'amount', 'itemMemo']
 });

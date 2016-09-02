@@ -48,6 +48,7 @@
             text: app.localize('Description'),
             filterField: {
                 xtype: 'textfield',
+                entity: 'typeOfAccountClassification',
                 width: '100%'
             }, editor: {
                 xtype: 'textfield'

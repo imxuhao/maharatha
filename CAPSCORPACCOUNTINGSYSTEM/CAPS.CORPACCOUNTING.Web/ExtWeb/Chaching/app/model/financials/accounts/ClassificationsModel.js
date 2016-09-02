@@ -4,7 +4,7 @@
 Ext.define('Chaching.model.financials.accounts.ClassificationsModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {
-        searchEntityName: 'Job'
+        searchEntityName: 'typeofaccounts'
     },
     fields: [
             { name: 'typeOfAccountId', type: 'int', isPrimaryKey: true },

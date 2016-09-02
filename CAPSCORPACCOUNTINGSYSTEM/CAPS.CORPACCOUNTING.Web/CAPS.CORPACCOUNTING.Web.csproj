@@ -4073,7 +4073,10 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\receivables\invoices\AccountsReceivableFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\receivables\invoices\AccountsReceivableGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\receivables\invoices\AccountsReceivableGridController.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\receivables\ReceivableInvoiceTabPanel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\receivables\invoices\ReceivableInvoiceBuilderForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\receivables\invoices\ReceivableInvoiceBuilderFormController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\receivables\ReceivableInvoiceFormPanel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\receivables\ReceivableInvoiceFormPanelController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesGrid.js" />

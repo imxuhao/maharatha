@@ -7,12 +7,12 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableFormController'
     alias: 'controller.receivables-invoices-accountsreceivableform',
     onFormResize: function (formPanel, width, height, oldWidth, oldHeight, eOpts) {
         if (formPanel) {
-            //var transactionDetailContainer = formPanel.down('*[itemId=transactionDetails]');
-            //if (transactionDetailContainer) {
-            //    var heightForDetailGrid = height - (170 + 130);
-            //    transactionDetailContainer.down('gridpanel').setHeight(heightForDetailGrid);
-            //}
-            //formPanel.updateLayout();
+            var transactionDetailContainer = formPanel.down('*[itemId=transactionDetails]');
+            if (transactionDetailContainer) {
+                var heightForDetailGrid = 200;//height - (170 + 130);
+                transactionDetailContainer.down('gridpanel').setHeight(heightForDetailGrid);
+            }
+            formPanel.updateLayout();
         }
     },
     onInvoiceTypeChange: function (field, newValue, oldValue) {

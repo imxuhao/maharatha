@@ -69,9 +69,7 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyForm', {
             displayField: 'cardType',
             valueField: 'cardTypeId',
             queryMode: 'local',
-            bind: {
-                store: '{StandardGroupTotalList}'
-            }
+            store : Ext.create('Chaching.store.utilities.CardTypeListStore')
         },{
             xtype: 'numberfield',
             name: 'accountNumber',
@@ -93,6 +91,7 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyForm', {
             store: new Chaching.store.utilities.autofill.AccountListStore(),
             fieldLabel: app.localize('ClearingAccount'),
             ui: 'fieldLabelTop',
+            tabIndex: 5,
             width: '100%',
             name: 'accountId',
             valueField: 'accountId',

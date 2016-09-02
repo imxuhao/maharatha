@@ -66,13 +66,13 @@ Ext.define('Chaching.view.creditcard.entry.StatementGrid', {
     createNewMode: 'tab',
     isSubMenuItemTab: true,
     listeners: {
-        cellclick: 'onInvoiceNumberClick'
+        cellclick: 'onStatementClick'
     },
     columns: [
          {
              xtype: 'gridcolumn',
              text: app.localize('CreditCardHolder'),
-             dataIndex: 'cardHolder',
+             dataIndex: 'description',
              sortable: true,
              groupable: true,
              width: '15%',
@@ -86,7 +86,7 @@ Ext.define('Chaching.view.creditcard.entry.StatementGrid', {
          }, {
              xtype: 'gridcolumn',
              text: app.localize('Invoice#'),
-             dataIndex: 'invoiceNumber',
+             dataIndex: 'documentReference',
              sortable: true,
              groupable: false,
              width: '15%',
@@ -98,7 +98,7 @@ Ext.define('Chaching.view.creditcard.entry.StatementGrid', {
          }, {
              xtype: 'gridcolumn',
              text: app.localize('PostingDate'),
-             dataIndex: 'postingDate',
+             dataIndex: 'transactionDate',
              sortable: true,
              groupable: false,
              width: '10%',
@@ -106,7 +106,7 @@ Ext.define('Chaching.view.creditcard.entry.StatementGrid', {
              filterField: {
                  xtype: 'dateSearchField',
                  width: '100%',
-                 dataIndex: 'postingDate'
+                 dataIndex: 'transactionDate'
              }, editor: {
                  xtype: 'datefield',
                  format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat
@@ -114,7 +114,7 @@ Ext.define('Chaching.view.creditcard.entry.StatementGrid', {
          }, {
              xtype: 'gridcolumn',
              text: app.localize('CreditCardTotal'),
-             dataIndex: 'creditCardTotal',
+             dataIndex: 'controlTotal',
              sortable: true,
              groupable: false,
              width: '15%',
@@ -137,6 +137,7 @@ Ext.define('Chaching.view.creditcard.entry.StatementGrid', {
              sortable: false,
              groupable: false,
              width: '10%',
+             renderer : ChachingRenderers.statusRenderer,
              filterField: {
                  xtype: 'combobox',
                  valueField: 'value',
@@ -145,21 +146,11 @@ Ext.define('Chaching.view.creditcard.entry.StatementGrid', {
                      fields: [{ name: 'text' }, { name: 'value' }],
                      data: [{ text: 'Yes', value: 'true' }, { text: 'No', value: 'false' }]
                  }
-             },
-             editor: {
-                 xtype: 'combobox',
-                 valueField: 'value',
-                 displayField: 'text',
-                 emptyText: app.localize('SelectOption'),
-                 store: {
-                     fields: [{ name: 'text' }, { name: 'value' }],
-                     data: [{ text: 'Yes', value: 'true' }, { text: 'No', value: 'false' }]
-                 }
              }
          }, {
              xtype: 'gridcolumn',
              text: app.localize('CreditCardBuildAp'),
-             dataIndex: 'buildAp',
+             dataIndex: 'buildAP',
              sortable: true,
              groupable: false,
              width: '10%'
@@ -167,7 +158,7 @@ Ext.define('Chaching.view.creditcard.entry.StatementGrid', {
           {
               xtype: 'gridcolumn',
               text: app.localize('Trans#'),
-              dataIndex: 'transactionNumber',
+              dataIndex: 'accountingDocumentId',
               sortable: true,
               groupable: false,
               width: '15%',

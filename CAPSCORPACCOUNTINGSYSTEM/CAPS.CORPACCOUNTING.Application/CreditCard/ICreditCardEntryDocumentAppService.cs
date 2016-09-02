@@ -52,6 +52,12 @@ namespace CAPS.CORPACCOUNTING.CreditCard
         /// <returns></returns>
         Task<PagedResultOutput<CreditCardStatementDto>> GetCreditCardStatementsUnits(SearchInputDto input);
 
+        /// <summary>
+        /// Get CreditCard Individual Statements List.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<PagedResultOutput<CreditCardEntryDocumentUnitDto>> GetCreditCardDetailStatementsUnits(SearchInputDto input);
 
         /// <summary>
         /// Get CreditCard Details by AccountingDocumentId List.
@@ -61,6 +67,7 @@ namespace CAPS.CORPACCOUNTING.CreditCard
 
         Task<PagedResultOutput<CreditCardEntryDocumentUnitDto>> GetCreditCardDetailsByDocumentId(GetTransactionList input);
 
+      
         /// <summary>
         /// Get CreditCard History.
         /// </summary>

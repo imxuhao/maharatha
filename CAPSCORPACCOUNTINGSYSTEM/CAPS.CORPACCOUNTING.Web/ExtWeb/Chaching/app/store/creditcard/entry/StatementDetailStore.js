@@ -9,9 +9,9 @@ Ext.define('Chaching.store.creditcard.entry.StatementDetailStore', {
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         api: {
             //create: abp.appPath + 'api/services/app/bankAccountUnit/CreateBankAccountUnit'//,
-            read: abp.appPath + 'api/services/app/bankAccountUnit/GetBankAccountUnits',
+            read: abp.appPath + 'api/services/app/creditCardEntryDocument/GetCreditCardDetailStatementsUnits'//,
             //update: abp.appPath + 'api/services/app/bankAccountUnit/UpdateBankAccountUnit',
-            destroy: abp.appPath + 'api/services/app/bankAccountUnit/DeleteBankAccountUnit'
+            //destroy: abp.appPath + 'api/services/app/bankAccountUnit/DeleteBankAccountUnit'
         }
     }
     //,

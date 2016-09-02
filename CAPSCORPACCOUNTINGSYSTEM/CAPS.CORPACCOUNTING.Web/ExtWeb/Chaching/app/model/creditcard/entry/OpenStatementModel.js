@@ -4,13 +4,15 @@
 Ext.define('Chaching.model.creditcard.entry.OpenStatementModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {
-        searchEntityName: ''
+        searchEntityName: 'CreditCard'
     },
     fields: [
-        { name: 'bankAccountId', type: 'int', isPrimaryKey: true },
-        { name: 'creditCardCompany', type: 'string' },
-        { name: 'statementDate', type: 'date', dateFormat: 'c' },
-        { name: 'statementBalance', type: 'float', defaultValue: null, convert: nullHandler },
+        { name: 'controllingBankAccountId', type: 'int', defaultValue : null, convert:nullHandler },
+        { name: 'description', type: 'string' }, // credit card company
+        { name: 'documentDate', type: 'date', dateFormat: 'c' }, //statement date
+        { name: 'transactionDate', type: 'date', dateFormat: 'c' },
+        { name: 'controlTotal', type: 'float', defaultValue: null, convert: nullHandler }, //statementBalance
+        { name: 'isPosted', type: 'boolean' },
         { name: 'status', type: 'string' }
     ]
 });

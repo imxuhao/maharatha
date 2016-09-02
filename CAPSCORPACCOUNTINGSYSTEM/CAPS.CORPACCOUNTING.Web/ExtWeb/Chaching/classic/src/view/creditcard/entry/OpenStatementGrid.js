@@ -86,7 +86,7 @@ Ext.define('Chaching.view.creditcard.entry.OpenStatementGrid', {
          {
              xtype: 'gridcolumn',
              text: app.localize('CreditCardCompany'),
-             dataIndex: 'creditCardCompany',
+             dataIndex: 'description',
              sortable: true,
              groupable: true,
              width: '45%',
@@ -100,7 +100,7 @@ Ext.define('Chaching.view.creditcard.entry.OpenStatementGrid', {
          }, {
              xtype: 'gridcolumn',
              text: app.localize('CreditCardStatementDate'),
-             dataIndex: 'statementDate',
+             dataIndex: 'documentDate',
              sortable: true,
              groupable: false,
              width: '15%',
@@ -116,7 +116,7 @@ Ext.define('Chaching.view.creditcard.entry.OpenStatementGrid', {
          }, {
              xtype: 'gridcolumn',
              text: app.localize('CreditCardStatementBalance'),
-             dataIndex: 'statementBalance',
+             dataIndex: 'controlTotal',
              sortable: true,
              groupable: false,
              width: '15%',

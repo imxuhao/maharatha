@@ -13,13 +13,13 @@ Ext.define('Chaching.view.creditcard.entry.StatementGridController', {
     alias: 'controller.creditcard-entry-statementgrid',
     doAfterCreateAction: function (createNewMode, formPanel, isEdit, record) {
     },
-    onInvoiceNumberClick: function (tableView, td, cellIndex, record, tr, rowIndex, e, eOpts) {
+    onStatementClick: function (tableView, td, cellIndex, record, tr, rowIndex, e, eOpts) {
         var me = this,
            view = me.getView(),
            fieldName = view.getColumns()[cellIndex].dataIndex,
            tabPanel = view.up('tabpanel');
         if (e && e.target && tabPanel) {
-            var horizontalTabPanel = tabPanel;//tabPanel.up('tabpanel');
+            var horizontalTabPanel = tabPanel.up('tabpanel');
             if (horizontalTabPanel && fieldName === 'invoiceNumber') {
                 var unpostedStatementGrid = Ext.create({
                     xtype: 'projects.projectmaintenance.linenumbers',
@@ -38,6 +38,19 @@ Ext.define('Chaching.view.creditcard.entry.StatementGridController', {
                 var tabLayout = horizontalTabPanel.getLayout();
                 if (tabLayout) {
                     tabLayout.setActiveItem(horizontalTabPanel.add(unpostedStatementGrid));
+                }
+            } else if (horizontalTabPanel && fieldName === 'buildAP' && !Ext.isEmpty(record.get('buildAP'))) {
+                var apInvoiceForm = Ext.create({
+                    xtype: 'payables.invoices.create',
+                    hideMode: 'offsets',
+                    closable: true,
+                    title: app.localize('ViewInvoice'),
+                    routId: 'payables.invoices.create'
+
+                });
+                var tabLayout = horizontalTabPanel.getLayout();
+                if (tabLayout) {
+                    tabLayout.setActiveItem(horizontalTabPanel.add(apInvoiceForm));
                 }
             }
         }

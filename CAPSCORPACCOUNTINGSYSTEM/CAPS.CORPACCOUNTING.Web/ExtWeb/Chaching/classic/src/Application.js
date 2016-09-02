@@ -131,7 +131,8 @@ Ext.define('Chaching.Application', {
         'creditcard.entry.CreditCardCompanyStore',
         'financials.accounts.ClassificationsStore',
         'utilities.BatchListStore',
-        'utilities.CardTypeListStore'
+        'utilities.CardTypeListStore',
+        'attachments.AttachmentsStore'
     ],
     //mainView: 'Chaching.view.main.ChachingViewport',
     launch: function () {
@@ -163,6 +164,7 @@ Ext.define('Chaching.Application', {
                         ChachingGlobals.setWestPanel(refs.treelistContainer);
                         ChachingGlobals.setMenuList(refs.navigationTreeList);
                         ChachingGlobals.setAppViewPort(mainView);
+                        console.log(refs);
                         if (!hasComponent) {
                             mainViewController.setCurrentView(hashTag);
                             hasComponent = mainCardPanel.child('component[routeId=' + hashTag + ']');

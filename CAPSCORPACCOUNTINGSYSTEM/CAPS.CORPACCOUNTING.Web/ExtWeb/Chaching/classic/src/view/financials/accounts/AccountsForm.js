@@ -8,6 +8,14 @@ Ext.define('Chaching.view.financials.accounts.AccountsForm', {
 
     controller: 'financials-accounts-accountsform',
     name: 'Financials.Accounts.Accounts',
+    modulePermissions: {
+        read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
+        create: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),
+        edit: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Edit'),
+        destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete'),
+        attach: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Attach'),
+        imports: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Import')
+    },
     openInPopupWindow: false,
     hideDefaultButtons: false,
     layout: 'column',

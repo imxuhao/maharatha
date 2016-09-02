@@ -3338,6 +3338,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardEntryDocumentAppService.GetCreditCardDetailStatementsUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get CreditCard Individual Statements List.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardEntryDocumentAppService.GetCreditCardDetailsByDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
             <summary>
             Get CreditCard Details by AccountingDocumentId List.

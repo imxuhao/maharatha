@@ -12,7 +12,8 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
         read: abp.auth.isGranted('Pages.Financials.Journals.Entry'),
         create: abp.auth.isGranted('Pages.Financials.Journals.Entry.Create'),
         edit: abp.auth.isGranted('Pages.Financials.Journals.Entry.Edit'),
-        destroy: abp.auth.isGranted('Pages.Financials.Journals.Entry.Delete')
+        destroy: abp.auth.isGranted('Pages.Financials.Journals.Entry.Delete'),
+        attach: abp.auth.isGranted('Pages.Financials.Journals.Entry.Attach')
     },
     groupedHeaderBaseConfig: [{
         groupHeaderText: app.localize('Debits'),

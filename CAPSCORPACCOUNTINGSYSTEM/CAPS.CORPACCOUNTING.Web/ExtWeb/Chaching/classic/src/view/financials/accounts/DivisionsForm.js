@@ -8,6 +8,14 @@ Ext.define('Chaching.view.financials.accounts.DivisionsForm', {
 
     controller: 'financials-accounts-divisionsform',
     name: 'Financials.Accounts.Divisions',
+    modulePermissions: {
+        read: abp.auth.isGranted('Pages.Financials.Accounts.Divisions'),
+        create: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Create'),
+        edit: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Edit'),
+        destroy: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Delete'),
+        attach: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Attach'),
+        imports: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Import')
+    },
     openInPopupWindow: false,
     hideDefaultButtons: false,
     layout: 'column',

@@ -9,9 +9,10 @@ Ext.define('Chaching.view.pettycash.entry.PettyCashGrid',{
     controller: 'pettycash-entry-pettycashgrid',
     modulePermissions: {
         read: abp.auth.isGranted('Pages.PettyCash.Entry'),
-        create: true,//abp.auth.isGranted('Pages.PettyCash.Entry.Create'),
-        edit: true,//abp.auth.isGranted('Pages.PettyCash.Entry.Edit'),
-        destroy: abp.auth.isGranted('Pages.PettyCash.Entry.Delete')
+        create: abp.auth.isGranted('Pages.PettyCash.Entry.Create'),
+        edit: abp.auth.isGranted('Pages.PettyCash.Entry.Edit'),
+        destroy: abp.auth.isGranted('Pages.PettyCash.Entry.Delete'),
+        attach: abp.auth.isGranted('Pages.PettyCash.Entry.Attach')
     },
     gridId: 30,
     headerButtonsConfig: [

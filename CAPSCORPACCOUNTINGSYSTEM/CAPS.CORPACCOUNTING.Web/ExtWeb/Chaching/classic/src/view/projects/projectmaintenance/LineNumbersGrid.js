@@ -11,11 +11,12 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
     store: 'projects.projectmaintenance.LinesStore',
     name: 'Projects.Projectmaintenance.Lines',
     modulePermissions: {
-        read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
-        create: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),
-        edit: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Edit'),
-        destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete'),
-        imports: true
+        read: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Lines'),
+        create: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Lines.Create'),
+        edit: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Lines.Edit'),
+        destroy: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Lines.Delete'),
+        attach: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Lines.Attach'),
+        imports: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Lines.Import')
     },
     padding: 5,
     gridId: 14,

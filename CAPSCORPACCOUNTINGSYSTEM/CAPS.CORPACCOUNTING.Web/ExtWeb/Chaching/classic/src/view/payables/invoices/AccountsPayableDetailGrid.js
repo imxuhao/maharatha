@@ -12,7 +12,8 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableDetailGrid',{
         read: abp.auth.isGranted('Pages.Payables.Invoices'),
         create: abp.auth.isGranted('Pages.Payables.Invoices.Create'),
         edit: abp.auth.isGranted('Pages.Payables.Invoices.Edit'),
-        destroy: abp.auth.isGranted('Pages.Payables.Invoices.Delete')
+        destroy: abp.auth.isGranted('Pages.Payables.Invoices.Delete'),
+        attach: abp.auth.isGranted('Pages.Payables.Invoices.Attach')
     },
     store: 'payables.invoices.AccountsPayableDetailsStore',
     moduleColumns:[

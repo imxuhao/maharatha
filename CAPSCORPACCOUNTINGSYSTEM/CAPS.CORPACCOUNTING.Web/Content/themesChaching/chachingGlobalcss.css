@@ -441,3 +441,83 @@ h1, h2, h3, h4, h5, h6 {
     font: 18px/1 FontAwesome;
     color: #0754e6;
 }
+
+.txt:before {
+    content: "\f0f6";
+    font: 18px/1 FontAwesome;
+    color: #090909;
+}
+.doc:before {
+    content: "\f1c2";
+    font: 18px/1 FontAwesome;
+    color: #065992;
+}
+.xls:before {
+    content: "\f1c3";
+    font: 18px/1 FontAwesome;
+    color: #33987d;
+}
+.zip:before {
+     content: "\f1c6";
+    font: 18px/1 FontAwesome;
+    color: #630f0f;
+}
+.png:before {
+     content: "\f1c5";
+    font: 18px/1 FontAwesome;
+    color: #309842;
+}
+.pdf:before {
+      content: "\f1c1";
+    font: 18px/1 FontAwesome;
+    color: red;
+}
+.ppt:before {
+    content: "\f1c4";
+    font: 18px/1 FontAwesome;
+    color: red;
+}
+.videoFile:before {
+     content: "\f008";
+    font: 18px/1 FontAwesome;
+    color: black;
+}
+.htmlFile:before {
+     content: "\f268";
+    font: 18px/1 FontAwesome;
+    color: #b3bb4b;
+}
+.defaultFile:before {
+    content: "\f0c5";
+    font: 18px/1 FontAwesome;
+    color: blue;
+}
+.drag-over:before {
+    content: "Drop Files";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: dashed 4px #929292;
+    color: #929292;
+    z-index: 9999;
+    background: #fff;
+    text-align: center;
+    font-size: 30px;
+    padding: 20px;
+}
+.fileStatusUploaded:before {
+    content: "\f192";
+    font: 18px/1 FontAwesome;
+    color: green;
+}
+.fileStatusNew:before {
+    content: "\f192";
+    font: 18px/1 FontAwesome;
+    color: red;
+}
+.chaching-transactiongrid .x-grid-empty {
+    font-weight: 700;
+     color: #56CFDA;
+}

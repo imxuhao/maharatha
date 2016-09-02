@@ -10,9 +10,10 @@ Ext.define('Chaching.view.pettycash.entry.PettyCashForm',{
 
     modulePermissions: {
         read: abp.auth.isGranted('Pages.PettyCash.Entry'),
-        create: true,//abp.auth.isGranted('Pages.PettyCash.Entry.Create'),
-        edit: true,//abp.auth.isGranted('Pages.PettyCash.Entry.Edit'),
-        destroy: abp.auth.isGranted('Pages.PettyCash.Entry.Delete')
+        create: abp.auth.isGranted('Pages.PettyCash.Entry.Create'),
+        edit: abp.auth.isGranted('Pages.PettyCash.Entry.Edit'),
+        destroy: abp.auth.isGranted('Pages.PettyCash.Entry.Delete'),
+        attach: abp.auth.isGranted('Pages.PettyCash.Entry.Attach')
     },
     openInPopupWindow: false,
     layout: 'fit',

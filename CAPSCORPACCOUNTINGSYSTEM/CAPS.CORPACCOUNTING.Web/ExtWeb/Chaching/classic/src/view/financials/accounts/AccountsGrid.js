@@ -13,7 +13,8 @@
         create: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),
         edit: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Edit'),
         destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete'),
-        imports: true
+        attach: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Attach'),
+        imports: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Import')
     },
     padding: 5,
     gridId: 11,

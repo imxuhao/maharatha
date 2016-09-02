@@ -1305,6 +1305,12 @@
     <text name="IsCurrencyCodeRequired" value="Is Currency Code Required" />
     <text name="IsPaymentType" value="Is Payment Type" />
     <text name="AREntryForm" value="AR Entry" />
+    
+    <text name="NoFilesAttached_Message" value="You do not have any files uploaded with this record. To upload new files drop your files and click upload. "/>
+    <text name="Filename" value="Filename"/>
+    <text name="AttachedOn" value="Attach Date"/>
+    <text name="AttachedBy" value="Attached By"/>
+    <text name="Attachment_Select_Info" value="Please select the file to upload"/>
 
   </texts>
 </localizationDictionary>

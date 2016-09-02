@@ -8,7 +8,8 @@ Ext.define('Chaching.view.financials.journals.JournalEntryGrid', {
         read: abp.auth.isGranted('Pages.Financials.Journals.Entry'),
         create: abp.auth.isGranted('Pages.Financials.Journals.Entry.Create'),
         edit: abp.auth.isGranted('Pages.Financials.Journals.Entry.Edit'),
-        destroy: abp.auth.isGranted('Pages.Financials.Journals.Entry.Delete')
+        destroy: abp.auth.isGranted('Pages.Financials.Journals.Entry.Delete'),
+        attach: abp.auth.isGranted('Pages.Financials.Journals.Entry.Attach')
     },
     controller: 'financials-journals-journalentrygrid',
     gridId: 18,

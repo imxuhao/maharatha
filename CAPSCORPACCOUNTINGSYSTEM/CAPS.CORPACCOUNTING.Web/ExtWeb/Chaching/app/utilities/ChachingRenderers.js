@@ -406,6 +406,66 @@
             itemRendered.iconCls = '';
         }
         return '';
+    },
+    genericAttachment:function(value, metadata, record, rowIndex, colIndex, store, view) {
+        var itemRendered = this.items[0],
+            renderIcon = '';
+
+        switch (value) {
+        case "txt":
+            renderIcon = "txt";
+            break;
+            case "doc":
+            case "docx":
+                renderIcon = 'doc';
+                break;
+            case "xls":
+            case "xlsx":
+                renderIcon = 'xls';
+                break;
+            case "zip":
+            case "rar":
+                renderIcon = "zip";
+                break;
+            case "png":
+            case "jpg":
+            case "jpeg":
+            case "gif":
+                renderIcon = "png";
+                break;
+            case "pdf":
+                renderIcon = "pdf";
+                break;
+            case "ppt":
+                renderIcon = "ppt";
+                break;
+            case "mpeg":
+            case "mp3":
+            case "mp4":
+                renderIcon = "videoFile";
+                break;
+            case "web":
+            case "html":
+            case "htm":
+                renderIcon = "htmlFile";
+                break;
+            default:
+                renderIcon = "defaultFile";
+                break;
+        }
+        itemRendered.iconCls = renderIcon;
+        return '';
+    },
+    fileStatusRenderer:function(value) {
+        var itemRendered = this.items[0];
+        if (value>0) {
+            itemRendered.iconCls = 'fileStatusUploaded';
+            itemRendered.tooltip = app.localize('Uploaded');
+        } else {
+            itemRendered.iconCls = 'fileStatusNew';
+            itemRendered.tooltip = app.localize('NotUploaded');
+        }
+        return '';
     }
 
 });

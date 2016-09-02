@@ -24,7 +24,9 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm', {
         read: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects'),
         create: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Create'),
         edit: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Edit'),
-        destroy: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Delete')
+        destroy: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Delete'),
+        attach: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Attach'),
+        imports: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Import')
     },
     controller: 'projects-projectmaintenance-projectsform',
     name: 'Projects',

@@ -371,6 +371,20 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                }
            );
     },
+    attachmentActionClicked: function (menu, item, e, eOpts) {
+        var me = this,
+            view = me.getView(),
+            gridStore = view.getStore(),
+            primaryKeyField = gridStore.idPropertyField,
+            widgetRec = menu.parentMenu.widgetRecord;
+
+
+        if (primaryKeyField && widgetRec && widgetRec.get(primaryKeyField)) {
+            var attachmentWnd = Ext.create('Chaching.view.attachments.AttachmentsView');
+            attachmentWnd.show();
+        }
+
+    },
     onDeleteOperationCompleteCallBack: function (records, operation, success) {
         var controller = operation.controller,
            view = controller.getView(),

@@ -13,9 +13,10 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableForm', {
     controller: 'receivables-invoices-accountsreceivableform',
     modulePermissions: {
         read: abp.auth.isGranted('Pages.Receivables.Invoices'),
-        create: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Create'),
-        edit: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Edit'),
-        destroy: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Delete')
+        create: abp.auth.isGranted('Pages.Receivables.Invoices.Create'),
+        edit: abp.auth.isGranted('Pages.Receivables.Invoices.Edit'),
+        destroy: abp.auth.isGranted('Pages.Receivables.Invoices.Delete'),
+        attach: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Attach')
     },
     openInPopupWindow: false,
     layout: 'fit',

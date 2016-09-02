@@ -704,6 +704,21 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             };
             defaultMenuItems.push(deleteMenuItem);
         }
+        //add attachments menu item
+        if (me.modulePermissions.attach) {
+            var attachmentMenu= {
+                text: app.localize('Attach'),
+                iconCls: 'fa fa-paperclip',
+                itemId: 'attachmentActionMenu',
+                eventListenerName: 'attachmentActionClicked',
+                listeners: {
+                    click:function(menu, item, e, eOpts) {
+                        return controller.attachmentActionClicked(menu, item, e, eOpts);
+                    }
+                }
+            }
+            defaultMenuItems.push(attachmentMenu);
+        }
         return defaultMenuItems;
     },
     getColumnsForImportDataGrid:function(columns) {

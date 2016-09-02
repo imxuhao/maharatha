@@ -10,6 +10,13 @@
     ],
     controller: 'payables-vendors-vendorsform',
     name: 'Payables.Vendors',
+    modulePermissions: {
+        read: abp.auth.isGranted('Pages.Payables.Vendors'),
+        create: abp.auth.isGranted('Pages.Payables.Vendors.Create'),
+        edit: abp.auth.isGranted('Pages.Payables.Vendors.Edit'),
+        destroy: abp.auth.isGranted('Pages.Payables.Vendors.Delete'),
+        attach: abp.auth.isGranted('Pages.Payables.Vendors.Attach')
+    },
     openInPopupWindow: false,
     hideDefaultButtons: false,
     autoScroll: true,

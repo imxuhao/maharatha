@@ -446,7 +446,6 @@
     <Content Include="App\host\views\maintenance\index.js" />
     <Content Include="App\host\views\maintenance\index.min.css" />
     <Content Include="App\host\views\tenants\featuresModal.js" />
-    <Content Include="App_Data\Logs\Logs.txt" />
     <Content Include="Areas\Mpa\Common\Scripts\jquery-validation-custom.js" />
     <Content Include="Areas\Mpa\Views\AuditLogs\index.css">
       <DependentUpon>index.less</DependentUpon>
@@ -3653,6 +3652,7 @@
     <Content Include="ExtWeb\Chaching\app\model\administration\organization\CompanyModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\administration\organization\CompanySettingsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\administration\organization\OrganizationModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\attachments\AttachmentsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\auditlogs\AuditLogsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\banking\banksetup\BankCheckRangesModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\banking\banksetup\BankSetupModel.js" />
@@ -3724,6 +3724,7 @@
     <Content Include="ExtWeb\Chaching\app\store\administration\organization\CompanyUsersStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\APPaymentTermsListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\ARPaymentTermsListStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\attachments\AttachmentsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\banking\banksetup\BankSetupStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\banking\banksetup\BankCheckNumberStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\base\BaseTreeStore.js" />
@@ -3879,6 +3880,8 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\OrganizationGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\OrganizationView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\OrganizationViewController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\attachments\AttachmentsView.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\attachments\AttachmentsViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\auditlogs\AuditLogDetail.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\auditlogs\AuditLogDetailView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\auditlogs\AuditLogDetailViewController.js" />
@@ -21831,6 +21834,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\Logs\" />
     <Folder Include="ExtWeb\build\production\Chaching\archive\classic\" />
     <Folder Include="ExtWeb\build\production\Chaching\archive\modern\" />
     <Folder Include="ExtWeb\build\production\Chaching\classic\deltas\" />

@@ -12,7 +12,8 @@ Ext.define('Chaching.view.purchaseorders.entry.PurchaseOrderForm',{
         read: abp.auth.isGranted('Pages.PurchaseOrders.Entry'),
         create: abp.auth.isGranted('Pages.PurchaseOrders.Entry.Create'),
         edit: abp.auth.isGranted('Pages.PurchaseOrders.Entry.Edit'),
-        destroy: abp.auth.isGranted('Pages.PurchaseOrders.Entry.Delete')
+        destroy: abp.auth.isGranted('Pages.PurchaseOrders.Entry.Delete'),
+        attach: abp.auth.isGranted('Pages.PurchaseOrders.Entry.Attach')
     },
     openInPopupWindow: false,
     layout: 'fit',

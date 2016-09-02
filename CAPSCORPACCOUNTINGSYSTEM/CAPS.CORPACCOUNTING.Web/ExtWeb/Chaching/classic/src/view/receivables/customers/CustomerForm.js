@@ -10,7 +10,8 @@
         read: abp.auth.isGranted('Pages.Receivables.Customers'),
         create: abp.auth.isGranted('Pages.Receivables.Customers.Create'),
         edit: abp.auth.isGranted('Pages.Receivables.Customers.Edit'),
-        destroy: abp.auth.isGranted('Pages.Receivables.Customers.Delete')
+        destroy: abp.auth.isGranted('Pages.Receivables.Customers.Delete'),
+        attach: abp.auth.isGranted('Pages.Receivables.Customers.Attach')
     },
     name: 'Customers',
     openInPopupWindow: false,

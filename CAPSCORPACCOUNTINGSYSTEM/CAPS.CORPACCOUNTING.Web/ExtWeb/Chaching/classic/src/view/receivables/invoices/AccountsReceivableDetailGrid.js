@@ -12,7 +12,8 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableDetailGrid', {
         read: abp.auth.isGranted('Pages.Receivables.Invoices'),
         create: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Create'),
         edit: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Edit'),
-        destroy: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Delete')
+        destroy: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Delete'),
+        attach: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Attach')
     },
     store: 'receivables.invoices.AccountsReceivableDetailsStore',
     moduleColumns: [

@@ -40,16 +40,13 @@ namespace CAPS.CORPACCOUNTING.Banking
         private readonly IRepository<BankAccountPaymentRangeUnit> _bankAccountPaymentRangeRepository;
         private readonly BankAccountPaymentRangeUnitManager _bankAccountPaymentRangeUnitManager;
         private readonly IRepository<CoaUnit>  _coaUnitRepository;
-        private readonly IAccountCache _accountCache;
-        private readonly CustomAppSession _customAppSession;
 
         public BankAccountUnitAppService(BankAccountUnitManager bankAccountUnitManager, IRepository<BankAccountUnit, long> bankAccountUnitRepository,
             IAddressUnitAppService addressAppService,IRepository<AddressUnit, long> addressUnitRepository, IRepository<AccountUnit, long> accountUnitRepository,
             IRepository<JobUnit, int> jobUnitRepository,IRepository<TypeOfUploadFileUnit, int> typeOfUploadFileUnitRepository, 
             IRepository<TypeOfCheckStockUnit, int> typeOfCheckStockUnitRepository,IRepository<VendorUnit, int> vendorUnitRepository, 
             IRepository<BatchUnit, int> batchUnitRepository,IRepository<BankAccountPaymentRangeUnit> bankAccountPaymentRangeUnit,
-            BankAccountPaymentRangeUnitManager bankAccountPaymentRangeUnitManager,IAccountCache accountCache, CustomAppSession customAppSession, 
-            IRepository<CoaUnit> coaUnitRepository)
+            BankAccountPaymentRangeUnitManager bankAccountPaymentRangeUnitManager,IRepository<CoaUnit> coaUnitRepository)
         {
             _bankAccountUnitManager = bankAccountUnitManager;
             _bankAccountUnitRepository = bankAccountUnitRepository;
@@ -63,8 +60,6 @@ namespace CAPS.CORPACCOUNTING.Banking
             _batchUnitRepository = batchUnitRepository;
             _bankAccountPaymentRangeRepository = bankAccountPaymentRangeUnit;
             _bankAccountPaymentRangeUnitManager = bankAccountPaymentRangeUnitManager;
-            _accountCache = accountCache;
-            _customAppSession = customAppSession;
             _coaUnitRepository = coaUnitRepository;
         }
 
@@ -209,8 +204,6 @@ namespace CAPS.CORPACCOUNTING.Banking
         public async Task<PagedResultOutput<BankAccountUnitDto>> GetBankAccountUnits(SearchInputDto input)
         {
             var bankAccountUnitQuery = CreateBankAccountQuery(input);
-            bankAccountUnitQuery = bankAccountUnitQuery
-                 .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), item => item.BankAccount.OrganizationUnitId == input.OrganizationUnitId);
             var resultCount = await bankAccountUnitQuery.CountAsync();
             var results = await bankAccountUnitQuery
                 .AsNoTracking()
@@ -335,10 +328,9 @@ namespace CAPS.CORPACCOUNTING.Banking
         {
             var query = from account in _accountUnitRepository.GetAll()
                         join coa in _coaUnitRepository.GetAll() on account.ChartOfAccountId equals coa.Id
-                        where coa.IsCorporate == true && account.TypeOfAccountId == 17 //Checking the typeofAccount is Bank 
+                        where coa.IsCorporate && account.TypeOfAccountId == 17 //Checking the typeofAccount is Bank 
                         select account;
-            return await query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId.Value)
-                             .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query) || p.Description.Contains(input.Query)
+            return await query.WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query) || p.Description.Contains(input.Query)
                              || p.AccountNumber.Contains(input.Query))
                             .Select(u => new AccountCacheItem
                             {

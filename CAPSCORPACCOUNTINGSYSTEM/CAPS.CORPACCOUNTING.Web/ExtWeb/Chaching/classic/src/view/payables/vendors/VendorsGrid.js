@@ -157,14 +157,14 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
     , {
         xtype: 'gridcolumn',
         text: app.localize('PaymentTerms'),
-        dataIndex: 'paymentTerms',
+        dataIndex: 'paymentTermName',
         sortable: true,
         groupable: true,
         width: '12%',
         filterField: {
             xtype: 'combobox',
             valueField: 'paymentTermsId',
-            displayField: 'paymentTerms',
+            displayField: 'paymentTermName',
             forceSelection: true,
             width: '100%',
             searchProperty: 'paymentTermsId',
@@ -173,7 +173,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
         editor: {
             xtype: 'combobox',
             valueField: 'paymentTermsId',
-            displayField: 'paymentTerms',
+            displayField: 'paymentTermName',
             queryMode: 'local',
             store: 'utilities.PaymentTermsListStore'
         }

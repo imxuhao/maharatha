@@ -100,6 +100,10 @@
              itemId: 'typeOfAccountId',
              sortable: true,
              groupable: true,
+             sorter: {
+                 property: 'typeOfAccount',
+                 sortOnEntity: ''
+             },
              //width: '8%',
              flex: 1,
              filterField: {
@@ -139,6 +143,10 @@
              dataIndex: 'typeofConsolidation',
              sortable: true,
              groupable: true,
+             sorter: {
+                 property: 'typeofConsolidation',
+                 sortOnEntity: ''
+             },
              //width: '10%',
              flex: 1,
              filterField: {
@@ -249,6 +257,10 @@
              sortable: true,
              groupable: true,
              flex: 1,
+             sorter: {
+                 property: 'typeOfCurrency',
+                 sortOnEntity: ''
+             },
              //width: '8%',
              filterField: {
                  xtype: 'combobox',
@@ -282,6 +294,10 @@
               sortable: true,
               groupable: true,
               flex: 1,
+              sorter: {
+                  property: 'typeOfAccountRate',
+                  sortOnEntity: ''
+              },
               //width: '8%',
               filterField: {
                   xtype: 'combobox',
@@ -338,6 +354,10 @@
              sortable: true,
              groupable: true,
              flex: 1,
+             sorter: {
+                 property: 'linkAccount',
+                 sortOnEntity: ''
+             },
              //width: '8%',
              filterField: {
                  xtype: 'combobox',

@@ -173,7 +173,7 @@ namespace CAPS.CORPACCOUNTING.Payroll
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = query.CreateFilters(mapSearchFilters);
             }
-            query = query.Where(p => p.Payrolls.OrganizationUnitId == input.OrganizationUnitId)
+            query = query
                  .Where(u => u.Payrolls.TypeOfAccountingDocumentId == TypeOfAccountingDocument.Payroll &&
                        u.Payrolls.IsPosted == unPosted); ;
 

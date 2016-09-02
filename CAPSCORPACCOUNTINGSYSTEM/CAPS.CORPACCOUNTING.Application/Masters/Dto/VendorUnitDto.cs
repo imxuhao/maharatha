@@ -2,6 +2,7 @@
 using Abp.AutoMapper;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
@@ -15,6 +16,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public string LastName { get; set; }
 
         /// <summary>Gets or sets the FirstName field. </summary>
+        
         public string FirstName { get; set; }
 
         /// <summary>Gets or sets the PayToName field. </summary>
@@ -48,7 +50,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public int? PaymentTermsId { get; set; }
 
         /// <summary>Gets or sets the PaymentTerms field. </summary>
-        public string PaymentTerms{ get; set; }
+        public string PaymentTermName{ get; set; }
 
         /// <summary>Gets or sets the TypeofCurrency field. </summary>
         public string TypeofCurrency { get; set; }

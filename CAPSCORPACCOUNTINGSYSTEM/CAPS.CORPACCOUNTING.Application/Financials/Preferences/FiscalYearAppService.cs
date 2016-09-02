@@ -104,8 +104,6 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = Helper.CreateFilters(query, mapSearchFilters);
             }
-            query = query.Where(p => p.FiscalYear.OrganizationUnitId == input.OrganizationUnitId);
-
             var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()

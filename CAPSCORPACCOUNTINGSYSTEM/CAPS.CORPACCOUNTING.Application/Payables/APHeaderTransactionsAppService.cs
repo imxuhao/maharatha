@@ -241,7 +241,7 @@ namespace CAPS.CORPACCOUNTING.Payables
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = query.CreateFilters(mapSearchFilters);
             }
-            query = query//.Where(p => p.Invoices.OrganizationUnitId == input.OrganizationUnitId)
+            query = query
                 .Where(u => u.Invoices.TypeOfAccountingDocumentId == TypeOfAccountingDocument.AccountsPayable &&
                        u.Invoices.IsPosted == unPosted);
 

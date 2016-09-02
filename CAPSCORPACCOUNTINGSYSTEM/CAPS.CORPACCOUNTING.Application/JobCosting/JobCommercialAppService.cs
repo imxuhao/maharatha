@@ -4,7 +4,6 @@ using CAPS.CORPACCOUNTING.JobCosting.Dto;
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using Abp.AutoMapper;
-using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using AutoMapper;
 using CAPS.CORPACCOUNTING.Masters.Dto;
@@ -20,23 +19,15 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         private readonly JobCommercialUnitManager _jobDetailUnitManager;
         private readonly IRepository<JobCommercialUnit> _jobDetailUnitRepository;
         private readonly IJobLocationAppService _jobLocationAppService;
-        private readonly IRepository<JobLocationUnit> _jobLocationRepository;
         private readonly IJobPORangeAllocationUnitAppService _poRangeAllocationAppService;
-        private readonly IRepository<JobPORangeAllocationUnit> _jobPORangeAllocationRepository;
-
-        private readonly IUnitOfWorkManager _unitOfWorkManager;
 
         public JobCommercialAppService(JobCommercialUnitManager jobDetailUnitManager, IRepository<JobCommercialUnit> jobDetailUnitRepository,
-            IUnitOfWorkManager unitOfWorkManager, IJobLocationAppService jobLocationAppService, IRepository<JobLocationUnit> jobLocationRepository,
-            IJobPORangeAllocationUnitAppService poRangeAllocationAppService, IRepository<JobPORangeAllocationUnit> jobPORangeAllocationRepository)
+            IJobLocationAppService jobLocationAppService,IJobPORangeAllocationUnitAppService poRangeAllocationAppService)
         {
             _jobDetailUnitManager = jobDetailUnitManager;
             _jobDetailUnitRepository = jobDetailUnitRepository;
-            _unitOfWorkManager = unitOfWorkManager;
             _jobLocationAppService = jobLocationAppService;
-            _jobLocationRepository = jobLocationRepository;
             _poRangeAllocationAppService = poRangeAllocationAppService;
-            _jobPORangeAllocationRepository = jobPORangeAllocationRepository;
 
         }
         /// <summary>

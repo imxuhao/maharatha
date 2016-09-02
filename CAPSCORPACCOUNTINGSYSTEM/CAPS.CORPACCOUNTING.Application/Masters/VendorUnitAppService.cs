@@ -234,7 +234,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 {
                     var dto = result.Vendor.MapTo<VendorUnitDto>();
                     dto.VendorId = result.Vendor.Id;
-                    dto.PaymentTerms = result.PaymentTerms;
+                    dto.PaymentTermName = result.PaymentTerms;
                     dto.TypeofCurrencyId = result.Vendor.TypeofCurrencyId;
                     dto.TypeofVendorId = result.Vendor.TypeofVendorId;
                     dto.TypeofTaxId = result.Vendor.TypeofTaxId;

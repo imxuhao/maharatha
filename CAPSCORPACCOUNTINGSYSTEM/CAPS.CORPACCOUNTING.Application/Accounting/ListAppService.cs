@@ -9,7 +9,6 @@ using Abp.Linq.Extensions;
 using System.Collections.Generic;
 using Abp.AutoMapper;
 using Abp.Collections.Extensions;
-using Abp.Runtime.Caching;
 using CAPS.CORPACCOUNTING.Accounting.Dto;
 using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.JobCosting;
@@ -19,7 +18,6 @@ using CAPS.CORPACCOUNTING.PettyCash;
 using CAPS.CORPACCOUNTING.PurchaseOrders;
 using CAPS.CORPACCOUNTING.Sessions;
 using CAPS.CORPACCOUNTING.Organization;
-using CAPS.CORPACCOUNTING.Authorization.Users;
 using Abp.Authorization.Users;
 
 namespace CAPS.CORPACCOUNTING.Accounting
@@ -32,10 +30,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         private readonly IRepository<SubAccountUnit, long> _subAccountUnitRepository;
         private readonly IRepository<JobUnit> _jobUnitRepository;
         private readonly IRepository<AccountUnit, long> _accountUnitRepository;
-        private readonly IRepository<CoaUnit> _coaUnit;
-        private readonly IRepository<VendorUnit> _vendorUnitRepository;
         private readonly IRepository<TaxCreditUnit> _taxCreditUnitRepository;
-        private readonly ICacheManager _cacheManager;
         private readonly CustomAppSession _customAppSession;
         private readonly IVendorCache _vendorCache;
         private readonly IDivisionCache _divisionCache;
@@ -47,10 +42,9 @@ namespace CAPS.CORPACCOUNTING.Accounting
         private readonly IBankAccountCache _bankAccountCache;
         private readonly IRepository<PurchaseOrderEntryDocumentUnit, long> _purchaseOrderEntryDocumentUnitRepository;
         private readonly IRepository<PurchaseOrderEntryDocumentDetailUnit, long> _purchaseOrderEntryDocumentDetailUnitRepository;
-        private readonly OrganizationExtendedUnitManager _organizationExtendedUnitManager;
         private readonly IRepository<OrganizationExtended, long> _organizationExtendedUnitRepository;
         private readonly IRepository<UserOrganizationUnit, long> _userOrganizationUnitUnitRepository;
-        private readonly UserManager _userManager;
+
 
         /// <summary>
         /// 
@@ -66,25 +60,25 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <param name="dividsCache"></param>
         /// <param name="accountCache"></param>
         /// <param name="subAccountCache"></param>
-        /// <param name="coaUnit"></param>
+        /// <param name="userOrganizationUnitUnitRepository"></param>
         /// <param name="subAccountRestrictionCache"></param>
         /// <param name="pettyCashAccountUnitRepository"></param>
         /// <param name="vendorPaymentTermUnitRepository"></param>
         /// <param name="bankAccountCache"></param>
         /// <param name="purchaseOrderEntryDocumentDetailUnitRepository"></param>
         /// <param name="purchaseOrderEntryDocumentUnitRepository"></param>
+        ///  <param name="organizationExtendedUnitRepository"></param>
         public ListAppService(IRepository<SubAccountUnit, long> subAccountUnitRepository, IRepository<JobUnit> jobUnitRepository,
-            CustomAppSession customAppSession, IRepository<AccountUnit, long> accountUnitRepository, ICacheManager cacheManager,
+            CustomAppSession customAppSession, IRepository<AccountUnit, long> accountUnitRepository,
             IRepository<VendorUnit> vendorUnitRepository, IRepository<TaxCreditUnit> taxCreditUnitRepository, IVendorCache vendorCache,
-            IDivisionCache dividsCache, IAccountCache accountCache, ISubAccountCache subAccountCache, IRepository<CoaUnit> coaUnit,
+            IDivisionCache dividsCache, IAccountCache accountCache, ISubAccountCache subAccountCache,
             ISubAccountRestrictionCache subAccountRestrictionCache,
             IRepository<PettyCashAccountUnit, long> pettyCashAccountUnitRepository,
             IRepository<VendorPaymentTermUnit> vendorPaymentTermUnitRepository,
             IBankAccountCache bankAccountCache,
             IRepository<PurchaseOrderEntryDocumentDetailUnit, long> purchaseOrderEntryDocumentDetailUnitRepository,
             IRepository<PurchaseOrderEntryDocumentUnit, long> purchaseOrderEntryDocumentUnitRepository,
-            OrganizationExtendedUnitManager organizationExtendedUnitManager,
-            UserManager userManager,
+
             IRepository<OrganizationExtended, long> organizationExtendedUnitRepository,
             IRepository<UserOrganizationUnit, long> userOrganizationUnitUnitRepository
             )
@@ -93,22 +87,18 @@ namespace CAPS.CORPACCOUNTING.Accounting
             _jobUnitRepository = jobUnitRepository;
             _accountUnitRepository = accountUnitRepository;
             _customAppSession = customAppSession;
-            _cacheManager = cacheManager;
-            _vendorUnitRepository = vendorUnitRepository;
+
             _taxCreditUnitRepository = taxCreditUnitRepository;
             _vendorCache = vendorCache;
             _divisionCache = dividsCache;
             _accountCache = accountCache;
             _subAccountCache = subAccountCache;
-            _coaUnit = coaUnit;
             _subAccountRestrictionCache = subAccountRestrictionCache;
             _pettyCashAccountUnitRepository = pettyCashAccountUnitRepository;
             _vendorPaymentTermUnitRepository = vendorPaymentTermUnitRepository;
             _bankAccountCache = bankAccountCache;
             _purchaseOrderEntryDocumentDetailUnitRepository = purchaseOrderEntryDocumentDetailUnitRepository;
             _purchaseOrderEntryDocumentUnitRepository = purchaseOrderEntryDocumentUnitRepository;
-            _organizationExtendedUnitManager = organizationExtendedUnitManager;
-            _userManager = userManager;
             _organizationExtendedUnitRepository = organizationExtendedUnitRepository;
             _userOrganizationUnitUnitRepository = userOrganizationUnitUnitRepository;
         }

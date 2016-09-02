@@ -56,8 +56,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = Helper.CreateFilters(query, mapSearchFilters);
             }
-            query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), item => item.Coa.OrganizationUnitId == input.OrganizationUnitId)
-                .Where(p => p.Coa.IsCorporate == true);
+            query = query.Where(p => p.Coa.IsCorporate);
 
             var resultCount = await query.CountAsync();
             var results = await query
@@ -184,7 +183,6 @@ namespace CAPS.CORPACCOUNTING.Masters
         {
             return await (from au in _coaUnitRepository.GetAll()
                           .WhereIf(input.CoaId != null, p => p.Id != input.CoaId)
-                          .WhereIf(input.OrganizationUnitId != null, p => p.OrganizationUnitId == input.OrganizationUnitId)
                           select new NameValueDto { Name = au.Caption, Value = au.Id.ToString() }).ToListAsync();
         }
 

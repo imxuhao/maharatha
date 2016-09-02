@@ -130,8 +130,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
                 query = Helper.CreateFilters(query, mapSearchFilters);
             }
-            query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), item => item.Job.OrganizationUnitId == input.OrganizationUnitId)
-                .Where(item => item.Job.IsDivision == true);
+            query = query.Where(item => item.Job.IsDivision == true);
 
 
             var resultCount = await query.CountAsync();

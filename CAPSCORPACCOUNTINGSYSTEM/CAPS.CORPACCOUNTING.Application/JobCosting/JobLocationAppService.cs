@@ -6,7 +6,6 @@ using Abp.AutoMapper;
 using Abp.Application.Services.Dto;
 using System.Linq;
 using Abp.Authorization;
-using CAPS.CORPACCOUNTING.Masters;
 using System.Data.Entity;
 using CAPS.CORPACCOUNTING.Accounting;
 
@@ -18,16 +17,12 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         private readonly JobLocationUnitManager _jobLocationUnitManager;
         private readonly IRepository<JobLocationUnit> _jobLocationUnitRepository;
         private readonly IRepository<SubAccountUnit, long> _subAccountUnitRepository;
-        private readonly IUnitOfWorkManager _unitOfWorkManager;
-
         public JobLocationAppService(JobLocationUnitManager jobLocationUnitManager,
             IRepository<JobLocationUnit> jobLocationUnitRepository,
-            IUnitOfWorkManager unitOfWorkManager,
             IRepository<SubAccountUnit, long> subAccountUnitRepository)
         {
             _jobLocationUnitManager = jobLocationUnitManager;
             _jobLocationUnitRepository = jobLocationUnitRepository;
-            _unitOfWorkManager = unitOfWorkManager;
             _subAccountUnitRepository = subAccountUnitRepository;
         }
 

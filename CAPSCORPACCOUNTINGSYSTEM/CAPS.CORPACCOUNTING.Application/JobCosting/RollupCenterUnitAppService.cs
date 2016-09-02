@@ -96,8 +96,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
                 query = Helper.CreateFilters(query, mapSearchFilters);
             }
-            query = query.Where(item => item.RollupCenter.OrganizationUnitId == input.OrganizationUnitId || item.RollupCenter.OrganizationUnitId == null);
-
             var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()

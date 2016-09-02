@@ -243,8 +243,7 @@ namespace CAPS.CORPACCOUNTING.Journals
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = query.CreateFilters(mapSearchFilters);
             }
-            query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null),
-                p => p.Journals.OrganizationUnitId == input.OrganizationUnitId)
+            query = query
                  .Where(u => u.Journals.TypeOfAccountingDocumentId == TypeOfAccountingDocument.GeneralLedger &&
                         u.Journals.IsPosted == unPosted);
 
@@ -308,10 +307,7 @@ namespace CAPS.CORPACCOUNTING.Journals
                             taxCreditNumber = taxCredits.Number
                         };
 
-
-            query = query.Where(p => p.JournalDetails.AccountingDocumentId.Value == input.AccountingDocumentId)
-                .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null),
-                    p => p.JournalDetails.OrganizationUnitId == input.OrganizationUnitId);
+            query = query.Where(p => p.JournalDetails.AccountingDocumentId.Value == input.AccountingDocumentId);
 
             var results = await query
                 .AsNoTracking()
@@ -376,9 +372,8 @@ namespace CAPS.CORPACCOUNTING.Journals
                         };
 
 
-            query = query.Where(p => p.JournalDetails.AccountingDocumentId.Value == input.AccountingDocumentId)
-                .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null),
-                    p => p.JournalDetails.OrganizationUnitId == input.OrganizationUnitId);
+            query = query.Where(p => p.JournalDetails.AccountingDocumentId.Value == input.AccountingDocumentId);
+               
 
             var results = await query
                 .AsNoTracking()

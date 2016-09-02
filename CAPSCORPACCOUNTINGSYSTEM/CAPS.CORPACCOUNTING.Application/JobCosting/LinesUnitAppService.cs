@@ -92,8 +92,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = Helper.CreateFilters(query, mapSearchFilters);
             }
-            query = query.Where(item => item.Account.ChartOfAccountId == input.CoaId)
-                .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.Account.OrganizationUnitId == input.OrganizationUnitId);
+            query = query.Where(item => item.Account.ChartOfAccountId == input.CoaId);
 
             var resultCount = await query.CountAsync();
             var results = await query

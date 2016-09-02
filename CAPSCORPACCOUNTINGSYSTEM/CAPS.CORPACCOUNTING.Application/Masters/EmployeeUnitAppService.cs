@@ -151,7 +151,6 @@ namespace CAPS.CORPACCOUNTING.Masters
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = Helper.CreateFilters(query, mapSearchFilters);
             }
-            query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), item => item.Employee.OrganizationUnitId == input.OrganizationUnitId);
             return query;
         }
 
@@ -253,8 +252,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = Helper.CreateFilters(query, mapSearchFilters);
             }
-            var employeeList = await query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), item => item.OrganizationUnitId == input.OrganizationUnitId)
-                  .Select(u => new NameValueDto { Name = u.LastName, Value = u.Id.ToString() }).ToListAsync();
+            var employeeList = await query.Select(u => new NameValueDto { Name = u.LastName, Value = u.Id.ToString() }).ToListAsync();
             return employeeList;
         }
 

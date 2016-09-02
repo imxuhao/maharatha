@@ -182,7 +182,6 @@ namespace CAPS.CORPACCOUNTING.Masters
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = Helper.CreateFilters(query, mapSearchFilters);
             }
-            query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), item => item.Customer.OrganizationUnitId == input.OrganizationUnitId);
             return query;
         }
 
@@ -289,7 +288,6 @@ namespace CAPS.CORPACCOUNTING.Masters
         {
             var customerList = await _customerUnitRepository.GetAll()
                  .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.LastName.Contains(input.Query))
-                 .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
                  .Select(u => new NameValueDto { Name = u.LastName, Value = u.Id.ToString() }).ToListAsync();
             return customerList;
         }
@@ -311,7 +309,6 @@ namespace CAPS.CORPACCOUNTING.Masters
         {
             var customerPaymentTermList = await _customerPaymentTermRepository.GetAll()
           .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))
-          .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
           .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
             return customerPaymentTermList;
         }
@@ -324,7 +321,6 @@ namespace CAPS.CORPACCOUNTING.Masters
         {
             var salesRepList = await _salesRepRepository.GetAll()
           .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.LastName.Contains(input.Query))
-          .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
           .Select(u => new NameValueDto { Name = u.LastName, Value = u.Id.ToString() }).ToListAsync();
             return salesRepList;
         }

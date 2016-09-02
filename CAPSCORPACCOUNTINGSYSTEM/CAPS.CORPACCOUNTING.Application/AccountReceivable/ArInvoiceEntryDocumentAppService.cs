@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Dynamic;
@@ -19,7 +18,6 @@ using CAPS.CORPACCOUNTING.Accounting;
 using CAPS.CORPACCOUNTING.AccountReceivable.Dto;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Helpers;
-using CAPS.CORPACCOUNTING.Journals;
 
 namespace CAPS.CORPACCOUNTING.AccountReceivable
 {
@@ -42,7 +40,6 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
         private readonly IRepository<TypeOfCurrencyUnit, short> _currencyUnitRepository;
         private readonly IRepository<CustomerPaymentTermUnit> _customerPaymentTermUnitRepository;
         private readonly IRepository<SalesRepUnit> _salesRepUnitRepository;
-        private readonly IRepository<LocationSetUnit> _locationSetUnitRepository;
         private readonly IRepository<ARBillingTypeUnit> _aRBillingTypeUnitRepository;
 
         /// <summary>
@@ -59,7 +56,6 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
         /// <param name="currencyUnitRepository"></param>
         /// <param name="customerPaymentTermRepository"></param>
         /// <param name="salesRepUnitTermRepository"></param>
-        /// <param name="locationSetUnitRepository"></param>
         /// <param name="aRBillingTypeUnitRepository"></param>
         public ArInvoiceEntryDocumentAppService(
             ArInvoiceEntryDocumentUnitManager arInvoiceEntryDocumentUnitManager,
@@ -73,7 +69,6 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
             IRepository<TypeOfCurrencyUnit, short> currencyUnitRepository,
             IRepository<CustomerPaymentTermUnit> customerPaymentTermRepository,
             IRepository<SalesRepUnit> salesRepUnitTermRepository,
-            IRepository<LocationSetUnit> locationSetUnitRepository,
             IRepository<ARBillingTypeUnit> aRBillingTypeUnitRepository)
         {
             _arInvoiceEntryDocumentUnitManager = arInvoiceEntryDocumentUnitManager;
@@ -87,7 +82,6 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
             _currencyUnitRepository = currencyUnitRepository;
             _customerPaymentTermUnitRepository = customerPaymentTermRepository;
             _salesRepUnitRepository = salesRepUnitTermRepository;
-            _locationSetUnitRepository = locationSetUnitRepository;
             _aRBillingTypeUnitRepository = aRBillingTypeUnitRepository;
         }
 

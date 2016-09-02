@@ -1278,7 +1278,7 @@
             
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.#ctor(Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Accounting.SubAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.JobCosting.JobUnit},CAPS.CORPACCOUNTING.Sessions.CustomAppSession,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Runtime.Caching.ICacheManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TaxCreditUnit},CAPS.CORPACCOUNTING.Helpers.CacheItems.IVendorCache,CAPS.CORPACCOUNTING.Helpers.CacheItems.IDivisionCache,CAPS.CORPACCOUNTING.Helpers.CacheItems.IAccountCache,CAPS.CORPACCOUNTING.Helpers.CacheItems.ISubAccountCache,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CoaUnit},CAPS.CORPACCOUNTING.Helpers.CacheItems.ISubAccountRestrictionCache,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PettyCash.PettyCashAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorPaymentTermUnit},CAPS.CORPACCOUNTING.Helpers.CacheItems.IBankAccountCache,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentDetailUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentUnit,System.Int64},CAPS.CORPACCOUNTING.Organization.OrganizationExtendedUnitManager,CAPS.CORPACCOUNTING.Authorization.Users.UserManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Organization.OrganizationExtended,System.Int64},Abp.Domain.Repositories.IRepository{Abp.Authorization.Users.UserOrganizationUnit,System.Int64})">
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.#ctor(Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Accounting.SubAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.JobCosting.JobUnit},CAPS.CORPACCOUNTING.Sessions.CustomAppSession,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TaxCreditUnit},CAPS.CORPACCOUNTING.Helpers.CacheItems.IVendorCache,CAPS.CORPACCOUNTING.Helpers.CacheItems.IDivisionCache,CAPS.CORPACCOUNTING.Helpers.CacheItems.IAccountCache,CAPS.CORPACCOUNTING.Helpers.CacheItems.ISubAccountCache,CAPS.CORPACCOUNTING.Helpers.CacheItems.ISubAccountRestrictionCache,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PettyCash.PettyCashAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorPaymentTermUnit},CAPS.CORPACCOUNTING.Helpers.CacheItems.IBankAccountCache,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentDetailUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Organization.OrganizationExtended,System.Int64},Abp.Domain.Repositories.IRepository{Abp.Authorization.Users.UserOrganizationUnit,System.Int64})">
             <summary>
             
             </summary>
@@ -1293,13 +1293,14 @@
             <param name="dividsCache"></param>
             <param name="accountCache"></param>
             <param name="subAccountCache"></param>
-            <param name="coaUnit"></param>
+            <param name="userOrganizationUnitUnitRepository"></param>
             <param name="subAccountRestrictionCache"></param>
             <param name="pettyCashAccountUnitRepository"></param>
             <param name="vendorPaymentTermUnitRepository"></param>
             <param name="bankAccountCache"></param>
             <param name="purchaseOrderEntryDocumentDetailUnitRepository"></param>
             <param name="purchaseOrderEntryDocumentUnitRepository"></param>
+             <param name="organizationExtendedUnitRepository"></param>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetJobOrDivisionList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
@@ -1507,13 +1508,12 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService.CreateorUpdateSubAccountRestrictions(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitInput},System.Int64,System.Nullable{System.Int64})">
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService.CreateorUpdateSubAccountRestrictions(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitInput},System.Int64)">
             <summary>
             Create or Update SubAccountRestrictions
             </summary>
             <param name="input"></param>
             <param name="id"></param>
-            <param name="organizationId"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentAppService">
@@ -1521,7 +1521,7 @@
             
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentAppService.#ctor(CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentDetailUnit,System.Int64},CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentDetailUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.JobCosting.JobUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Accounting.SubAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CustomerUnit,System.Int32},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TypeOfCurrencyUnit,System.Int16},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CustomerPaymentTermUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.SalesRepUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.LocationSetUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.JobCosting.ARBillingTypeUnit})">
+        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentAppService.#ctor(CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentDetailUnit,System.Int64},CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentDetailUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.JobCosting.JobUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Accounting.SubAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CustomerUnit,System.Int32},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TypeOfCurrencyUnit,System.Int16},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CustomerPaymentTermUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.SalesRepUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.JobCosting.ARBillingTypeUnit})">
             <summary>
             
             </summary>
@@ -1536,7 +1536,6 @@
             <param name="currencyUnitRepository"></param>
             <param name="customerPaymentTermRepository"></param>
             <param name="salesRepUnitTermRepository"></param>
-            <param name="locationSetUnitRepository"></param>
             <param name="aRBillingTypeUnitRepository"></param>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentAppService.CreateArInvoiceEntryDocumentUnit(CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit)">
@@ -2380,7 +2379,7 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Banking.Dto.BatchUnitAppService.GetBatchList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
-            Get Batch List based on OrganizationUnitId
+            Get Batch List 
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -5597,6 +5596,18 @@
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobUnitDto.TaxCreditId">
             <summary>Gets or sets the TaxCreditId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobUnitDto.TaxCredit">
+            <summary>Gets or sets the TaxCredit field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobUnitDto.AccountNumber">
+            <summary>Gets or sets the RollupAccount field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobUnitDto.BudgetFormatCaption">
+            <summary>Gets or sets the budgetFormatCaption field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobUnitDto.DivisionJobNumber">
+            <summary>Gets or sets the DivisionJobNumber field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobUnitDto.ErrorMessage">
             <summary>
             Gets or sets the ErrorMessage. 
@@ -5743,6 +5754,31 @@
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.TaxCreditId">
             <summary>Gets or sets the TaxCreditId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.TypeOfCurrency">
+            <summary>Gets or sets the TypeOfCurrencyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.TaxCredit">
+            <summary>Gets or sets the TaxCredit field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.AccountNumber">
+            <summary>Gets or sets the RollupAccount field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.BudgetFormatCaption">
+            <summary>Gets or sets the budgetFormatCaption field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.JobStatusName">
+            <summary>
+             Gets or sets the JobStatusName 
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.TypeofProjectName">
+            <summary>
+             Gets or sets the TypeofProjectName
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.DivisionJobNumber">
+            <summary>Gets or sets the DivisionJobNumber field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.ExcelRowNumber">
              <summary>
             Gets or sets the  ExcelRowNumber
@@ -5816,11 +5852,12 @@
             <param name="listDivisionUnitDtos"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.JobCosting.DivisionUnitAppService.ValidateDuplicateRecords(System.Collections.Generic.List{CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput})">
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.DivisionUnitAppService.ValidateDuplicateRecords(System.Collections.Generic.List{CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput},System.Int32)">
             <summary>
             Checking DuplicateRecords
             </summary>
             <param name="divisionsList"></param>
+             <param name="coaId"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.JobCosting.IJobLocationAppService">
@@ -6006,21 +6043,6 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.JobCosting.LinesUnitAppService.ImportLines(System.Data.DataTable,System.Int32)">
-            <summary>
-            Importing the Lines From Excel
-            </summary>
-            <param name="linesTable"></param>
-            <param name="coaId"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.JobCosting.LinesUnitAppService.BulkLineUploads(CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountListInput)">
-            <summary>
-            BulkAccount Import
-            </summary>
-            <param name="accountList"></param>
-            <returns></returns>
-        </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.ARBillingTypeUnitAppService.#ctor(Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.JobCosting.ARBillingTypeUnit},CAPS.CORPACCOUNTING.JobCosting.ARBillingTypeUnitManager)">
             
         </member>
@@ -6083,13 +6105,6 @@
             Get Lines by ProjectCoaId
             </summary>
             <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.JobCosting.ILinesUnitAppService.BulkLineUploads(CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountListInput)">
-            <summary>
-            Inserting Bulk of Lines
-            </summary>
-            <param name="accountList"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.JobCosting.IARBillingTypeUnitAppService">
@@ -6955,12 +6970,11 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.ImportAccounts(System.Data.DataTable,System.Int32)">
+        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.BulkAccountInsert(CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountListInput)">
             <summary>
-            Importing the Accounts From Excel
+            Inserting BulkAccount
             </summary>
-            <param name="accountTable"></param>
-            <param name="coaId"></param>
+            <param name="listAccountUnitDtos"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.ValidateDuplicateRecords(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput})">
@@ -7489,7 +7503,7 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.PaymentTermsId">
             <summary>Gets or sets the PaymentTermsId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.PaymentTerms">
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.PaymentTermName">
             <summary>Gets or sets the PaymentTerms field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.TypeofCurrency">
@@ -8882,6 +8896,24 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.TypeOfCurrencyRateId">
             <summary>Gets or sets the TypeOfCurrencyRateId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.TypeofConsolidation">
+            <summary>Gets or sets the TypeofConsolidation field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.TypeOfCurrency">
+            <summary>Gets or sets the TypeOfCurrency field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.TypeOfAccount">
+            <summary>Gets or sets the TypeOfAccount field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.TypeOfCurrencyRate">
+            <summary>Gets or sets the TypeOfCurrencyRate field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.RollUpAccountCaption">
+            <summary>Gets or sets the RollUpAccountCaption field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.RollUpDivision">
+            <summary>Gets or sets the RollUpDivision field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.ExcelRowNumber">
             <summary>

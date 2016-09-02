@@ -12,7 +12,6 @@ using AutoMapper;
 using System.Collections.Generic;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using CAPS.CORPACCOUNTING.Journals;
-using CAPS.CORPACCOUNTING.Accounting.Dto;
 
 namespace CAPS.CORPACCOUNTING.Banking.Dto
 {
@@ -93,8 +92,6 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
                 if (!ReferenceEquals(mapSearchFilters, null))
                     batchUnitQuery = Helper.CreateFilters(batchUnitQuery, mapSearchFilters);
             }
-
-            batchUnitQuery = batchUnitQuery.Where(item => item.OrganizationUnitId == input.OrganizationUnitId || item.OrganizationUnitId == null);
             var resultCount = await batchUnitQuery.CountAsync();
             var results = await batchUnitQuery
                 .AsNoTracking()
@@ -154,7 +151,7 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
 
 
         /// <summary>
-        /// Get Batch List based on OrganizationUnitId
+        /// Get Batch List 
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
@@ -162,7 +159,6 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
         {
             var batchList = await (from subaccount in _batchUnitRepository.GetAll()
                                     .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))
-                                    .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId.Value)
                                         select new NameValueDto { Name = subaccount.Description, Value = subaccount.Id.ToString() })
                               .ToListAsync();
             return batchList;

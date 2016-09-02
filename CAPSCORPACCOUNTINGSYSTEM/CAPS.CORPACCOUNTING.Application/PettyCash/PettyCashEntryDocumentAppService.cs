@@ -173,8 +173,6 @@ namespace CAPS.CORPACCOUNTING.PettyCash
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = query.CreateFilters(mapSearchFilters);
             }
-            query = query.Where(p => p.pcUnits.OrganizationUnitId == input.OrganizationUnitId);
-
 
             var resultCount = await query.CountAsync();
             var results = await query

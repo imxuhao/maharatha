@@ -145,7 +145,6 @@ namespace CAPS.CORPACCOUNTING.Masters
                                                          join gridList in _gridListUnitRepository.GetAll()
                                                          on settings.ViewId equals gridList.Id into gridsetting
                                                          from grdsettings in gridsetting.DefaultIfEmpty()
-                                                         where settings.OrganizationUnitId==input.OrganizationUnitId
                                                          select new UserViewSettingsUnitDto
                                                          {
                                                              UserViewId = settings.Id,

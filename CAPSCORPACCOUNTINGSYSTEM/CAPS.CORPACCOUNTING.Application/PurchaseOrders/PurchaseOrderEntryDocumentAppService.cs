@@ -271,9 +271,7 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
                             ApprovedBy = approvedUser
                         };
 
-            query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null),
-                p => p.purchaseOrder.OrganizationUnitId == input.OrganizationUnitId)
-                .Where(u =>
+            query = query.Where(u =>
                         u.purchaseOrder.TypeOfAccountingDocumentId == TypeOfAccountingDocument.PurchaseOrders &&
                         u.purchaseOrder.IsPosted == unPosted);
 
@@ -456,8 +454,6 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
         {
             var cardLength = 0;
             var cardHolderList = await _bankAccountUnitRepository.GetAll()
-                .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null),
-                    p => p.OrganizationUnitId == input.OrganizationUnitId)
                 .WhereIf(!string.IsNullOrEmpty(input.Query),
                     p => p.Description.Contains(input.Query) || p.Description.Contains(input.Query))
                     .Where(p => p.IsClosed == false)

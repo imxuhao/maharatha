@@ -89,8 +89,6 @@ namespace CAPS.CORPACCOUNTING.Masters
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = Helper.CreateFilters(query, mapSearchFilters);
             }
-            query = query.Where(item => item.VendorPayTerms.OrganizationUnitId == input.OrganizationUnitId || item.VendorPayTerms.OrganizationUnitId == null);
-
             var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()

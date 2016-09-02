@@ -5,6 +5,10 @@
             return record.get('name');
         }
     }, {
+        name: 'paymentTermName', convert: function (value, record) {
+            return record.get('name');
+        }
+    }, {
         name: 'paymentTermsId', convert: function (value, record) {
             return record.get('value');
         }

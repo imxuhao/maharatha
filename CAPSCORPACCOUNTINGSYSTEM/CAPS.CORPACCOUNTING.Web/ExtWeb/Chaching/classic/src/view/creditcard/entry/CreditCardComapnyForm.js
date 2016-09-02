@@ -30,7 +30,6 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyForm', {
     autoScroll: true,
     border: false,
     showFormTitle: true,
-    displayDefaultButtonsCenter: true,
     defaultFocus : 'textfield#creditCardCompany',
     items: [{
         columnWidth: .5,

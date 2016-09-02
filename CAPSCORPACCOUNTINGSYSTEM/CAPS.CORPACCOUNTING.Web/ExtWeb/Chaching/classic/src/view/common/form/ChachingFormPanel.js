@@ -143,7 +143,7 @@ Ext.define('Chaching.view.common.form.ChachingFormPanel',{
     * if set to true then create new buttons
     */
     hideDefaultButtons: false,
-    displayDefaultButtonsCenter:false,
+    displayDefaultButtonsCenter:true,
     /**
     * @cfg {object} default values to be loaded when the form loads
     * use beforeCreateAction in parentGrid's controller class to set defaultValues if any.

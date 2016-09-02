@@ -13,7 +13,6 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsForm',{
     autoScroll: true,
     border: false,
     showFormTitle: true,
-    displayDefaultButtonsCenter: true,
     //titleConfig: {
     //    title: abp.localization.localize("CreatingNewProjectCOA").initCap()
     //},

@@ -18,7 +18,6 @@
     autoScroll: true,
     border: false,
     showFormTitle: false,
-    displayDefaultButtonsCenter: true,
     items: [
         {
             xtype: 'tabpanel',

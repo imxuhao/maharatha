@@ -20,7 +20,6 @@ Ext.define('Chaching.view.users.UsersForm',
     scrollable: true,
     border: false,
     showFormTitle: false,
-    displayDefaultButtonsCenter: true,
     defaults: {
         bodyStyle: { 'background-color': 'trasparent' },
         labelAlign: 'left'

@@ -24,7 +24,6 @@ Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodForm', {
     autoScroll: false,
     border: false,
     showFormTitle: true,
-    displayDefaultButtonsCenter: true,
     //titleConfig: {
     //    title: abp.localization.localize("CreateNewFiscalPeriod").initCap()
     //},

@@ -14,7 +14,6 @@ Ext.define('Chaching.view.financials.accounts.DivisionsForm', {
     autoScroll: true,
     border: false,
     showFormTitle: true,
-    displayDefaultButtonsCenter: true,
     popupWndSize: {
         height: '40%',
         width: '50%'

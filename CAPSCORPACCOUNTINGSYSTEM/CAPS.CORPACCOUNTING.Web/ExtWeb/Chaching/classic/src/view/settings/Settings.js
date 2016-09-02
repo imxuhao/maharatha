@@ -9,7 +9,6 @@
     controller: 'settings-settingsController',
     name: 'Administration.Host.Settings',
     hideDefaultButtons: false,
-    displayDefaultButtonsCenter: true,
     modulePermissions: {
         read: abp.auth.isGranted('Pages.Administration.Host.Settings'),
         create: abp.auth.isGranted('Pages.Administration.Host.Settings'),

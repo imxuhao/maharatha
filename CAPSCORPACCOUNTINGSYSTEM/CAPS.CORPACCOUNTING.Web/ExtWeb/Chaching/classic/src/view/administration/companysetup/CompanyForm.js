@@ -16,7 +16,6 @@
     autoScroll: false,
     border: false,
     showFormTitle: false,
-    displayDefaultButtonsCenter: true,
     titleConfig: {
         title: abp.localization.localize("CreateNewCompanySetup").initCap()
     },

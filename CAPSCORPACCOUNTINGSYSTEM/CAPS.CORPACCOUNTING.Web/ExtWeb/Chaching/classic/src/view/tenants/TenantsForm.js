@@ -14,7 +14,6 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
     scrollable: true,
     border: false,
     showFormTitle: false,
-    displayDefaultButtonsCenter: true,
     defaults: {
         bodyStyle: { 'background-color': 'trasparent' },
       //  labelAlign: 'top',

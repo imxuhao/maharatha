@@ -13,7 +13,6 @@ Ext.define('Chaching.view.address.AddressForm',
     openInPopupWindow: true,
     hideDefaultButtons: false,
     border: false,
-    displayDefaultButtonsCenter: true,
     scrollable: true,
     controller: 'address-addressform',
     modulePermissions: {

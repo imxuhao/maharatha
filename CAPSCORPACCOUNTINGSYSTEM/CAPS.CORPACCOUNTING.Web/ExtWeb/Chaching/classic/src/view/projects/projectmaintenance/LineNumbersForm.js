@@ -15,7 +15,6 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersForm',{
     autoScroll: true,
     border: false,
     showFormTitle: true,
-    displayDefaultButtonsCenter: true,
     popupWndSize: {
         height: '70%',
         width: '70%'

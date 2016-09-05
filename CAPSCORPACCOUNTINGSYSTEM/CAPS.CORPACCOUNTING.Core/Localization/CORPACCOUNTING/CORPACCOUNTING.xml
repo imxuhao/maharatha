@@ -1312,5 +1312,11 @@
     <text name="AttachedBy" value="Attached By"/>
     <text name="Attachment_Select_Info" value="Please select the file to upload"/>
 
+    <text name="BalanceDue" value="Balance Due" />
+    <text name="DateOfDeposit" value="Date of Deposit" />
+    <text name="InvoiceStatus" value="Invoice Status" />
+    <text name="ARInvoiceInquiryGrid" value="AR Invoice Inquiry Grid" />
+    
+    
   </texts>
 </localizationDictionary>

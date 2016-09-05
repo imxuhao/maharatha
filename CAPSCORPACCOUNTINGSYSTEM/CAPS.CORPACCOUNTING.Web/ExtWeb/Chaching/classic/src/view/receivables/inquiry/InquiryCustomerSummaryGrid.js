@@ -1,37 +1,27 @@
 ﻿/**
- * Accounts list to display all records of Accounts Receivable Invoices.
+ * Inquiry list to display all records of Iquiry in Receivable .
  */
-Ext.define('Chaching.view.receivables.invoices.AccountsReceivableGrid', {
+Ext.define('Chaching.view.receivables.inquiry.InquiryCustomerSummaryGrid', {
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
-    xtype: 'receivables.invoices',
-    name: 'Receivables.Invoices',
-    requires: [
-        'Chaching.view.receivables.invoices.AccountsReceivableGridController'
-    ],
-    controller: 'receivables-invoices-accountsreceivablegrid',
+    xtype: 'receivables.inquiry.customersummary',
+    name: 'Receivables.Inquiry.CustomerSummary',
+    //requires: [
+    //    'Chaching.view.receivables.inquiry.InquiryGridController'
+    //],
+    //controller: 'receivables-inquiry-accountsreceivableinquirygrid',
     modulePermissions: {
-        read: abp.auth.isGranted('Pages.Receivables.Invoices'),
-        create: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Create'),
-        edit: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Edit'),
-        destroy: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Delete'),
-        attach: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Attach')
+        read: abp.auth.isGranted('Pages.Receivables.Inquiry.CustomerSummary'),
+        create: abp.auth.isGranted('Pages.Receivables.Inquiry.CustomerSummary.Create'),
+        edit: abp.auth.isGranted('Pages.Receivables.Inquiry.CustomerSummary.Edit'),
+        destroy: abp.auth.isGranted('Pages.Receivables.Inquiry.CustomerSummary.Delete')
     },
     gridId: 29,
     headerButtonsConfig: [
         {
             xtype: 'displayfield',
-            value: abp.localization.localize("AccountsReceivable"),
+            value: abp.localization.localize("CustomerSummary"),
             ui: 'headerTitle'
-        }, '->', {
-            xtype: 'button',
-            scale: 'small',
-            ui: 'actionButton',
-            action: 'create',
-            text: abp.localization.localize("Add").toUpperCase(),
-            checkPermission: true,
-            iconCls: 'fa fa-plus',
-            iconAlign: 'left'
-        }
+        }, '->'
     ],
     requireExport: true,
     requireMultiSearch: true,
@@ -40,21 +30,9 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableGrid', {
     editingMode: 'row',
     columnLines: true,
     multiColumnSort: true,
-    editWndTitleConfig: {
-        title: app.localize('EditInvoice'),
-        iconCls: 'fa fa-pencil'
-    },
-    createWndTitleConfig: {
-        title: app.localize('CreateNewInvoice'),
-        iconCls: 'fa fa-plus'
-    },
-    viewWndTitleConfig: {
-        title: app.localize('ViewInvoice'),
-        iconCls: 'fa fa-th'
-    },
-    createNewMode: 'tab',
-    isSubMenuItemTab: true,
-    store: 'receivables.invoices.AccountsReceivableStore',
+    //createNewMode: 'tab',
+    //isSubMenuItemTab: true,
+    store: 'receivables.inquiry.InquiryStore',
     columns: [
         {
             xtype: 'gridcolumn',
@@ -101,6 +79,20 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableGrid', {
             }
         }, {
             xtype: 'gridcolumn',
+            text: abp.localization.localize("DueDate"),
+            dataIndex: 'duedate',
+            sortable: true,
+            groupable: true,
+            width: '10%',
+            filterField: {
+                xtype: 'textfield',
+                width: '100%'
+            },
+            editor: {
+                xtype: 'textfield'
+            }
+        }, {
+            xtype: 'gridcolumn',
             text: abp.localization.localize("Description"),
             dataIndex: 'description',
             sortable: true,
@@ -113,25 +105,9 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableGrid', {
             editor: {
                 xtype: 'textfield'
             }
-        },{
+        }, {
             xtype: 'gridcolumn',
-            text: app.localize('Amount'),
-            dataIndex: 'amount',
-            sortable: true,
-            groupable: true,
-            //flex:1,
-            width: '8%',
-            filterField: {
-                xtype: 'textfield',
-                width: '100%'
-            },
-            editor: {
-                xtype: 'textfield',
-                name: 'amount'
-            }
-          }, {
-            xtype: 'gridcolumn',
-            text: app.localize('Job#/Division'),
+            text: app.localize('JobNumber'),
             dataIndex: 'jobNumber',
             sortable: true,
             groupable: true,
@@ -143,7 +119,7 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableGrid', {
             editor: {
                 xtype: 'textfield'
             }
-          }, {
+        }, {
             xtype: 'gridcolumn',
             text: app.localize('JobName'),
             dataIndex: 'jobName',
@@ -158,11 +134,10 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableGrid', {
             }
         }, {
             xtype: 'gridcolumn',
-            text: app.localize('Account/Line'),
-            dataIndex: 'accountLine',
+            text: app.localize('InvoiceStatus'),
+            dataIndex: 'invoiceStatus',
             sortable: true,
             groupable: true,
-            isAssociationField: true,
             width: '10%',
             filterField: {
                 xtype: 'textfield',
@@ -172,8 +147,63 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableGrid', {
             }
         }, {
             xtype: 'gridcolumn',
-            text: app.localize('Currency'),
-            dataIndex: 'typeOfCurrency',
+            text: app.localize('InvoiceAmount'),
+            dataIndex: 'invoiceAmount',
+            sortable: true,
+            groupable: true,
+            width: '8%',
+            filterField: {
+                xtype: 'textfield',
+                width: '100%',
+                emptyText: app.localize('Search')
+            }, editor: {
+                xtype: 'textfield'
+            }
+        }, {
+            xtype: 'gridcolumn',
+            text: app.localize('DateOfDeposit'),
+            dataIndex: 'dateOfDeposite',
+            sortable: true,
+            groupable: true,
+            width: '10%',
+            filterField: {
+                xtype: 'datefield',
+                width: '100%'
+            }, editor: {
+                xtype: 'textfield'
+            }
+        }, {
+            xtype: 'gridcolumn',
+            text: app.localize('Payments'),
+            dataIndex: 'payments',
+            sortable: true,
+            groupable: true,
+            width: '8%',
+            filterField: {
+                xtype: 'textfield',
+                width: '100%',
+                emptyText: app.localize('Search')
+            }, editor: {
+                xtype: 'textfield'
+            }
+        }, {
+            xtype: 'gridcolumn',
+            text: app.localize('BalanceDue'),
+            dataIndex: 'balanceDue',
+            sortable: true,
+            groupable: true,
+            width: '10%',
+            filterField: {
+                xtype: 'textfield',
+                width: '100%',
+                emptyText: app.localize('Search')
+            }, editor: {
+                xtype: 'numberfield'
+            }
+        }, {
+            xtype: 'gridcolumn',
+            text: app.localize('Notes'),
+            dataIndex: 'notes',
             sortable: true,
             groupable: true,
             width: '8%',
@@ -185,6 +215,6 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableGrid', {
                 xtype: 'textfield'
             }
         }
-                
+
     ]
 });

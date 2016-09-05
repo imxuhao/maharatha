@@ -446,6 +446,7 @@
     <Content Include="App\host\views\maintenance\index.js" />
     <Content Include="App\host\views\maintenance\index.min.css" />
     <Content Include="App\host\views\tenants\featuresModal.js" />
+    <Content Include="App_Data\Logs\Logs.txt" />
     <Content Include="Areas\Mpa\Common\Scripts\jquery-validation-custom.js" />
     <Content Include="Areas\Mpa\Views\AuditLogs\index.css">
       <DependentUpon>index.less</DependentUpon>
@@ -3652,7 +3653,6 @@
     <Content Include="ExtWeb\Chaching\app\model\administration\organization\CompanyModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\administration\organization\CompanySettingsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\administration\organization\OrganizationModel.js" />
-    <Content Include="ExtWeb\Chaching\app\model\attachments\AttachmentsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\auditlogs\AuditLogsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\banking\banksetup\BankCheckRangesModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\banking\banksetup\BankSetupModel.js" />
@@ -3699,6 +3699,7 @@
     <Content Include="ExtWeb\Chaching\app\model\purchaseorders\entry\PurchaseOrderDetailModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\purchaseorders\entry\PurchaseOrderModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\receivables\customers\CustomersModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\receivables\inquiry\InquiryModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\receivables\invoices\AccountsReceivableDetailsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\receivables\invoices\AccountsReceivableModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\roles\RoleEditModel.js" />
@@ -3724,7 +3725,6 @@
     <Content Include="ExtWeb\Chaching\app\store\administration\organization\CompanyUsersStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\APPaymentTermsListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\ARPaymentTermsListStore.js" />
-    <Content Include="ExtWeb\Chaching\app\store\attachments\AttachmentsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\banking\banksetup\BankSetupStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\banking\banksetup\BankCheckNumberStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\base\BaseTreeStore.js" />
@@ -3777,6 +3777,7 @@
     <Content Include="ExtWeb\Chaching\app\store\purchaseorders\entry\PurchaseOrderDetailsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\purchaseorders\entry\PurchaseOrderStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\receivables\customers\CustomersStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\receivables\inquiry\InquiryStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\receivables\invoices\AccountsReceivableDetailsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\receivables\invoices\AccountsReceivableStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesTreeStore.js" />
@@ -3809,7 +3810,6 @@
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\VendorsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\JobDivisionStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\BatchListStore.js" />
-    <Content Include="ExtWeb\Chaching\app\store\utilities\CardTypeListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\CheckStockListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\JournalTypeListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\PaymentTermsListStore.js" />
@@ -3880,8 +3880,6 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\OrganizationGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\OrganizationView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\OrganizationViewController.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\attachments\AttachmentsView.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\attachments\AttachmentsViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\auditlogs\AuditLogDetail.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\auditlogs\AuditLogDetailView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\auditlogs\AuditLogDetailViewController.js" />
@@ -4071,6 +4069,11 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\receivables\customers\CustomerFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\receivables\customers\CustomersGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\receivables\customers\CustomersGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\receivables\InquiryTabPanel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\receivables\inquiry\InquiryCustomerSummaryGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\receivables\inquiry\InquiryGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\receivables\inquiry\InquiryGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\receivables\inquiry\InquiryInvoiceDetailGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\receivables\invoices\AccountsReceivableDetailGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\receivables\invoices\AccountsReceivableDetailGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\receivables\invoices\AccountsReceivableForm.js" />
@@ -21834,7 +21837,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\Logs\" />
     <Folder Include="ExtWeb\build\production\Chaching\archive\classic\" />
     <Folder Include="ExtWeb\build\production\Chaching\archive\modern\" />
     <Folder Include="ExtWeb\build\production\Chaching\classic\deltas\" />

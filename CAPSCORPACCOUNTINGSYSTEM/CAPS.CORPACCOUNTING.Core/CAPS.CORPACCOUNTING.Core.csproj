@@ -188,7 +188,8 @@
     <Compile Include="Common\AccountingDocumentTypeUnit.cs" />
     <Compile Include="Common\ApprovalUnit.cs" />
     <Compile Include="Common\ApprovedSoxUnit.cs" />
-    <Compile Include="Common\AttachedObjectUnit.cs" />
+    <Compile Include="Attachments\AttachedObjectUnit.cs" />
+    <Compile Include="Attachments\AttachedObjectUnitManager.cs" />
     <Compile Include="Common\Code1099T4RateUnit.cs" />
     <Compile Include="Common\Code1099T4TypeUnit.cs" />
     <Compile Include="Common\ConsolidationDetailUnit.cs" />
@@ -202,7 +203,10 @@
     <Compile Include="Common\EmailMsgLogUnit.cs" />
     <Compile Include="Common\EmailUnit.cs" />
     <Compile Include="Common\FedExTranslationUnit.cs" />
-    <Compile Include="Common\NotedObjectUnit.cs" />
+    <Compile Include="Common\IMayHaveAttachments.cs" />
+    <Compile Include="Common\IMayHaveNotes.cs" />
+    <Compile Include="Notes\NotedObjectUnit.cs" />
+    <Compile Include="Notes\NotedObjectUnitManager.cs" />
     <Compile Include="Common\ProfitVariableUnit.cs" />
     <Compile Include="Common\ProfitRuleUnit.cs" />
     <Compile Include="Common\SecureObjectUnit.cs" />

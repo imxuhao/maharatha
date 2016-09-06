@@ -4,7 +4,7 @@ using Abp.Organizations;
 using CAPS.CORPACCOUNTING.Masters;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CAPS.CORPACCOUNTING.Common
+namespace CAPS.CORPACCOUNTING.Notes
 {
     /// <summary>
     ///  NotedObject is the table name in Lajit

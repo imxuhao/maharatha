@@ -1926,6 +1926,122 @@
             
             </summary>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.Attachments.AttachedObjectUnitAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Attachments.AttachedObjectUnitAppService.#ctor(CAPS.CORPACCOUNTING.Attachments.AttachedObjectUnitManager,CAPS.CORPACCOUNTING.Storage.IBinaryObjectManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Storage.BinaryObject,System.Guid},Abp.Domain.Uow.IUnitOfWork)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Attachments.AttachedObjectUnitAppService.CreateAttachedObjectUnit(CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitInput)">
+            <summary>
+            Create Attached Object Unit 
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Attachments.IAttachedObjectUnitAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Attachments.IAttachedObjectUnitAppService.CreateAttachedObjectUnit(CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitInput)">
+            <summary>
+            Create Attached Object Unit 
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Attachments.Dto.CreateAttachedObjectInputUnit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:CAPS.CORPACCOUNTING.Attachments.Dto.CreateAttachedObjectInputUnit.MaxFileExtensionLength">
+            <summary>
+                Maximum Length of FileExtensionLength  
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.CreateAttachedObjectInputUnit.TypeOfAttachedObjectId">
+            <summary>Gets or sets the TypeOfAttachedObjectID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.CreateAttachedObjectInputUnit.TypeOfObjectId">
+            <summary>Gets or sets the TypeOfObjectID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.CreateAttachedObjectInputUnit.ObjectId">
+            <summary>Gets or sets the ObjectID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.CreateAttachedObjectInputUnit.Description">
+            <summary>Gets or sets the Description field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.CreateAttachedObjectInputUnit.FileName">
+            <summary>Gets or sets the FileName field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.CreateAttachedObjectInputUnit.AttachedDate">
+            <summary>Gets or sets the AttachedDate field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.CreateAttachedObjectInputUnit.FileSize">
+            <summary>Gets or sets the FileSize field. </summary>      
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.CreateAttachedObjectInputUnit.FileExtension">
+            <summary>Gets or sets the FileExtension field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.CreateAttachedObjectInputUnit.UserAttachmentFilesId">
+            <summary>Gets or sets the UserAttachmentFilesID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.CreateAttachedObjectInputUnit.IsSystemGenerated">
+            <summary>Gets or sets the IsSystemGenerated field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.CreateAttachedObjectInputUnit.Bytes">
+            <summary>Gets or sets the ByteArray field. </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitDto.MaxFileExtensionLength" -->
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitDto.TypeOfAttachedObjectId">
+            <summary>Gets or sets the TypeOfAttachedObjectID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitDto.TypeOfObjectId">
+            <summary>Gets or sets the TypeOfObjectID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitDto.ObjectId">
+            <summary>Gets or sets the ObjectID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitDto.Description">
+            <summary>Gets or sets the Description field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitDto.FileName">
+            <summary>Gets or sets the FileName field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitDto.AttachedDate">
+            <summary>Gets or sets the AttachedDate field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitDto.FileSize">
+            <summary>Gets or sets the FileSize field. </summary>      
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitDto.FileExtension">
+            <summary>Gets or sets the FileExtension field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitDto.UserAttachmentFilesId">
+            <summary>Gets or sets the UserAttachmentFilesID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitDto.IsSystemGenerated">
+            <summary>Gets or sets the IsSystemGenerated field. </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitInput">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitInput.CreateAttachedObjectUnit">
+            <summary>Gets or sets the AttachedObject </summary>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Auditing.AuditLogAndUser">
             <summary>
             A helper class to store an <see cref="P:CAPS.CORPACCOUNTING.Auditing.AuditLogAndUser.AuditLog"/> and a <see cref="P:CAPS.CORPACCOUNTING.Auditing.AuditLogAndUser.User"/> object.
@@ -10925,6 +11041,69 @@
         </member>
         <member name="F:CAPS.CORPACCOUNTING.Net.MimeTypes.MimeTypeNames.ApplicationZip">
             <summary>ZIP archive files; Registered[7]</summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Notes.NotedObjectUnitAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Notes.NotedObjectUnitAppService.#ctor(CAPS.CORPACCOUNTING.Notes.NotedObjectUnitManager)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Notes.NotedObjectUnitAppService.CreateNotedObjectUnit(CAPS.CORPACCOUNTING.Notes.Dto.NotedObjectUnitInput)">
+            <summary>
+            Create noted Object Unit
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Notes.Dto.NotedObjectUnitDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Notes.Dto.NotedObjectUnitDto.TypeOfObjectId">
+            <summary>Gets or sets the TypeOfObjectId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Notes.Dto.NotedObjectUnitDto.ObjectId">
+            <summary>Gets or sets the ObjectId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Notes.Dto.NotedObjectUnitDto.Notes">
+            <summary>Gets or sets the Notes field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Notes.Dto.NotedObjectUnitDto.IsSharedUpdate">
+            <summary>Gets or sets the IsSharedUpdate field. </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Notes.Dto.NotedObjectUnitInput">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Notes.Dto.NotedObjectUnitInput.TypeOfObjectId">
+            <summary>Gets or sets the TypeOfObjectId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Notes.Dto.NotedObjectUnitInput.ObjectId">
+            <summary>Gets or sets the ObjectId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Notes.Dto.NotedObjectUnitInput.Notes">
+            <summary>Gets or sets the Notes field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Notes.Dto.NotedObjectUnitInput.IsSharedUpdate">
+            <summary>Gets or sets the IsSharedUpdate field. </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Notes.INotedObjectUnitAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Notes.INotedObjectUnitAppService.CreateNotedObjectUnit(CAPS.CORPACCOUNTING.Notes.Dto.NotedObjectUnitInput)">
+            <summary>
+            Create noted Object Unit
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.HostOrganizationUnitDto.ConnectionStringName">
             <summary>

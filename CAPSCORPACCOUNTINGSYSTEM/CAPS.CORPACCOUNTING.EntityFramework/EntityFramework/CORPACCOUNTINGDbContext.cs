@@ -36,6 +36,8 @@ using Abp.Configuration;
 using CAPS.CORPACCOUNTING.Configuration;
 using CAPS.CORPACCOUNTING.CoreHelper;
 using Abp.Organizations;
+using CAPS.CORPACCOUNTING.Notes;
+using CAPS.CORPACCOUNTING.Attachments;
 
 namespace CAPS.CORPACCOUNTING.EntityFramework
 {

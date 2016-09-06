@@ -21593,6 +21593,7 @@
     <Compile Include="Auth\ApplicationSignInManager.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\AttachmentController.cs" />
     <Compile Include="Controllers\Results\ChallengeResult.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FileController.cs" />
@@ -21850,6 +21851,7 @@
     <Folder Include="libs\angular-ui-grid\plugins\" />
     <Folder Include="SignalR\" />
     <Folder Include="Temp\Downloads\" />
+    <Folder Include="Views\Notes\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CAPS.CORPACCOUNTING.Application\CAPS.CORPACCOUNTING.Application.csproj">

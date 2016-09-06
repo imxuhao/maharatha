@@ -6,7 +6,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using CAPS.CORPACCOUNTING.Masters;
 
-namespace CAPS.CORPACCOUNTING.Common
+namespace CAPS.CORPACCOUNTING.Attachments
 {
     public enum TypeOfAttachedObject {      
 

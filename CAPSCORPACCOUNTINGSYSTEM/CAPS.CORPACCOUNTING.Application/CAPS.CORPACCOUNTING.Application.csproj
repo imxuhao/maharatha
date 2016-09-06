@@ -186,6 +186,8 @@
     <Compile Include="AccountReceivable\IArInvoiceEntryDocumentAppService.cs" />
     <Compile Include="AccountReceivable\IInvoiceBuilderAppService.cs" />
     <Compile Include="AccountReceivable\InvoiceBuilderAppService.cs" />
+    <Compile Include="Attachments\AttachedObjectUnitAppService.cs" />
+    <Compile Include="Attachments\IAttachedObjectUnitAppService.cs" />
     <Compile Include="Auditing\INamespaceStripper.cs" />
     <Compile Include="Auditing\NamespaceStripper.cs" />
     <Compile Include="Authorization\AbpLoginResultTypeHelper.cs" />
@@ -558,6 +560,13 @@
     <Compile Include="MultiTenancy\Dto\TenantEditDto.cs" />
     <Compile Include="MultiTenancy\Dto\UpdateTenantFeaturesInput.cs" />
     <Compile Include="Net\MimeTypes\MimeTypeNames.cs" />
+    <Compile Include="Attachments\Dto\CreateAttachedObjectInputUnit.cs" />
+    <Compile Include="Notes\NotedObjectUnitAppService.cs" />
+    <Compile Include="Attachments\Dto\AttachedObjectUnitDto.cs" />
+    <Compile Include="Attachments\Dto\AttachedObjectUnitInput.cs" />
+    <Compile Include="Notes\Dto\NotedObjectUnitDto.cs" />
+    <Compile Include="Notes\Dto\NotedObjectUnitInput.cs" />
+    <Compile Include="Notes\INotedObjectUnitAppService.cs" />
     <Compile Include="Notifications\Dto\GetNotificationSettingsOutput.cs" />
     <Compile Include="Notifications\Dto\GetNotificationsOutput.cs" />
     <Compile Include="Notifications\Dto\GetUserNotificationsInput.cs" />

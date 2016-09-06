@@ -229,14 +229,14 @@ namespace CAPS.CORPACCOUNTING.Banking
                     var dto = result.BankAccount.MapTo<BankAccountUnitDto>();
                     dto.BankAccountId = result.BankAccount.Id;
                     dto.LedgerAccount = result.LedgerAccount;
-                    dto.Job = result.Job;
-                    dto.ClearingAccount = result.ClearingAccount;
-                    dto.ClearingJob = result.ClearingJob;
-                    dto.Vendor = result.Vendor;
-                    dto.TypeOfUploadFile = result.TypeOfUploadFile;
-                    dto.TypeofCheckStock = result.TypeofCheckStock;
-                    dto.Batch = result.Batch;
-                    dto.TypeOfBankAccount = result.BankAccount.TypeOfBankAccountId.ToDisplayName();
+                    dto.JobNumber = result.Job;
+                    dto.ClearingAccountNumber = result.ClearingAccount;
+                    dto.ClearingJobNumber = result.ClearingJob;
+                    dto.VendorNumber = result.Vendor;
+                    dto.TypeOfUploadFileDesc = result.TypeOfUploadFile;
+                    dto.TypeofCheckStockDesc = result.TypeofCheckStock;
+                    dto.BatchDesc = result.Batch;
+                    dto.TypeOfBankAccountDesc = result.BankAccount.TypeOfBankAccountId.ToDisplayName();
                     dto.TypeOfInactiveStatus = result.BankAccount.TypeOfInactiveStatusId != null ? result.BankAccount.TypeOfInactiveStatusId.ToDisplayName() : "";
                     if (!ReferenceEquals(result.Address, null))
                     {

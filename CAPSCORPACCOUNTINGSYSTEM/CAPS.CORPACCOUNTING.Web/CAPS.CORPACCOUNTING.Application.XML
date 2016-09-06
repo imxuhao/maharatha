@@ -2482,43 +2482,46 @@
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.TypeOfBankAccount">
-            <summary>Gets or sets the TypeOfBankAccount.</summary>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.Address">
+            <summary>Gets or sets the Address field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.TypeOfBankAccountDesc">
+            <summary>Gets or sets the TypeOfBankAccountDesc.</summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.LedgerAccount">
             <summary>Gets or sets the Account.</summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.Job">
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.JobNumber">
             <summary>Gets or sets the Job.</summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.TypeofCheckStock">
-            <summary>Gets or sets the TypeofCheckStock.</summary>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.TypeofCheckStockDesc">
+            <summary>Gets or sets the TypeofCheckStockDesc.</summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.ClearingAccount">
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.ClearingAccountNumber">
             <summary>Gets or sets the ClearingAccount.</summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.ClearingJob">
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.ClearingJobNumber">
             <summary>Gets or sets the ClearingJob.</summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.TypeOfUploadFile">
-            <summary>Gets or sets the TypeOfUploadFile.</summary>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.TypeOfUploadFileDesc">
+            <summary>Gets or sets the TypeOfUploadFileDesc.</summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.Vendor">
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.VendorNumber">
             <summary>Gets or sets the Vendor.</summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.ControllingBankAccounts">
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.ControllingBankAccountDesc">
             <summary>Gets or sets the ControllingBankAccounts.</summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.TypeOfInactiveStatus">
             <summary>Gets or sets the TypeOfInactiveStatus.</summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.PositivePayTypeOfUploadFile">
-            <summary>Gets or sets the PositivePayTypeOfUploadFile.</summary>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.PositivePayTypeOfUploadFileDesc">
+            <summary>Gets or sets the PositivePayTypeOfUploadFileDesc.</summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.PettyCashAccount">
             <summary>Gets or sets the PettyCashAccount.</summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.Batch">
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.BatchDesc">
             <summary>Gets or sets the Batch.</summary>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Banking.Dto.BatchUnitAppService.CreateBatchUnit(CAPS.CORPACCOUNTING.Banking.Dto.CreateBatchUnitInput)">

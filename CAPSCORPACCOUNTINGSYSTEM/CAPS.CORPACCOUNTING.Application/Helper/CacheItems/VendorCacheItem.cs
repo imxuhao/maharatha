@@ -76,7 +76,8 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                 LastName = u.vendors.LastName,
                 FirstName = u.vendors.FirstName,
                 VendorNumber = u.vendors.VendorNumber,
-                VendorAccountInfo = u.vendors.VendorAccountInfo
+                VendorAccountInfo = u.vendors.VendorAccountInfo,
+                TypeofVendorId=u.vendors.TypeofVendorId
             }).OrderBy(p=>p.LastName).ToListAsync();
         }
 

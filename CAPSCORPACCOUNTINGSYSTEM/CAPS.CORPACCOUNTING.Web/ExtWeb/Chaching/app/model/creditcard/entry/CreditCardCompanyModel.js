@@ -11,7 +11,7 @@ Ext.define('Chaching.model.creditcard.entry.CreditCardCompanyModel', {
         { name: 'description', type: 'string' },
         { name: 'bankAccountName', type: 'string' },
         { name: 'bankAccountNumber', type: 'string' },
-        { name: 'batch', type: 'string' },
+        { name: 'batchDesc', type: 'string' },
         { name: 'typeOfBankAccountId', type: 'int' },
         { name: 'typeOfBankAccount', type: 'string' },
         { name: 'clearingAccountId', type: 'int' },

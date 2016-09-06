@@ -9,7 +9,7 @@ Ext.define('Chaching.store.creditcard.entry.CreditCardCompanyStore', {
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         api: {
             create: abp.appPath + 'api/services/app/creditCardCompany/CreateCCCompanyDocumentUnit',
-            read: abp.appPath + 'api/services/app/creditCardCompany/GetCCCompanyDocumentUnits',
+            read: abp.appPath + 'api/services/app/creditCardCompany/GetCreditCardCompanies',
             update: abp.appPath + 'api/services/app/creditCardCompany/UpdateCCCompanyDocumentUnit',
             destroy: abp.appPath + 'api/services/app/creditCardCompany/DeleteCCCompanyDocumentUnit'
         }

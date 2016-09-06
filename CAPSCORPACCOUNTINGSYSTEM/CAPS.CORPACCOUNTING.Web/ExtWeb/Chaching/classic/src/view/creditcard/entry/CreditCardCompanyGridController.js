@@ -25,7 +25,7 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyGridController', {
         if (clearingAccountCombo) {
             var clearingAccountComboStore = clearingAccountCombo.getStore(),
                 clearingAccountStoreProxy = clearingAccountComboStore.getProxy();
-            clearingAccountStoreProxy.setExtraParams({ 'typeOfAccountId': "Credit Card" }); //
+            clearingAccountStoreProxy.setExtraParams({ 'typeOfAccount': "Credit Card" }); 
             clearingAccountCombo.getStore().load();
         }
         // load job/division combo
@@ -39,13 +39,15 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyGridController', {
         // load credit card vendor combo
         if (ccVendorCombo) {
             var vendorComboStore = ccVendorCombo.getStore(),
-                 vendorStoreProxy = clearingAccountComboStore.getProxy();
+                 vendorStoreProxy = vendorComboStore.getProxy();
             vendorStoreProxy.setExtraParams({ 'typeofVendorId': 2 }); // 2: credit card
             vendorComboStore.load();
         }
         //load upload method
         if (uploadMethodCombo) {
-            var uploadMethodStore = uploadMethodCombo.getStore();
+            var uploadMethodStore = uploadMethodCombo.getStore(),
+                uploadProxy = uploadMethodStore.getProxy();
+            uploadProxy.api.read = abp.appPath + 'api/services/app/list/FileUploadCRDRList';
             //uploadMethodStore.getProxy().setExtraParams({ 'typeOfBatchId': 1 });
             uploadMethodStore.load();
         }

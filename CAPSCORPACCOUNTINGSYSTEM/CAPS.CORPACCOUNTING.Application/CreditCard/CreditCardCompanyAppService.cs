@@ -222,8 +222,8 @@ namespace CAPS.CORPACCOUNTING.CreditCard
                 {
                     var dto = result.BankAccount.MapTo<BankAccountUnitDto>();
                     dto.BankAccountId = result.BankAccount.Id;
-                    dto.Batch = result.Batch;
-                    dto.TypeOfBankAccount = result.BankAccount.TypeOfBankAccountId.ToDisplayName();
+                    dto.BatchDesc = result.Batch;
+                    dto.TypeOfBankAccountDesc = result.BankAccount.TypeOfBankAccountId.ToDisplayName();
                     return dto;
                 }).ToList();
         }

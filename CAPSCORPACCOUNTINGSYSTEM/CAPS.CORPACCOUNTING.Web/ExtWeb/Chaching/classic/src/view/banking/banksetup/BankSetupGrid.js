@@ -101,7 +101,7 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupGrid', {
          }, {
              xtype: 'gridcolumn',
              text: app.localize('AccountType').initCap(),
-             dataIndex: 'typeOfBankAccount',
+             dataIndex: 'typeOfBankAccountDesc',
              sortable: true,
              groupable: true,
              width: '15%',

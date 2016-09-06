@@ -120,7 +120,8 @@ namespace CAPS.CORPACCOUNTING.Banking
         public virtual long? OrganizationUnitId { get; set; }
 
         #endregion
-        public BatchUnit() {
+        public BatchUnit()
+        {
             IsRetained = false;
             IsDefault = false;
             IsActive = true;
@@ -130,7 +131,7 @@ namespace CAPS.CORPACCOUNTING.Banking
             bool? isbatchfinalized, bool? isuniversal, long? organizationunitid)
         {
             Description = description;
-            typeofbatchid = TypeOfBatchId;
+            TypeOfBatchId = typeofbatchid;
             DefaultTransactionDate = defaulttransactiondate;
             PostingDate = postingdate;
             ControlTotal = controltotal;

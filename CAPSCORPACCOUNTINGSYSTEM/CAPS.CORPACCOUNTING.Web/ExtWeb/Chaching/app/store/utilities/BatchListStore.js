@@ -14,7 +14,7 @@
     proxy: {
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         type: 'chachingProxy',
-        url: abp.appPath + 'api/services/app/creditCardCompany/GetBatchList',
+        url: abp.appPath + 'api/services/app/list/GetBatchListByType',
         reader: {
             type: 'json',
             rootProperty: 'result'

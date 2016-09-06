@@ -236,7 +236,6 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyForm', {
             inputValue: true,
             uncheckedValue : false,
             checked: true,
-            readOnly: true,
             boxLabelCls: 'checkboxLabel'
         }]
     }]

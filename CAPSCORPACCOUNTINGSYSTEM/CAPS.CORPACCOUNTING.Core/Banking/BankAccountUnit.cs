@@ -289,7 +289,7 @@ namespace CAPS.CORPACCOUNTING.Banking
             TypeOfCheckStockId = typeofcheckstockid;
             LastCheckNumberGenerated = lastchecknumbergenerated;
             ControlAccount = controlaccount;
-            ClearingAccountId = ClearingAccountId;
+            ClearingAccountId = clearingaccountid;
             ClearingJobId = clearingjobid;
             ExpirationMMYYYY = expirationmmyyyy;
             TypeOfUploadFileId = typeofuploadfileid;

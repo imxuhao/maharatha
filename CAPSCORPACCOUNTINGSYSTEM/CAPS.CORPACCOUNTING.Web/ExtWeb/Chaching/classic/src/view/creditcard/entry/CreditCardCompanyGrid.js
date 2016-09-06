@@ -71,7 +71,7 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyGrid', {
         {
             xtype: 'gridcolumn',
             text: app.localize('CreditCardCompany'),
-            dataIndex: 'creditCardCompany',
+            dataIndex: 'description',
             sortable: true,
             groupable: false,
             width: '35%',
@@ -85,7 +85,7 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyGrid', {
          {
              xtype: 'gridcolumn',
              text: app.localize('AccountName'),
-             dataIndex: 'accountName',
+             dataIndex: 'bankAccountName',
              sortable: true,
              groupable: false,
              width: '20%',
@@ -99,7 +99,7 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyGrid', {
           {
               xtype: 'gridcolumn',
               text: app.localize('AccountNumber'),
-              dataIndex: 'accountNumber',
+              dataIndex: 'bankAccountNumber',
               sortable: true,
               groupable: false,
               width: '20%',
@@ -113,7 +113,7 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyGrid', {
           {
               xtype: 'gridcolumn',
               text: app.localize('Batch'),
-              dataIndex: 'batch',
+              dataIndex: 'batchDesc',
               sortable: true,
               groupable: false,
               width: '20%',

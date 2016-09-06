@@ -3810,6 +3810,7 @@
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\VendorsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\JobDivisionStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\BatchListStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\utilities\CardTypeListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\CheckStockListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\JournalTypeListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\PaymentTermsListStore.js" />

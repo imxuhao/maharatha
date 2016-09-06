@@ -108,46 +108,48 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
+
+        /// <summary>Gets or sets the Address field. </summary>
         public Collection<AddressUnitDto> Address { get; set; }
 
-        /// <summary>Gets or sets the TypeOfBankAccount.</summary>
-        public string TypeOfBankAccount { get; set; }
+        /// <summary>Gets or sets the TypeOfBankAccountDesc.</summary>
+        public string TypeOfBankAccountDesc { get; set; }
 
         /// <summary>Gets or sets the Account.</summary>
         public string LedgerAccount { get; set; }
 
         /// <summary>Gets or sets the Job.</summary>
-        public string Job { get; set; }
+        public string JobNumber { get; set; }
 
-        /// <summary>Gets or sets the TypeofCheckStock.</summary>
-        public string TypeofCheckStock { get; set; }
+        /// <summary>Gets or sets the TypeofCheckStockDesc.</summary>
+        public string TypeofCheckStockDesc { get; set; }
 
         /// <summary>Gets or sets the ClearingAccount.</summary>
-        public string ClearingAccount { get; set; }
+        public string ClearingAccountNumber { get; set; }
 
         /// <summary>Gets or sets the ClearingJob.</summary>
-        public string ClearingJob { get; set; }
+        public string ClearingJobNumber { get; set; }
 
-        /// <summary>Gets or sets the TypeOfUploadFile.</summary>
-        public string TypeOfUploadFile { get; set; }
+        /// <summary>Gets or sets the TypeOfUploadFileDesc.</summary>
+        public string TypeOfUploadFileDesc { get; set; }
 
         /// <summary>Gets or sets the Vendor.</summary>
-        public string Vendor { get; set; }
+        public string VendorNumber { get; set; }
 
         /// <summary>Gets or sets the ControllingBankAccounts.</summary>
-        public string ControllingBankAccounts { get; set; }
+        public string ControllingBankAccountDesc { get; set; }
 
         /// <summary>Gets or sets the TypeOfInactiveStatus.</summary>
         public string TypeOfInactiveStatus { get; set; }
 
-        /// <summary>Gets or sets the PositivePayTypeOfUploadFile.</summary>
-        public string PositivePayTypeOfUploadFile { get; set; }
+        /// <summary>Gets or sets the PositivePayTypeOfUploadFileDesc.</summary>
+        public string PositivePayTypeOfUploadFileDesc { get; set; }
 
         /// <summary>Gets or sets the PettyCashAccount.</summary>
         public string PettyCashAccount { get; set; }
 
         /// <summary>Gets or sets the Batch.</summary>
-        public string Batch { get; set; }
+        public string BatchDesc { get; set; }
 
     }
 }

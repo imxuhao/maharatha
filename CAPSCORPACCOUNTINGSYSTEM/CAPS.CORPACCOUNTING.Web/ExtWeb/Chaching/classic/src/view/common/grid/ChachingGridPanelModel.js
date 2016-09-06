@@ -455,8 +455,16 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelModel', {
             }
         },
         getTaxCreditList: {
-            fields: [{ name: 'name' }, { name: 'value' }],
-            xtype: 'ajax',
+            fields: [{ name: 'name' }, { name: 'value' }, {
+
+                name: 'taxCreditName', convert: function (value, record) {
+                    return record.get('name');
+                }
+            }, {
+                name: 'taxCreditId', convert: function (value, record) {
+                    return record.get('value');
+                }
+            }],
             proxy: {
                 actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
                 type: 'chachingProxy',

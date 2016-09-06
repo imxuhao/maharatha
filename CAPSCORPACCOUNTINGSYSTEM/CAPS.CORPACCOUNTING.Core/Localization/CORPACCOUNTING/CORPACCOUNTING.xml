@@ -1157,7 +1157,7 @@
     <text name="DuplicateAccountNumbers" value="Duplicate AccountNumbers:"/>
     <text name="DuplicateJobNumbers" value="Duplicate JobNumbers:"/>
     <text name="DuplicateJobNames" value="Duplicate JobNames:"/>
-    <text name="DuplicateJobNumber" value=" ,Duplicate JobNumber -"/>
+    <text name="DuplicateJobNumber" value="Duplicate JobNumber -"/>
     <text name="DuplicateJobName" value=" Duplicate JobName-" />
     <text name="ShouldbeNumberic" value=" should be Numeric," />
     <text name="DuplicateCaption" value=" Duplicate Caption - "/>

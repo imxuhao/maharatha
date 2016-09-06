@@ -33,11 +33,9 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         public DateTime? FinalShootDate { get; set; }
 
         /// <summary>Gets or Sets ProductOwner Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxProductLength)]
         public string ProductOwner { get; set; }
 
         /// <summary>Gets or Sets ProductName Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxTitleLength)]
         public string ProductName { get; set; }
 
         /// <summary>Gets or Sets ExecutiveProducerId Field.  </summary>
@@ -74,80 +72,64 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         public int? ThirdPartyCustomerId { get; set; }
 
         /// <summary>Gets or Sets AgencyProducer Field.  </summary>
-
-        [StringLength(JobCommercialUnit.MaxTitleLength)]
         public string AgencyProducer { get; set; }
 
         /// <summary>Gets or Sets AgencyProducerContactInfo Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxInfoLength)]
         public string AgencyProducerContactInfo { get; set; }
 
         /// <summary>Gets or Sets AgencyArtDirector Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxTitleLength)]
         public string AgencyArtDirector { get; set; }
 
         /// <summary>Gets or Sets AgencyArtDirContactInfo Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxInfoLength)]
         public string AgencyArtDirContactInfo { get; set; }
 
         /// <summary>Gets or Sets AgencyWriter Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxTitleLength)]
+       
         public string AgencyWriter { get; set; }
 
         /// <summary>Gets or Sets AgencyWriterContactInfo Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxInfoLength)]
+      
         public string AgencyWriterContactInfo { get; set; }
 
         /// <summary>Gets or Sets AgencyBusinessManager Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxTitleLength)]
         public string AgencyBusinessManager { get; set; }
-
+        
         /// <summary>Gets or Sets AgencyBusMgrContactInfo Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxInfoLength)]
         public string AgencyBusMgrContactInfo { get; set; }
 
         /// <summary>Gets or Sets AgencyJobNumber Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxJobnumberLength)]
         public string AgencyJobNumber { get; set; }
 
         /// <summary>Gets or Sets AgencyPONumber Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxJobnumberLength)]
         public string AgencyPONumber { get; set; }
 
         /// <summary>Gets or Sets AgencyName Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxTitleLength)]
+       
         public string AgencyName { get; set; }
 
         /// <summary>Gets or Sets AgencyAddress Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxProductLength)]
         public string AgencyAddress { get; set; }
 
         /// <summary>Gets or Sets AgencyPhone Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxJobnumberLength)]
         public string AgencyPhone { get; set; }
 
         /// <summary>Gets or Sets CommercialTitle1 Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxTitleLength)]
         public string CommercialTitle1 { get; set; }
 
         /// <summary>Gets or Sets CommercialTitle2 Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxTitleLength)]
         public string CommercialTitle2 { get; set; }
 
         /// <summary>Gets or Sets CommercialTitle3 Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxTitleLength)]
         public string CommercialTitle3 { get; set; }
 
         /// <summary>Gets or Sets CommercialTitle4 Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxTitleLength)]
         public string CommercialTitle4 { get; set; }
 
         /// <summary>Gets or Sets CommercialTitle5 Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxTitleLength)]
         public string CommercialTitle5 { get; set; }
 
         /// <summary>Gets or Sets CommercialTitle6 Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxTitleLength)]
+        
         public string CommercialTitle6 { get; set; }
 
         /// <summary>Gets or Sets ProjectTotal Field.  </summary>
@@ -172,26 +154,21 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         public decimal? CostAccrual { get; set; }
 
         /// <summary>Gets or Sets PostProductionCompany Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxTitleLength)]
         public string PostProductionCompany { get; set; }
 
         /// <summary>Gets or Sets DubbingHouse Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxTitleLength)]
         public string DubbingHouse { get; set; }
 
         /// <summary>Gets or Sets StorageHouse Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxTitleLength)]
         public string StorageHouse { get; set; }
 
         /// <summary>Gets or Sets IsBudgetLocked Field.  </summary>
         public bool IsBudgetLocked { get; set; }
 
         /// <summary>Gets or Sets CommercialNumber Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxJobnumberLength)]
         public string CommercialNumber { get; set; }
 
         /// <summary>Gets or Sets CommercialLength Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxJobnumberLength)]
         public string CommercialLength { get; set; }
 
         /// <summary>Gets or Sets PreProductionDays Field.  </summary>
@@ -234,7 +211,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         public bool IsOTon { get; set; }
 
         /// <summary>Gets or Sets AgencyEmail Field.  </summary>
-        [StringLength(JobCommercialUnit.MaxEmailLength)]
         public string AgencyEmail { get; set; }
 
         /// <summary>Gets or Sets the JobLocations. </summary>

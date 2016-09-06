@@ -54,7 +54,7 @@ Ext.define('Chaching.store.imports.ProjectsImportStore', {
         defaultValue: null,
         mapping: { source: app.localize("RollUpDivisionValue") }
     }, {
-        name: 'name',//this is tax credit
+        name: 'taxCreditName',//this is tax credit
         type: 'string',
         mapping: { source: app.localize("TaxCredit") }
     }, {

@@ -25,7 +25,6 @@ using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.Sessions;
 using Abp.Runtime.Session;
 using CAPS.CORPACCOUNTING.JobCosting.CustomRepository;
-using LinqKit;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -285,8 +284,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 var dto = new JobCommercialUnitDto()
                 {
                     JobId = item.Job.Id,
-                    BidDate=item.Job.BidDate,
-                    AwardDate= item.Job.AwardDate,
+                    BidDate = item.Job.BidDate,
+                    AwardDate = item.Job.AwardDate,
                     ShootingDate = item.Job.ShootingDate,
                     WrapDate = item.Job.WrapDate,
                     RoughCutDate = item.Job.RoughCutDate,
@@ -294,52 +293,52 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                     DateClosed = item.Job.DateClosed,
                     FinalShootDate = item.Job.FinalShootDate,
                     ProductOwner = item.Job.ProductOwner,
-                    ProductName =            item.Job.ProductName,
-                    ExecutiveProducerId=     item.Job.ExecutiveProducerId,
-                    DirectorEmployeeId =      item.Job.DirectorEmployeeId,
-                    ProducerEmployeeId =      item.Job.ProducerEmployeeId,
-                    
-                    SetDesignerEmployeeId =   item.Job.SetDesignerEmployeeId,
-                    EditorEmployeeId =        item.Job.EditorEmployeeId,
-                    ArtDirectorEmployeeId =   item.Job.ArtDirectorEmployeeId,
-                    SalesRepId =              item.Job.SalesRepId,
-                    AgencyId =                item.Job.AgencyId,
-                    AgencyClientCustomerId  = item.Job.AgencyClientCustomerId,
-                    ThirdPartyCustomerId=    item.Job.ThirdPartyCustomerId,
-                    AgencyProducer =          item.Job.AgencyProducer,
-                    AgencyProducerContactInfo=item.Job.AgencyProducerContactInfo,
-                    AgencyArtDirector       =item.Job.AgencyArtDirector,
-                    AgencyArtDirContactInfo =item.Job.AgencyArtDirContactInfo,
-                    AgencyWriter            =item.Job.AgencyWriter,
-                    AgencyBusinessManager   =item.Job.AgencyBusinessManager,
-                    AgencyBusMgrContactInfo =item.Job.AgencyBusMgrContactInfo,
-                    AgencyJobNumber         =item.Job.AgencyJobNumber,
-                    AgencyPONumber          =item.Job.AgencyPONumber,
-                    AgencyName              =item.Job.AgencyName,
-                    AgencyAddress           =item.Job.AgencyAddress,
-                    AgencyPhone             =item.Job.AgencyPhone,
-                    CommercialTitle1        =item.Job.CommercialTitle1,
-                    CommercialTitle2        =item.Job.CommercialTitle2,
-                    CommercialTitle3        =item.Job.CommercialTitle3,
-                                            
-                    JobNumber               =item.Job.JobNumber,
-                    Caption                =item.Job.Caption,
-                    RollupCenterId          =item.Job.RollupCenterId,
-                    IsCorporateDefault      =item.Job.IsCorporateDefault,
-                    ChartOfAccountId        =item.Job.ChartOfAccountId,
-                    RollupAccountId         =item.Job.RollupAccountId,
-                    TypeOfCurrencyId        =item.Job.TypeOfCurrencyId,
-                    RollupJobId             =item.Job.RollupJobId,
-                    TypeOfJobStatusId       =item.Job.TypeOfJobStatusId,
-                    TypeOfBidSoftwareId     =item.Job.TypeOfBidSoftwareId,
-                    IsActive                =item.Job.IsActive,
-                    IsApproved              =item.Job.IsApproved,
-                    IsICTDivision           =item.Job.IsICTDivision,
-                    TypeofProjectId         =item.Job.TypeofProjectId,
-                    TaxRecoveryId           =item.Job.TaxRecoveryId
+                    ProductName = item.Job.ProductName,
+                    ExecutiveProducerId = item.Job.ExecutiveProducerId,
+                    DirectorEmployeeId = item.Job.DirectorEmployeeId,
+                    ProducerEmployeeId = item.Job.ProducerEmployeeId,
+
+                    SetDesignerEmployeeId = item.Job.SetDesignerEmployeeId,
+                    EditorEmployeeId = item.Job.EditorEmployeeId,
+                    ArtDirectorEmployeeId = item.Job.ArtDirectorEmployeeId,
+                    SalesRepId = item.Job.SalesRepId,
+                    AgencyId = item.Job.AgencyId,
+                    AgencyClientCustomerId = item.Job.AgencyClientCustomerId,
+                    ThirdPartyCustomerId = item.Job.ThirdPartyCustomerId,
+                    AgencyProducer = item.Job.AgencyProducer,
+                    AgencyProducerContactInfo = item.Job.AgencyProducerContactInfo,
+                    AgencyArtDirector = item.Job.AgencyArtDirector,
+                    AgencyArtDirContactInfo = item.Job.AgencyArtDirContactInfo,
+                    AgencyWriter = item.Job.AgencyWriter,
+                    AgencyBusinessManager = item.Job.AgencyBusinessManager,
+                    AgencyBusMgrContactInfo = item.Job.AgencyBusMgrContactInfo,
+                    AgencyJobNumber = item.Job.AgencyJobNumber,
+                    AgencyPONumber = item.Job.AgencyPONumber,
+                    AgencyName = item.Job.AgencyName,
+                    AgencyAddress = item.Job.AgencyAddress,
+                    AgencyPhone = item.Job.AgencyPhone,
+                    CommercialTitle1 = item.Job.CommercialTitle1,
+                    CommercialTitle2 = item.Job.CommercialTitle2,
+                    CommercialTitle3 = item.Job.CommercialTitle3,
+
+                    JobNumber = item.Job.JobNumber,
+                    Caption = item.Job.Caption,
+                    RollupCenterId = item.Job.RollupCenterId,
+                    IsCorporateDefault = item.Job.IsCorporateDefault,
+                    ChartOfAccountId = item.Job.ChartOfAccountId,
+                    RollupAccountId = item.Job.RollupAccountId,
+                    TypeOfCurrencyId = item.Job.TypeOfCurrencyId,
+                    RollupJobId = item.Job.RollupJobId,
+                    TypeOfJobStatusId = item.Job.TypeOfJobStatusId,
+                    TypeOfBidSoftwareId = item.Job.TypeOfBidSoftwareId,
+                    IsActive = item.Job.IsActive,
+                    IsApproved = item.Job.IsApproved,
+                    IsICTDivision = item.Job.IsICTDivision,
+                    TypeofProjectId = item.Job.TypeofProjectId,
+                    TaxRecoveryId = item.Job.TaxRecoveryId
 
                 };
-                
+
                 if (item.DirectorName != null)
                     dto.DirectorName = item.DirectorName;
                 if (item.Agency != null)
@@ -557,19 +556,21 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                                                                  join rollUpDivision in _jobUnitRepository.GetAll().Where(u => u.IsDivision == true) on account.RollupJobId equals rollUpDivision.Id into rollUpDivision
                                                                  from rollUpDivisions in rollUpDivision.DefaultIfEmpty()
                                                                  where account.ChartOfAccountId == coaId
-                                                                 select new CreateJobAccountUnitInput { 
+                                                                 select new CreateJobAccountUnitInput
+                                                                 {
                                                                      JobId = jobId,
                                                                      AccountId = account.Id,
                                                                      RollupAccountId = account.RollupAccountId,
                                                                      RollupJobId = account.RollupJobId == 0 ? null : account.RollupJobId,
                                                                      Description = account.Caption,
                                                                      RollupAccountDescription = rollUpAccounts.Caption,
-                                                                     RollupJobDescription = rollUpDivisions.Caption 
+                                                                     RollupJobDescription = rollUpDivisions.Caption
                                                                  }).ToListAsync();
 
 
             var jobAccountList = jobAccounts.Select(accountunitDto => accountunitDto.MapTo<JobAccountUnit>()).ToList();
-            jobAccountList.ForEach(x => {
+            jobAccountList.ForEach(x =>
+            {
                 x.TenantId = AbpSession.GetTenantId();
                 x.CreatorUserId = AbpSession.GetUserId();
             });
@@ -583,9 +584,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         private async Task<List<JobCommercialUnitDto>> ValidateDuplicateRecords(List<CreateJobCommercialInput> jobsList)
         {
-            var jobunitDtoList = new List<JobCommercialUnitDto>();
             var jobNumberList = string.Join(",", jobsList.Select(p => p.JobNumber).ToArray());
-            var descriptionList = string.Join(",", jobsList.Select(p => p.Caption).ToArray());
+            //  var descriptionList = string.Join(",", jobsList.Select(p => p.Caption).ToArray());
 
             var duplicatejobs = await _divisioncache.GetDivisionCacheItemAsync(
                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(AbpSession.GetTenantId())));
@@ -593,26 +593,19 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
             var duplicatejobList =
                 duplicatejobItems.Where(
-                    p => jobNumberList.Contains(p.JobNumber) || descriptionList.Contains(p.Caption)).ToList();
+                    p => jobNumberList.Contains(p.JobNumber)).ToList();
 
-            //duplicateJobNames of JobList
-            var duplicatejobCaptionList = (from p in jobsList
-                                           join p2 in duplicatejobList on p.Caption equals p2.Caption
-                                           select new { Caption = p.Caption, jobNumber = string.Empty, RowNumber = p.ExcelRowNumber, ErrorMesage = L("DuplicateJobName") + p.Caption }).ToList();
+
             //duplicateJobNumbers of JobList
             var duplicatejobsjobNumberList = (from p in jobsList
                                               join p2 in duplicatejobList on p.JobNumber equals p2.JobNumber
-                                              select new { Caption = string.Empty, jobNumber = p.JobNumber, RowNumber = p.ExcelRowNumber, ErrorMesage = L("DuplicateJobNumber") + p.JobNumber }).ToList();
+                                              select new { jobNumber = p.JobNumber, RowNumber = p.ExcelRowNumber, ErrorMesage = L("DuplicateJobNumber") + p.JobNumber }).ToList();
             //Get Joblist of unassigned BudgetFormat.
             var requiredcoaJobList = (from p in jobsList
                                       where (p.ChartOfAccountId == 0 || p.ChartOfAccountId == null)
-                                      select new { Caption = string.Empty, jobNumber = string.Empty, RowNumber = p.ExcelRowNumber, ErrorMesage = L("BudgetFormatRequired") }).ToList();
+                                      select new { jobNumber = string.Empty, RowNumber = p.ExcelRowNumber, ErrorMesage = L("BudgetFormatRequired") }).ToList();
 
             var jobUnits = (from job in jobsList
-                            join duplicatecaption in duplicatejobCaptionList
-                            on job.ExcelRowNumber equals duplicatecaption.RowNumber
-                                                  into duplicatecaptionjob
-                            from duplicatecaptionjobunit in duplicatecaptionjob.DefaultIfEmpty()
                             join duplicatenum in duplicatejobsjobNumberList
                            on job.ExcelRowNumber equals duplicatenum.RowNumber
                                                  into duplicatejobnumber
@@ -622,13 +615,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                           on job.ExcelRowNumber equals requiredcoajob.RowNumber
                                                 into requiredcoajobs
                             from requiredcoajobunit in requiredcoajobs.DefaultIfEmpty()
-
                             select new
                             {
                                 job,
                                 ErrorMesage =
-                                    (!ReferenceEquals(duplicatecaptionjobunit, null) ? duplicatecaptionjobunit.ErrorMesage : "") +
-                                                    (!ReferenceEquals(duplicatejobnumberunit, null) ? duplicatejobnumberunit.ErrorMesage : "") +
+                                    (!ReferenceEquals(duplicatejobnumberunit, null) ? duplicatejobnumberunit.ErrorMesage : "") +
                                     (!ReferenceEquals(requiredcoajobunit, null) ? requiredcoajobunit.ErrorMesage : "")
 
                             }).Distinct().ToList();
@@ -637,74 +628,68 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             var errorjobs = jobUnits.Where(u => u.ErrorMesage.Trim().Length > 0).ToList();
 
 
-            foreach (var job in errorjobs)
+            return errorjobs.Select(job => new JobCommercialUnitDto
             {
-                // var jobdto = job.job.MapTo<JobCommercialUnit>().MapTo<JobCommercialUnitDto>();
-                var jobdto = new JobCommercialUnitDto
-                {
-                    JobId = job.job.JobId,
-                    BidDate = job.job.BidDate,
-                    AwardDate = job.job.AwardDate,
-                    ShootingDate = job.job.ShootingDate,
-                    WrapDate = job.job.WrapDate,
-                    RoughCutDate = job.job.RoughCutDate,
-                    AirDate = job.job.AirDate,
-                    DateClosed = job.job.DateClosed,
-                    FinalShootDate = job.job.FinalShootDate,
-                    ProductOwner = job.job.ProductOwner,
-                    ProductName = job.job.ProductName,
-                    ExecutiveProducerId = job.job.ExecutiveProducerId,
-                    DirectorEmployeeId = job.job.DirectorEmployeeId,
-                    ProducerEmployeeId = job.job.ProducerEmployeeId,
-                    SetDesignerEmployeeId = job.job.SetDesignerEmployeeId,
-                    EditorEmployeeId = job.job.EditorEmployeeId,
-                    ArtDirectorEmployeeId = job.job.ArtDirectorEmployeeId,
-                    SalesRepId = job.job.SalesRepId,
-                    AgencyId = job.job.AgencyId,
-                    AgencyClientCustomerId = job.job.AgencyClientCustomerId,
-                    ThirdPartyCustomerId = job.job.ThirdPartyCustomerId,
-                    AgencyProducer = job.job.AgencyProducer,
-                    AgencyProducerContactInfo = job.job.AgencyProducerContactInfo,
-                    AgencyArtDirector = job.job.AgencyArtDirector,
-                    AgencyArtDirContactInfo = job.job.AgencyArtDirContactInfo,
-                    AgencyWriter = job.job.AgencyWriter,
-                    AgencyBusinessManager = job.job.AgencyBusinessManager,
-                    AgencyBusMgrContactInfo = job.job.AgencyBusMgrContactInfo,
-                    AgencyJobNumber = job.job.AgencyJobNumber,
-                    AgencyPONumber = job.job.AgencyPONumber,
-                    AgencyName = job.job.AgencyName,
-                    AgencyAddress = job.job.AgencyAddress,
-                    AgencyPhone = job.job.AgencyPhone,
-                    CommercialTitle1 = job.job.CommercialTitle1,
-                    CommercialTitle2 = job.job.CommercialTitle2,
-                    CommercialTitle3 = job.job.CommercialTitle3,
-                    JobNumber = job.job.JobNumber,
-                    Caption = job.job.Caption,
-                    RollupCenterId = job.job.RollupCenterId,
-                    IsCorporateDefault = job.job.IsCorporateDefault,
-                    ChartOfAccountId = job.job.ChartOfAccountId.Value,
-                    RollupAccountId = job.job.RollupAccountId,
-                    TypeOfCurrencyId = job.job.TypeOfCurrencyId,
-                    RollupJobId = job.job.RollupJobId,
-                    TypeOfJobStatusId = job.job.TypeOfJobStatusId,
-                    TypeOfBidSoftwareId = job.job.TypeOfBidSoftwareId,
-                    IsActive = job.job.IsActive,
-                    IsApproved = job.job.IsApproved,
-                    IsICTDivision = job.job.IsICTDivision,
-                    TypeofProjectId = job.job.TypeofProjectId,
-                    TaxRecoveryId = job.job.TaxRecoveryId,
-                    DivisionJobNumber=job.job.DivisionJobNumber,
-                    JobStatusName = job.job.DivisionJobNumber,
-                    TypeOfCurrency = job.job.TypeOfCurrency,
-                    TypeofProjectName = job.job.TypeofProjectName,
-                    BudgetFormatCaption = job.job.BudgetFormatCaption,
-                    ErrorMessage = job.ErrorMesage.TrimEnd(',').TrimStart(',')
-                };
+                JobId = job.job.JobId,
+                BidDate = job.job.BidDate,
+                AwardDate = job.job.AwardDate,
+                ShootingDate = job.job.ShootingDate,
+                WrapDate = job.job.WrapDate,
+                RoughCutDate = job.job.RoughCutDate,
+                AirDate = job.job.AirDate,
+                DateClosed = job.job.DateClosed,
+                FinalShootDate = job.job.FinalShootDate,
+                ProductOwner = job.job.ProductOwner,
+                ProductName = job.job.ProductName,
+                ExecutiveProducerId = job.job.ExecutiveProducerId,
+                DirectorEmployeeId = job.job.DirectorEmployeeId,
+                ProducerEmployeeId = job.job.ProducerEmployeeId,
+                SetDesignerEmployeeId = job.job.SetDesignerEmployeeId,
+                EditorEmployeeId = job.job.EditorEmployeeId,
+                ArtDirectorEmployeeId = job.job.ArtDirectorEmployeeId,
+                SalesRepId = job.job.SalesRepId,
+                AgencyId = job.job.AgencyId,
+                AgencyClientCustomerId = job.job.AgencyClientCustomerId,
+                ThirdPartyCustomerId = job.job.ThirdPartyCustomerId,
+                AgencyProducer = job.job.AgencyProducer,
+                AgencyProducerContactInfo = job.job.AgencyProducerContactInfo,
+                AgencyArtDirector = job.job.AgencyArtDirector,
+                AgencyArtDirContactInfo = job.job.AgencyArtDirContactInfo,
+                AgencyWriter = job.job.AgencyWriter,
+                AgencyBusinessManager = job.job.AgencyBusinessManager,
+                AgencyBusMgrContactInfo = job.job.AgencyBusMgrContactInfo,
+                AgencyJobNumber = job.job.AgencyJobNumber,
+                AgencyPONumber = job.job.AgencyPONumber,
+                AgencyName = job.job.AgencyName,
+                AgencyAddress = job.job.AgencyAddress,
+                AgencyPhone = job.job.AgencyPhone,
+                CommercialTitle1 = job.job.CommercialTitle1,
+                CommercialTitle2 = job.job.CommercialTitle2,
+                CommercialTitle3 = job.job.CommercialTitle3,
+                JobNumber = job.job.JobNumber,
+                Caption = job.job.Caption,
+                RollupCenterId = job.job.RollupCenterId,
+                IsCorporateDefault = job.job.IsCorporateDefault,
+                ChartOfAccountId = job.job.ChartOfAccountId.Value,
+                RollupAccountId = job.job.RollupAccountId,
+                TypeOfCurrencyId = job.job.TypeOfCurrencyId,
+                RollupJobId = job.job.RollupJobId,
+                TypeOfJobStatusId = job.job.TypeOfJobStatusId,
+                TypeOfBidSoftwareId = job.job.TypeOfBidSoftwareId,
+                IsActive = job.job.IsActive,
+                IsApproved = job.job.IsApproved,
+                IsICTDivision = job.job.IsICTDivision,
+                TypeofProjectId = job.job.TypeofProjectId,
+                TaxRecoveryId = job.job.TaxRecoveryId,
+                DivisionJobNumber = job.job.DivisionJobNumber,
+                JobStatusName = job.job.DivisionJobNumber,
+                TypeOfCurrency = job.job.TypeOfCurrency,
+                TypeofProjectName = job.job.TypeofProjectName,
+                BudgetFormatCaption = job.job.BudgetFormatCaption,
+                ErrorMessage = job.ErrorMesage.TrimEnd(',').TrimStart(','),
+                TaxCreditName = job.job.TaxCreditName
 
-
-                jobunitDtoList.Add(jobdto);
-            }
-            return jobunitDtoList;
+            }).ToList();
         }
     }
 }

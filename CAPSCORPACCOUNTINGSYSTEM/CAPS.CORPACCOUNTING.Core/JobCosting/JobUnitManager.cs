@@ -59,23 +59,23 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         protected virtual async Task ValidateJobUnitAsync(JobUnit jobUnit)
         {
-            //Validating if Duplicate Caption exists
+            //Validating if Duplicate JobNumber exists
             if (JobUnitRepository != null)
             {
-                var jobUnits = (await JobUnitRepository.GetAllListAsync(p => p.Caption == jobUnit.Caption && p.OrganizationUnitId == jobUnit.OrganizationUnitId));
+                var jobUnits = (await JobUnitRepository.GetAllListAsync(p => p.JobNumber == jobUnit.JobNumber));
 
                 if (jobUnit.Id == 0)
                 {
                     if (jobUnits.Count > 0)
                     {
-                        throw new UserFriendlyException(L("Duplicate Caption", jobUnit.Caption));
+                        throw new UserFriendlyException(L("DuplicateNumber") , jobUnit.JobNumber);
                     }
                 }
                 else
                 {
-                    if (jobUnits.FirstOrDefault(p => p.Id != jobUnit.Id && p.Caption == jobUnit.Caption) != null)
+                    if (jobUnits.FirstOrDefault(p => p.Id != jobUnit.Id && p.JobNumber == jobUnit.JobNumber) != null)
                     {
-                        throw new UserFriendlyException(L("Duplicate Caption", jobUnit.Caption));
+                        throw new UserFriendlyException(L("DuplicateNumber"),jobUnit.JobNumber);
                     }
                 }
             }

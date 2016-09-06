@@ -93,8 +93,9 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         public int? TaxCreditId { get; set; }
 
         #region These fields are for ImportFunctionality
-        /// <summary>Gets or sets the TaxCredit field. </summary>
-        public string TaxCredit { get; set; }
+       
+        /// <summary>Gets or sets the TaxCreditName field. </summary>
+        public string TaxCreditName { get; set; }
 
 
         /// <summary>Gets or sets the RollupAccount field. </summary>

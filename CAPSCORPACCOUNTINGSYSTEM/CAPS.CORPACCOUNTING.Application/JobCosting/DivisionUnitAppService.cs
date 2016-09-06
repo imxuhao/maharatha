@@ -210,8 +210,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         private async Task<List<JobUnitDto>> ValidateDuplicateRecords(List<CreateJobUnitInput> divisionsList,int coaId)
         {
             var divisionNumberList = string.Join(",", divisionsList.Select(p => p.JobNumber).ToArray());
-            var descriptionList = string.Join(",", divisionsList.Select(p => p.Caption).ToArray());
-
             //Geting all divisions from cache
             var duplicatedivisions = await _divisioncache.GetDivisionCacheItemAsync(
                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(AbpSession.GetTenantId())));
@@ -220,36 +218,16 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             //get duplicate division list
             var duplicatedivisionList =
                 duplicatedivisionItems.Where(
-                    p => divisionNumberList.Contains(p.JobNumber) || descriptionList.Contains(p.Caption)).ToList();
+                    p => divisionNumberList.Contains(p.JobNumber)).ToList();
 
-            //duplicatedivisionNames of divisionList
-            var duplicatedivisionCaptionList = (from p in divisionsList
-                                                join p2 in duplicatedivisionList on p.Caption equals p2.Caption
-                                                select new { Caption = p.Caption, divisionNumber = string.Empty, RowNumber = p.ExcelRowNumber, ErrorMesage = L("DuplicatedivisionName") + p.Caption }).ToList();
+          
             //duplicatedivisionNumbers of divisionList
             var duplicatedivisionsdivisionNumberList = (from p in divisionsList
                                                         join p2 in duplicatedivisionList on p.JobNumber equals p2.JobNumber
-                                                        select new { Caption = string.Empty, divisionNumber = p.JobNumber, RowNumber = p.ExcelRowNumber, ErrorMesage = L("DuplicatedivisionNumber") + p.JobNumber }).ToList();
-
-            var divisionUnits = (from division in divisionsList
-                                 join duplicatecaption in duplicatedivisionCaptionList
-                                 on division.ExcelRowNumber equals duplicatecaption.RowNumber
-                                                       into duplicatecaptiondivision
-                                 from duplicatecaptiondivisionunit in duplicatecaptiondivision.DefaultIfEmpty()
-                                 join duplicatenum in duplicatedivisionsdivisionNumberList
-                                on division.ExcelRowNumber equals duplicatenum.RowNumber
-                                                      into duplicatedivisionnumber
-                                 from duplicatedivisionnumberunit in duplicatedivisionnumber.DefaultIfEmpty()
-                                 select new
-                                 {
-                                     division,
-                                     ErrorMesage =
-                                         (!ReferenceEquals(duplicatedivisionnumberunit, null) ? duplicatedivisionnumberunit.ErrorMesage : "") +
-                                         (!ReferenceEquals(duplicatecaptiondivisionunit, null) ? duplicatecaptiondivisionunit.ErrorMesage : "")
-                                 }).Distinct().ToList();
+                                                        select new { division=p, ErrorMesage = L("DuplicatedivisionNumber") + p.JobNumber }).ToList();
 
             //invalid divisionList
-            var errordivisions = divisionUnits.Where(u => u.ErrorMesage.Trim().Length > 0).ToList();
+            var errordivisions = duplicatedivisionsdivisionNumberList.Where(u => u.ErrorMesage.Trim().Length > 0).ToList();
 
             return errordivisions.Select(division => new JobUnitDto
             {

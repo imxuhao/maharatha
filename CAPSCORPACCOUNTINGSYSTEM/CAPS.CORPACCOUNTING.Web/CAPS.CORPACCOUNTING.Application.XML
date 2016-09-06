@@ -5759,8 +5759,8 @@
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobUnitDto.TaxCreditId">
             <summary>Gets or sets the TaxCreditId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobUnitDto.TaxCredit">
-            <summary>Gets or sets the TaxCredit field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobUnitDto.TaxCreditName">
+            <summary>Gets or sets the TaxCreditName field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobUnitDto.AccountNumber">
             <summary>Gets or sets the RollupAccount field. </summary>
@@ -5920,7 +5920,7 @@
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.TypeOfCurrency">
             <summary>Gets or sets the TypeOfCurrencyId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.TaxCredit">
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.TaxCreditName">
             <summary>Gets or sets the TaxCredit field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.AccountNumber">

@@ -126,7 +126,7 @@ Ext.define('Chaching.view.imports.entities.ProjectImportsGrid',{
         }, {
             xtype: 'gridcolumn',
             text: app.localize('TaxCredit'),
-            dataIndex: 'name',
+            dataIndex: 'taxCreditName',
             sortable: true,
             groupable: true,
             flex: 1,
@@ -137,7 +137,7 @@ Ext.define('Chaching.view.imports.entities.ProjectImportsGrid',{
                     store: '{getTaxCreditList}'
                 },
                 valueField: 'taxCreditId',
-                displayField: 'name'
+                displayField: 'taxCreditName'
             }
         }, {
             xtype: 'gridcolumn',

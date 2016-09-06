@@ -82,7 +82,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         public string TypeOfCurrency { get; set; }
 
         /// <summary>Gets or sets the TaxCredit field. </summary>
-        public string TaxCredit { get; set; }
+        public string TaxCreditName { get; set; }
 
 
         /// <summary>Gets or sets the RollupAccount field. </summary>

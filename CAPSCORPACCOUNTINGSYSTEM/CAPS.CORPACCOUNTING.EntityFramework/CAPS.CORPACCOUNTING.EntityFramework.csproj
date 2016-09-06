@@ -1371,6 +1371,10 @@
     <Compile Include="Migrations\201608311241040_Modify_TypeOfAccount_Table.Designer.cs">
       <DependentUpon>201608311241040_Modify_TypeOfAccount_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609060846543_Modify_TypeOfAccountUnit_Table1.cs" />
+    <Compile Include="Migrations\201609060846543_Modify_TypeOfAccountUnit_Table1.Designer.cs">
+      <DependentUpon>201609060846543_Modify_TypeOfAccountUnit_Table1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultSecurityGroupCreator.cs" />
@@ -2314,6 +2318,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608311241040_Modify_TypeOfAccount_Table.resx">
       <DependentUpon>201608311241040_Modify_TypeOfAccount_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609060846543_Modify_TypeOfAccountUnit_Table1.resx">
+      <DependentUpon>201609060846543_Modify_TypeOfAccountUnit_Table1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

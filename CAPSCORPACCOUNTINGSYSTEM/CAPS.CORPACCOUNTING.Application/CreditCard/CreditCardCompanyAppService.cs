@@ -268,16 +268,6 @@ namespace CAPS.CORPACCOUNTING.CreditCard
             return ccCompanyQuery;
         }
 
-        /// <summary>
-        /// Get BatchList By TypeOfBatch
-        /// </summary>
-        /// <returns></returns>
-        public async Task<List<NameValueDto>> GetBatchList(BatchSearchInput input)
-        {
-            var paymentTermsList = await _batchUnitRepository.GetAll().Where(u => u.TypeOfBatchId == input.TypeOfBatchId)
-                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))
-                 .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
-            return paymentTermsList;
-        }
+       
     }
 }

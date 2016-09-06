@@ -20,6 +20,7 @@ using CAPS.CORPACCOUNTING.Sessions;
 using CAPS.CORPACCOUNTING.Organization;
 using Abp.Authorization.Users;
 using CAPS.CORPACCOUNTING.Banking;
+using CAPS.CORPACCOUNTING.Banking.Dto;
 
 namespace CAPS.CORPACCOUNTING.Accounting
 {
@@ -45,7 +46,9 @@ namespace CAPS.CORPACCOUNTING.Accounting
         private readonly IRepository<PurchaseOrderEntryDocumentDetailUnit, long> _purchaseOrderEntryDocumentDetailUnitRepository;
         private readonly IRepository<OrganizationExtended, long> _organizationExtendedUnitRepository;
         private readonly IRepository<UserOrganizationUnit, long> _userOrganizationUnitUnitRepository;
-
+        private readonly IRepository<TypeOfUploadFileUnit> _typeOfUploadFileUnitRepository;
+        private readonly IRepository<BatchUnit, int> _batchUnitRepository;
+        private readonly IRepository<TypeOfAccountUnit> _typeOfAccountUnitRepository;
 
         /// <summary>
         /// 
@@ -81,14 +84,17 @@ namespace CAPS.CORPACCOUNTING.Accounting
             IRepository<PurchaseOrderEntryDocumentUnit, long> purchaseOrderEntryDocumentUnitRepository,
 
             IRepository<OrganizationExtended, long> organizationExtendedUnitRepository,
-            IRepository<UserOrganizationUnit, long> userOrganizationUnitUnitRepository
+            IRepository<UserOrganizationUnit, long> userOrganizationUnitUnitRepository,
+            IRepository<TypeOfUploadFileUnit> typeOfUploadFileUnitRepository,
+             IRepository<BatchUnit, int> batchUnitRepository,
+           IRepository<TypeOfAccountUnit> typeOfAccountUnitRepository
             )
         {
             _subAccountUnitRepository = subAccountUnitRepository;
             _jobUnitRepository = jobUnitRepository;
             _accountUnitRepository = accountUnitRepository;
             _customAppSession = customAppSession;
-
+            _batchUnitRepository = batchUnitRepository;
             _taxCreditUnitRepository = taxCreditUnitRepository;
             _vendorCache = vendorCache;
             _divisionCache = dividsCache;
@@ -102,6 +108,8 @@ namespace CAPS.CORPACCOUNTING.Accounting
             _purchaseOrderEntryDocumentUnitRepository = purchaseOrderEntryDocumentUnitRepository;
             _organizationExtendedUnitRepository = organizationExtendedUnitRepository;
             _userOrganizationUnitUnitRepository = userOrganizationUnitUnitRepository;
+            _typeOfUploadFileUnitRepository = typeOfUploadFileUnitRepository;
+            _typeOfAccountUnitRepository = typeOfAccountUnitRepository;
         }
 
 
@@ -521,6 +529,22 @@ namespace CAPS.CORPACCOUNTING.Accounting
         }
 
 
+
+        /// <summary>
+        /// get Credit Card File Upload Types
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> FileUploadCRDRList(AutoSearchInput input)
+        {
+
+            var uploadFilesList = await _typeOfUploadFileUnitRepository.GetAll()
+                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))
+                 .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
+            return uploadFilesList;
+
+        }
+
+
         /// <summary>
         ///Get PurchaseOrders
         /// </summary>
@@ -565,7 +589,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         }
 
         /// <summary>
-        /// Get accounts List By Classification
+        /// Get accounts List By Classification Type
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
@@ -573,6 +597,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         {
             Func<AccountCacheItem, bool> expAccountCache = null;
 
+            var typeOfAccountId = (await _typeOfAccountUnitRepository.FirstOrDefaultAsync(u => u.Description == input.TypeOfAccount)).Id;
             var accountList = await _accountCache.GetAccountCacheItemAsync(
                  CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId)));
 
@@ -588,7 +613,8 @@ namespace CAPS.CORPACCOUNTING.Accounting
             p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
             p.AccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
             p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()))
-            .Where(u => u.IsCorporate == true && u.TypeOfAccountId == input.TypeOfAccountId)
+            .Where(u => u.IsCorporate == true)
+             .WhereIf(input.TypeOfAccount.Length > 0, u => u.TypeOfAccountId == typeOfAccountId)
             .WhereIf(!ReferenceEquals(expAccountCache, null), expAccountCache).ToList();
         }
 
@@ -640,6 +666,18 @@ namespace CAPS.CORPACCOUNTING.Accounting
             }
             return Filters;
 
+        }
+
+        /// <summary>
+        /// Get BatchList By TypeOfBatch
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetBatchListByType(BatchSearchInput input)
+        {
+            var batchList = await _batchUnitRepository.GetAll().Where(u => u.TypeOfBatchId == input.TypeOfBatchId)
+                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))
+                 .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
+            return batchList;
         }
 
     }

@@ -39,6 +39,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
                 return;
             }
             typeOfAccount.TenantId = _tenantId;
+            typeOfAccount.IsEditable = false;
             _context.TypeOfAccountUnit.Add(typeOfAccount);
 
             _context.SaveChanges();

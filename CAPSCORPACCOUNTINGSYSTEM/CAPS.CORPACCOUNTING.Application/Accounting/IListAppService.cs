@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using CAPS.CORPACCOUNTING.Accounting.Dto;
+using CAPS.CORPACCOUNTING.Banking.Dto;
 
 namespace CAPS.CORPACCOUNTING.Accounting
 {
@@ -111,9 +112,16 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <returns></returns>
          List<NameValueDto> GetCRBankTypeList();
 
+        /// <summary>
+        /// get Credit Card File Upload Types
+        /// </summary>
+        /// <returns></returns>
+
+        Task<List<NameValueDto>> FileUploadCRDRList(AutoSearchInput input);
+
 
         /// <summary>
-        /// Get accounts List By Classification
+        /// Get accounts List By Classification Type
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
@@ -121,12 +129,17 @@ namespace CAPS.CORPACCOUNTING.Accounting
 
 
         /// <summary>
-        /// Get Vendors list by Classification
+        /// Get Vendors list by Classification Type
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<List<VendorCacheItem>> GetVendorsListByClassification(VendorSearchInput input);
 
+        /// <summary>
+        /// Get BatchList By TypeOfBatch
+        /// </summary>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetBatchListByType(BatchSearchInput input);
 
 
 

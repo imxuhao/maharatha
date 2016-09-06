@@ -64,6 +64,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public async Task<int> CreateClassificationUnit(CreateTypeOfAccountInputUnit input)
         {
             var typeOfAccountUnit = input.MapTo<TypeOfAccountUnit>();
+            typeOfAccountUnit.IsEditable = true;
             typeOfAccountUnit.TenantId = AbpSession.TenantId;
             var typeOfAccountId = await _typeOfAccountUnitManager.CreateAsync(typeOfAccountUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
@@ -131,6 +132,8 @@ namespace CAPS.CORPACCOUNTING.Accounting
                 var dto = item.typeofaccounts.MapTo<TypeOfAccountUnitDto>();
                 dto.TypeOfAccountId = item.typeofaccounts.Id;
                 dto.TypeOfAccountClassificationDesc = item.typeOfAccountClassification;
+                dto.AllowDelete = item.typeofaccounts.IsEditable;
+                dto.AllowEdit = item.typeofaccounts.IsEditable;
                 return dto;
             }).ToList());
         }
@@ -153,10 +156,13 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// Get TypeOfAccountClassification List
         /// </summary>
         /// <returns></returns>
-        public async Task<List<NameValueDto>> GetTypeOfAccountClassificationList(AutoSearchInput input) {
+        public async Task<List<NameValueDto>> GetTypeOfAccountClassificationList(AutoSearchInput input)
+        {
             var accountClassificationList = await _typeOfAccountClassificationUnitRepository.GetAll()
                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))
-                .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
+                .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() })
+                .OrderBy(u => u.Name)
+                .ToListAsync();
             return accountClassificationList;
         }
     }

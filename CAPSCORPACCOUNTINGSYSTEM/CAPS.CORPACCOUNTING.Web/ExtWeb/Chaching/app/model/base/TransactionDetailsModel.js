@@ -88,7 +88,7 @@ Ext.define('Chaching.model.base.TransactionDetailsModel', {
         { name: 'purchaseOrderItemId', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'purchaseOrderItem', type: 'string' },
          { name: 'typeOfTransactionId', type: 'int', defaultValue: 1 },
-        { name: 'typeOfTransaction', type: 'string', defaultValue: 'APInvoice' },
+        { name: 'typeOfTransaction', type: 'string', defaultValue: 'Entered' },
          { name: 'typeOfAmountId', type: 'int', defaultValue: 1 },
         { name: 'typeOfAmount', type: 'string', defaultValue: 'StandardEntry' },
         { name: 'SplitGroupCls', type: 'string' },//Temporary field for row coloring.

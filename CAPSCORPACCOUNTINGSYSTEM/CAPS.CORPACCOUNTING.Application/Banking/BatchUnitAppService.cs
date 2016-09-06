@@ -155,7 +155,7 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<NameValueDto>> GetBatchList(AutoSearchInput input)
+        public async Task<List<NameValueDto>> GetBatchList(BatchSearchInput input)
         {
             var batchList = await (from subaccount in _batchUnitRepository.GetAll()
                                     .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))

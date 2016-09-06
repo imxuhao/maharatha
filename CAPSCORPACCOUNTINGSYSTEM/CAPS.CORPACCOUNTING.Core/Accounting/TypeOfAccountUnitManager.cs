@@ -54,6 +54,9 @@ namespace CAPS.CORPACCOUNTING.Accounting
         [UnitOfWork]
         public virtual async Task DeleteAsync(int id)
         {
+            var typeOfaccount = (await TypeOfAccountUnitRepository.GetAsync(id));
+            if (!typeOfaccount.IsEditable)
+                throw new UserFriendlyException(L("Predefined Classification is not deleted", typeOfaccount.Description));
             await TypeOfAccountUnitRepository.DeleteAsync(id);
         }
 
@@ -64,6 +67,10 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <returns></returns>
         protected virtual async Task ValidateTypeOfAccountUnitAsync(TypeOfAccountUnit typeOfAccountUnit)
         {
+
+            if(!typeOfAccountUnit.IsEditable)
+                throw new UserFriendlyException(L("Predefined Classification is not editable", typeOfAccountUnit.Description));
+
             if (TypeOfAccountUnitRepository != null)
             {
                 var typeOfaccount = (await TypeOfAccountUnitRepository.GetAllListAsync(p => p.Description == typeOfAccountUnit.Description));

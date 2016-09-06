@@ -55,6 +55,10 @@ namespace CAPS.CORPACCOUNTING.Accounting
 
         /// <summary>Gets or sets the TenantId field. </summary>
         public virtual int? TenantId { get; set; }
+
+
+        /// <summary>Gets or sets the isEditable field. </summary>
+        public virtual bool IsEditable { get; set; }
         #endregion
 
         public TypeOfAccountUnit()

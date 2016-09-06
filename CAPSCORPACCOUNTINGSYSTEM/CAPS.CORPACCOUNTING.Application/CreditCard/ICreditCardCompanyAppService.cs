@@ -1,6 +1,7 @@
 ﻿using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Banking.Dto;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using System;
 using System.Collections.Generic;
@@ -33,11 +34,15 @@ namespace CAPS.CORPACCOUNTING.CreditCard
         /// <returns></returns>
         Task DeleteCCCompanyDocumentUnit(IdInput<long> input);
 
+   
+
         /// <summary>
-        /// Get BatchList By TypeOfBatch
+        /// 
         /// </summary>
+        /// <param name="input"></param>
         /// <returns></returns>
-        Task<List<NameValueDto>> GetBatchList(BatchSearchInput input);
-        
+        Task<PagedResultOutput<BankAccountUnitDto>> GetCreditCardCompanies(SearchInputDto input);
+
+
     }
 }

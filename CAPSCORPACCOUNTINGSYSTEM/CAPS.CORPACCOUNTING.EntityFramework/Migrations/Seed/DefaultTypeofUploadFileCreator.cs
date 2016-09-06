@@ -39,29 +39,26 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
 
         private void CreateTypeOfUploadFileList()
         {
-            foreach (var country in InitialTypeOfUploadFileList)
+            foreach (var TypeOfUploadFile in InitialTypeOfUploadFileList)
             {
-                _context.TypeOfUploadFileUnits.Add(country);
-
-                _context.SaveChanges();
+                AddTypeOfUploadFileListIfNotExists(TypeOfUploadFile);
             }
         }
 
-        //private void AddCountryListIfNotExists(CountryUnit countryList)
-        //{
-        //    if (_context.CountryUnit.Any(l => l.TenantId == countryList.TenantId && l.TypeOfCountryId == countryList.TypeOfCountryId))
-        //    {
-        //        return;
-        //    }
+        private void AddTypeOfUploadFileListIfNotExists(TypeOfUploadFileUnit typeOfUploadFile)
+        {
+            if (_context.TypeOfUploadFileUnits.Any(l => l.Description == typeOfUploadFile.Description))
+            {
+                return;
+            }
 
-        //    _context.CountryUnit.Add(countryList);
+            _context.TypeOfUploadFileUnits.Add(typeOfUploadFile);
 
-        //    _context.SaveChanges();
-        //}
+            _context.SaveChanges();
+        }
 
     }
 }
 
 
-        
-                          
+

@@ -19,9 +19,11 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// </summary>
         public string Query { get; set; }
 
+
+
         /// <summary>
-        ///set classification id to search 
+        ///set classification name to search 
         /// </summary>
-        public int TypeOfAccountId { get; set; }
+        public string TypeOfAccount { get; set; }
     }
 }

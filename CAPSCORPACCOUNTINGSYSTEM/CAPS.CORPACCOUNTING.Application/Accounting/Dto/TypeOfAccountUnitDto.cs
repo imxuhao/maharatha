@@ -40,5 +40,12 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
 
         /// <summary>Gets or sets the IsPaymentType field. </summary>
         public  bool IsPaymentType { get; set; }
+
+        /// <summary>Gets or sets the IsPaymentType field. </summary>
+        public bool AllowDelete { get; set; }
+
+        /// <summary>Gets or sets the IsPaymentType field. </summary>
+        public bool AllowEdit { get; set; }
+
     }
 }

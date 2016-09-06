@@ -665,6 +665,12 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.TypeOfAccountUnitDto.IsPaymentType">
             <summary>Gets or sets the IsPaymentType field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.TypeOfAccountUnitDto.AllowDelete">
+            <summary>Gets or sets the IsPaymentType field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.TypeOfAccountUnitDto.AllowEdit">
+            <summary>Gets or sets the IsPaymentType field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.SubAccountId">
             <summary>Gets or sets the SubAccountId field. </summary>
         </member>
@@ -1224,18 +1230,30 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.FileUploadCRDRList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            get Credit Card File Upload Types
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.GetAccountsListByClassification(CAPS.CORPACCOUNTING.Masters.Dto.AccountSearchInput)">
             <summary>
-            Get accounts List By Classification
+            Get accounts List By Classification Type
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.GetVendorsListByClassification(CAPS.CORPACCOUNTING.Masters.Dto.VendorSearchInput)">
             <summary>
-            Get Vendors list by Classification
+            Get Vendors list by Classification Type
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.GetBatchListByType(CAPS.CORPACCOUNTING.Banking.Dto.BatchSearchInput)">
+            <summary>
+            Get BatchList By TypeOfBatch
+            </summary>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.ISubAccountUnitAppService.CreateSubAccountUnit(CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput)">
@@ -1298,7 +1316,7 @@
             
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.#ctor(Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Accounting.SubAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.JobCosting.JobUnit},CAPS.CORPACCOUNTING.Sessions.CustomAppSession,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TaxCreditUnit},CAPS.CORPACCOUNTING.Helpers.CacheItems.IVendorCache,CAPS.CORPACCOUNTING.Helpers.CacheItems.IDivisionCache,CAPS.CORPACCOUNTING.Helpers.CacheItems.IAccountCache,CAPS.CORPACCOUNTING.Helpers.CacheItems.ISubAccountCache,CAPS.CORPACCOUNTING.Helpers.CacheItems.ISubAccountRestrictionCache,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PettyCash.PettyCashAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorPaymentTermUnit},CAPS.CORPACCOUNTING.Helpers.CacheItems.IBankAccountCache,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentDetailUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Organization.OrganizationExtended,System.Int64},Abp.Domain.Repositories.IRepository{Abp.Authorization.Users.UserOrganizationUnit,System.Int64})">
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.#ctor(Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Accounting.SubAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.JobCosting.JobUnit},CAPS.CORPACCOUNTING.Sessions.CustomAppSession,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TaxCreditUnit},CAPS.CORPACCOUNTING.Helpers.CacheItems.IVendorCache,CAPS.CORPACCOUNTING.Helpers.CacheItems.IDivisionCache,CAPS.CORPACCOUNTING.Helpers.CacheItems.IAccountCache,CAPS.CORPACCOUNTING.Helpers.CacheItems.ISubAccountCache,CAPS.CORPACCOUNTING.Helpers.CacheItems.ISubAccountRestrictionCache,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PettyCash.PettyCashAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorPaymentTermUnit},CAPS.CORPACCOUNTING.Helpers.CacheItems.IBankAccountCache,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentDetailUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Organization.OrganizationExtended,System.Int64},Abp.Domain.Repositories.IRepository{Abp.Authorization.Users.UserOrganizationUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.TypeOfUploadFileUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.BatchUnit,System.Int32},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Accounting.TypeOfAccountUnit})">
             <summary>
             
             </summary>
@@ -1455,6 +1473,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.FileUploadCRDRList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            get Credit Card File Upload Types
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetPurchaseOrderList(CAPS.CORPACCOUNTING.Accounting.Dto.GetPurchaseOrderInput)">
              <summary>
             Get PurchaseOrders
@@ -1469,7 +1493,7 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetAccountsListByClassification(CAPS.CORPACCOUNTING.Masters.Dto.AccountSearchInput)">
             <summary>
-            Get accounts List By Classification
+            Get accounts List By Classification Type
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -1486,6 +1510,12 @@
             User Entity restriction list
             </summary>
             <param name="entityClassification"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetBatchListByType(CAPS.CORPACCOUNTING.Banking.Dto.BatchSearchInput)">
+            <summary>
+            Get BatchList By TypeOfBatch
+            </summary>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService">
@@ -2417,7 +2447,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Banking.Dto.BatchUnitAppService.GetBatchList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Banking.Dto.BatchUnitAppService.GetBatchList(CAPS.CORPACCOUNTING.Banking.Dto.BatchSearchInput)">
             <summary>
             Get Batch List 
             </summary>
@@ -2945,7 +2975,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Banking.IBatchUnitAppService.GetBatchList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Banking.IBatchUnitAppService.GetBatchList(CAPS.CORPACCOUNTING.Banking.Dto.BatchSearchInput)">
             <summary>
             Get BatchUnit List for AutoSearch
             </summary>
@@ -3146,12 +3176,6 @@
             Get the CreditCard Company Details By Id
             </summary>
             <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardCompanyAppService.GetBatchList(CAPS.CORPACCOUNTING.Banking.Dto.BatchSearchInput)">
-            <summary>
-            Get BatchList By TypeOfBatch
-            </summary>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.CreditCard.CreditCardEntryDocumentAppService">
@@ -3442,10 +3466,11 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardCompanyAppService.GetBatchList(CAPS.CORPACCOUNTING.Banking.Dto.BatchSearchInput)">
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardCompanyAppService.GetCreditCardCompanies(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
             <summary>
-            Get BatchList By TypeOfBatch
+            
             </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.CreditCard.ICreditCardEntryDocumentAppService">
@@ -7205,9 +7230,9 @@
             dropdown keyword search
             </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountSearchInput.TypeOfAccountId">
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountSearchInput.TypeOfAccount">
              <summary>
-            set classification id to search 
+            set classification name to search 
              </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CountryListDto.CountryId">

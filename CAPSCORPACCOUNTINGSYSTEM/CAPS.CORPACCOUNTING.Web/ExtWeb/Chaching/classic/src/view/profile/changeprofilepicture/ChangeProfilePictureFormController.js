@@ -92,6 +92,7 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormC
         }       
         view.submit({
             url: abp.appPath + 'Profile/UploadProfilePicture',
+            headers: { 'Content-Type': 'multipart/form-data' },
             success: function (form, response) {
                 if (response.result) {
                     form.findField('changeProfilePicture').value = "gjhsagjd";

@@ -19,6 +19,7 @@ using CAPS.CORPACCOUNTING.PurchaseOrders;
 using CAPS.CORPACCOUNTING.Sessions;
 using CAPS.CORPACCOUNTING.Organization;
 using Abp.Authorization.Users;
+using CAPS.CORPACCOUNTING.Banking;
 
 namespace CAPS.CORPACCOUNTING.Accounting
 {
@@ -115,7 +116,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
             var cacheItem = await _divisionCache.GetDivisionCacheItemAsync(
                   CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId)));
 
-            //appy User have restrictions
+            //apply User have restrictions
             if (_customAppSession.HasProjectRestriction || _customAppSession.HasDivisionRestriction)
             {
                 var strEntityClassification = string.Join(",", new string[] { EntityClassification.Division.ToDescription(), EntityClassification.Project.ToDescription() });
@@ -143,7 +144,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
             var accountList = await _accountCache.GetAccountCacheItemAsync(
                  CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId)));
 
-            //appy User have restrictions
+            //apply User have restrictions
             if (_customAppSession.HasGLRestrictions || _customAppSession.HasLineRestrictions)
             {
                 var strEntityClassification = string.Join(",", new string[] { EntityClassification.Account.ToDescription(), EntityClassification.Line.ToDescription() });
@@ -154,8 +155,6 @@ namespace CAPS.CORPACCOUNTING.Accounting
             p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.AccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
             || p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).Where(p => p.ChartOfAccountId == chartOfAccountId)
             .WhereIf(!ReferenceEquals(expAccountCache, null), expAccountCache).ToList();
-
-
         }
 
         /// <summary>
@@ -504,6 +503,25 @@ namespace CAPS.CORPACCOUNTING.Accounting
         }
 
         /// <summary>
+        /// get card types
+        /// </summary>
+        /// <returns></returns>
+        public List<NameValueDto> GetCRBankTypeList()
+        {
+
+            var listEnums = (from TypeOfInvoice n in Enum.GetValues(typeof(TypeOfInvoice))
+                             select new NameValueDto { Value = ((int)n).ToString(), Name = EnumHelper.ToDisplayName(n) }).ToList();
+
+            var typeOfbankList = Enum.GetValues(typeof(TypeOfBankAccount)).Cast<TypeOfBankAccount>().Select(x => x)
+                     .ToDictionary(u => u.ToDescription(), u => (int)u).Where(u => u.Value >= 5 && u.Value <= 9)
+                     .Select(u => new NameValueDto { Value = u.Value.ToString(), Name = u.Key }).ToList();
+
+            return typeOfbankList;
+
+        }
+
+
+        /// <summary>
         ///Get PurchaseOrders
         /// </summary>
         /// <returns></returns>
@@ -545,6 +563,53 @@ namespace CAPS.CORPACCOUNTING.Accounting
         {
             return EnumList.GetCheckTypeList();
         }
+
+        /// <summary>
+        /// Get accounts List By Classification
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<List<AccountCacheItem>> GetAccountsListByClassification(AccountSearchInput input)
+        {
+            Func<AccountCacheItem, bool> expAccountCache = null;
+
+            var accountList = await _accountCache.GetAccountCacheItemAsync(
+                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId)));
+
+            //apply User have restrictions
+            if (_customAppSession.HasGLRestrictions || _customAppSession.HasLineRestrictions)
+            {
+                var strEntityClassification = string.Join(",", new string[] { EntityClassification.Account.ToDescription(), EntityClassification.Line.ToDescription() });
+                expAccountCache = ExpressionBuilder.GetExpression<AccountCacheItem>(await GetEntityAccessFilter(strEntityClassification)).Compile();
+            }
+
+            return accountList.ToList()
+                .WhereIf(!string.IsNullOrEmpty(input.Query),
+            p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
+            p.AccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
+            p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()))
+            .Where(u => u.IsCorporate == true && u.TypeOfAccountId == input.TypeOfAccountId)
+            .WhereIf(!ReferenceEquals(expAccountCache, null), expAccountCache).ToList();
+        }
+
+
+        /// <summary>
+        /// Get Vendors list by Classification
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<List<VendorCacheItem>> GetVendorsListByClassification(VendorSearchInput input)
+        {
+
+            var vendorCacheItemList = await _vendorCache.GetVendorsCacheItemAsync(CacheKeyStores.CalculateCacheKey(CacheKeyStores.VendorKey, Convert.ToInt32(_customAppSession.TenantId)));
+            return vendorCacheItemList.ToList().Where(u => u.TypeofVendorId == input.TypeofVendorId)
+                .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.LastName.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
+           || p.FirstName.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
+           || p.VendorAccountInfo.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
+           || p.VendorNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();
+
+        }
+
 
         /// <summary>
         /// User Entity restriction list

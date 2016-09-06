@@ -131,6 +131,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                 ChartOfAccountId = u.account.ChartOfAccountId,
                 IsCorporate = u.IsCorporate,
                 IsRollupAccount = u.account.IsRollupAccount,
+                TypeOfAccountId=u.account.TypeOfAccountId,
                 OrganizationUnitId = u.account.OrganizationUnitId
             }).ToList();
 

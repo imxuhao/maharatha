@@ -39,6 +39,12 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
+
+        /// <summary>Gets or sets the IsCorporateDefault field. </summary>
+        public virtual bool IsCorporateDefault { get; set; }
+
+        /// <summary>Gets or sets the ChartOfAccountId field. </summary>
+        public virtual int ChartOfAccountId { get; set; }
     }
 
     public interface IDivisionCache : IEntityCache<DivisionCacheItem>
@@ -77,7 +83,10 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                      Caption = u.Caption,
                      TypeOfJobStatusId = u.TypeOfJobStatusId,
                      IsDivision = u.IsDivision,
-                     OrganizationUnitId = u.OrganizationUnitId
+                     OrganizationUnitId = u.OrganizationUnitId,
+                     IsCorporateDefault=u.IsCorporateDefault,
+                     ChartOfAccountId=u.ChartOfAccountId
+
                  }).ToListAsync();
             return divisions;
         }

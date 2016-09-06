@@ -105,5 +105,30 @@ namespace CAPS.CORPACCOUNTING.Accounting
        /// <returns></returns>
        Task<List<PurchaseOrderEntyDocumnetwithDetailOutputDto>> GetPurchaseOrderList(GetPurchaseOrderInput input);
 
+        /// <summary>
+        /// get card types
+        /// </summary>
+        /// <returns></returns>
+         List<NameValueDto> GetCRBankTypeList();
+
+
+        /// <summary>
+        /// Get accounts List By Classification
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<List<AccountCacheItem>> GetAccountsListByClassification(AccountSearchInput input);
+
+
+        /// <summary>
+        /// Get Vendors list by Classification
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<List<VendorCacheItem>> GetVendorsListByClassification(VendorSearchInput input);
+
+
+
+
     }
 }

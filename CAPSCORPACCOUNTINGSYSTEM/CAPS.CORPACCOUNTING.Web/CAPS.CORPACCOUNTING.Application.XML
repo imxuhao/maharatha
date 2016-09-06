@@ -1218,6 +1218,26 @@
              </summary>
              <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.GetCRBankTypeList">
+            <summary>
+            get card types
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.GetAccountsListByClassification(CAPS.CORPACCOUNTING.Masters.Dto.AccountSearchInput)">
+            <summary>
+            Get accounts List By Classification
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.GetVendorsListByClassification(CAPS.CORPACCOUNTING.Masters.Dto.VendorSearchInput)">
+            <summary>
+            Get Vendors list by Classification
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.ISubAccountUnitAppService.CreateSubAccountUnit(CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput)">
             <summary>
             Create the SubAccount.
@@ -1429,6 +1449,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetCRBankTypeList">
+            <summary>
+            get card types
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetPurchaseOrderList(CAPS.CORPACCOUNTING.Accounting.Dto.GetPurchaseOrderInput)">
              <summary>
             Get PurchaseOrders
@@ -1439,6 +1465,20 @@
             <summary>
             Get CheckType List
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetAccountsListByClassification(CAPS.CORPACCOUNTING.Masters.Dto.AccountSearchInput)">
+            <summary>
+            Get accounts List By Classification
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetVendorsListByClassification(CAPS.CORPACCOUNTING.Masters.Dto.VendorSearchInput)">
+            <summary>
+            Get Vendors list by Classification
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetEntityAccessFilter(System.String)">
@@ -2407,6 +2447,16 @@
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountPaymentRangDto.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BatchSearchInput.Query">
+            <summary>
+            dropdown keyword search
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BatchSearchInput.TypeOfBatchId">
+             <summary>
+            set TypeOfBatch id to search 
+             </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BatchUnitDto.BatchId">
             <summary>Gets or sets the BatchId field</summary>
         </member>
@@ -3031,6 +3081,79 @@
             Maximum allowed page size for paged requests.
             </summary>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.CreditCard.CreditCardCompanyAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardCompanyAppService.#ctor(CAPS.CORPACCOUNTING.Banking.BankAccountUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.BankAccountUnit,System.Int64},CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AddressUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.JobCosting.JobUnit,System.Int32},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.TypeOfUploadFileUnit,System.Int32},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.TypeOfCheckStockUnit,System.Int32},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit,System.Int32},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.BatchUnit,System.Int32},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.BankAccountPaymentRangeUnit},CAPS.CORPACCOUNTING.Banking.BankAccountPaymentRangeUnitManager,CAPS.CORPACCOUNTING.Helpers.CacheItems.IAccountCache,CAPS.CORPACCOUNTING.Sessions.CustomAppSession,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CoaUnit})">
+            <summary>
+            
+            </summary>
+            <param name="bankAccountUnitManager"></param>
+            <param name="bankAccountUnitRepository"></param>
+            <param name="addressAppService"></param>
+            <param name="addressUnitRepository"></param>
+            <param name="accountUnitRepository"></param>
+            <param name="jobUnitRepository"></param>
+            <param name="typeOfUploadFileUnitRepository"></param>
+            <param name="typeOfCheckStockUnitRepository"></param>
+            <param name="vendorUnitRepository"></param>
+            <param name="batchUnitRepository"></param>
+            <param name="bankAccountPaymentRangeUnit"></param>
+            <param name="bankAccountPaymentRangeUnitManager"></param>
+            <param name="accountCache"></param>
+            <param name="customAppSession"></param>
+            <param name="coaUnitRepository"></param>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardCompanyAppService.CreateCCCompanyDocumentUnit(CAPS.CORPACCOUNTING.Banking.Dto.CreateBankAccountUnitInput)">
+            <summary>
+            Create the CreditCard Company.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardCompanyAppService.UpdateCCCompanyDocumentUnit(CAPS.CORPACCOUNTING.Banking.Dto.UpdateBankAccountUnitInput)">
+            <summary>
+             Update the CreditCard Company 
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardCompanyAppService.DeleteCCCompanyDocumentUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            Delete the CreditCard Company
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardCompanyAppService.GetCreditCardCompanies(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get the list of all Credit Card Companies
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardCompanyAppService.ConvertToCcCompanyDtos(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Banking.Dto.BankAccountAndAddressDto})">
+            <summary>
+            Converting Customer to outputdto of a CustomerUnitDto List
+            </summary>
+            <param name="results"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardCompanyAppService.GetCcCompanyById(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            Get the CreditCard Company Details By Id
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardCompanyAppService.GetBatchList(CAPS.CORPACCOUNTING.Banking.Dto.BatchSearchInput)">
+            <summary>
+            Get BatchList By TypeOfBatch
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.CreditCard.CreditCardEntryDocumentAppService">
             <summary>
             
@@ -3297,6 +3420,33 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardStatementDto.ControlTotal">
             <summary>Get Sets the ControlTotal field.</summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardCompanyAppService.CreateCCCompanyDocumentUnit(CAPS.CORPACCOUNTING.Banking.Dto.CreateBankAccountUnitInput)">
+            <summary>
+             Create the CreditCard Company.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardCompanyAppService.UpdateCCCompanyDocumentUnit(CAPS.CORPACCOUNTING.Banking.Dto.UpdateBankAccountUnitInput)">
+            <summary>
+            Update the CreditCard Company based on Id.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardCompanyAppService.DeleteCCCompanyDocumentUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+             Delete the CreditCard Company
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardCompanyAppService.GetBatchList(CAPS.CORPACCOUNTING.Banking.Dto.BatchSearchInput)">
+            <summary>
+            Get BatchList By TypeOfBatch
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.CreditCard.ICreditCardEntryDocumentAppService">
             <summary>
@@ -4233,6 +4383,12 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.DivisionCacheItem.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.DivisionCacheItem.IsCorporateDefault">
+            <summary>Gets or sets the IsCorporateDefault field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.DivisionCacheItem.ChartOfAccountId">
+            <summary>Gets or sets the ChartOfAccountId field. </summary>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.CustomerCacheItem">
             <summary>
@@ -7039,6 +7195,21 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountSearchInput.JobId">
+            <summary>
+            Set JobId to search
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountSearchInput.Query">
+            <summary>
+            dropdown keyword search
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountSearchInput.TypeOfAccountId">
+             <summary>
+            set classification id to search 
+             </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CountryListDto.CountryId">
             <summary>
             Gets or Sets CountryId
@@ -7470,6 +7641,16 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetVendorPayTermsInput.OrganizationUnitId">
             <summary> Gets or Sets the CompanyId to Search the CustomerPaymentTerms based on  CompanyId. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorSearchInput.Query">
+            <summary>
+            dropdown keyword search
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorSearchInput.TypeofVendorId">
+             <summary>
+            set classification id to search 
+             </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.VendorId">
             <summary>Gets or sets the VendorId field. </summary>

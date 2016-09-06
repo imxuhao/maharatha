@@ -221,6 +221,7 @@
     <Compile Include="Banking\Dto\BankAccountUnitDto.cs" />
     <Compile Include="Banking\BatchUnitAppService.cs" />
     <Compile Include="Banking\Dto\BankAccountPaymentRangDto.cs" />
+    <Compile Include="Banking\Dto\BatchSearchInput.cs" />
     <Compile Include="Banking\Dto\BatchUnitDto.cs" />
     <Compile Include="Banking\Dto\CreateBankAccountUnitInput.cs" />
     <Compile Include="Banking\Dto\CreateBatchUnitInput.cs" />
@@ -272,12 +273,14 @@
     <Compile Include="Common\Dto\FindUsersInput.cs" />
     <Compile Include="Common\ICommonLookupAppService.cs" />
     <Compile Include="Configuration\Tenants\Dto\LdapSettingsEditDto.cs" />
+    <Compile Include="CreditCard\CreditCardCompanyAppService.cs" />
     <Compile Include="CreditCard\CreditCardEntryDocumentAppService.cs" />
     <Compile Include="CreditCard\Dto\CreditCardEntryDetailInputUnit.cs" />
     <Compile Include="CreditCard\Dto\CreditCardEntryDetailUnitDto.cs" />
     <Compile Include="CreditCard\Dto\CreditCardEntryDocumentInputUnit.cs" />
     <Compile Include="CreditCard\Dto\CreditCardEntryDocumentUnitDto.cs" />
     <Compile Include="CreditCard\Dto\CreditCardStatementDto.cs" />
+    <Compile Include="CreditCard\ICreditCardCompanyAppService.cs" />
     <Compile Include="CreditCard\ICreditCardEntryDocumentAppService.cs" />
     <Compile Include="CustomDtoMapper.cs" />
     <Compile Include="DataExporting\Excel\EpPlus\EpPlusExcelExporterBase.cs" />
@@ -451,6 +454,7 @@
     <Compile Include="Logging\WebLogAppService.cs" />
     <Compile Include="Masters\AccountUnitAppService.cs" />
     <Compile Include="Masters\CoaUnitAppService.cs" />
+    <Compile Include="Masters\Dto\AccountSearchInput.cs" />
     <Compile Include="Masters\Dto\AutoFillDto.cs" />
     <Compile Include="Masters\Dto\CountryListDto.cs" />
     <Compile Include="Masters\Dto\CreateAccountListInput.cs" />
@@ -488,6 +492,7 @@
     <Compile Include="Masters\Dto\GetVendorInput.cs" />
     <Compile Include="Masters\Dto\GetCustomerInput.cs" />
     <Compile Include="Masters\Dto\GetVendorPayTermsInput.cs" />
+    <Compile Include="Masters\Dto\VendorSearchInput.cs" />
     <Compile Include="Masters\Dto\VendorUnitDto.cs" />
     <Compile Include="Masters\Dto\UpdateVendorUnitInput.cs" />
     <Compile Include="Masters\Dto\CreateVendorUnitInput.cs" />

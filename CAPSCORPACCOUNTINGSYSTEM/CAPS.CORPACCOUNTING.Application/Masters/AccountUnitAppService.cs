@@ -257,13 +257,10 @@ namespace CAPS.CORPACCOUNTING.Accounts
         /// <returns></returns>
         public async Task<List<NameValueDto>> GetTypeOfAccountList()
         {
-            using (_unitOfWorkManager.Current.DisableFilter(AbpDataFilters.MayHaveTenant))
-            {
                 var typeOfAccounts = await _typeOfAccountRepository.GetAll()
                             .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() })
                             .ToListAsync();
                 return typeOfAccounts;
-            }
         }
 
         /// <summary>

@@ -33,7 +33,7 @@
                     {
                         xtype: 'fieldset',
                         ui: 'transparentFieldSet',
-                        title: abp.localization.localize("GeneralInformation").initCap(),
+                        title: abp.localization.localize("GeneralInformation"),
                         collapsible: true,
                         layout: 'column',
                         itemId: 'generalField',
@@ -56,7 +56,7 @@
                                         name: 'lastName',
                                         itemId: 'lastName',
                                         allowBlank: false,
-                                        fieldLabel: app.localize('CompanyName').initCap(),
+                                        fieldLabel: app.localize('CompanyName'),
                                         tabIndex: 1,
                                         width: '100%',
                                         ui: 'fieldLabelTop',
@@ -66,7 +66,7 @@
                                         xtype: 'textfield',
                                         name: 'vendorNumber',
                                         itemId: 'vendorNumber',
-                                        fieldLabel: app.localize('VendorNumber').initCap(),
+                                        fieldLabel: app.localize('VendorNumber'),
                                         tabIndex: 4,
                                         width: '100%',
                                         ui: 'fieldLabelTop'
@@ -84,7 +84,7 @@
                                         xtype: 'textfield',
                                         name: 'firstName',
                                         itemId: 'firstName',
-                                        fieldLabel: app.localize('PayToName').initCap(),
+                                        fieldLabel: app.localize('PayToName'),
                                         width: '100%',
                                         tabIndex: 2,
                                         ui: 'fieldLabelTop'
@@ -93,7 +93,7 @@
                                         name: 'billingAccount',
                                         itemId: 'billingAccount',
                                         tabIndex: 5,
-                                        fieldLabel: app.localize('BillingAccount').initCap(),
+                                        fieldLabel: app.localize('BillingAccount'),
                                         width: '100%',
                                         ui: 'fieldLabelTop'
                                     }
@@ -109,7 +109,7 @@
                                     {
                                         xtype: 'combobox',
                                         name: 'typeofVendorId',
-                                        fieldLabel: app.localize('Type').initCap(),
+                                        fieldLabel: app.localize('Type'),
                                         labelWidth: 70,
                                         width: '100%',
                                         ui: 'fieldLabelTop',
@@ -155,7 +155,7 @@
                         xtype: 'fieldset',
                         ui: 'transparentFieldSet',
                         collapsible: true,
-                        title: abp.localization.localize("TaxInformation").initCap(),
+                        title: abp.localization.localize("TaxInformation"),
                         layout: 'column',
                         flex: 1,
                         itemId: 'taxInfoField',
@@ -170,7 +170,7 @@
                                     {
                                         xtype: 'combobox',
                                         name: 'typeofTaxId',
-                                        fieldLabel: app.localize('Type').initCap(),
+                                        fieldLabel: app.localize('Type'),
                                         width: '100%',
                                         ui: 'fieldLabelTop',
                                         displayField: 'typeofTax',
@@ -185,7 +185,7 @@
                                         xtype: 'textfield',
                                         name: 'dbaName',
                                         itemId: 'dbaName',
-                                        fieldLabel: app.localize('LegalName').initCap(),
+                                        fieldLabel: app.localize('LegalName'),
                                         tabIndex: 10,
                                         width: '100%',
                                         ui: 'fieldLabelTop'
@@ -210,7 +210,7 @@
                                     }, {
                                         xtype: 'combobox',
                                         name: 'typeof1099BoxId',
-                                        fieldLabel: app.localize('1099s').initCap(),
+                                        fieldLabel: app.localize('1099s'),
                                         width: '100%',
                                         ui: 'fieldLabelTop',
                                         displayField: 'typeof1099Box',
@@ -256,13 +256,13 @@
                 ]
             },
             {
-                title: abp.localization.localize("Other").initCap(),
+                title: abp.localization.localize("Other"),
                 iconCls: 'fa fa-gear',
                 items: [
                     {
                         xtype: 'fieldset',
                         collapsible: true,
-                        title: abp.localization.localize("DefaultsSection").initCap(),
+                        title: abp.localization.localize("DefaultsSection"),
                         ui: 'transparentFieldSet',
                         itemId: 'defaultField',
                         layout: 'column',
@@ -278,7 +278,7 @@
                                     {
                                         xtype: 'combobox',
                                         name: 'paymentTermsId',
-                                        fieldLabel: app.localize('PaymentTerms').initCap(),
+                                        fieldLabel: app.localize('PaymentTerms'),
                                         width: '100%',
                                         ui: 'fieldLabelTop',
                                         displayField: 'paymentTerms',
@@ -335,7 +335,7 @@
                                         valueField: 'value',
                                         displayField: 'name',
                                         tabIndex: 2,
-                                        fieldLabel: app.localize('TaxCredit').initCap(),
+                                        fieldLabel: app.localize('TaxCredit'),
                                         width: '100%',
                                         ui: 'fieldLabelTop',
                                         emptyText: app.localize('SelectOption')
@@ -435,7 +435,7 @@
                     },
                     {
                         xtype: 'fieldset',
-                        title: abp.localization.localize("NotesSection").initCap(),
+                        title: abp.localization.localize("NotesSection"),
                         collapsible: true,
                         ui: 'transparentFieldSet',
                         itemId: 'notesField',
@@ -446,7 +446,7 @@
                                 grow: true,
                                 name: 'notes',
                                 itemId: 'notes',
-                                fieldLabel: app.localize('Notes').initCap(),
+                                fieldLabel: app.localize('Notes'),
                                 width: '33%',
                                 ui: 'fieldLabelTop'
                             }

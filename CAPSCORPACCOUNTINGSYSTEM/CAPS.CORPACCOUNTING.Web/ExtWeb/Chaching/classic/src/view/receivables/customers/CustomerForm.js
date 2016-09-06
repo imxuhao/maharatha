@@ -33,7 +33,7 @@
                             columnWidth: .5,
                             padding: '20 10 0 20',
                             defaults: {
-                                labelWidth: 140,
+                                labelWidth: 170,
                                 blankText: app.localize('MandatoryToolTipText')
                             },
                             items: [
@@ -50,14 +50,13 @@
                                     width: '100%',
                                     ui: 'fieldLabelTop',
                                     emptyText: app.localize('MandatoryField')
-                                },
-                                {
-                                    xtype: 'textfield',
-                                    name: 'customerNumber',
-                                    itemId: 'customerNumber',
-                                    fieldLabel: app.localize('CustomerNumber'),
-                                    width: '100%',
-                                    ui: 'fieldLabelTop'
+                                //}, {
+                                //    xtype: 'textfield',
+                                //    name: 'customerNumber',
+                                //    itemId: 'customerNumber',
+                                //    fieldLabel: app.localize('CustomerNumber'),
+                                //    width: '100%',
+                                //    ui: 'fieldLabelTop'
                                 }
                             ]
                         },
@@ -70,23 +69,31 @@
                             items: [
                                 {
                                     xtype: 'textfield',
-                                    name: 'firstName',
-                                    itemId: 'firstName',
-                                    fieldLabel: app.localize('FirstName'),
+                                    name: 'customerNumber',
+                                    itemId: 'customerNumber',
+                                    fieldLabel: app.localize('CustomerNumber'),
                                     width: '100%',
                                     ui: 'fieldLabelTop'
-                                },
-                                {
-                                    xtype: 'checkbox',
-                                    name: 'isActive',
-                                    itemId: 'isActive',
-                                    labelAlign: 'right',
-                                    inputValue: true,
-                                    checked: true,
-                                    ui: 'default',
-                                    boxLabelCls: 'checkboxLabel',
-                                    boxLabel: app.localize('Active')
                                 }
+                                //{
+                                //    xtype: 'textfield',
+                                //    name: 'firstName',
+                                //    itemId: 'firstName',
+                                //    fieldLabel: app.localize('FirstName'),
+                                //    width: '100%',
+                                //    ui: 'fieldLabelTop'
+                                //},
+                                //{
+                                //    xtype: 'checkbox',
+                                //    name: 'isActive',
+                                //    itemId: 'isActive',
+                                //    labelAlign: 'right',
+                                //    inputValue: true,
+                                //    checked: true,
+                                //    ui: 'default',
+                                //    boxLabelCls: 'checkboxLabel',
+                                //    boxLabel: app.localize('Active')
+                                //}
                             ]
                         },
                         {
@@ -120,7 +127,7 @@
                             },
                             items: [
                                 {
-                                    xtype: 'textfield',
+                                    xtype: 'amountfield',
                                     name: 'creditLimit',
                                     itemId: 'creditLimit',
                                     fieldLabel: app.localize('CreditLimit'),
@@ -137,6 +144,16 @@
                                     valueField: 'paymentTermsId',
                                     emptyText: app.localize('SelectOption')
 
+                                }, {
+                                    xtype: 'checkbox',
+                                    name: 'isActive',
+                                    itemId: 'isActive',
+                                    labelAlign: 'right',
+                                    inputValue: true,
+                                    checked: true,
+                                    ui: 'default',
+                                    boxLabelCls: 'checkboxLabel',
+                                    boxLabel: app.localize('Active')
                                 }
                             ]
                         },
@@ -147,19 +164,37 @@
                                 labelWidth: 120
                             },
                             items: [
+                                //{
+                                //    xtype: 'combobox',
+                                //    name: 'typeofPaymentMethodId',
+                                //    fieldLabel: app.localize('PaymentMethods'),
+                                //    width: '100%',
+                                //    ui: 'fieldLabelTop',
+                                //    displayField: 'typeofPaymentMethod',
+                                //    valueField: 'typeofPaymentMethodId',
+                                //    emptyText: app.localize('SelectOption')
+                                //    //,
+                                //    //bind: {
+                                //    //    store: '{paymentTermsList}'
+                                //    //}
+                                //},
                                 {
                                     xtype: 'combobox',
-                                    name: 'typeofPaymentMethodId',
-                                    fieldLabel: app.localize('PaymentMethods'),
+                                    name: 'typeOfCurrencyId',
+                                    itemId: 'typeOfCurrencyId',
+                                    queryMode: 'local',
+                                    bind: {
+                                        store: '{typeOfCurrencyList}'
+                                    },
+                                    valueField: 'typeOfCurrencyId',
+                                    displayField: 'typeOfCurrency',
                                     width: '100%',
                                     ui: 'fieldLabelTop',
-                                    displayField: 'typeofPaymentMethod',
-                                    valueField: 'typeofPaymentMethodId',
-                                    emptyText: app.localize('SelectOption')
-                                    //,
-                                    //bind: {
-                                    //    store: '{paymentTermsList}'
-                                    //}
+                                    fieldLabel: app.localize('Currency'),
+                                    emptyText: app.localize('SelectOption'),
+                                    listeners: {
+                                        change: 'changeCurrency'
+                                    }
                                 },
                                 {
                                     xtype: 'combobox',

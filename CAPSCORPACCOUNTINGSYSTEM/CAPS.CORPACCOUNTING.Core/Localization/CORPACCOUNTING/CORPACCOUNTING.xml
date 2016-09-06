@@ -745,7 +745,7 @@
     <text name="ShootLocations" value="Shoot locations" />
     <text name="ToolTipShootLocations" value="Enter shoot locations" />
     <text name="OtherInfo" value="Other Info" />
-    <text name="SalesRep" value="Sales rep" />
+    <text name="SalesRep" value="Sales Rep" />
     <text name="CreateJobLocation" value="Add new location" />
     <text name="POAllocation" value="Purchase order allocation" />
     <text name="AddNewRange" value="Add new range" />

@@ -103,8 +103,26 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
              text: app.localize('Edition'),
              dataIndex: 'editionDisplayName',
              sortable: false,
-             flex: 1
-             //width: '15%'
+             flex: 1,
+             filterField: {
+                xtype: 'combobox',
+                forceSelection: true,
+                displayField: 'editionDisplayName',
+                valueField: 'editionId',
+                queryMode: 'local',
+                bind: {
+                    store: '{editionsForComboBox}'
+                }
+            },editor: {
+                xtype: 'combobox',
+                forceSelection: true,
+                displayField: 'editionDisplayName',
+                valueField: 'editionId',
+                queryMode: 'local',
+                bind: {
+                    store: '{editionsForComboBox}'
+                }
+            }
          },
           {
               xtype: 'gridcolumn',

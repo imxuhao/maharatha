@@ -1,6 +1,14 @@
 ﻿Ext.define('Chaching.view.receivables.customers.CustomerFormController', {
     extend: 'Chaching.view.common.form.ChachingFormPanelController',
     alias: 'controller.receivables-customers-customersform',
+    changeCurrency: function (field, newValue, oldValue) {
+        var me = this,
+            view = me.getView(),
+            form = view.getForm();
+        //    controlTotal = form.findField('controlTotal');
+        /////TODO: change based on currency code
+        //controlTotal.setCurrency('INR');
+    },
     doPreSaveOperation: function (record, values, idPropertyField) {
         var me = this,
              view = me.getView();

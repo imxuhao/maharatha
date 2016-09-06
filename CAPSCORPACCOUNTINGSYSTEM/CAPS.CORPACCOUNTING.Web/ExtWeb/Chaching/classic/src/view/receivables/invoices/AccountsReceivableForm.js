@@ -13,9 +13,9 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableForm', {
     controller: 'receivables-invoices-accountsreceivableform',
     modulePermissions: {
         read: abp.auth.isGranted('Pages.Receivables.Invoices'),
-        create: abp.auth.isGranted('Pages.Receivables.Invoices.Create'),
-        edit: abp.auth.isGranted('Pages.Receivables.Invoices.Edit'),
-        destroy: abp.auth.isGranted('Pages.Receivables.Invoices.Delete'),
+        create: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Create'),
+        edit: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Edit'),
+        destroy: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Delete'),
         attach: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Attach')
     },
     openInPopupWindow: false,
@@ -129,6 +129,79 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableForm', {
                         },
                         items: [
                             {
+                                xtype: 'chachingcombobox',
+                                store: new Chaching.store.utilities.autofill.CustomerListStore(),
+                                fieldLabel: app.localize('Agency/Customer'),
+                                ui: 'fieldLabelTop',
+                                width: '100%',
+                                name: 'customerId',
+                                valueField: 'customerId',
+                                displayField: 'lastName',
+                                queryMode: 'remote',
+                                minChars: 2,
+                                modulePermissions: {
+                                    read: abp.auth.isGranted('Pages.Receivables.Invoices'),
+                                    create: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Create'),
+                                    edit: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Edit'),
+                                    destroy: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Delete')
+                                },
+                                primaryEntityCrudApi: null,
+                                createEditEntityType: 'receivables.customers',
+                                createEditEntityGridController: 'receivables-customers-customersgrid',
+                                entityType: 'Customer',
+                                listeners: {
+                                    //change: 'onCustomerChange'
+                                }
+                            }, {
+                                xtype: 'textfield',
+                                name: 'description',
+                                itemId: 'description',
+                                allowBlank: false,
+                                fieldLabel: app.localize('Description'),
+                                emptyText: app.localize('MandatoryField')
+                            },
+                            {
+                                xtype: 'textfield',
+                                name: 'documentReference',
+                                itemId: 'documentReference',
+                                allowBlank: false,
+                                fieldLabel: app.localize('Invoice#'),
+                                emptyText: app.localize('MandatoryField')
+                            },
+                            {
+                                xtype: 'datefield',
+                                name: 'transactionDate',
+                                itemId: 'transactionDate',
+                                allowBlank: false,
+                                format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
+                                emptyText: app.localize('MandatoryField'),
+                                fieldLabel: app.localize('InvoiceDate'),
+                                value: new Date()
+                            },
+                            {
+                                xtype: 'combobox',
+                                name: 'paymentTerms',
+                                itemId: 'paymentTerms',
+                                emptyText: app.localize('SelectOption'),
+                                width: '100%',
+                                ui: 'fieldLabelTop',
+                                displayField: 'description',
+                                valueField: 'customerPaymentTermId',
+                                queryMode: 'local',
+                                fieldLabel: app.localize('PaymentTerms'),
+                                store: Ext.create('Chaching.store.ARPaymentTermsListStore')
+                            }
+                        ]
+                    }, {
+                        columnWidth: .34,
+                        padding: '0 5 0 10',
+                        defaults: {
+                            ui: 'fieldLabelTop',
+                            width: '100%',
+                            labelWidth: 140
+                        },
+                        items: [
+                            {
                                 xtype: 'textfield',
                                 name: 'receivableOrderReference',
                                 itemId: 'receivableOrderReference',
@@ -156,82 +229,14 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableForm', {
                                         }
                                     }
                                 }
-                            }, {
-                                xtype: 'chachingcombobox',
-                                store: new Chaching.store.utilities.autofill.VendorsStore(),
-                                fieldLabel: app.localize('Agency/Customer'),
-                                ui: 'fieldLabelTop',
-                                width: '100%',
-                                name: 'customerId',
-                                valueField: 'customerId',
-                                displayField: 'customerName',
-                                queryMode: 'remote',
-                                minChars: 2,
-                                modulePermissions: {
-                                    read: abp.auth.isGranted('Pages.Receivables.Invoices'),
-                                    create: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Create'),
-                                    edit: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Edit'),
-                                    destroy: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Delete')
-                                },
-                                primaryEntityCrudApi: null,
-                                createEditEntityType: 'receivables.customers',
-                                createEditEntityGridController: 'receivables-customers-customersgrid',
-                                entityType: 'Customer',
-                                listeners: {
-                                    change: 'onCustomerChange'
-                                }
-                            }, {
-                                xtype: 'textfield',
-                                name: 'description',
-                                itemId: 'description',
-                                allowBlank: false,
-                                fieldLabel: app.localize('Description'),
-                                emptyText: app.localize('MandatoryField')
-                            }, {
+                            },
+                            {
                                 xtype: 'amountfield',
                                 name: 'invoiceAmount',
                                 itemId: 'invoiceAmount',
                                 fieldLabel: app.localize('InvoiceAmount')
-                            }, {
-                                xtype: 'combobox',
-                                name: 'paymentTerms',
-                                itemId: 'paymentTerms',
-                                emptyText: app.localize('SelectOption'),
-                                width: '100%',
-                                ui: 'fieldLabelTop',
-                                displayField: 'description',
-                                valueField: 'customerPaymentTermId',
-                                queryMode: 'local',
-                                fieldLabel: app.localize('PaymentTerms'),
-                                store: Ext.create('Chaching.store.ARPaymentTermsListStore')
-                            }
-                        ]
-                    }, {
-                        columnWidth: .34,
-                        padding: '0 5 0 10',
-                        defaults: {
-                            ui: 'fieldLabelTop',
-                            width: '100%',
-                            labelWidth: 140
-                        },
-                        items: [
+                            },
                             {
-                                xtype: 'textfield',
-                                name: 'documentReference',
-                                itemId: 'documentReference',
-                                allowBlank: false,
-                                fieldLabel: app.localize('Invoice#'),
-                                emptyText: app.localize('MandatoryField')
-                            }, {
-                                xtype: 'datefield',
-                                name: 'transactionDate',
-                                itemId: 'transactionDate',
-                                allowBlank: false,
-                                format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
-                                emptyText: app.localize('MandatoryField'),
-                                fieldLabel: app.localize('InvoiceDate'),
-                                value: new Date()
-                            }, {
                                 xtype: 'datefield',
                                 name: 'datePosted',
                                 itemId: 'datePosted',

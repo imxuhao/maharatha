@@ -57,7 +57,6 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <param name="jobUnitRepository"></param>
         /// <param name="customAppSession"></param>
         /// <param name="accountUnitRepository"></param>
-        /// <param name="cacheManager"></param>
         /// <param name="vendorUnitRepository"></param>
         /// <param name="taxCreditUnitRepository"></param>
         /// <param name="vendorCache"></param>
@@ -224,7 +223,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <returns></returns>
         public async Task<List<AutoFillDto>> GetTaxCreditList(AutoSearchInput input)
         {
-            var taxCreditList = await _taxCreditUnitRepository.GetAll()
+            var taxCreditList = await _taxCreditUnitRepository.GetAll().OrderBy(p=>p.Number)
                  .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
                  .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query) || p.Number.Contains(input.Query))
                  .Select(u => new AutoFillDto { Name = u.Number, Value = u.Id.ToString(), Column1 = u.Description }).ToListAsync();
@@ -248,7 +247,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <returns></returns>
         public async Task<List<NameValueDto>> GetLocationList(AutoSearchInput input)
         {
-            var locationSets = await _subAccountUnitRepository.GetAll()
+            var locationSets = await _subAccountUnitRepository.GetAll().OrderBy(p=>p.Description)
                  .Where(p => p.TypeofSubAccountId == TypeofSubAccount.Locations || p.TypeofSubAccountId == TypeofSubAccount.Sets)
                  .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
                  .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))

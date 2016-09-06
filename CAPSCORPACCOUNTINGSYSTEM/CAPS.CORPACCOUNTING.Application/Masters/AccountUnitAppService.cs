@@ -245,7 +245,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
                 var typeOfCurrency =
                     await
                         _typeOfCurrencyRepository.GetAll()
-                            .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() })
+                            .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).OrderBy(p=>p.Name)
                             .ToListAsync();
                 return typeOfCurrency;
             }
@@ -259,7 +259,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
         {
                 var typeOfAccounts = await _typeOfAccountRepository.GetAll()
                             .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() })
-                            .ToListAsync();
+                            .OrderBy(p => p.Name).ToListAsync();
                 return typeOfAccounts;
         }
 
@@ -272,7 +272,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
 
             var typeOfCurrencyRates = await _typeOfCurrencyRateRepository.GetAll()
                         .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() })
-                        .ToListAsync();
+                        .OrderBy(p => p.Name).ToListAsync();
             return typeOfCurrencyRates;
 
         }
@@ -290,7 +290,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
                 linkAccountList = linkAccountList.Where(u => u.Caption.Contains(input.Query));
 
             var result = await linkAccountList.Select(u => new NameValueDto { Name = u.Caption, Value = u.Id.ToString() })
-             .ToListAsync();
+             .OrderBy(p => p.Name).ToListAsync();
             return result;
         }
 
@@ -305,7 +305,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
 
             return accountList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query),
                 p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.AccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
-                || p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).Where(p => p.IsCorporate == true && p.IsRollupAccount == true).ToList();
+                || p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).Where(p => p.IsCorporate && p.IsRollupAccount).ToList();
 
         }
 

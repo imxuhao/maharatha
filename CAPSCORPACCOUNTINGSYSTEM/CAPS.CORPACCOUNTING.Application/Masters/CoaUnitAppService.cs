@@ -183,7 +183,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         {
             return await (from au in _coaUnitRepository.GetAll()
                           .WhereIf(input.CoaId != null, p => p.Id != input.CoaId)
-                          select new NameValueDto { Name = au.Caption, Value = au.Id.ToString() }).ToListAsync();
+                          select new NameValueDto { Name = au.Caption, Value = au.Id.ToString() }).OrderBy(p => p.Name).ToListAsync();
         }
 
         /// <summary>

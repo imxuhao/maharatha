@@ -153,9 +153,13 @@ namespace CAPS.CORPACCOUNTING.Masters
             return result;
         }
 
+        /// <summary>
+        /// Get all VendorPayment Terms Order by Description
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<VendorPaymentTermUnitDto>> GetVendorPayTerms()
         {
-            var vendorPayTerms = await _vendorPaymentTermUnitRepository.GetAllListAsync();
+            var vendorPayTerms = await _vendorPaymentTermUnitRepository.GetAll().OrderBy(p => p.Description).ToListAsync();
             return new List<VendorPaymentTermUnitDto>(vendorPayTerms.Select(item =>
             {
                 var dto = item.MapTo<VendorPaymentTermUnitDto>();

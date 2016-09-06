@@ -119,8 +119,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                          select new { account, IsCorporate = coaunit.IsCorporate };
 
 
-            var result = await query
-                //.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.account.OrganizationUnitId == input.OrganizationUnitId)
+            var result = await query.OrderBy(p=>p.account.AccountNumber)
                 .ToListAsync();
             return result.Select(u => new AccountCacheItem
             {

@@ -82,7 +82,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                 FirstName = u.FirstName,
                 CustomerNumber = u.CustomerNumber,
                 CustomerPayTermsId = u.CustomerPayTermsId
-            }).ToListAsync();
+            }).OrderBy(p => p.CustomerNumber).ToListAsync();
 
         }
 

@@ -505,7 +505,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                                          Description = country.Description,
                                          CountryId = country.Id,
                                          IsoCode = country.TwoLetterAbbreviation
-                                     }).ToListAsync();
+                                     }).OrderBy(p=>p.Description).ToListAsync();
             return countryList;
         }
 
@@ -520,7 +520,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 Description = u.Description + " (" + u.RegionAbbreviation + ")",
                 RegionId = u.Id,
                 StateCode = u.RegionAbbreviation
-            }).ToListAsync();
+            }).OrderBy(p => p.Description).ToListAsync();
             return regionList;
         }
 

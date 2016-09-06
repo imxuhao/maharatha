@@ -77,7 +77,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                 FirstName = u.vendors.FirstName,
                 VendorNumber = u.vendors.VendorNumber,
                 VendorAccountInfo = u.vendors.VendorAccountInfo
-            }).ToListAsync();
+            }).OrderBy(p=>p.LastName).ToListAsync();
         }
 
         public async Task<List<VendorCacheItem>> GetVendorsCacheItemAsync(string vendorkey)

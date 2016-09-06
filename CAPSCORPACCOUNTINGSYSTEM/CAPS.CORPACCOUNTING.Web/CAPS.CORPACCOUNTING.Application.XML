@@ -1324,7 +1324,6 @@
             <param name="jobUnitRepository"></param>
             <param name="customAppSession"></param>
             <param name="accountUnitRepository"></param>
-            <param name="cacheManager"></param>
             <param name="vendorUnitRepository"></param>
             <param name="taxCreditUnitRepository"></param>
             <param name="vendorCache"></param>
@@ -10598,6 +10597,12 @@
             Getting the VendorPaymentTerm by Id
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.VendorPaymentTermUnitAppService.GetVendorPayTerms">
+            <summary>
+            Get all VendorPayment Terms Order by Description
+            </summary>
             <returns></returns>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.ComapnyPreferenceDto.TenantExtendedId">

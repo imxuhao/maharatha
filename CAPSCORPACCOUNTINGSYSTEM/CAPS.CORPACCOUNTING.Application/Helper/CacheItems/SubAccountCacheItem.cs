@@ -108,7 +108,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                      Caption = u.Caption,
                      SubAccountNumber = u.SubAccountNumber,
                      SearchNo = u.SearchNo
-                 }).ToListAsync();
+                 }).OrderBy(p => p.SubAccountNumber).ToListAsync();
             return subaccounts;
         }
 

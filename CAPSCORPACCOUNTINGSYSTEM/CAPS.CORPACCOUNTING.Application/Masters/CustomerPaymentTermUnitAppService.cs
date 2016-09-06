@@ -120,7 +120,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <returns></returns>
         public async Task<List<CustomerPaymentTermUnitDto>> GetCustomerPayTerms()
         {
-            var customerPayTerms = await _customerPaymentTermUnitRepository.GetAllListAsync();
+            var customerPayTerms = await _customerPaymentTermUnitRepository.GetAll().OrderBy(p => p.Description).ToListAsync();
             return new List<CustomerPaymentTermUnitDto>(customerPayTerms.Select(item =>
             {
                 var dto = item.MapTo<CustomerPaymentTermUnitDto>();

@@ -87,7 +87,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                      LastName = u.LastName,
                      EmployeeId = u.Id,
                      FirstName = u.FirstName
-                 }).ToListAsync();
+                 }).OrderBy(p => p.LastName).ToListAsync();
             return employees;
         }
 

@@ -67,7 +67,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task<ListResultOutput<TaxCreditUnitDto>> GetTaxCreditUnits(SearchInputDto input)
         {
             var query = _taxCreditUnitRepository.GetAll();
-            var items = await query.ToListAsync();
+            var items = await query.OrderBy(p=>p.Description).ToListAsync();
 
             return new ListResultOutput<TaxCreditUnitDto>(
                 items.Select(item =>

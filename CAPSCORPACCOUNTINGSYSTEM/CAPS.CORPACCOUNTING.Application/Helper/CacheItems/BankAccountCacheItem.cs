@@ -121,7 +121,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                       OrganizationUnitId = u.OrganizationUnitId,
                       TypeOfBankAccountId = u.TypeOfBankAccountId
 
-                  }).ToListAsync();
+                  }).OrderBy(p=>p.BankAccountNumber).ToListAsync();
             return bankAccounts;
 
         }

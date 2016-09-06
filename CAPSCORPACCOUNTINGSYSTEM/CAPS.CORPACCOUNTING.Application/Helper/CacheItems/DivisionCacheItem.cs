@@ -87,7 +87,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                      IsCorporateDefault=u.IsCorporateDefault,
                      ChartOfAccountId=u.ChartOfAccountId
 
-                 }).ToListAsync();
+                 }).OrderBy(p => p.JobNumber).ToListAsync();
             return divisions;
         }
 

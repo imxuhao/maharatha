@@ -269,6 +269,10 @@ Ext.define('Chaching.components.form.field.ComboBox', {
             Ext.raise('If selectOnFocus is enabled the combo must be editable: true -- please change one of those settings.');
         }
         me.autoSelect = false;
+        // if primaryEntityCrudApi is there then use default api for store 
+        var storeApi = me.getPrimaryEntityCrudApi();
+        if (storeApi) me.store.getProxy().setApi(storeApi);
+
         me.callParent(arguments);
         me.mon(me, {
             specialkey: me.handleFieldEvents,

@@ -39,8 +39,12 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyForm', {
             blankText: app.localize('MandatoryToolTipText')
         },
         items: [{
+            xtype: 'hiddenfield',
+            name: 'bankAccountId',
+            value: 0
+        }, {
             xtype: 'textfield',
-            name: 'creditCardCompany',
+            name: 'description',
             itemId: 'creditCardCompany',
             allowBlank: false,
             tabIndex: 1,
@@ -50,7 +54,7 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyForm', {
             emptyText: app.localize('MandatoryField')
         }, {
             xtype: 'textfield',
-            name: 'accountName',
+            name: 'bankAccountName',
             itemId: 'accountName',
             tabIndex: 2,
             allowBlank: false,
@@ -60,19 +64,19 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyForm', {
             emptyText: app.localize('MandatoryField')
         }, {
             xtype: 'combobox',
-            name: 'cardTypeId',
+            name: 'typeOfBankAccountId',
             fieldLabel: app.localize('CreditCardType'),
             width: '100%',
             ui: 'fieldLabelTop',
             tabIndex: 3,
             emptyText: app.localize('CreditCardType'),
-            displayField: 'cardType',
-            valueField: 'cardTypeId',
+            displayField: 'typeOfBankAccount',
+            valueField: 'typeOfBankAccountId',
             queryMode: 'local',
             store : Ext.create('Chaching.store.utilities.CardTypeListStore')
         },{
             xtype: 'numberfield',
-            name: 'accountNumber',
+            name: 'bankAccountNumber',
             itemId: 'accountNumber',
             tabIndex: 4,
             allowBlank: false,
@@ -93,7 +97,7 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyForm', {
             ui: 'fieldLabelTop',
             tabIndex: 5,
             width: '100%',
-            name: 'accountId',
+            name: 'clearingAccountId',
             valueField: 'accountId',
             displayField: 'accountNumber',
             queryMode: 'remote',
@@ -105,7 +109,7 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyForm', {
                 destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete')
             },
             primaryEntityCrudApi: {
-                read: abp.appPath + 'api/services/app/bankAccountUnit/GetCorporateAccountList',
+                read: abp.appPath + 'api/services/app/list/GetAccountsListByClassification',
                 create: abp.appPath + 'api/services/app/accountUnit/CreateAccountUnit',
                 update: abp.appPath + 'api/services/app/accountUnit/UpdateAccountUnit',
                 destroy: abp.appPath + 'api/services/app/accountUnit/DeleteAccountUnit'
@@ -189,7 +193,12 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyForm', {
                     edit: abp.auth.isGranted('Pages.Payables.Vendors.Edit'),
                     destroy: abp.auth.isGranted('Pages.Payables.Vendors.Delete')
                 },
-                primaryEntityCrudApi: null,
+                primaryEntityCrudApi: {
+                    read: abp.appPath + 'api/services/app/list/GetVendorsListByClassification',
+                    create: abp.appPath + 'api/services/app/vendorUnit/CreateVendorUnit',
+                    update: abp.appPath + 'api/services/app/vendorUnit/UpdateVendorUnit',
+                    destroy: abp.appPath + 'api/services/app/vendorUnit/DeleteVendorUnit'
+                },
                 createEditEntityType: 'payables.vendors',
                 createEditEntityGridController: 'payables-vendors-vendorsgrid',
                 entityType: 'Vendor'
@@ -221,7 +230,7 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyForm', {
         }, {
             xtype: 'checkbox',
             boxLabel: app.localize('CreditCardClosedAccount'),
-            name: 'isClosedAccount',
+            name: 'isClosed',
             labelAlign: 'right',
             tabIndex: 10,
             inputValue: true,

@@ -27,7 +27,7 @@ Ext.define('Chaching.model.financials.accounts.AccountsModel', {
             { name: 'linkAccountId', type: 'int', defaultValue: null, convert: nullHandler },
             { name: 'linkAccount', type: 'string' },
             { name: 'linkJobId', type: 'int', defaultValue: null, convert: nullHandler },
-            { name: 'rollupAccountId', type: 'int', defaultValue: null, convert: nullHandler },
+            { name: 'rollupAccountId', type: 'int', defaultValue: null, convert: nullHandler, mapping: 'accountId' },
             { name: 'rollupJobId', type: 'int', defaultValue: null, convert: nullHandler },
             { name: 'typeOfAccountId', type: 'int', defaultValue: null, convert: nullHandler },
             { name: 'typeOfAccount', type: 'string' },
@@ -51,7 +51,9 @@ Ext.define('Chaching.model.financials.accounts.AccountsModel', {
             { name: 'us1120IncomeStmtName', type: 'string' },
             { name: 'isActive', type: 'boolean' },
             { name: 'rollUpAccountCaption', type: 'string' },
-             { name: 'RollUpDivision', type: 'string' }
+            { name: 'rollUpAccountNumber', type: 'string', mapping : 'accountNumber' },
+            { name: 'rollUpDivision', type: 'string' },
+            { name: 'jobNumber', type: 'string', mapping: 'rollUpDivision' }
             
     ]
 });

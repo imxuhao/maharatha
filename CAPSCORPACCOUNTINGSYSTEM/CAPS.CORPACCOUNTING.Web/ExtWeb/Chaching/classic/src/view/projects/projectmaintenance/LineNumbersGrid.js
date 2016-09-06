@@ -200,7 +200,33 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
                  createEditEntityGridController: 'financials-accounts-accountsgrid',
                  entityType: 'Account',
                  isTwoEntityPicker: false
+             },
+             editor: {
+                 xtype: 'chachingcombobox',
+                 store: new Chaching.store.utilities.autofill.RollupAccountListStore(),
+                 width: '100%',
+                 valueField: 'rollupAccountId',
+                 displayField: 'rollUpAccountNumber',
+                 forceSelection: true,
+                 minChars: 2,
+                 modulePermissions: {
+                     read: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Lines'),
+                     create: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Lines.Create'),
+                     edit: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Lines.Edit'),
+                     destroy: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Lines.Delete')
+                 },
+                 primaryEntityCrudApi: {
+                     read: abp.appPath + 'api/services/app/accountUnit/GetRollupAccountsList',
+                     create: abp.appPath + 'api/services/app/accountUnit/CreateAccountUnit',
+                     update: abp.appPath + 'api/services/app/accountUnit/UpdateAccountUnit',
+                     destroy: abp.appPath + 'api/services/app/accountUnit/DeleteAccountUnit'
+                 },
+                 createEditEntityType: 'financials.accounts.accounts',
+                 createEditEntityGridController: 'financials-accounts-accountsgrid',
+                 entityType: 'Account',
+                 isTwoEntityPicker: false
              }
+
          }, {
              xtype: 'gridcolumn',
              text: app.localize('RollUpDivision'),
@@ -213,11 +239,38 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
              filterField: {
                  xtype: 'chachingcombobox',
                  store: new Chaching.store.utilities.autofill.DivisionListStore(),
-                 valueField: 'jobId',
+                 valueField: 'rollupJobId',
                  displayField: 'jobNumber',
                  queryMode: 'remote',
                  forceSelection: true,
                  searchProperty : 'rollupJobId',
+                 minChars: 2,
+                 //useDisplayFieldToSearch: true,
+                 modulePermissions: {
+                     read: abp.auth.isGranted('Pages.Financials.Accounts.Divisions'),
+                     create: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Create'),
+                     edit: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Edit'),
+                     destroy: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Delete')
+                 },
+                 primaryEntityCrudApi: {
+                     read: abp.appPath + 'api/services/app/jobUnit/GetDivisionList',
+                     create: abp.appPath + 'api/services/app/divisionUnit/CreateDivisionUnit',
+                     update: abp.appPath + 'api/services/app/divisionUnit/UpdateDivisionUnit',
+                     destroy: abp.appPath + 'api/services/app/divisionUnit/DeleteDivisionUnit'
+                 },
+                 createEditEntityType: 'financials.accounts.divisions',
+                 createEditEntityGridController: 'financials-accounts-divisionsgrid',
+                 entityType: 'Division',
+                 identificationKey: 'isDivision',
+                 isTwoEntityPicker: false
+             },
+             editor: {
+                 xtype: 'chachingcombobox',
+                 store: new Chaching.store.utilities.autofill.DivisionListStore(),
+                 valueField: 'rollupJobId',
+                 displayField: 'jobNumber',
+                 queryMode: 'remote',
+                 forceSelection: true,
                  minChars: 2,
                  //useDisplayFieldToSearch: true,
                  modulePermissions: {

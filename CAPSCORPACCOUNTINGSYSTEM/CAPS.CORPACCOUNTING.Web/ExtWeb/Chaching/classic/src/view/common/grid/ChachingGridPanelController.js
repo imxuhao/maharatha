@@ -189,6 +189,29 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         // do row specific work over here like hiding action menu based on some condition 
     },
     //Event Listeners
+    cloneActionClick: function (menu, item, e, eOpts) {
+        var me = this,
+        view = me.getView(),
+        gridStore = view.getStore(),
+        primaryKeyField = gridStore.idPropertyField,
+        widgetRec = menu.parentMenu.widgetRecord;
+        if (widgetRec.get(primaryKeyField) > 0) {
+            widgetRec.set(primaryKeyField, 0)
+            me.editActionClicked(menu, item, e, eOpts, false);
+            me.changeViewTitle(view);
+        }  
+    },
+    changeViewTitle: function (view) {
+        var parentGrid = view.parentGrid;
+        if (view.openInPopupWindow) {
+            var wnd = view.up('window');
+            wnd.setTitle(parentGrid.createWndTitleConfig.title);
+            wnd.setIconCls(parentGrid.createWndTitleConfig.iconCls);
+        } else {
+            view.setTitle(parentGrid.createWndTitleConfig.title);
+            view.setIconCls(parentGrid.createWndTitleConfig.iconCls);
+        }
+    },
     quickEditActionClicked: function (menu, item, e, eOpts) {
         //do edit based on editMode of grid
         var parentMenu = menu.parentMenu,

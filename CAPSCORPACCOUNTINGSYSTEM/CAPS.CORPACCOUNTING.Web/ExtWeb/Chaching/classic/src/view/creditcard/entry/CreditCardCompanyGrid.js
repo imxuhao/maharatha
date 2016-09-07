@@ -50,7 +50,7 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyGrid', {
     requireExport: true,
     requireMultiSearch: true,
     requireMultisort: true,
-    isEditable: true,
+    isEditable: false,
     editingMode: 'row',
     columnLines: true,
     multiColumnSort: true,
@@ -126,16 +126,17 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyGrid', {
                   entityName: '',
                   xtype: 'textfield',
                   width: '100%'
-              }, editor: {
-                  //xtype: 'textfield'
-
-                    xtype: 'combobox',
-                    width: '100%',
-                    displayField: 'description',
-                    valueField: 'batchId',
-                    queryMode: 'local',
-                    store: 'utilities.BatchListStore'//Ext.create('Chaching.store.utilities.BatchListStore')
               }
+              //, editor: {
+              //    //xtype: 'textfield'
+
+              //      xtype: 'combobox',
+              //      width: '100%',
+              //      displayField: 'description',
+              //      valueField: 'batchId',
+              //      queryMode: 'local',
+              //      store: 'utilities.BatchListStore'//Ext.create('Chaching.store.utilities.BatchListStore')
+              //}
           }
     ]
 });

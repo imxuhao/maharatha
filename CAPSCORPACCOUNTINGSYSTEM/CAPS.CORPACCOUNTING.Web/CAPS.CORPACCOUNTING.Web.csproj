@@ -3839,6 +3839,7 @@
     <Content Include="ExtWeb\Chaching\app\model\languages\LanguagesModel.js" />
     <Content Include="ExtWeb\Chaching\app\store\languages\LanguagesStore.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\dragdrop\GridToGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\components\feature\ChachingGrouping.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\filter\DateSearchField.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\form\Basic.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\form\field\ComboBox.js" />

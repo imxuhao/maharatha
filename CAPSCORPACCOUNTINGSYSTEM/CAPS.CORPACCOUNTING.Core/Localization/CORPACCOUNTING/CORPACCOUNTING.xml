@@ -1400,5 +1400,9 @@
 
     <text name="MaxProjectCount" value="Number of Projects Allowed" />
     
+
+    <text name="OnlyOneHomeCoaAllowed" value="Only one home coa is allowed." />
+    <text name="OnlyOneNewCoaAllowed" value="Only one new coa is allowed." />
+    <text name="MappingChart" value="Mapping chart"/>
   </texts>
 </localizationDictionary>

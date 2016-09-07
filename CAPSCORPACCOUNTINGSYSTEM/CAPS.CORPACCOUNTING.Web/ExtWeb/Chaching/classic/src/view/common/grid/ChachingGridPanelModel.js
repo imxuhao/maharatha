@@ -219,13 +219,13 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelModel', {
             }
         },
         linkChartOfAccountList: {
-            fields: [{ name: 'name' }, { name: 'value' }, {
+            fields: [{ name: 'coaId' }, { name: 'caption' }, { name: 'typeOfChartId' }, {
                 name: 'linkChartOfAccount', convert: function (value, record) {
-                    return record.get('name');
+                    return record.get('caption');
                 }
             }, {
                 name: 'linkChartOfAccountID', convert: function (value, record) {
-                    return record.get('value');
+                    return record.get('coaId');
                 }
             }],
             xtype: 'ajax',

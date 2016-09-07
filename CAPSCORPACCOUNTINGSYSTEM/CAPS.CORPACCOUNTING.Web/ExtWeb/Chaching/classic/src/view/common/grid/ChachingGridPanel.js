@@ -56,7 +56,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
         'Chaching.view.common.grid.ChachingGridPanelController',
         'Chaching.view.common.grid.ChachingGridPanelModel',
         'Chaching.components.plugins.RowEditing',
-        'Chaching.components.plugins.CellEditing'
+        'Chaching.components.plugins.CellEditing',
+        'Chaching.components.feature.ChachingGrouping'
     ],
 
     controller: 'common-grid-chachinggridpanel',
@@ -321,8 +322,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                 groupingFeature = me.groupingConfig;              
                 
             } else {
-                 groupingFeature = {
-                    ftype: 'grouping',
+                groupingFeature = {
+                    ftype: 'chachingGrouping',
                     hideGroupedHeader: true,
                     startCollapsed: false
                 };

@@ -71,9 +71,20 @@ namespace CAPS.CORPACCOUNTING.Masters
                 {
                     int count = (await CoaUnitRepository.CountAsync(p => p.TypeOfChartId ==TypeOfChart.HOMECOA&&
                                                                          p.IsCorporate == true ));
-                    if (count > 1)
+                    if (count > 0)
                     {
-                        throw new UserFriendlyException(L("Only2HomeCoaAllowed"));
+                        var errorMessage = L("OnlyOneHomeCoaAllowed");
+                        throw new UserFriendlyException(errorMessage);
+                    }
+                }
+                else if (coaUnit.IsCorporate && coaUnit.Id == 0 && coaUnit.TypeOfChartId == TypeOfChart.NEWCOA)
+                {
+                    int count = (await CoaUnitRepository.CountAsync(p => p.TypeOfChartId == TypeOfChart.NEWCOA &&
+                                                                         p.IsCorporate == true));
+                    if (count > 0)
+                    {
+                        var errorMessage = L("OnlyOneNewCoaAllowed");
+                        throw new UserFriendlyException(errorMessage);
                     }
                 }
 

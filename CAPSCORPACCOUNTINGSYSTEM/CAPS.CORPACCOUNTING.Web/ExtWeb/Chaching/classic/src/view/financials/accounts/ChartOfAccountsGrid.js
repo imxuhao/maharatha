@@ -208,12 +208,10 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
              }
          }, {
             xtype: 'gridcolumn',
-            text: app.localize('ConvertToNewCOA'),
+            text: app.localize('MappingChart').initCap(),
             dataIndex: 'linkChartOfAccountName',
             sortable: true,
             groupable: true,
-            //width: '22%',
-             //hidden: true,
             flex: 1,
              filterField: {
                  xtype: 'combobox',
@@ -226,7 +224,6 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
                  isEnum: true,
                  isViewmodelStore: true,
                  loadStoreOnCreate: true,
-                 forceSelection:true,
                  bind: {
                      store: '{linkChartOfAccountList}'
                  }

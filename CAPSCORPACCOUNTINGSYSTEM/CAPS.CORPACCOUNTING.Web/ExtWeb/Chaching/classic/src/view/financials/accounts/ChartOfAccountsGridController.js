@@ -21,6 +21,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGridController', {
                         xtype: 'financials.accounts.accounts',
                         hideMode: 'offsets',
                         closable: true,
+                        //requireGrouping: false,
                         title: abp.localization.localize("FinancialAccounts"),
                         routId: 'financials.accounts.accounts',
                         coaId: record.get('coaId'),
@@ -30,9 +31,26 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGridController', {
                 }
                 accountsGrid.coaId = record.get('coaId');
                 var chartType = record.get('typeOfChartId');
-                if (chartType === 1 || chartType === 4) {
+                var visibleColumns = accountsGrid.getColumns();
+                if (chartType === 1) {
                     accountsGrid.allowAccountMapping = true;
-                } else accountsGrid.allowAccountMapping = false;
+                    for (var i = 0; i < visibleColumns.length; i++) {
+                        var col = visibleColumns[i];
+                        if (col.dataIndex === "linkAccount") {
+                            col.setVisible(true);
+                            break;
+                        }
+                    }
+                } else {
+                    accountsGrid.allowAccountMapping = false;
+                    for (var i = 0; i < visibleColumns.length; i++) {
+                        var col = visibleColumns[i];
+                        if (col.dataIndex === "linkAccount") {
+                            col.setVisible(false);
+                            break;
+                        }
+                    }
+                }
                 var toolBar = accountsGrid.child("component[dock=top]");
                 
                 if (toolBar) {
@@ -40,6 +58,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGridController', {
                     if (displayTitle)
                         displayTitle.setValue(record.get('caption').initCap());
                 }
+                
                 var gridStore = accountsGrid.getStore(),
                     storeProxy = gridStore.getProxy();
                 storeProxy.setExtraParam('coaId', record.get('coaId'));

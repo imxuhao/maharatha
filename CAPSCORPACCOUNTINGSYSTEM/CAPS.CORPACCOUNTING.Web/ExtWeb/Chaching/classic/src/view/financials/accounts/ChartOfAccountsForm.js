@@ -113,7 +113,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
         }, {
             xtype: 'combobox',
             name: 'linkChartOfAccountID',
-            fieldLabel: app.localize('ConvertToNewCOA').initCap(),
+            fieldLabel: app.localize('MappingChart').initCap(),
             width: '100%',
             labelWidth: 140,
             ui: 'fieldLabelTop',
@@ -121,6 +121,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
             displayField: 'linkChartOfAccount',
             valueField: 'linkChartOfAccountID',
             queryMode: 'local',
+            hidden:true,
             bind: {
                 store: '{linkChartOfAccountList}'
             }

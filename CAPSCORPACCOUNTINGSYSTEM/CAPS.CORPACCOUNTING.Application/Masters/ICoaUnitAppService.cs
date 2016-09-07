@@ -52,7 +52,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// Get GetCoaList
         /// </summary>
         /// <returns></returns>
-        Task<List<NameValueDto>> GetCoaList(GetCoaInput input);
+        Task<List<CoaUnitDto>> GetCoaList(GetCoaInput input);
 
         /// <summary>
         /// Get StandardGroupTotals List

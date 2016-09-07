@@ -182,16 +182,17 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<NameValueDto>> GetCoaList(GetCoaInput input)
+        public async Task<List<CoaUnitDto>> GetCoaList(GetCoaInput input)
         {
-            return await (from au in _coaUnitRepository.GetAll()
+            var query= await (from au in _coaUnitRepository.GetAll()
                 .WhereIf(input.CoaId != null, p => p.Id != input.CoaId)
                 .WhereIf(!input.IsProjectCOA,
                     p =>
-                        p.IsCorporate &&p.TypeOfChartId == TypeOfChart.HOMECOA)
+                        p.IsCorporate &&p.TypeOfChartId == TypeOfChart.HOMECOA||p.TypeOfChartId==TypeOfChart.NEWCOA)
                 .WhereIf(input.IsProjectCOA, p => p.IsCorporate == false && p.TypeOfChartId == TypeOfChart.PROJECTCOA)
                 //.Where(p => p.IsCorporate && p.TypeOfChartId == input.TypeOfChartId)
-                select new NameValueDto {Name = au.Caption, Value = au.Id.ToString()}).ToListAsync();
+                select new CoaUnitDto { Caption = au.Caption, Description =au.Description,CoaId = au.Id,TypeOfChartId = au.TypeOfChartId}).ToListAsync();
+            return query;
         }
 
         /// <summary>

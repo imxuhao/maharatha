@@ -304,7 +304,8 @@ namespace CAPS.CORPACCOUNTING.Accounts
 
             var linkAccountList = _accountUnitRepository.GetAll().Where(u => u.ChartOfAccountId == linkCoaId);
             if (!string.IsNullOrEmpty(input.Query))
-                linkAccountList = linkAccountList.Where(u => u.Caption.Contains(input.Query));
+                linkAccountList =
+                    linkAccountList.Where(u => u.AccountNumber.Contains(input.Query) || u.Caption.Contains(input.Query));
 
             var result = await linkAccountList.Select(
                 u => new AccountUnitDto {Caption = u.Caption,Description = u.Description,AccountNumber = u.AccountNumber,AccountId = u.Id,ChartOfAccountId = u.ChartOfAccountId}

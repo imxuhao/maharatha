@@ -573,16 +573,22 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         return deferred.promise;
     },
     //editing plugin listeners
-    onBeforeGridEdit: function (editor, context, eOpts) {
+   onBeforeGridEdit: function (editor, context, eOpts) {
+       var me = this;
         //return false if isInViewMode
         if (context && context.grid && context.grid.isInViewMode) {
             return false;
         }
+        var isModuleSpecific = me.doModuleSpecificBeforeEdit(editor, context, eOpts);
+       if (!isModuleSpecific) {
+           return false;
+       }
         ///TODO cancel edit if restricted
         //cancel edit if is actioncolumn editing
         var record = context.record;
         if (context.column.name === "ActionColumn" && !record.get('passEdit')) return false;
-    },
+   },
+   doModuleSpecificBeforeEdit: function (editor, context, eOpts) { return true; },
     onCreateNewBtnClicked: function (btn) {
         var me = this,
             view = me.getView(),

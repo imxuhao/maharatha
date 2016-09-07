@@ -670,7 +670,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                     eventListenerName: 'editActionClicked',
                     listeners: {
                         click: function(menu, item, e, eOpts) {
-                            return controller.editActionClicked(menu, item, e, eOpts,false);
+                            return controller.editActionClicked(menu, item, e, eOpts, false);
                         }
                     }
                 };

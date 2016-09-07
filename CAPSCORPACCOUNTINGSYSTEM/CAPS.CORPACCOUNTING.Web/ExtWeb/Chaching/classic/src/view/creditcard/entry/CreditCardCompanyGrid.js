@@ -44,6 +44,7 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyGrid', {
     actionColumnMenuItemsConfig: [{
         text: app.localize('Clone'),
         iconCls: 'fa fa-clone',
+        itemId: 'cloneActionMenu',
         clickActionName: 'cloneActionClick'
     }],
     requireExport: true,

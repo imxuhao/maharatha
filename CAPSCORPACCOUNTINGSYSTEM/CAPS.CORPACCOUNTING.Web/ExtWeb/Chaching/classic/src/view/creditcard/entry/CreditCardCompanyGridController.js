@@ -57,5 +57,26 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyGridController', {
             batchStore.getProxy().setExtraParams({ 'typeOfBatchId' : 3}); //3: account payable batch
             batchStore.load();
         }
+    },
+    doRowSpecificEditDelete: function (button, grid) {
+        var menu = button.menu;
+        var ccCompanyGrid = Ext.ComponentQuery.query('[xtype = "creditcard.entry.ccdcompanies"]')[0];
+        var separatorButton = menu.items.get('actionMenuSeparator');
+        if (button.menu) {
+            var cloneActionMenu = button.menu.down('menuitem#cloneActionMenu');
+            if (ccCompanyGrid && ccCompanyGrid.modulePermissions.create && cloneActionMenu && button.widgetRec) {
+                cloneActionMenu.show();
+                separatorButton.show();
+            } else {
+                cloneActionMenu.hide();
+                separatorButton.hide();
+            }
+
+        }
+    },
+
+    doBeforeCloneAction: function (record) {
+        record.set('bankAccountId', 0);
+        return record;
     }
 });

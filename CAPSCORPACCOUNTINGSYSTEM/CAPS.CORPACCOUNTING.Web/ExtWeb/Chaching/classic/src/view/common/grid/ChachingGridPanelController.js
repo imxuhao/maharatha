@@ -196,25 +196,29 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         widgetCol = parentMenu.widgetColumn,
         grid = widgetCol.up('grid'),
         gridStore = grid.getStore(),
-        primaryKeyField = gridStore.idPropertyField,
         controller = grid.getController();
-        if (grid &&  widgetRec.get(primaryKeyField) > 0) {
-            widgetRec.set(primaryKeyField, 0)
-            controller.editActionClicked(menu, item, e, eOpts, false);
-            controller.changeViewTitle(grid);
-        }  
-    },
-    changeViewTitle: function (view) {
-        var parentGrid = view.parentGrid;
-        if (view.openInPopupWindow) {
-            var wnd = view.up('window');
-            wnd.setTitle(parentGrid.createWndTitleConfig.title);
-            wnd.setIconCls(parentGrid.createWndTitleConfig.iconCls);
-        } else {
-            view.setTitle(parentGrid.createWndTitleConfig.title);
-            view.setIconCls(parentGrid.createWndTitleConfig.iconCls);
+        if (widgetRec && grid) {
+            //modify record before cloning it if you want to
+            widgetRec = controller.doBeforeCloneAction(widgetRec);
+            var titleConfig = grid.createWndTitleConfig ;
+            var formView = controller.createNewRecord(grid.xtype, grid.createNewMode, false, titleConfig, widgetRec);
+            var form, formPanel;
+            if (formView && formView.isWindow) {
+                formPanel = formView.down('form'),
+                form = formPanel.getForm();
+                form.loadRecord(widgetRec);
+            } else if (formView) {
+                form = formView.getForm();
+                form.loadRecord(widgetRec);
+            }
         }
     },
+
+    //modify record before cloning it if you want to
+    doBeforeCloneAction: function (record) {
+        return record;
+    },
+   
     quickEditActionClicked: function (menu, item, e, eOpts) {
         //do edit based on editMode of grid
         var parentMenu = menu.parentMenu,
@@ -608,11 +612,11 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                     editingPlugin.startEdit(gridStore.getAt(0));
                     break;
                 case "popup":
-                    me.createNewRecord(view.xtype, 'popup', false, view.createWndTitleConfig);
+                    me.createNewRecord(view.xtype, 'popup', false, view.createWndTitleConfig, null);
                     break;
                 case "tab":
                     if (view.isSubMenuItemTab) {
-                        me.createNewRecord(view.xtype, 'tab', false, view.createWndTitleConfig);
+                        me.createNewRecord(view.xtype, 'tab', false, view.createWndTitleConfig, null);
                     } else {
                         if (!btn.routeName) Ext.Error.raise('When create/edit mode is tab for grid then routeName config to button is mandatory!!!');
                         me.currentRedirectedRoute = btn.routeName;
@@ -630,8 +634,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
     },
     //Do module specific tasks 
     doBeforeCreateAction: function (createNewMode) { },
-    doAfterCreateAction: function (createNewMode, form,isEdit,record) { },
-    createNewRecord: function (type, createMode, isEdit, titleConfig,record) {
+    doAfterCreateAction: function (createNewMode, form, isEdit, record) { },
+    createNewRecord: function (type, createMode, isEdit, titleConfig, record) {
         var me = this,
             view = me.getView(),
             formView,

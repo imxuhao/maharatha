@@ -387,6 +387,74 @@
     <text name="TimeZoneSettingChangedRefreshPageNotification">Timezone setting changed. Click OK button to refresh page and changes to take effect.</text>
     <text name="Ok">Ok</text>
 
+    <text name="Permission">Permission</text>
+    <text name="Role">Role</text>
+    <text name="Security">Security</text>
+    <text name="PasswordComplexity">Password complexity</text>
+    <text name="MinPasswordLength">Minimum password length</text>
+    <text name="MaxPasswordLength">Maximum password length</text>
+    <text name="UseNumbers">Use numbers in password</text>
+    <text name="UseUpperCaseLetters">Use upper case letters in password</text>
+    <text name="UseLowerCaseLetters">Use lower case letters in password</text>
+    <text name="UsePunctuations">Use punctuations in password</text>
+    <text name="UseDefaultSettings">Use default settings</text>
+    <text name="PasswordComplexityNotSatisfied">Password complexity is not satisfied.</text>
+    <text name="PasswordComplexity_MinLength_Hint">Password must be minimum {0} characters</text>
+    <text name="PasswordComplexity_MaxLength_Hint">Password must be maximum {0} characters</text>
+    <text name="PasswordComplexity_UseNumbers_Hint">Password must contain at least 1 number</text>
+    <text name="PasswordComplexity_UseUpperCaseLetters_Hint">Password must contain at least 1 upper case letter</text>
+    <text name="PasswordComplexity_UseLowerCaseLetters_Hint">Password must contain at least 1 lower case letter</text>
+    <text name="PasswordComplexity_UsePunctuations_Hint">Password must contain at least 1 special character</text>
+    <text name="YouAlreadySentAFriendshipRequestToThisUser">You already added this user.</text>
+    <text name="YouCannotBeFriendWithYourself">You can not be friend with yourself.</text>
+    <text name="NewChatMessageEmail_Title">Message Details</text>
+    <text name="NewChatMessageEmail_SubTitle"></text>
+    <text name="NewChatMessageEmail_Subject">You have a new chat message</text>
+    <text name="Sender">Sender</text>
+    <text name="Message">Message</text>
+    <text name="UserBlocked">User blocked successfully.</text>
+    <text name="UserUnblocked">Block removed from user successfully.</text>
+    <text name="BlockUser">Block user</text>
+    <text name="UnblockUser">Unblock</text>
+    <text name="FriendshipRequestAccepted">Friendship request accepted</text>
+    <text name="UserSendYouAFriendshipRequest">{0} added you as a friend.</text>
+    <text name="Friends">Friends</text>
+    <text name="Others">Others</text>
+    <text name="BlockedUsers">Blocked Users</text>
+    <text name="YouDontHaveAnyFriend">You don't have any friends. Write a username to above input box and click "Add Friend" button.</text>
+    <text name="YouDontHaveAnyBlockedFriend">You don't have any blocked users. In order to block a friend, select a friend and select block from actions dropdown.</text>
+    <text name="ChatUserSearch_Hint">
+      <![CDATA[
+      Write only username for same tenant users, <br>
+      <strong>[tenancyName]\[userName]</strong> for other tenant's users <br><br>
+      for example: <br>
+      .\admin -> for host admin <br>
+      Test\admin -> for test tenant's admin <br>
+      admin -> for your tenant's admin
+      ]]>
+    </text>
+    <text name="AddFriend">Add friend</text>
+    <text name="TypeAMessageHere">Type a message here...</text>
+    <text name="Chat">Chat</text>
+    <text name="ChatFeature">Chat</text>
+    <text name="ChatFeatureIsNotEnabledForSender">Chat is not enabled for you.</text>
+    <text name="ChatFeatureIsNotEnabledForReceiver">Chat is not enabled for tenant.</text>
+    <text name="UserIsBlocked">User is blocked.</text>
+    <text name="ChatIsNotConnectedWarning">Chat is not connected.</text>
+    <text name="Demo_SampleChatMessage">Hi, This is a test message. Please login with my account in a different browser and checkout how chat feature works.</text>
+    <text name="TenantToTenantChatFeatureIsNotEnabledForSender">Chat with other tenants is not enabled for you.</text>
+    <text name="TenantToTenantChatFeatureIsNotEnabledForReceiver">Chat with other tenants is not enabled for tenant.</text>
+    <text name="TenantToHostChatFeatureIsNotEnabledForSender">Chat with host is not enabled for you.</text>
+    <text name="TenantToHostChatFeatureIsNotEnabledForReceiver">Chat with host is not enabled for tenant.</text>
+    <text name="TenantToTenantChatFeature">Chat with other tenants</text>
+    <text name="TenantToHostChatFeature">Chat with host</text>
+    <text name="FilterByPermission">Filter by permission</text>
+    <text name="FilterByRole">Filter by role</text>
+    <text name="FilterOrAddUser">Filter/Add user</text>
+    <text name="HangfireDashboard" value="Hangfire dashboard" />
+    <text name="TargetUserNotFoundProbablyDeleted">Target user could not be found. It's probably deleted.</text>
+
+
     <!-- SUMIT KEYS-->
     <text name="Export" value="Export" />
     <text name="ExportToPDF" value="Export to pdf" />
@@ -1319,6 +1387,18 @@
     <text name="ARInvoiceInquiryGrid" value="AR Invoice Inquiry Grid" />
     <text name="ImportValueNotExists" value=" does not exists." />
     
+    <!--Client Type Definition-->
+    <text name="TenantType" value="Tenant Type" />
+    <text name="Commercial" value="Commercial" />
+    <text name="Feature" value="Feature" />
+    <text name="Television" value="Television" />
+    <text name="Episodic" value="Television-Episodic" />
+    <text name="NonEpisodic" value="Television-Non-Episodic" />
+    <text name="MusicTour" value="Music Tour" />
+    <text name="FestivalLiveEvent" value="Festival and Event" />
+    <text name="Venue" value="Venue" />
+
+    <text name="MaxProjectCount" value="Number of Projects Allowed" />
     
   </texts>
 </localizationDictionary>

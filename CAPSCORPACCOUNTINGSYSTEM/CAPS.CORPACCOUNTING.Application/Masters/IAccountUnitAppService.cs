@@ -101,6 +101,13 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <param name="listAccountUnitDtos"></param>
         /// <returns></returns>
         Task<List<AccountUnitDto>> BulkAccountInsert(CreateAccountListInput listAccountUnitDtos);
+
+        /// <summary>
+        /// Get the list of convert to new coa accounts for mapping
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns>Account unit</returns>
+        Task<List<AccountUnitDto>> GetAccountsForMapping(AutoSearchInput input);
     }
     
 }

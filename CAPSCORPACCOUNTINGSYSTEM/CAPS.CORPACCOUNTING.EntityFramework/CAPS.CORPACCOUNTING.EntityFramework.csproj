@@ -1375,6 +1375,10 @@
     <Compile Include="Migrations\201609060846543_Modify_TypeOfAccountUnit_Table1.Designer.cs">
       <DependentUpon>201609060846543_Modify_TypeOfAccountUnit_Table1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609061618211_Add_TypeOfChart_Enum.cs" />
+    <Compile Include="Migrations\201609061618211_Add_TypeOfChart_Enum.Designer.cs">
+      <DependentUpon>201609061618211_Add_TypeOfChart_Enum.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultSecurityGroupCreator.cs" />
@@ -2321,6 +2325,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609060846543_Modify_TypeOfAccountUnit_Table1.resx">
       <DependentUpon>201609060846543_Modify_TypeOfAccountUnit_Table1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609061618211_Add_TypeOfChart_Enum.resx">
+      <DependentUpon>201609061618211_Add_TypeOfChart_Enum.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -67,14 +67,13 @@ namespace CAPS.CORPACCOUNTING.Masters
             //Validating if Duplicate COA exists
             if (CoaUnitRepository != null)
             {
-                if (coaUnit.IsCorporate && coaUnit.Id==0)
+                if (coaUnit.IsCorporate && coaUnit.Id==0&&coaUnit.TypeOfChartId == TypeOfChart.HOMECOA)
                 {
-                    int count = (await CoaUnitRepository.CountAsync(p => p.OrganizationUnitId ==
-                                                                         coaUnit.OrganizationUnitId &&
+                    int count = (await CoaUnitRepository.CountAsync(p => p.TypeOfChartId ==TypeOfChart.HOMECOA&&
                                                                          p.IsCorporate == true ));
-                    if (count > 0)
+                    if (count > 1)
                     {
-                        throw new UserFriendlyException(L("Cannot create multiple chartofAccounts"));
+                        throw new UserFriendlyException(L("Only2HomeCoaAllowed"));
                     }
                 }
 

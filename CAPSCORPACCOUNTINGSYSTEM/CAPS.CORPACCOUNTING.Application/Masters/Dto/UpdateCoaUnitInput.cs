@@ -45,6 +45,10 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the StandardGroupTotalId field. </summary>      
         public StandardGroupTotal? StandardGroupTotalId { get; set; }
 
+        /// <summary>Specifies the type of chart is i.e. HOME,REPORTING OR PROJECT</summary>   
+        [Required(ErrorMessage = "Type of Chart field is required")]
+        public TypeOfChart? TypeOfChartId { get; set; }
+
         /// <summary>Gets or sets the RollupAccountId field. </summary>      
         public virtual long? RollupAccountId { get; set; }
 

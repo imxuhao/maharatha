@@ -69,6 +69,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 var dto = item.Coa.MapTo<CoaUnitDto>();
                 dto.CoaId = item.Coa.Id;
                 dto.StandardGroupTotal = item.Coa.StandardGroupTotalId != null ? item.Coa.StandardGroupTotalId.ToDisplayName() : "";
+                dto.TypeOfChart = item.Coa.TypeOfChartId != null ? item.Coa.TypeOfChartId.ToDisplayName() : "";
                 dto.LinkChartOfAccountName = item.LinkChartOfAccountName;
                 return dto;
             }).ToList());
@@ -131,6 +132,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             coaUnit.IsNumeric = input.IsNumeric;
             coaUnit.LinkChartOfAccountID = input.LinkChartOfAccountID;
             coaUnit.StandardGroupTotalId = input.StandardGroupTotalId;
+            coaUnit.TypeOfChartId = input.TypeOfChartId;
             #endregion
 
             await _coaunitManager.UpdateAsync(coaUnit);
@@ -174,6 +176,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             result.CoaId = coaUnit.Id;
             return result;
         }
+
         /// <summary>
         /// Gets all the COA for that company except input Coa ( ConvertNewCOA Dropdown Data)
         /// </summary>
@@ -182,8 +185,13 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task<List<NameValueDto>> GetCoaList(GetCoaInput input)
         {
             return await (from au in _coaUnitRepository.GetAll()
-                          .WhereIf(input.CoaId != null, p => p.Id != input.CoaId)
-                          select new NameValueDto { Name = au.Caption, Value = au.Id.ToString() }).OrderBy(p => p.Name).ToListAsync();
+                .WhereIf(input.CoaId != null, p => p.Id != input.CoaId)
+                .WhereIf(!input.IsProjectCOA,
+                    p =>
+                        p.IsCorporate &&p.TypeOfChartId == TypeOfChart.HOMECOA)
+                .WhereIf(input.IsProjectCOA, p => p.IsCorporate == false && p.TypeOfChartId == TypeOfChart.PROJECTCOA)
+                //.Where(p => p.IsCorporate && p.TypeOfChartId == input.TypeOfChartId)
+                select new NameValueDto {Name = au.Caption, Value = au.Id.ToString()}).ToListAsync();
         }
 
         /// <summary>
@@ -195,5 +203,13 @@ namespace CAPS.CORPACCOUNTING.Masters
             return EnumList.GetStandardGroupTotalList();
         }
 
+        /// <summary>
+        /// Get the list for Types of Charts used on COA.
+        /// </summary>
+        /// <returns>NameValue collection for HOME,PROJECTS AND REPORTING</returns>
+        public List<NameValueDto> GetTypeOfChartList()
+        {
+            return EnumList.GetTypeOfChartList();
+        }
     }
 }

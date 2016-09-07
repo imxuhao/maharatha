@@ -26,7 +26,16 @@ namespace CAPS.CORPACCOUNTING.Helpers
                              select new NameValueDto { Value = ((int)n).ToString(), Name = EnumHelper.ToDisplayName(n) }).OrderBy(p => p.Name).ToList();
             return listEnums;
         }
-
+        /// <summary>
+        /// Type of chart is.
+        /// </summary>
+        /// <returns>HOME,PROJECT and REPORTING</returns>
+        public static List<NameValueDto> GetTypeOfChartList()
+        {
+            var listEnums = (from TypeOfChart n in Enum.GetValues(typeof(TypeOfChart))
+                             select new NameValueDto { Value = ((int)n).ToString(), Name = EnumHelper.ToDisplayName(n) }).ToList();
+            return listEnums;
+        }
         /// <summary>
         /// Get TypeOfInactiveStatus Enum as List
         /// </summary>

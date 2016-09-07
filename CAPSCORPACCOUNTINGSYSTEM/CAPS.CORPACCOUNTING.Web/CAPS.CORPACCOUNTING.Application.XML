@@ -4635,6 +4635,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.EnumList.GetTypeOfChartList">
+            <summary>
+            Type of chart is.
+            </summary>
+            <returns>HOME,PROJECT and REPORTING</returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Helpers.EnumList.GetTypeOfInactiveStatusList">
             <summary>
             Get TypeOfInactiveStatus Enum as List
@@ -7263,6 +7269,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.GetAccountsForMapping(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get new mapping accounts by Convert to new coa id
+            </summary>
+            <param name="input"></param>
+            <returns>Account units</returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.GetRollupAccountsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
             Get CorporateRollupAccountsList 
@@ -7337,6 +7350,12 @@
             Get StandardGroupTotals as List
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.CoaUnitAppService.GetTypeOfChartList">
+            <summary>
+            Get the list for Types of Charts used on COA.
+            </summary>
+            <returns>NameValue collection for HOME,PROJECTS AND REPORTING</returns>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountSearchInput.JobId">
             <summary>
@@ -7655,6 +7674,11 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetCoaInput.CoaId">
             <summary> Gets or Sets the CoaId. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetCoaInput.IsProjectCOA">
+            <summary>
+            Type of COA to fetch
+            </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetSalesRepInput.OrganizationUnitId">
             <summary> Gets or Sets the LastName to Search the SalesRepresentatives based on CompanyId. </summary>
@@ -8871,6 +8895,12 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto.StandardGroupTotal">
             <summary>Gets or sets the StandardGroupTotal field. </summary>      
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto.TypeOfChartId">
+            <summary>Specifies the type of chart is i.e. 1-HOME,2-REPORTING OR 3-PROJECT</summary>      
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto.TypeOfChart">
+            <summary>Specifies the type of chart is i.e. 1-HOME,2-REPORTING OR 3-PROJECT</summary>      
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto.RollupAccountId">
             <summary>Gets or sets the RollupAccountId field. </summary>      
         </member>
@@ -9284,6 +9314,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCoaUnitInput.StandardGroupTotalId">
             <summary>Gets or sets the StandardGroupTotalId field. </summary>      
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCoaUnitInput.TypeOfChartId">
+            <summary>Specifies the type of chart is i.e. HOME,REPORTING OR PROJECT</summary>      
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCoaUnitInput.RollupAccountId">
             <summary>Gets or sets the RollupAccountId field. </summary>      
         </member>
@@ -9322,6 +9355,9 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCoaUnitInput.StandardGroupTotalId">
             <summary>Gets or sets the StandardGroupTotalId field. </summary>      
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCoaUnitInput.TypeOfChartId">
+            <summary>Specifies the type of chart is i.e. HOME,REPORTING OR PROJECT</summary>   
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCoaUnitInput.RollupAccountId">
             <summary>Gets or sets the RollupAccountId field. </summary>      
@@ -10115,6 +10151,13 @@
             <param name="listAccountUnitDtos"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.GetAccountsForMapping(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get the list of convert to new coa accounts for mapping
+            </summary>
+            <param name="input"></param>
+            <returns>Account unit</returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService">
             <summary>
             This service will provide all CRUD operations on COA.
@@ -10166,6 +10209,12 @@
             Get StandardGroupTotals List
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService.GetTypeOfChartList">
+            <summary>
+            Get the list for Types of Charts used on COA.
+            </summary>
+            <returns>NameValue collection for HOME,PROJECTS AND REPORTING</returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Masters.ISalesRepUnitAppService">
             <summary>

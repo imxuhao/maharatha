@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
@@ -28,6 +29,20 @@ namespace CAPS.CORPACCOUNTING.Masters
         BALANCESHEET=8
     }
 
+    public enum TypeOfChart
+    {
+        [Display(Name="HOME COA")]
+        HOMECOA=1,
+        [Display(Name = "REPORTING COA")]
+        REPORTINGCOA = 2,
+        [Display(Name = "PROJECT COA")]
+        PROJECTCOA = 3,
+        [Display(Name = "NEW COA")]
+        NEWCOA = 4,
+        [Display(Name = "INACTIVE COA")]
+        INACTIVECOA = 5
+
+    }
     /// <summary>
     /// ChartOfAccount  is the table name in lajit
     /// </summary>
@@ -127,6 +142,11 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         /// <summary>Gets or sets the StandardGroupTotalId field. </summary>      
         public virtual  StandardGroupTotal? StandardGroupTotalId { get; set; }
+
+        /// <summary>
+        /// Specifies the type of chart is i.e. HOME,REPORTING OR PROJECT
+        /// </summary>
+        public virtual TypeOfChart? TypeOfChartId { get; set; }
 
         #endregion
     }

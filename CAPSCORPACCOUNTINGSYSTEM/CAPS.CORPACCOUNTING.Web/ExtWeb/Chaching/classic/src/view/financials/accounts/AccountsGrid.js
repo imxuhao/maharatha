@@ -361,17 +361,30 @@
              },
              //width: '8%',
              filterField: {
-                 xtype: 'combobox',
-                 itemId: 'linkAccountId',
+                 xtype: 'chachingcombobox',
+                 store: new Chaching.store.utilities.autofill.MappingAccountStore(),
+                 width: '100%',
                  valueField: 'linkAccountId',
                  displayField: 'linkAccount',
-                 isViewmodelStore: true,
-                 typeAhead: true,
                  queryMode: 'remote',
-                 forceSelection: true,
-                 bind: {
-                     store: '{linkAccountListByCoaId}'
+                 minChars: 2,
+                 searchProperty:'linkAccountId',
+                 modulePermissions: {
+                     read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
+                     create: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),
+                     edit: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Edit'),
+                     destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete')
                  },
+                 primaryEntityCrudApi: {
+                     read: abp.appPath + 'api/services/app/accountUnit/GetAccountsForMapping',
+                     create: abp.appPath + 'api/services/app/accountUnit/CreateAccountUnit',
+                     update: abp.appPath + 'api/services/app/accountUnit/UpdateAccountUnit',
+                     destroy: abp.appPath + 'api/services/app/accountUnit/DeleteAccountUnit'
+                 },
+                 createEditEntityType: 'financials.accounts.accounts',
+                 createEditEntityGridController: 'financials-accounts-accountsgrid',
+                 entityType: 'Account',
+                 isTwoEntityPicker: false,
                  listeners: {
                      beforequery: function (query, eOpts) {
                          var grid = this.up().grid;
@@ -382,30 +395,41 @@
                          }
                      }
                  }
-             },
-             editor: {
-                 xtype: 'combobox',
-                 typeAhead: true,
-                 itemId: 'linkAccountId',
-                 valueField: 'linkAccountId',
-                 displayField: 'linkAccount',
-                 isViewmodelStore: true,
-                 queryMode: 'remote',
-                 forceSelection: true,
-                 bind: {
-                     store: '{linkAccountListByCoaId}'
-                 },
-                 listeners: {
-                     beforequery: function (query, eOpts) {
-                         var grid = this.up('grid');
-                         if (grid) {
-                             var coaId = grid.coaId;
-                             var myStore = this.getStore();
-                             myStore.getProxy().setExtraParam('id', coaId);
-                         }
-                     }
-                 }
-             }
-         }
+             },editor: {
+                xtype: 'chachingcombobox',
+                store: new Chaching.store.utilities.autofill.MappingAccountStore(),
+                width: '100%',
+                valueField: 'linkAccountId',
+                displayField: 'linkAccount',
+                queryMode: 'remote',
+                minChars: 2,
+                modulePermissions: {
+                    read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
+                    create: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),
+                    edit: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Edit'),
+                    destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete')
+                },
+                primaryEntityCrudApi: {
+                    read: abp.appPath + 'api/services/app/accountUnit/GetAccountsForMapping',
+                    create: abp.appPath + 'api/services/app/accountUnit/CreateAccountUnit',
+                    update: abp.appPath + 'api/services/app/accountUnit/UpdateAccountUnit',
+                    destroy: abp.appPath + 'api/services/app/accountUnit/DeleteAccountUnit'
+                },
+                createEditEntityType: 'financials.accounts.accounts',
+                createEditEntityGridController: 'financials-accounts-accountsgrid',
+                entityType: 'Account',
+                isTwoEntityPicker: false,
+                listeners: {
+                    beforequery: function(query, eOpts) {
+                        var grid = this.up('grid');
+                        if (grid) {
+                            var coaId = grid.coaId;
+                            var myStore = query.combo.getStore();
+                            myStore.getProxy().setExtraParam('id', coaId);
+                        }
+                    }
+                }
+            }
+        }
     ]
 })

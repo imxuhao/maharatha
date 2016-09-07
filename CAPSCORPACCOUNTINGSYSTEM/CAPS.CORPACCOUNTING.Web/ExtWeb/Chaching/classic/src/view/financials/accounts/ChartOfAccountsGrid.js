@@ -76,20 +76,53 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
              }
          }, {
              xtype: 'gridcolumn',
-             text: app.localize('Description'),
-             dataIndex: 'description',
+             text: app.localize('ChartType'),
+             dataIndex: 'typeOfChart',
              sortable: true,
              groupable: true,
              //width: '15%',
              //hidden: true,
              flex: 1,
              filterField: {
-                 xtype: 'textfield',
-                 width: '100%'
-             }, editor: {
-                 xtype: 'textfield'
+                 xtype: 'combobox',
+                 width: '100%',
+                 displayField: 'typeOfChart',
+                 valueField: 'typeOfChartId',
+                 queryMode: 'local',
+                 searchProperty: 'typeOfChartId',
+                 forceSelection: true,
+                 isEnum: true,
+                 isViewmodelStore: true,
+                 loadStoreOnCreate: true,
+                 bind: {
+                     store: '{TypeOfChartList}'
+                 }
              }
          }, {
+             xtype: 'gridcolumn',
+             text: app.localize('StdGroupTotal'),
+             dataIndex: 'standardGroupTotal',
+             sortable: true,
+             groupable: true,
+             //width: '20%',
+             flex: 1,
+             hidden: false,
+             filterField: {
+                 xtype: 'combobox',
+                 width: '100%',
+                 displayField: 'standardGroupTotal',
+                 valueField: 'standardGroupTotalId',
+                 searchProperty: 'standardGroupTotalId',
+                 forceSelection: true,
+                 queryMode:'local',
+                 isEnum: true,
+                 isViewmodelStore: true,
+                 loadStoreOnCreate: true,
+                 bind: {
+                     store: '{StandardGroupTotalList}'
+                 }
+             }
+         }, /*{
              xtype: 'gridcolumn',
              text: app.localize('IsApproved'),
              dataIndex: 'isApproved',
@@ -151,7 +184,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
              }, editor: {
                  xtype: 'checkbox'
              }
-         }, {
+         },*/ {
              xtype: 'gridcolumn',
              text: app.localize('IsNumeric'),
              dataIndex: 'isNumeric',
@@ -198,31 +231,6 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
                      store: '{linkChartOfAccountList}'
                  }
              }
-        }, {
-             xtype: 'gridcolumn',
-             text: app.localize('StdGroupTotal'),
-             dataIndex: 'standardGroupTotal',
-             sortable: true,
-             groupable: true,
-             //width: '20%',
-             flex: 1,
-             hidden: false,
-             filterField: {
-                 xtype: 'combobox',
-                 width: '100%',
-                 displayField: 'standardGroupTotal',
-                 valueField: 'standardGroupTotalId',
-                 searchProperty: 'standardGroupTotalId',
-                 forceSelection: true,
-                 queryMode:'local',
-                 isEnum: true,
-                 isViewmodelStore: true,
-                 loadStoreOnCreate: true,
-                 bind: {
-                     store: '{StandardGroupTotalList}'
-                 },
-                 forceSelection:true
-             }
-         }
+        }
     ]
 });

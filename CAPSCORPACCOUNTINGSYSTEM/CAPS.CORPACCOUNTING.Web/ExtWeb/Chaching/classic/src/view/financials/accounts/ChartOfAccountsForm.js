@@ -38,29 +38,44 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
             name: 'caption',
             itemId: 'caption',              
             allowBlank: false,
-            tabIndex: 1,
             fieldLabel: app.localize('Caption') ,
             width: '100%',
             ui: 'fieldLabelTop',
             emptyText: app.localize('MandatoryField')
         }, {
+            xtype: 'combobox',
+            name: 'typeOfChartId',
+            itemId: 'typeOfChartId',
+            allowBlank: false,
+            width: '100%',
+            fieldLabel: app.localize('ChartType'),
+            ui: 'fieldLabelTop',
+            displayField: 'typeOfChart',
+            valueField: 'typeOfChartId',
+            queryMode: 'local',
+            emptyText: app.localize('MandatoryField'),
+            bind: {
+                store: '{TypeOfChartList}'
+            },
+            listeners: {
+                change:'onTypeOfChartChange'
+            }
+
+        }, {
             xtype: 'textfield',
             name: 'description',
             itemId: 'description',
-            tabIndex: 3,
-            //allowBlank: false,
             fieldLabel: app.localize('Description'),
             width: '100%',
             ui: 'fieldLabelTop',
-            emptyText: '' //app.localize('MandatoryField')
+            emptyText: ''
         }, {
             xtype: 'checkbox',
             boxLabel: app.localize('IsApproved'),
             name: 'isApproved',
             labelAlign: 'right',
-            tabIndex: 5,
             inputValue: true,
-            checked: true,
+            checked: false,
             boxLabelCls: 'checkboxLabel',
             hidden: false
         }, {
@@ -69,7 +84,6 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
             name: 'isPrivate',
             labelAlign: 'right',
             inputValue: true,
-            tabIndex: 7,
             checked: true,
             boxLabelCls: 'checkboxLabel',
             hidden: false
@@ -89,7 +103,6 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
             width: '100%',
             labelWidth: 140,
             ui: 'fieldLabelTop',
-            tabIndex: 2,
             emptyText: app.localize('StdGroupTotal'),
             displayField: 'standardGroupTotal',
             valueField: 'standardGroupTotalId',
@@ -104,7 +117,6 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
             width: '100%',
             labelWidth: 140,
             ui: 'fieldLabelTop',
-            tabIndex: 4,
             emptyText: app.localize('ConvertToNewCOA'),
             displayField: 'linkChartOfAccount',
             valueField: 'linkChartOfAccountID',
@@ -117,7 +129,6 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
             boxLabel: app.localize('IsCorporate'),
             name: 'isCorporate',
             labelAlign: 'right',
-            tabIndex: 6,
             inputValue: true,
             checked: true,
             readOnly:true,
@@ -127,7 +138,6 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
             boxLabel: app.localize('IsNumeric'),
             name: 'isNumeric',
             labelAlign: 'right',
-            tabIndex: 8,
             inputValue: true,
             checked: true,
             boxLabelCls: 'checkboxLabel'

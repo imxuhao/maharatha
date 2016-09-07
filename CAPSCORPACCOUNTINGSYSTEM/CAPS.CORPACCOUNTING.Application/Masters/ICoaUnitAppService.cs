@@ -60,5 +60,10 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <returns></returns>
         List<NameValueDto> StandardGroupTotalList();
 
+        /// <summary>
+        /// Get the list for Types of Charts used on COA.
+        /// </summary>
+        /// <returns>NameValue collection for HOME,PROJECTS AND REPORTING</returns>
+        List<NameValueDto> GetTypeOfChartList();
     }
 }

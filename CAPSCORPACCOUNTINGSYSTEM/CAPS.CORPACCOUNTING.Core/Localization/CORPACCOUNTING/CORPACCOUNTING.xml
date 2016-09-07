@@ -1311,6 +1311,7 @@
     <text name="AttachedOn" value="Attach Date"/>
     <text name="AttachedBy" value="Attached By"/>
     <text name="Attachment_Select_Info" value="Please select the file to upload"/>
+    <text name="ChartType" value="Chart Type"/>
 
     <text name="BalanceDue" value="Balance Due" />
     <text name="DateOfDeposit" value="Date of Deposit" />

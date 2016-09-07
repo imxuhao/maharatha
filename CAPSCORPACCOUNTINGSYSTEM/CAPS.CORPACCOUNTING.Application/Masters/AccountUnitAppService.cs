@@ -293,6 +293,24 @@ namespace CAPS.CORPACCOUNTING.Accounts
              .OrderBy(p => p.Name).ToListAsync();
             return result;
         }
+        /// <summary>
+        /// Get new mapping accounts by Convert to new coa id
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns>Account units</returns>
+        public async Task<List<AccountUnitDto>> GetAccountsForMapping(AutoSearchInput input)
+        {
+            var linkCoaId = _coaRepository.GetAll().Where(u => u.Id == input.Id).Select(u => u.LinkChartOfAccountID).FirstOrDefault();
+
+            var linkAccountList = _accountUnitRepository.GetAll().Where(u => u.ChartOfAccountId == linkCoaId);
+            if (!string.IsNullOrEmpty(input.Query))
+                linkAccountList = linkAccountList.Where(u => u.Caption.Contains(input.Query));
+
+            var result = await linkAccountList.Select(
+                u => new AccountUnitDto {Caption = u.Caption,Description = u.Description,AccountNumber = u.AccountNumber,AccountId = u.Id,ChartOfAccountId = u.ChartOfAccountId}
+                ).OrderBy(p => p.Caption).ToListAsync();
+            return result;
+        }
 
         /// <summary>
         /// Get CorporateRollupAccountsList 

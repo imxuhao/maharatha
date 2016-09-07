@@ -50,6 +50,11 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the StandardGroupTotal field. </summary>      
         public string StandardGroupTotal { get; set; }
+
+        /// <summary>Specifies the type of chart is i.e. 1-HOME,2-REPORTING OR 3-PROJECT</summary>      
+        public TypeOfChart? TypeOfChartId { get; set; }
+        /// <summary>Specifies the type of chart is i.e. 1-HOME,2-REPORTING OR 3-PROJECT</summary>      
+        public string TypeOfChart { get; set; }
         /// <summary>Gets or sets the RollupAccountId field. </summary>      
         public virtual long? RollupAccountId { get; set; }
 

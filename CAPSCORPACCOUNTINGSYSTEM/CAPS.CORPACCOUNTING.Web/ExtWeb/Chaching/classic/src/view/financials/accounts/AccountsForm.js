@@ -81,19 +81,35 @@ Ext.define('Chaching.view.financials.accounts.AccountsForm', {
             bind: {
                 store: '{typeOfCurrencyList}'
             }
-        }, {
-            xtype: 'combobox',
-            name: 'linkAccountId',
-            typeAhead: true,
-            queryMode: 'remote',
-            forceSelection: true,
-            fieldLabel: app.localize('NewAccount'),
+        },{
+            xtype: 'chachingcombobox',
+            store: new Chaching.store.utilities.autofill.MappingAccountStore(),
             width: '100%',
-            ui: 'fieldLabelTop',
-            displayField: 'linkAccount',
             valueField: 'linkAccountId',
-            bind: {
-                store: '{linkAccountListByCoaId}'
+            displayField: 'linkAccount',
+            queryMode: 'remote',
+            minChars: 2,
+            name: 'linkAccountId',
+            ui: 'fieldLabelTop',
+            fieldLabel: app.localize('NewAccount'),
+            modulePermissions: {
+                read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
+                create: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),
+                edit: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Edit'),
+                destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete')
+            },
+            primaryEntityCrudApi: {
+                read: abp.appPath + 'api/services/app/accountUnit/GetAccountsForMapping',
+                create: abp.appPath + 'api/services/app/accountUnit/CreateAccountUnit',
+                update: abp.appPath + 'api/services/app/accountUnit/UpdateAccountUnit',
+                destroy: abp.appPath + 'api/services/app/accountUnit/DeleteAccountUnit'
+            },
+            createEditEntityType: 'financials.accounts.accounts',
+            createEditEntityGridController: 'financials-accounts-accountsgrid',
+            entityType: 'Account',
+            isTwoEntityPicker: false,
+            listeners: {
+                beforequery: 'beforeMappingAccountQuery'
             }
         },
         {

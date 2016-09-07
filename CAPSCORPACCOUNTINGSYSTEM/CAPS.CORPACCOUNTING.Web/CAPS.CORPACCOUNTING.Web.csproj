@@ -3653,6 +3653,7 @@
     <Content Include="ExtWeb\Chaching\app\model\administration\organization\CompanyModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\administration\organization\CompanySettingsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\administration\organization\OrganizationModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\attachments\AttachmentsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\auditlogs\AuditLogsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\banking\banksetup\BankCheckRangesModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\banking\banksetup\BankSetupModel.js" />
@@ -3714,6 +3715,7 @@
     <Content Include="ExtWeb\Chaching\app\model\users\AccountSecurityModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\utilities\autofill\BankAccountModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\utilities\autofill\CustomerModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\utilities\autofill\MappingAccountModel.js" />
     <Content Include="ExtWeb\Chaching\app\store\address\AddressStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\administration\organization\CompanyStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\administration\organization\CompanyUserRoleListStore.js" />
@@ -3725,6 +3727,7 @@
     <Content Include="ExtWeb\Chaching\app\store\administration\organization\CompanyUsersStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\APPaymentTermsListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\ARPaymentTermsListStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\attachments\AttachmentsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\banking\banksetup\BankSetupStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\banking\banksetup\BankCheckNumberStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\base\BaseTreeStore.js" />
@@ -3803,6 +3806,7 @@
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\DivisionListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\GLAccountListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\LinesListStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\MappingAccountStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\RollupAccountListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\SubAccountsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\T41099Store.js" />
@@ -3881,6 +3885,8 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\OrganizationGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\OrganizationView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\OrganizationViewController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\attachments\AttachmentsView.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\attachments\AttachmentsViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\auditlogs\AuditLogDetail.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\auditlogs\AuditLogDetailView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\auditlogs\AuditLogDetailViewController.js" />

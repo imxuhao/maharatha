@@ -8,5 +8,9 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary> Gets or Sets the CoaId. </summary>
         public int? CoaId { get; set; }
+        /// <summary>
+        /// Type of COA to fetch
+        /// </summary>
+        public bool IsProjectCOA { get; set; }
     }
 }

@@ -16,6 +16,8 @@ Ext.define('Chaching.model.financials.accounts.ChartOfAccountsModel', {
             { name: 'isCorporate', type: 'boolean' },
             { name: 'isNumeric', type: 'boolean' },
             { name: 'standardGroupTotalId', type: 'int', defaultValue: null, convert: nullHandler },
+            { name: 'typeOfChartId', type: 'int', defaultValue: null, convert: nullHandler },
+            { name: 'typeOfChart', type: 'string' },
             { name: 'linkChartOfAccountID', type: 'int', defaultValue: null, convert: nullHandler },
             { name: 'linkChartOfAccountName', type: 'string' },
             { name: 'standardGroupTotal', type: 'string' },

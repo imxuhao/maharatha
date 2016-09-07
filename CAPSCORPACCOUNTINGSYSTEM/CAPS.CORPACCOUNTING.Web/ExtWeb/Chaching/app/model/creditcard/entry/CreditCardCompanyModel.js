@@ -12,13 +12,13 @@ Ext.define('Chaching.model.creditcard.entry.CreditCardCompanyModel', {
         { name: 'bankAccountName', type: 'string' },
         { name: 'bankAccountNumber', type: 'string' },
         { name: 'batchDesc', type: 'string' },
-        { name: 'typeOfBankAccountId', type: 'int' },
+        { name: 'typeOfBankAccountId', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'typeOfBankAccount', type: 'string' },
-        { name: 'clearingAccountId', type: 'int' },
-        { name: 'jobId', type: 'int' },
-        { name: 'vendorId', type: 'int' },
-        { name: 'typeOfUploadFileId', type: 'int' },
-        { name: 'batchId', type: 'int' },
+        { name: 'clearingAccountId', type: 'int', defaultValue: null, convert: nullHandler },
+        { name: 'jobId', type: 'int', defaultValue: null, convert: nullHandler },
+        { name: 'vendorId', type: 'int', defaultValue: null, convert: nullHandler },
+        { name: 'typeOfUploadFileId', type: 'int', defaultValue: null, convert: nullHandler },
+        { name: 'batchId', type: 'int',defaultValue: null, convert: nullHandler  },
         { name: 'isClosed', type: 'boolean' }
     ]
 });

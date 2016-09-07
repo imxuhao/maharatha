@@ -50,7 +50,7 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyGrid', {
     requireExport: true,
     requireMultiSearch: true,
     requireMultisort: true,
-    isEditable: false,
+    isEditable: true,
     editingMode: 'row',
     columnLines: true,
     multiColumnSort: true,

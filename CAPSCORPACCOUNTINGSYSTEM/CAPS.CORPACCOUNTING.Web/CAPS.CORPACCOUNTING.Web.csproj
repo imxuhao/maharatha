@@ -44,68 +44,68 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Abp, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.0.11.0.2\lib\net452\Abp.dll</HintPath>
+    <Reference Include="Abp, Version=0.11.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.0.11.3.0\lib\net452\Abp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.AutoMapper, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.AutoMapper.0.11.0.2\lib\net452\Abp.AutoMapper.dll</HintPath>
+    <Reference Include="Abp.AutoMapper, Version=0.11.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.AutoMapper.0.11.3.0\lib\net452\Abp.AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.EntityFramework, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.EntityFramework.0.11.0.2\lib\net452\Abp.EntityFramework.dll</HintPath>
+    <Reference Include="Abp.EntityFramework, Version=0.11.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.EntityFramework.0.11.3.0\lib\net452\Abp.EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.EntityFramework.Common, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.EntityFramework.Common.0.11.0.2\lib\net452\Abp.EntityFramework.Common.dll</HintPath>
+    <Reference Include="Abp.EntityFramework.Common, Version=0.11.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.EntityFramework.Common.0.11.3.0\lib\net452\Abp.EntityFramework.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.HangFire, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.HangFire.0.11.0.2\lib\net452\Abp.HangFire.dll</HintPath>
+    <Reference Include="Abp.HangFire, Version=0.11.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.HangFire.0.11.3.0\lib\net452\Abp.HangFire.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.Owin, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.Owin.0.11.0.2\lib\net452\Abp.Owin.dll</HintPath>
+    <Reference Include="Abp.Owin, Version=0.11.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.Owin.0.11.3.0\lib\net452\Abp.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.RedisCache, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.RedisCache.0.11.0.2\lib\net452\Abp.RedisCache.dll</HintPath>
+    <Reference Include="Abp.RedisCache, Version=0.11.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.RedisCache.0.11.3.0\lib\net452\Abp.RedisCache.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.Web, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.Web.0.11.0.2\lib\net452\Abp.Web.dll</HintPath>
+    <Reference Include="Abp.Web, Version=0.11.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.Web.0.11.3.0\lib\net452\Abp.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.Web.Api, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.Web.Api.0.11.0.2\lib\net452\Abp.Web.Api.dll</HintPath>
+    <Reference Include="Abp.Web.Api, Version=0.11.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.Web.Api.0.11.3.0\lib\net452\Abp.Web.Api.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.Web.Api.OData, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.Web.Api.OData.0.11.0.2\lib\net452\Abp.Web.Api.OData.dll</HintPath>
+    <Reference Include="Abp.Web.Api.OData, Version=0.11.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.Web.Api.OData.0.11.3.0\lib\net452\Abp.Web.Api.OData.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.Web.Common, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.Web.Common.0.11.0.2\lib\net452\Abp.Web.Common.dll</HintPath>
+    <Reference Include="Abp.Web.Common, Version=0.11.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.Web.Common.0.11.3.0\lib\net452\Abp.Web.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.Web.Mvc, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.Web.Mvc.0.11.0.2\lib\net452\Abp.Web.Mvc.dll</HintPath>
+    <Reference Include="Abp.Web.Mvc, Version=0.11.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.Web.Mvc.0.11.3.0\lib\net452\Abp.Web.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.Web.SignalR, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.Web.SignalR.0.11.0.2\lib\net452\Abp.Web.SignalR.dll</HintPath>
+    <Reference Include="Abp.Web.SignalR, Version=0.11.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.Web.SignalR.0.11.3.0\lib\net452\Abp.Web.SignalR.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.Zero, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.Zero.0.11.0.2\lib\net452\Abp.Zero.dll</HintPath>
+    <Reference Include="Abp.Zero, Version=0.11.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.Zero.0.11.2.0\lib\net452\Abp.Zero.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.Zero.EntityFramework, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.Zero.EntityFramework.0.11.0.2\lib\net452\Abp.Zero.EntityFramework.dll</HintPath>
+    <Reference Include="Abp.Zero.EntityFramework, Version=0.11.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.Zero.EntityFramework.0.11.2.0\lib\net452\Abp.Zero.EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.Zero.Ldap, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.Zero.Ldap.0.11.0.2\lib\net452\Abp.Zero.Ldap.dll</HintPath>
+    <Reference Include="Abp.Zero.Ldap, Version=0.11.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.Zero.Ldap.0.11.2.0\lib\net452\Abp.Zero.Ldap.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Antlr3.Runtime">
@@ -446,7 +446,6 @@
     <Content Include="App\host\views\maintenance\index.js" />
     <Content Include="App\host\views\maintenance\index.min.css" />
     <Content Include="App\host\views\tenants\featuresModal.js" />
-    <Content Include="App_Data\Logs\Logs.txt" />
     <Content Include="Areas\Mpa\Common\Scripts\jquery-validation-custom.js" />
     <Content Include="Areas\Mpa\Views\AuditLogs\index.css">
       <DependentUpon>index.less</DependentUpon>
@@ -21455,10 +21454,6 @@
     <Content Include="ExtWeb\build\testing\Chaching\resources\fonts\OpenSans-Semibold.ttf" />
     <Content Include="ExtWeb\build\testing\Chaching\resources\fonts\OpenSans-SemiboldItalic.ttf" />
     <Content Include="ExtWeb\build\testing\Chaching\resources\Readme.md" />
-    <Content Include="Abp\Framework\styles\abp.mixings.less" />
-    <Content Include="Abp\Framework\styles\abp.mixings.css.map" />
-    <Content Include="Abp\Framework\styles\abp.less" />
-    <Content Include="Abp\Framework\styles\abp.css.map" />
     <Content Include="ExtWeb\packages\remote\gearbox-import-export\.sencha\package\build.properties" />
     <Content Include="ExtWeb\packages\remote\gearbox-import-export\.sencha\package\cert.json" />
     <Content Include="ExtWeb\packages\remote\gearbox-import-export\.sencha\package\codegen.json" />
@@ -21500,6 +21495,10 @@
     <Content Include="ExtWeb\packages\remote\gearbox-import-export\package.json" />
     <Content Include="ExtWeb\packages\remote\gearbox-import-export\README.md" />
     <Content Include="ExtWeb\build\development\Chaching\classic\resources\gearbox-data-file\Readme.md" />
+    <Content Include="Abp\Framework\styles\abp.mixings.less" />
+    <Content Include="Abp\Framework\styles\abp.mixings.css.map" />
+    <Content Include="Abp\Framework\styles\abp.less" />
+    <Content Include="Abp\Framework\styles\abp.css.map" />
     <None Include="Properties\PublishProfiles\DevServerRelease.pubxml" />
     <None Include="Properties\PublishProfiles\File.pubxml" />
     <Content Include="Scripts\angular-parse-ext.min.js.map" />
@@ -21845,6 +21844,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\Logs\" />
     <Folder Include="ExtWeb\build\production\Chaching\archive\classic\" />
     <Folder Include="ExtWeb\build\production\Chaching\archive\modern\" />
     <Folder Include="ExtWeb\build\production\Chaching\classic\deltas\" />

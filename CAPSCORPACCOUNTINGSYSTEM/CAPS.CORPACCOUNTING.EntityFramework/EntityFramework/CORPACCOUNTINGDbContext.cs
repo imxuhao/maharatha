@@ -62,6 +62,11 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         public virtual IDbSet<AccountUnit> AccountUnits { get; set; }
 
         /// <summary>
+        ///  Mappng Table for Home Accounts and Reporting Accounts
+        /// </summary>
+        public IDbSet<AccountLinks> AccountLinks { get; set; }
+
+        /// <summary>
         ///  VendorPaymentTerms Declaration
         /// </summary>
         public virtual IDbSet<VendorPaymentTermUnit> VendorPaymentTermUnits { get; set; }

@@ -33,28 +33,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Abp, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.0.11.0.2\lib\net452\Abp.dll</HintPath>
+    <Reference Include="Abp, Version=0.11.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.0.11.3.0\lib\net452\Abp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.AutoMapper, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.AutoMapper.0.11.0.2\lib\net452\Abp.AutoMapper.dll</HintPath>
+    <Reference Include="Abp.AutoMapper, Version=0.11.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.AutoMapper.0.11.3.0\lib\net452\Abp.AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.EntityFramework, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.EntityFramework.0.11.0.2\lib\net452\Abp.EntityFramework.dll</HintPath>
+    <Reference Include="Abp.EntityFramework, Version=0.11.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.EntityFramework.0.11.3.0\lib\net452\Abp.EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.EntityFramework.Common, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.EntityFramework.Common.0.11.0.2\lib\net452\Abp.EntityFramework.Common.dll</HintPath>
+    <Reference Include="Abp.EntityFramework.Common, Version=0.11.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.EntityFramework.Common.0.11.3.0\lib\net452\Abp.EntityFramework.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.Zero, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.Zero.0.11.0.2\lib\net452\Abp.Zero.dll</HintPath>
+    <Reference Include="Abp.Zero, Version=0.11.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.Zero.0.11.2.0\lib\net452\Abp.Zero.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.Zero.EntityFramework, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.Zero.EntityFramework.0.11.0.2\lib\net452\Abp.Zero.EntityFramework.dll</HintPath>
+    <Reference Include="Abp.Zero.EntityFramework, Version=0.11.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.Zero.EntityFramework.0.11.2.0\lib\net452\Abp.Zero.EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="AutoMapper, Version=5.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
@@ -1375,9 +1375,17 @@
     <Compile Include="Migrations\201609060846543_Modify_TypeOfAccountUnit_Table1.Designer.cs">
       <DependentUpon>201609060846543_Modify_TypeOfAccountUnit_Table1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201609061618211_Add_TypeOfChart_Enum.cs" />
-    <Compile Include="Migrations\201609061618211_Add_TypeOfChart_Enum.Designer.cs">
-      <DependentUpon>201609061618211_Add_TypeOfChart_Enum.cs</DependentUpon>
+    <Compile Include="Migrations\201609061618211_Add_TypeOfChart_COATable.cs" />
+    <Compile Include="Migrations\201609061618211_Add_TypeOfChart_COATable.Designer.cs">
+      <DependentUpon>201609061618211_Add_TypeOfChart_COATable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609071829496_Update_to_Abp0.11.2and0.11.3.cs" />
+    <Compile Include="Migrations\201609071829496_Update_to_Abp0.11.2and0.11.3.Designer.cs">
+      <DependentUpon>201609071829496_Update_to_Abp0.11.2and0.11.3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609071902064_Add_AccountLinksTable.cs" />
+    <Compile Include="Migrations\201609071902064_Add_AccountLinksTable.Designer.cs">
+      <DependentUpon>201609071902064_Add_AccountLinksTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
@@ -2326,8 +2334,14 @@
     <EmbeddedResource Include="Migrations\201609060846543_Modify_TypeOfAccountUnit_Table1.resx">
       <DependentUpon>201609060846543_Modify_TypeOfAccountUnit_Table1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609061618211_Add_TypeOfChart_Enum.resx">
-      <DependentUpon>201609061618211_Add_TypeOfChart_Enum.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201609061618211_Add_TypeOfChart_COATable.resx">
+      <DependentUpon>201609061618211_Add_TypeOfChart_COATable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609071829496_Update_to_Abp0.11.2and0.11.3.resx">
+      <DependentUpon>201609071829496_Update_to_Abp0.11.2and0.11.3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609071902064_Add_AccountLinksTable.resx">
+      <DependentUpon>201609071902064_Add_AccountLinksTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

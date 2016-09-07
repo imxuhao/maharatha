@@ -3,6 +3,7 @@ using CAPS.CORPACCOUNTING.Accounting;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CAPS.CORPACCOUNTING.AccountReceivable.Dto
 {
@@ -49,7 +50,8 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable.Dto
         public  int? ReversedByUserId { get; set; }
 
         ///<summary>Get Sets the BatchId field.</summary>
-        public  DateTime ReversalDate { get; set; }
+        [Column(TypeName = "smalldatetime")]
+        public  DateTime? ReversalDate { get; set; }
 
         ///<summary>Get Sets the BatchId field.</summary>
         public  long? GroupBillingAccountingDocumentId { get; set; }

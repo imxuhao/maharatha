@@ -113,6 +113,54 @@ Ext.define('Chaching.components.plugins.RowEditing', {
                 
                 //set value and rawValue for combos
                 if (editor.form) {
+                    if (editor.view.ownerGrid.xtype === "projects.projectmaintenance.linenumbers") {
+                        var formFields = editor.form.getFields();
+                        for (var i = 0; i < formFields.items.length; i++) {
+                            var field = formFields.items[i];
+                            if (field.xtype === "combo" || field.xtype === "combobox" || field.xtype === "chachingcombobox" || field.xtype === "chachingcombo") {
+                                var editorStore = field.getStore();
+                                if (editorStore.storeId === "ext-empty-store" && field.isViewmodelStore) {
+                                    var bindName = field.getBind().store.stub.name,
+                                        viewModel = me.grid.getViewModel();
+                                    editorStore = viewModel.getStore(bindName);
+                                    field.setStore(editorStore);
+                                }
+                                if (editorStore && !editorStore.isDataLoaded) {
+                                    editorStore.field = field;
+                                    editorStore.load({
+                                        callback: function (records, operation, success) {
+                                            var rollUpAccountCaption = record.get("rollUpAccountCaption"),
+                                                //rollupAccountId = record.get("rollupAccountId"),
+                                                jobNumber = record.get("jobNumber"),
+                                                rollupJobId = record.get("rollupJobId");
+
+                                            for (var i = 0; i < records.length; i++) {
+                                                if (records[i].data.accountNumber === rollUpAccountCaption || (records[i].data.rollupJobId === rollupJobId && rollupJobId != null)) {
+                                                    try {
+                                                        var storeCombo = this.field;
+                                                        storeCombo.setValue(records[i].get(storeCombo.valueField));
+                                                        storeCombo.setRawValue(records[i].get(storeCombo.displayField));
+                                                    } catch (e) {
+                                                        console.log(e);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    });
+                                    editorStore.isDataLoaded = true;
+                                } else {
+                                    if (record.data.accountId !== record.data.rollupAccountId && field.valueField === "rollupJobId") {
+                                        // once store is loaded editing will take grid row account number to display, we cant update the same hence making it blank so that user can go and set the value once again.
+                                        field.setValue(record.get(field.valueField));
+                                        field.setRawValue(record.get(field.displayField));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                else if (editor.form) {
                     var formFields = editor.form.getFields();
                     for (var i = 0; i < formFields.items.length; i++) {
                         var field = formFields.items[i];
@@ -164,6 +212,12 @@ Ext.define('Chaching.components.plugins.RowEditing', {
             for (var i = 0; i < fieldItems.length; i++) {
                 var field = fieldItems[i];
                 if (field.xtype === "combo" || field.xtype === "combobox" || field.xtype === "chachingcombobox" || field.xtype === "chachingcombo") {
+                    if (field.name === "rollUpDivisionEditor") { // explicitly setting display field only in case of line number grid
+                        record.set("rollUpDivision", field.getRawValue());
+                    }
+                    if (field.name === "rollUpAccountEditor") { // explicitly setting display field only in case of line number grid
+                        record.set("rollUpAccountCaption", field.getRawValue());
+                    }
                     record.set(field.valueField, field.getValue());
                     record.set(field.displayField, field.getRawValue());
                 } else if (me.isAsscociationModelField(field, columns)) {

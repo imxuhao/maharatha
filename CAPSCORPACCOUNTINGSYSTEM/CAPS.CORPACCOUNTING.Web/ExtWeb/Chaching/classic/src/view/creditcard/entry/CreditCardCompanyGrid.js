@@ -127,7 +127,14 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyGrid', {
                   xtype: 'textfield',
                   width: '100%'
               }, editor: {
-                  xtype: 'textfield'
+                  //xtype: 'textfield'
+
+                    xtype: 'combobox',
+                    width: '100%',
+                    displayField: 'description',
+                    valueField: 'batchId',
+                    queryMode: 'local',
+                    store: 'utilities.BatchListStore'//Ext.create('Chaching.store.utilities.BatchListStore')
               }
           }
     ]

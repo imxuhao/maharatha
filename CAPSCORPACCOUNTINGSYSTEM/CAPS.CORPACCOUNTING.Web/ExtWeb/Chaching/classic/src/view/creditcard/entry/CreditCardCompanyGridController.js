@@ -76,7 +76,7 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyGridController', {
     },
 
     doBeforeCloneAction: function (record) {
-        record.set('bankAccountId', 0);
+        record.set('bankAccountId', '0');
         return record;
     }
 });

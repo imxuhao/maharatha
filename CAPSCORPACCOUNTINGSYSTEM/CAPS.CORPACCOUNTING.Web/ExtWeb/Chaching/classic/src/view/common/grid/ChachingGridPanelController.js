@@ -191,14 +191,17 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
     //Event Listeners
     cloneActionClick: function (menu, item, e, eOpts) {
         var me = this,
-        view = me.getView(),
-        gridStore = view.getStore(),
+        parentMenu = menu.parentMenu,
+        widgetRec = parentMenu.widgetRecord,
+        widgetCol = parentMenu.widgetColumn,
+        grid = widgetCol.up('grid'),
+        gridStore = grid.getStore(),
         primaryKeyField = gridStore.idPropertyField,
-        widgetRec = menu.parentMenu.widgetRecord;
-        if (widgetRec.get(primaryKeyField) > 0) {
+        controller = grid.getController();
+        if (grid &&  widgetRec.get(primaryKeyField) > 0) {
             widgetRec.set(primaryKeyField, 0)
-            me.editActionClicked(menu, item, e, eOpts, false);
-            me.changeViewTitle(view);
+            controller.editActionClicked(menu, item, e, eOpts, false);
+            controller.changeViewTitle(grid);
         }  
     },
     changeViewTitle: function (view) {

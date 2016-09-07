@@ -118,7 +118,12 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyGrid', {
               sortable: true,
               groupable: false,
               width: '20%',
+              sorter: {
+                  property: 'batchDesc',
+                  sortOnEntity: ''
+              },
               filterField: {
+                  entityName: '',
                   xtype: 'textfield',
                   width: '100%'
               }, editor: {

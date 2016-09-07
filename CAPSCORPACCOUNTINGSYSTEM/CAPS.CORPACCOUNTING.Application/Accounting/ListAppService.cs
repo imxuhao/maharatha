@@ -515,10 +515,6 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <returns></returns>
         public List<NameValueDto> GetCRBankTypeList()
         {
-
-            var listEnums = (from TypeOfInvoice n in Enum.GetValues(typeof(TypeOfInvoice))
-                             select new NameValueDto { Value = ((int)n).ToString(), Name = EnumHelper.ToDisplayName(n) }).ToList();
-
             var typeOfbankList = Enum.GetValues(typeof(TypeOfBankAccount)).Cast<TypeOfBankAccount>().Select(x => x)
                      .ToDictionary(u => u.ToDescription(), u => (int)u).Where(u => u.Value >= 5 && u.Value <= 9)
                      .Select(u => new NameValueDto { Value = u.Value.ToString(), Name = u.Key }).ToList();
@@ -536,7 +532,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public async Task<List<NameValueDto>> FileUploadCRDRList(AutoSearchInput input)
         {
 
-            var uploadFilesList = await _typeOfUploadFileUnitRepository.GetAll()
+            var uploadFilesList = await _typeOfUploadFileUnitRepository.GetAll().Where(u=>u.Id>=10 && u.Id<=25)
                  .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))
                  .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
             return uploadFilesList;

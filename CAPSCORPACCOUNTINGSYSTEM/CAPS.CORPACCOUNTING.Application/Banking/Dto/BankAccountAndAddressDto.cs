@@ -50,7 +50,7 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
             public string PettyCashAccount { get; set; }
 
             /// <summary>Gets or sets the Batch.</summary>
-            public string Batch { get; set; }
+            public string BatchDesc { get; set; }
           
 
     }

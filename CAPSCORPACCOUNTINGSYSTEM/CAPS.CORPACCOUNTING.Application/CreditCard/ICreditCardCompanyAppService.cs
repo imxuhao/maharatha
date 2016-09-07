@@ -18,21 +18,21 @@ namespace CAPS.CORPACCOUNTING.CreditCard
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<IdOutputDto<long>> CreateCCCompanyDocumentUnit(CreateBankAccountUnitInput input);
+        Task<IdOutputDto<long>> CreateCreditCardCompanyUnit(CreateBankAccountUnitInput input);
 
         /// <summary>
         /// Update the CreditCard Company based on Id.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task UpdateCCCompanyDocumentUnit(UpdateBankAccountUnitInput input);
+        Task UpdateCreditCardCompanyUnit(UpdateBankAccountUnitInput input);
 
         /// <summary>
         ///  Delete the CreditCard Company
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task DeleteCCCompanyDocumentUnit(IdInput<long> input);
+        Task DeleteCreditCardCompanyUnit(IdInput<long> input);
 
    
 

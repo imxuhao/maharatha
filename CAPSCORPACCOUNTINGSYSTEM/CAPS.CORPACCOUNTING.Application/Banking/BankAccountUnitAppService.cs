@@ -20,6 +20,7 @@ using AutoMapper;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.Sessions;
+using System;
 
 namespace CAPS.CORPACCOUNTING.Banking
 {
@@ -235,7 +236,7 @@ namespace CAPS.CORPACCOUNTING.Banking
                     dto.VendorNumber = result.Vendor;
                     dto.TypeOfUploadFileDesc = result.TypeOfUploadFile;
                     dto.TypeofCheckStockDesc = result.TypeofCheckStock;
-                    dto.BatchDesc = result.Batch;
+                    dto.BatchDesc = result.BatchDesc;
                     dto.TypeOfBankAccountDesc = result.BankAccount.TypeOfBankAccountId.ToDisplayName();
                     dto.TypeOfInactiveStatus = result.BankAccount.TypeOfInactiveStatusId != null ? result.BankAccount.TypeOfInactiveStatusId.ToDisplayName() : "";
                     if (!ReferenceEquals(result.Address, null))
@@ -299,8 +300,14 @@ namespace CAPS.CORPACCOUNTING.Banking
                                            Vendor = vendoracc.VendorNumber,
                                            TypeOfUploadFile = typfacc.Description,
                                            TypeofCheckStock = typcacc.Description,
-                                           Batch = batchacc.Description,
+                                           BatchDesc = batchacc.Description,
                                        };
+
+            var values = Enum.GetValues(typeof(TypeOfBankAccount)).Cast<TypeOfBankAccount>().Select(x => x)
+                        .ToDictionary(u => u.ToDescription(), u => (int)u).Where(u => u.Value <=4)
+                        .Select(u => u.Key).ToArray();
+
+            var strTypeOfbankAC = string.Join(",", values);
 
             if (!ReferenceEquals(input.Filters, null))
             {
@@ -308,7 +315,7 @@ namespace CAPS.CORPACCOUNTING.Banking
                 if (!ReferenceEquals(mapSearchFilters, null))
                     bankAccountUnitQuery = Helper.CreateFilters(bankAccountUnitQuery, mapSearchFilters);
             }
-            return bankAccountUnitQuery;
+            return bankAccountUnitQuery.Where(u => strTypeOfbankAC.Contains(u.BankAccount.TypeOfBankAccountId.ToString()));
         }
 
         /// <summary>
@@ -317,7 +324,11 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// <returns></returns>
         public List<NameValueDto> GetBankAccountTypeList()
         {
-            return Helpers.EnumList.GetBankAccountTypeList();
+            var typeOfbankList = Enum.GetValues(typeof(TypeOfBankAccount)).Cast<TypeOfBankAccount>().Select(x => x)
+                     .ToDictionary(u => u.ToDescription(), u => (int)u).Where(u => u.Value <=4)
+                     .Select(u => new NameValueDto { Value = u.Value.ToString(), Name = u.Key }).ToList();
+
+            return typeOfbankList;
         }
 
         /// <summary>

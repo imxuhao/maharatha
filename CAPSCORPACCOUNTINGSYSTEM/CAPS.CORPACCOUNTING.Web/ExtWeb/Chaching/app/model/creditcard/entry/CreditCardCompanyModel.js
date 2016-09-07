@@ -4,7 +4,7 @@
 Ext.define('Chaching.model.creditcard.entry.CreditCardCompanyModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {
-        searchEntityName: ''
+        searchEntityName: 'BankAccount'
     },
     fields: [
         { name: 'bankAccountId', type: 'int', isPrimaryKey : true, defaultValue : null, convert : nullHandler },

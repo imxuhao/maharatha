@@ -21,6 +21,7 @@ using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.Sessions;
 using CAPS.CORPACCOUNTING.Banking;
+using System;
 
 namespace CAPS.CORPACCOUNTING.CreditCard
 {
@@ -97,7 +98,7 @@ namespace CAPS.CORPACCOUNTING.CreditCard
         /// <returns></returns>
         [UnitOfWork]
         [AbpAuthorize(AppPermissions.Pages_CreditCard_Entry_CreditCardCompanies_Create)]
-        public async Task<IdOutputDto<long>> CreateCCCompanyDocumentUnit(CreateBankAccountUnitInput input)
+        public async Task<IdOutputDto<long>> CreateCreditCardCompanyUnit(CreateBankAccountUnitInput input)
         {
             var bankAccountUnit = input.MapTo<BankAccountUnit>();
             long id = await _bankAccountUnitManager.CreateAsync(bankAccountUnit);
@@ -133,7 +134,7 @@ namespace CAPS.CORPACCOUNTING.CreditCard
         /// <returns></returns>
         [UnitOfWork]
         [AbpAuthorize(AppPermissions.Pages_CreditCard_Entry_CreditCardCompanies_Edit)]
-        public async Task UpdateCCCompanyDocumentUnit(UpdateBankAccountUnitInput input)
+        public async Task UpdateCreditCardCompanyUnit(UpdateBankAccountUnitInput input)
         {
             var bankAccountUnit = await _bankAccountUnitRepository.GetAsync(input.BankAccountId);
 
@@ -177,7 +178,7 @@ namespace CAPS.CORPACCOUNTING.CreditCard
         /// <returns></returns>
         [UnitOfWork]
         [AbpAuthorize(AppPermissions.Pages_CreditCard_Entry_CreditCardCompanies_Delete)]
-        public async Task DeleteCCCompanyDocumentUnit(IdInput<long> input)
+        public async Task DeleteCreditCardCompanyUnit(IdInput<long> input)
         {
             await _bankAccountPaymentRangeRepository.DeleteAsync(p => p.BankAccountId == input.Id);
             DeleteAddressUnitInput dto = new DeleteAddressUnitInput
@@ -222,7 +223,7 @@ namespace CAPS.CORPACCOUNTING.CreditCard
                 {
                     var dto = result.BankAccount.MapTo<BankAccountUnitDto>();
                     dto.BankAccountId = result.BankAccount.Id;
-                    dto.BatchDesc = result.Batch;
+                    dto.BatchDesc = result.BatchDesc;
                     dto.TypeOfBankAccountDesc = result.BankAccount.TypeOfBankAccountId.ToDisplayName();
                     return dto;
                 }).ToList();
@@ -250,13 +251,19 @@ namespace CAPS.CORPACCOUNTING.CreditCard
 
         private IQueryable<BankAccountAndAddressDto> CreateCcCompanyQuery(SearchInputDto input)
         {
+            var values = Enum.GetValues(typeof(TypeOfBankAccount)).Cast<TypeOfBankAccount>().Select(x => x)
+                          .ToDictionary(u => u.ToDescription(), u => (int)u).Where(u => u.Value >= 5 && u.Value <= 9)
+                          .Select(u => u.Key).ToArray();
+
+            var strTypeOfbankAC = string.Join(",", values);
+
             var ccCompanyQuery = from bankAccount in _bankAccountUnitRepository.GetAll()
                                  join batch in _batchUnitRepository.GetAll() on bankAccount.BatchId equals batch.Id into batch
                                  from batchacc in batch.DefaultIfEmpty()
                                  select new BankAccountAndAddressDto
                                  {
                                      BankAccount = bankAccount,
-                                     Batch = batchacc.Description,
+                                     BatchDesc = batchacc.Description,
                                  };
 
             if (!ReferenceEquals(input.Filters, null))
@@ -265,7 +272,7 @@ namespace CAPS.CORPACCOUNTING.CreditCard
                 if (!ReferenceEquals(mapSearchFilters, null))
                     ccCompanyQuery = Helper.CreateFilters(ccCompanyQuery, mapSearchFilters);
             }
-            return ccCompanyQuery;
+            return ccCompanyQuery.Where(u => strTypeOfbankAC.Contains(u.BankAccount.TypeOfBankAccountId.ToString()));
         }
 
        

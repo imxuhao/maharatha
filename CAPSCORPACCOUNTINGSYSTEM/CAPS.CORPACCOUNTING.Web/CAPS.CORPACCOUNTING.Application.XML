@@ -2365,7 +2365,7 @@
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountAndAddressDto.PettyCashAccount">
             <summary>Gets or sets the PettyCashAccount.</summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountAndAddressDto.Batch">
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountAndAddressDto.BatchDesc">
             <summary>Gets or sets the Batch.</summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountPaymentRangeDto.BankAccountId">
@@ -3254,21 +3254,21 @@
             <param name="customAppSession"></param>
             <param name="coaUnitRepository"></param>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardCompanyAppService.CreateCCCompanyDocumentUnit(CAPS.CORPACCOUNTING.Banking.Dto.CreateBankAccountUnitInput)">
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardCompanyAppService.CreateCreditCardCompanyUnit(CAPS.CORPACCOUNTING.Banking.Dto.CreateBankAccountUnitInput)">
             <summary>
             Create the CreditCard Company.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardCompanyAppService.UpdateCCCompanyDocumentUnit(CAPS.CORPACCOUNTING.Banking.Dto.UpdateBankAccountUnitInput)">
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardCompanyAppService.UpdateCreditCardCompanyUnit(CAPS.CORPACCOUNTING.Banking.Dto.UpdateBankAccountUnitInput)">
             <summary>
              Update the CreditCard Company 
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardCompanyAppService.DeleteCCCompanyDocumentUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardCompanyAppService.DeleteCreditCardCompanyUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
             <summary>
             Delete the CreditCard Company
             </summary>
@@ -3358,6 +3358,13 @@
         <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardEntryDocumentAppService.GetCreditCardStatementsUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
             <summary>
             get CreditCard statements group by 
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardEntryDocumentAppService.GetCreditCardPostedStatementsUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            get CreditCard Posted statements group by 
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -3563,21 +3570,21 @@
         <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardStatementDto.ControlTotal">
             <summary>Get Sets the ControlTotal field.</summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardCompanyAppService.CreateCCCompanyDocumentUnit(CAPS.CORPACCOUNTING.Banking.Dto.CreateBankAccountUnitInput)">
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardCompanyAppService.CreateCreditCardCompanyUnit(CAPS.CORPACCOUNTING.Banking.Dto.CreateBankAccountUnitInput)">
             <summary>
              Create the CreditCard Company.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardCompanyAppService.UpdateCCCompanyDocumentUnit(CAPS.CORPACCOUNTING.Banking.Dto.UpdateBankAccountUnitInput)">
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardCompanyAppService.UpdateCreditCardCompanyUnit(CAPS.CORPACCOUNTING.Banking.Dto.UpdateBankAccountUnitInput)">
             <summary>
             Update the CreditCard Company based on Id.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardCompanyAppService.DeleteCCCompanyDocumentUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardCompanyAppService.DeleteCreditCardCompanyUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
             <summary>
              Delete the CreditCard Company
             </summary>
@@ -7633,11 +7640,6 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.DeleteAddressUnitInput.TypeofObjectId">
             <summary>Gets or sets the TypeofObjectId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.DeleteAddressUnitInput.Id">
-            <summary>
-            AddressId to be deleted from address table.
-            </summary>
-        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.EmployeeAndAddressDto.Employee">
             <summary>
             Gets or sets the EmployeeUnit.
@@ -9450,9 +9452,16 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Masters.AddressUnitAppService.DeleteAddressUnit(CAPS.CORPACCOUNTING.Masters.Dto.DeleteAddressUnitInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Masters.AddressUnitAppService.DeleteAddressUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
             <summary>
-            
+            Delete Address by AddressId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.AddressUnitAppService.DeleteAddressUnitByEntity(CAPS.CORPACCOUNTING.Masters.Dto.DeleteAddressUnitInput)">
+            <summary>
+            Deleting the addresses by ObjectId and TypeofObject
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -9737,7 +9746,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService.DeleteAddressUnit(CAPS.CORPACCOUNTING.Masters.Dto.DeleteAddressUnitInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService.DeleteAddressUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
             <summary>
             Delete the Address based on AddressId.
             </summary>
@@ -10476,7 +10485,7 @@
             
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.#ctor(CAPS.CORPACCOUNTING.Masters.VendorUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit},Abp.Domain.Uow.IUnitOfWorkManager,CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AddressUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorPaymentTermUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TypeOfCountryUnit,System.Int16},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.RegionUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CountryUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorAliasUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CoaUnit},CAPS.CORPACCOUNTING.Masters.VendorAliasUnitManager,CAPS.CORPACCOUNTING.Sessions.CustomAppSession,Abp.Runtime.Caching.ICacheManager,CAPS.CORPACCOUNTING.Helpers.CacheItems.IAccountCache)">
+        <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.#ctor(CAPS.CORPACCOUNTING.Masters.VendorUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit},Abp.Domain.Uow.IUnitOfWorkManager,CAPS.CORPACCOUNTING.Masters.AddressUnitAppService,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AddressUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorPaymentTermUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TypeOfCountryUnit,System.Int16},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.RegionUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CountryUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorAliasUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CoaUnit},CAPS.CORPACCOUNTING.Masters.VendorAliasUnitManager,CAPS.CORPACCOUNTING.Sessions.CustomAppSession,Abp.Runtime.Caching.ICacheManager,CAPS.CORPACCOUNTING.Helpers.CacheItems.IAccountCache)">
             <summary>
             
             </summary>

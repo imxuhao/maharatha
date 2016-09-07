@@ -8,10 +8,10 @@ Ext.define('Chaching.store.creditcard.entry.CreditCardCompanyStore', {
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         api: {
-            create: abp.appPath + 'api/services/app/creditCardCompany/CreateCCCompanyDocumentUnit',
+            create: abp.appPath + 'api/services/app/creditCardCompany/CreateCreditCardCompanyUnit',
             read: abp.appPath + 'api/services/app/creditCardCompany/GetCreditCardCompanies',
-            update: abp.appPath + 'api/services/app/creditCardCompany/UpdateCCCompanyDocumentUnit',
-            destroy: abp.appPath + 'api/services/app/creditCardCompany/DeleteCCCompanyDocumentUnit'
+            update: abp.appPath + 'api/services/app/creditCardCompany/UpdateCreditCardCompanyUnit',
+            destroy: abp.appPath + 'api/services/app/creditCardCompany/DeleteCreditCardCompanyUnit'
         }
     },
     idPropertyField: 'bankAccountId'//important to set for add/update of records

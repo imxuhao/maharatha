@@ -17,6 +17,7 @@ using AutoMapper;
 using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.Payables;
 using CAPS.CORPACCOUNTING.Accounting;
+using System;
 
 namespace CAPS.CORPACCOUNTING.CreditCard
 {
@@ -182,7 +183,7 @@ namespace CAPS.CORPACCOUNTING.CreditCard
         /// <returns></returns>
         public async Task<PagedResultOutput<CreditCardEntryDocumentUnitDto>> GetCreditCardDetailStatementsUnits(SearchInputDto input)
         {
-            var query = from creditCard in _creditCardUnitRepository.GetAll()
+            var query = from creditCard in _creditCardUnitRepository.GetAll().Where(u => u.IsPosted == false)
                         join bankAccount in _bankAccountUnitRepository.GetAll() on creditCard.BankAccountId equals bankAccount.Id
                          into bankaccount
                         from bankaccounts in bankaccount.DefaultIfEmpty()
@@ -247,13 +248,19 @@ namespace CAPS.CORPACCOUNTING.CreditCard
         /// <returns></returns>
         public async Task<PagedResultOutput<CreditCardStatementDto>> GetCreditCardStatementsUnits(SearchInputDto input)
         {
-            var query = from creditCard in _creditCardUnitRepository.GetAll()
-                        join bankAccount in _bankAccountUnitRepository.GetAll() on creditCard.BankAccountId equals bankAccount.Id
+            //get Credit Card Compay TypeOfBankAccounts types
+            var values = Enum.GetValues(typeof(TypeOfBankAccount)).Cast<TypeOfBankAccount>().Select(x => x)
+                                  .ToDictionary(u => u.ToDescription(), u => (int)u).Where(u => u.Value >= 5 && u.Value <= 9)
+                                  .Select(u => u.Key).ToArray();
+            var strTypeOfbankAC = string.Join(",", values);
+
+            var query = from creditCard in _creditCardUnitRepository.GetAll().Where(u => u.IsPosted == true)
+                        join bankAccount in _bankAccountUnitRepository.GetAll().Where(u => strTypeOfbankAC.Contains(u.TypeOfBankAccountId.ToString())) on creditCard.BankAccountId equals bankAccount.Id
                         into bankaccount
                         from bankaccounts in bankaccount.DefaultIfEmpty()
-                        join bankaccount1 in _bankAccountUnitRepository.GetAll() on bankaccounts.ControllingBankAccountId equals bankaccount1.Id
-                        into bankaccount1
-                        from bankaccounts1 in bankaccount1.DefaultIfEmpty()
+                        join controllingbankaccount1 in _bankAccountUnitRepository.GetAll() on bankaccounts.ControllingBankAccountId equals controllingbankaccount1.Id
+                        into controllingbankaccount1
+                        from controllingbankaccounts1 in controllingbankaccount1.DefaultIfEmpty()
                         where creditCard.IsPosted == false
                         group creditCard by
                         new
@@ -261,7 +268,7 @@ namespace CAPS.CORPACCOUNTING.CreditCard
                             DocumentDate = creditCard.DocumentDate,
                             TransactionDate = creditCard.TransactionDate,
                             ControllingBankAccountID = bankaccounts.ControllingBankAccountId,
-                            Description = bankaccounts1.Description + "  " + bankaccounts1.BankAccountNumber,
+                            Description = controllingbankaccounts1.Description + "  " + controllingbankaccounts1.BankAccountNumber,
                             IsPosted = creditCard.IsPosted
                         } into g
                         select new
@@ -303,7 +310,74 @@ namespace CAPS.CORPACCOUNTING.CreditCard
 
         }
 
+        /// <summary>
+        /// get CreditCard Posted statements group by 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<PagedResultOutput<CreditCardStatementDto>> GetCreditCardPostedStatementsUnits(SearchInputDto input)
+        {
+            //get Credit Card Compay TypeOfBankAccounts types
+            var values = Enum.GetValues(typeof(TypeOfBankAccount)).Cast<TypeOfBankAccount>().Select(x => x)
+                                  .ToDictionary(u => u.ToDescription(), u => (int)u).Where(u => u.Value >= 5 && u.Value <= 9)
+                                  .Select(u => u.Key).ToArray();
+            var strTypeOfbankAC = string.Join(",", values);
 
+            var query = from creditCard in _creditCardUnitRepository.GetAll().Where(u=>u.IsPosted==true)
+                        join bankAccount in _bankAccountUnitRepository.GetAll().Where(u => strTypeOfbankAC.Contains(u.TypeOfBankAccountId.ToString())) on creditCard.BankAccountId equals bankAccount.Id
+                        into bankaccount
+                        from bankaccounts in bankaccount.DefaultIfEmpty()
+                        join controllingbankaccount1 in _bankAccountUnitRepository.GetAll() on bankaccounts.ControllingBankAccountId equals controllingbankaccount1.Id
+                        into controllingbankaccount1
+                        from controllingbankaccounts1 in controllingbankaccount1.DefaultIfEmpty()
+                        where creditCard.IsPosted == false
+                        group creditCard by
+                        new
+                        {
+                            DocumentDate = creditCard.DocumentDate,
+                            TransactionDate = creditCard.TransactionDate,
+                            ControllingBankAccountID = bankaccounts.ControllingBankAccountId,
+                            Description = controllingbankaccounts1.Description + "  " + controllingbankaccounts1.BankAccountNumber,
+                            IsPosted = creditCard.IsPosted
+                        } into g
+                        select new
+                        {
+                            DocumentDate = g.Key.DocumentDate,
+                            TransactionDate = g.Key.TransactionDate,
+                            ControllingBankAccountID = g.Key.ControllingBankAccountID,
+                            Description = g.Key.Description,
+                            IsPosted = g.Key.IsPosted,
+                            ControlTotal = g.Sum(q => q.ControlTotal),
+                            TrxId = g.Min(q => q.Id)
+                        };
+
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                query = Helper.CreateFilters(query, mapSearchFilters);
+            }
+
+            var resultCount = await query.CountAsync();
+            var results = await query
+                .AsNoTracking()
+                .OrderBy(Helper.GetSort("TransactionDate DESC", input.Sorting))
+                .PageBy(input)
+                .ToListAsync();
+
+
+            return new PagedResultOutput<CreditCardStatementDto>(resultCount, results.Select(item =>
+            {
+                var dto = item.MapTo<CreditCardStatementDto>();
+                dto.DocumentDate = item.DocumentDate;
+                dto.TransactionDate = item.TransactionDate;
+                dto.IsPosted = item.IsPosted;
+                dto.Description = item.Description;
+                dto.ControllingBankAccountId = item.ControllingBankAccountID;
+                dto.ControlTotal = item.ControlTotal;
+                return dto;
+            }).ToList());
+
+        }
 
         /// <summary>
         /// 

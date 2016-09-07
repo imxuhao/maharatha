@@ -13,10 +13,5 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the TypeofObjectId field. </summary>
         [EnumDataType(typeof(TypeofObject))]
         public TypeofObject TypeofObjectId { get; set; }
-
-        /// <summary>
-        /// AddressId to be deleted from address table.
-        /// </summary>
-        public long Id { get; set; }
     }
 }

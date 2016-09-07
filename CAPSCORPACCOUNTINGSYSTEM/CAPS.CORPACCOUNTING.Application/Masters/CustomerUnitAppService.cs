@@ -109,7 +109,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 TypeofObjectId = TypeofObject.Customer,
                 ObjectId = input.Id
             };
-            await _addressUnitAppService.DeleteAddressUnit(dto);
+            await _addressUnitAppService.DeleteAddressUnitByEntity(dto);
             await _customerUnitManager.DeleteAsync(input.Id);
         }
 

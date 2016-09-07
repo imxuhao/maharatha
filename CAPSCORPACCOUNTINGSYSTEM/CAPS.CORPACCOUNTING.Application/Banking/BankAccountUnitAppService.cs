@@ -28,7 +28,7 @@ namespace CAPS.CORPACCOUNTING.Banking
     {
 
         private readonly BankAccountUnitManager _bankAccountUnitManager;
-        private readonly IAddressUnitAppService _addressAppService;
+        private readonly AddressUnitAppService _addressAppService;
         private readonly IRepository<BankAccountUnit, long> _bankAccountUnitRepository;
         private readonly IRepository<AddressUnit, long> _addressUnitRepository;
         private readonly IRepository<AccountUnit, long> _accountUnitRepository;
@@ -42,7 +42,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         private readonly IRepository<CoaUnit>  _coaUnitRepository;
 
         public BankAccountUnitAppService(BankAccountUnitManager bankAccountUnitManager, IRepository<BankAccountUnit, long> bankAccountUnitRepository,
-            IAddressUnitAppService addressAppService,IRepository<AddressUnit, long> addressUnitRepository, IRepository<AccountUnit, long> accountUnitRepository,
+            AddressUnitAppService addressAppService,IRepository<AddressUnit, long> addressUnitRepository, IRepository<AccountUnit, long> accountUnitRepository,
             IRepository<JobUnit, int> jobUnitRepository,IRepository<TypeOfUploadFileUnit, int> typeOfUploadFileUnitRepository, 
             IRepository<TypeOfCheckStockUnit, int> typeOfCheckStockUnitRepository,IRepository<VendorUnit, int> vendorUnitRepository, 
             IRepository<BatchUnit, int> batchUnitRepository,IRepository<BankAccountPaymentRangeUnit> bankAccountPaymentRangeUnit,
@@ -191,7 +191,7 @@ namespace CAPS.CORPACCOUNTING.Banking
                 TypeofObjectId = TypeofObject.Bank,
                 ObjectId = input.Id
             };
-            await _addressAppService.DeleteAddressUnit(dto);
+            await _addressAppService.DeleteAddressUnitByEntity(dto);
             await _bankAccountUnitManager.DeleteAsync(input);
         }
 

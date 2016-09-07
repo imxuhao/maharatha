@@ -49,13 +49,23 @@ namespace CAPS.CORPACCOUNTING.Masters
         }
 
         /// <summary>
-        /// 
+        /// Delete Address by AddressId
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task DeleteAddressUnit(DeleteAddressUnitInput input)
+        public async Task DeleteAddressUnit(IdInput<long> input)
         {
             await _addressUnitRepository.DeleteAsync(p => p.Id == input.Id);
+        }
+
+        /// <summary>
+        /// Deleting the addresses by ObjectId and TypeofObject
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task DeleteAddressUnitByEntity(DeleteAddressUnitInput input)
+        {
+            await _addressUnitRepository.DeleteAsync(p => p.TypeofObjectId == input.TypeofObjectId && p.ObjectId==input.ObjectId);
         }
 
         /// <summary>

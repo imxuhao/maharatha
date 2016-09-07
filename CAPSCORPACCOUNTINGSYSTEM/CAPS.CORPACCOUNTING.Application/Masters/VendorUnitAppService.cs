@@ -34,7 +34,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         private readonly VendorUnitManager _vendorUnitManager;
         private readonly IRepository<VendorUnit> _vendorUnitRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
-        private readonly IAddressUnitAppService _addressAppService;
+        private readonly AddressUnitAppService _addressAppService;
         private readonly IRepository<AddressUnit, long> _addresRepository;
         private readonly IRepository<VendorPaymentTermUnit> _vendorPaytermRepository;
         private readonly IRepository<TypeOfCountryUnit, short> _typeOfCountryRepository;
@@ -65,7 +65,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <param name="coaUnitRepository"></param>
         /// <param name="vendorAliasUnitManager"></param>
         public VendorUnitAppService(VendorUnitManager vendorUnitManager, IRepository<VendorUnit> vendorUnitRepository,
-            IUnitOfWorkManager unitOfWorkManager, IAddressUnitAppService addressAppService,
+            IUnitOfWorkManager unitOfWorkManager, AddressUnitAppService addressAppService,
             IRepository<AddressUnit, long> addresRepository, IRepository<VendorPaymentTermUnit> vendorPaytermRepository,
             IRepository<TypeOfCountryUnit, short> typeOfCountryRepository, IRepository<RegionUnit> regionRepository,
             IRepository<CountryUnit> countryRepository, IRepository<VendorAliasUnit> vendorAliasUnitRepository,
@@ -179,7 +179,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 TypeofObjectId = TypeofObject.Vendor,
                 ObjectId = input.Id
             };
-            await _addressAppService.DeleteAddressUnit(dto);
+            await _addressAppService.DeleteAddressUnitByEntity(dto);
             await _vendorAliasUnitManager.DeleteAsync(Convert.ToInt32(dto.ObjectId));
             await _vendorUnitManager.DeleteAsync(input.Id);
         }

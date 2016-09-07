@@ -185,7 +185,7 @@ namespace CAPS.CORPACCOUNTING.CreditCard
                 TypeofObjectId = TypeofObject.CreditCardBank,
                 ObjectId = input.Id
             };
-            await _addressAppService.DeleteAddressUnit(dto);
+           // await _addressAppService.DeleteAddressUnit(dto);
             await _bankAccountUnitManager.DeleteAsync(input);
         }
 

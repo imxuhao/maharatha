@@ -27,7 +27,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         private readonly EmployeeUnitManager _employeeUnitManager;
         private readonly IRepository<EmployeeUnit> _employeeUnitRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
-        private readonly IAddressUnitAppService _addressAppService;
+        private readonly AddressUnitAppService _addressAppService;
         private readonly IRepository<AddressUnit, long> _addressUnitRepository;
         private readonly ICacheManager _cacheManager;
         private readonly CustomAppSession _customAppSession;
@@ -35,7 +35,7 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         public EmployeeUnitAppService(EmployeeUnitManager employeeUnitManager,
             IRepository<EmployeeUnit> employeeUnitRepository,
-            IUnitOfWorkManager unitOfWorkManager, IAddressUnitAppService addressAppService,
+            IUnitOfWorkManager unitOfWorkManager, AddressUnitAppService addressAppService,
             IRepository<AddressUnit, long> addressRepository,
             CustomAppSession customAppSession, ICacheManager cacheManager, IEmployeeCache empCache)
         {
@@ -62,7 +62,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 TypeofObjectId = TypeofObject.Emp,
                 ObjectId = input.Id
             };
-            await _addressAppService.DeleteAddressUnit(dto);
+            await _addressAppService.DeleteAddressUnitByEntity(dto);
         }
 
         /// <summary>

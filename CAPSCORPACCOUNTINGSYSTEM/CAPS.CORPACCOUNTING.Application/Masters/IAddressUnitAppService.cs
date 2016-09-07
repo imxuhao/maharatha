@@ -37,7 +37,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task DeleteAddressUnit(DeleteAddressUnitInput input);
+        Task DeleteAddressUnit(IdInput<long> input);
 
         /// <summary>
         /// Get TerritoriesList

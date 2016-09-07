@@ -153,6 +153,26 @@ Ext.define('Chaching.view.imports.ImportsFormController', {
                                     record.set('errorMessage', err);
                                 }
                             }
+                            if (field.type == 'int' && field.name.indexOf('Id')>=0) {
+                                var comboColumnName = field.name.replace('Id','');
+                                if (record.get(comboColumnName)) {
+                                    isValid = (record.get(field.name)) == null ? false : true;
+                                    if (!isValid) {
+                                        errorCount += 1;
+                                        var exError = record.get('errorMessage');
+                                        column = columnManager.getHeaderByDataIndex(comboColumnName);
+                                        if (column) {
+                                            comboColumnName = column.text;
+                                        }
+                                        if (exError)
+                                            err = exError + '; ' + comboColumnName + app.localize('ImportValueNotExists');
+                                        else
+                                            err = comboColumnName + app.localize('ImportValueNotExists');
+
+                                        record.set('errorMessage', err);
+                                    }
+                                }
+                            }
                         });
                     data.push(record.data);
                 } catch (e) {

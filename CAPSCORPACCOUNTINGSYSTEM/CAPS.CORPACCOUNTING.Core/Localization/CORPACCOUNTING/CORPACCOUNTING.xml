@@ -1317,6 +1317,7 @@
     <text name="DateOfDeposit" value="Date of Deposit" />
     <text name="InvoiceStatus" value="Invoice Status" />
     <text name="ARInvoiceInquiryGrid" value="AR Invoice Inquiry Grid" />
+    <text name="ImportValueNotExists" value=" does not exists." />
     
     
   </texts>

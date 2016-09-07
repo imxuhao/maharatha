@@ -145,7 +145,7 @@ Ext.define('Chaching.view.financials.accounts.AccountsForm', {
             fieldLabel: app.localize('Consolidation'),
             width: '100%',
             ui: 'fieldLabelTop',
-            emptyText: app.localize('MandatoryField'),
+            //emptyText: app.localize('MandatoryField'),
             displayField: 'typeofConsolidation',
             valueField: 'typeofConsolidationId',
             queryMode : 'local',

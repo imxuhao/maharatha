@@ -59,7 +59,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()
-                .OrderBy(Helper.GetSort("Coa.Description ASC", input.Sorting))
+                .OrderBy(Helper.GetSort("Coa.Caption ASC", input.Sorting))
                 .PageBy(input)
                 .ToListAsync();
             return new PagedResultOutput<CoaUnitDto>(resultCount, results.Select(item =>

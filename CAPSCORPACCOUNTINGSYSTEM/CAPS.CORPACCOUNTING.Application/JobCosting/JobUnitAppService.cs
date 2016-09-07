@@ -503,7 +503,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         {
             var taxCreditList = await _taxCreditUnitRepository.GetAll()
                  .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query) || p.Number.Contains(input.Query))
-                 .Select(u => new AutoFillDto { Name = u.Description, Value = u.Id.ToString(), Column1 = u.Number }).ToListAsync();
+                 .Select(u => new AutoFillDto { Name = u.Description, Value = u.Id.ToString(), Column1 = u.Number }).OrderBy(p=>p.Name).ToListAsync();
             return taxCreditList;
         }
 

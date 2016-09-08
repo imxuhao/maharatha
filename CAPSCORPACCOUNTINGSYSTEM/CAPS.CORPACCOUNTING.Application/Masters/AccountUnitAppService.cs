@@ -13,7 +13,6 @@ using Abp.Linq.Extensions;
 using System.Linq.Dynamic;
 using CAPS.CORPACCOUNTING.Helpers;
 using System.Collections.Generic;
-using System.Data;
 using Abp.Authorization;
 using Abp.Collections.Extensions;
 using Abp.Runtime.Session;
@@ -514,18 +513,21 @@ namespace CAPS.CORPACCOUNTING.Accounts
         }
 
         /// <summary>
-        /// 
+        /// Create or Update AccountLinks
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task CreateOrUpdateAccountLinkUnit(CreateOrUpdateAccountLinkUnit input)
+        public async Task CreateOrUpdateAccountLinkUnits(CreateOrUpdateAccountLinkUnitList input)
         {
-            var accountUnit = input.MapTo<AccountLinks>();
-            if (input.AccountLinkId == 0)
-                await _accountLinksManager.CreateAsync(accountUnit);
-            else
-                await _accountLinksManager.UpdateAsync(accountUnit);
+            foreach (var accountLink in input.CreateOrUpdateAccountLinkList)
+            {
+                var accountUnit = accountLink.MapTo<AccountLinks>();
+                if (accountLink.AccountLinkId == 0)
+                    await _accountLinksManager.CreateAsync(accountUnit);
+                else
+                    await _accountLinksManager.UpdateAsync(accountUnit);
 
+            }
             await CurrentUnitOfWork.SaveChangesAsync();
         }
     }

@@ -464,6 +464,7 @@
     <Compile Include="Masters\Dto\CountryListDto.cs" />
     <Compile Include="Masters\Dto\CreateAccountListInput.cs" />
     <Compile Include="Masters\Dto\CreateOrUpdateAccountLinkUnit.cs" />
+    <Compile Include="Masters\Dto\CreateOrUpdateAccountLinkUnitList.cs" />
     <Compile Include="Masters\Dto\CreateTerritoriesUnitInput.cs" />
     <Compile Include="Masters\Dto\IdInputExtensionDto.cs" />
     <Compile Include="Masters\Dto\CreateTaxCreditUnitInput.cs" />

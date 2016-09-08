@@ -123,8 +123,12 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <returns></returns>
         Task<List<AccountCacheItem>> GetAccountListByCoaId(AutoSearchInput input);
 
-
-        Task CreateOrUpdateAccountLinkUnit(CreateOrUpdateAccountLinkUnit input);
+        /// <summary>
+        /// Create or Update AccountLinks
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task CreateOrUpdateAccountLinkUnits(CreateOrUpdateAccountLinkUnitList input);
     }
     
 }

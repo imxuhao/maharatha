@@ -1,5 +1,6 @@
 ﻿Ext.define('Chaching.view.receivables.ReceivableInvoiceFormPanel', {
     extend: 'Chaching.view.common.form.ChachingFormPanel',
+    //viewModel:{},
     alias: ['widget.receivables.invoices.create', 'widget.receivables.invoices.edit'],
     controller: 'receivables-invoices-accountsreceivableformentry',
     hideDefaultButtons: true,
@@ -13,7 +14,7 @@
                 iconCls: 'fa fa-gear'
             },
             {
-                //xtype: 'accountreceivableentryform',
+                xtype: 'accountreceivableinvoicebuilderform',
                 title: abp.localization.localize("InvoiceBuilder"),
                 iconCls: 'fa fa-gear'
             }

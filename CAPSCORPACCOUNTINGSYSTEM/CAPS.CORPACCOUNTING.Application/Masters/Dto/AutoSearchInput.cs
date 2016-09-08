@@ -1,5 +1,5 @@
 ﻿using Abp.Application.Services.Dto;
-
+using CAPS.CORPACCOUNTING.JobCosting;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
@@ -18,5 +18,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public string Property { get; set; }
 
         public long AccountId { get; set; }
+
+        public ProjectStatus? TypeOfJobStatusId { get; set; }
     }
 }

@@ -36,6 +36,13 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
           routeName: 'coa.create',
           iconAlign: 'left'
       }],
+    actionColumnMenuItemsConfig: [
+    {
+        text: app.localize('MapCOA'),
+        itemId: 'mapCoa',
+        iconCls: 'fa fa-ticket',
+        clickActionName: 'mapCoaClicked'
+    }],
     requireExport: true,
     requireMultiSearch: true,
     requireMultisort: true,

@@ -150,5 +150,5 @@ Ext.define('Chaching.components.feature.ChachingGrouping',
             }
             return o;
         };
-    },
+    }
 });

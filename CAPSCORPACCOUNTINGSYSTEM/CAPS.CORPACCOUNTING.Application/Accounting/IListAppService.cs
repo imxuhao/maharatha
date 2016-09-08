@@ -141,7 +141,12 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <returns></returns>
         Task<List<NameValueDto>> GetBatchListByType(BatchSearchInput input);
 
-
+        /// <summary>
+        /// Get Jobs lIst by status
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<List<DivisionCacheItem>> GetJobListByStatus(AutoSearchInput input);
 
     }
 }

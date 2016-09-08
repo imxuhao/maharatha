@@ -1,6 +1,7 @@
 Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
     alias: 'controller.financials-accounts-chartofaccountsgrid',
+    requires : ['Chaching.view.financials.accounts.AccountsGrid'],
     onChartOfAccountClicked: function (tableView, td, cellIndex, record, tr, rowIndex, e, eOpts) {
         var me = this,
             view = me.getView(),
@@ -56,7 +57,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGridController', {
                 if (toolBar) {
                     var displayTitle = toolBar.child('component[ui=headerTitle]');
                     if (displayTitle)
-                        displayTitle.setValue(record.get('caption').initCap());
+                        displayTitle.setValue(record.get('caption'));
                 }
                 
                 var gridStore = accountsGrid.getStore(),
@@ -90,6 +91,36 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGridController', {
                     }
                 });
         });
+    },
+    doRowSpecificEditDelete: function (button, grid) {
+        var record = button.widgetRec;
+        if (record) {
+            var linkCoaId = record.get('linkChartOfAccountID');
+            if (button.menu && (linkCoaId === 1 || linkCoaId === 4)) {
+                    var mapCoa = button.menu.down('menuitem#mapCoa'),
+                        seperatorBar = button.menu.down('menuitem#actionMenuSeparator');
+                    if ((mapCoa && button.widgetRec)) {
+                        mapCoa.hide(); seperatorBar.hide();
+                    }
+                }
+            }
+    },
+    mapCoaClicked: function (menu, item, e, eOpts, isView) {
+        var me = this,
+            parentMenu = menu.parentMenu,
+            widgetRec = parentMenu.widgetRecord;
+        if(widgetRec){
+            var CoaCaption = widgetRec.get('caption'),
+                coaId = widgetRec.get('coaId');
+            var window = Ext.create('Chaching.view.financials.accounts.AccountsMapCoaWindow', {
+                title: app.localize('MapCOA') + ' - ' + CoaCaption
+            });
+            var gridPanel = window.down('gridpanel');
+            var gridStore = gridPanel.getStore();
+            //gridStore.getProxy().api.read = abp.appPath + 'api/services/app/accountUnit/Servicename';
+            gridStore.getProxy().setExtraParam('id', coaId);
+            gridStore.load();
+        }
     }
-
+    
 });

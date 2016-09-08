@@ -15,6 +15,9 @@
             view = me.getView();
         var viewModel = formPanel.getViewModel();
         var form = formPanel.getForm();
+        var currencyStore = viewModel.getStore('typeOfCurrencyList');
+        currencyStore.load();
+
         if (isEdit) {
             if (record) {
                 var vendoraddressGrid = formPanel.down('*[itemId=addressGrid]');

@@ -111,7 +111,7 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableForm', {
             }, {
                 xtype: 'hiddenfield',
                 name: 'typeOfAccountingDocumentId',
-                value: 3
+                value: 4
             }, {
                 xtype: 'container',
                 layout: {
@@ -207,28 +207,28 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableForm', {
                                 itemId: 'receivableOrderReference',
                                 ui: 'fieldLabelTop',
                                 width: '100%',
-                                fieldLabel: app.localize('AgencyPO#'),
-                                emptyText: app.localize('SearchText'),
-                                triggers: {
-                                    poRelief: {
-                                        cls: 'purchaseOrderTriggerClsInactive',
-                                        handler: function () {
-                                            console.log('poRelief trigger clicked');
-                                        }
-                                    }
-                                },
-                                listeners: {
-                                    change: function (field, newValue, oldValue) {
-                                        ///TODO: Change to enter key press once poo flow work starts
-                                        if (field.getValue().length > 3) {
-                                            var poRel = field.getTrigger('poRelief');
-                                            poRel.getEl().removeCls('x-form-trigger x-form-trigger-fieldLabelTop purchaseOrderTriggerClsInactive purchaseOrderTriggerClsInactive-fieldLabelTop');
-                                            poRel.getEl().setCls('x-form-trigger x-form-trigger-fieldLabelTop purchaseOrderTriggerClsActive purchaseOrderTriggerClsActive-fieldLabelTop');
-                                            //poRel.getEl().setCls('x-form-trigger-fieldLabelTop purchaseOrderTriggerClsActive');
-                                            field.updateLayout();
-                                        }
-                                    }
-                                }
+                                fieldLabel: app.localize('AgencyPO#')
+                                //emptyText: app.localize('SearchText'),
+                                //triggers: {
+                                //    poRelief: {
+                                //        cls: 'purchaseOrderTriggerClsInactive',
+                                //        handler: function () {
+                                //            console.log('poRelief trigger clicked');
+                                //        }
+                                //    }
+                                //},
+                                //listeners: {
+                                //    change: function (field, newValue, oldValue) {
+                                //        ///TODO: Change to enter key press once poo flow work starts
+                                //        if (field.getValue().length > 3) {
+                                //            var poRel = field.getTrigger('poRelief');
+                                //            poRel.getEl().removeCls('x-form-trigger x-form-trigger-fieldLabelTop purchaseOrderTriggerClsInactive purchaseOrderTriggerClsInactive-fieldLabelTop');
+                                //            poRel.getEl().setCls('x-form-trigger x-form-trigger-fieldLabelTop purchaseOrderTriggerClsActive purchaseOrderTriggerClsActive-fieldLabelTop');
+                                //            //poRel.getEl().setCls('x-form-trigger-fieldLabelTop purchaseOrderTriggerClsActive');
+                                //            field.updateLayout();
+                                //        }
+                                //    }
+                                //}
                             },
                             {
                                 xtype: 'amountfield',
@@ -278,8 +278,10 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableForm', {
                                 bind: {
                                     store: '{typeOfCurrencyList}'
                                 },
-                                valueField: 'typeOfCurrencyId',
-                                displayField: 'typeOfCurrency',
+                                //valueField: 'typeOfCurrencyId',
+                                //displayField: 'typeOfCurrency',
+                                valueField: 'value',
+                                displayField: 'name',
                                 width: '100%',
                                 ui: 'fieldLabelTop',
                                 fieldLabel: app.localize('Currency'),

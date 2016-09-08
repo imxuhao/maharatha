@@ -99,7 +99,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
         items: [{
             xtype: 'combobox',
             name: 'standardGroupTotalId',
-            fieldLabel: app.localize('StdGroupTotal').initCap(),
+            fieldLabel: app.localize('StdGroupTotal'),
             width: '100%',
             labelWidth: 140,
             ui: 'fieldLabelTop',
@@ -113,7 +113,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
         }, {
             xtype: 'combobox',
             name: 'linkChartOfAccountID',
-            fieldLabel: app.localize('MappingChart').initCap(),
+            fieldLabel: app.localize('MappingChart'),
             width: '100%',
             labelWidth: 140,
             ui: 'fieldLabelTop',

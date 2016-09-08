@@ -1386,6 +1386,7 @@
     <text name="InvoiceStatus" value="Invoice Status" />
     <text name="ARInvoiceInquiryGrid" value="AR Invoice Inquiry Grid" />
     <text name="ImportValueNotExists" value=" does not exists." />
+    <text name="StartupAmount" value="Startup Amount" />
     
     <!--Client Type Definition-->
     <text name="TenantType" value="Tenant Type" />
@@ -1404,5 +1405,8 @@
     <text name="OnlyOneHomeCoaAllowed" value="Only one home coa is allowed." />
     <text name="OnlyOneNewCoaAllowed" value="Only one new coa is allowed." />
     <text name="MappingChart" value="Mapping chart"/>
+    
+    <text name="MapCOA" value="Map COA"/>
+    
   </texts>
 </localizationDictionary>

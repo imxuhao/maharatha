@@ -130,7 +130,8 @@ namespace CAPS.CORPACCOUNTING.Accounting
                 expDivisionCache = ExpressionBuilder.GetExpression<DivisionCacheItem>(await GetEntityAccessFilter(strEntityClassification)).Compile();
             }
 
-            return cacheItem.ToList().WhereIf(!ReferenceEquals(expDivisionCache, null), expDivisionCache).Where(p => p.TypeOfJobStatusId != ProjectStatus.Closed).
+            return cacheItem.ToList().WhereIf(!ReferenceEquals(expDivisionCache, null), expDivisionCache)
+                .Where(p => p.TypeOfJobStatusId != ProjectStatus.Closed).
                 WhereIf(!string.IsNullOrEmpty(input.Query), p => p.JobNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
             p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();
         }
@@ -674,6 +675,32 @@ namespace CAPS.CORPACCOUNTING.Accounting
                  .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
             return batchList;
         }
+
+        /// <summary>
+        /// Get Jobs or Divisions List by using OrganizationUnitId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<List<DivisionCacheItem>> GetJobListByStatus(AutoSearchInput input)
+        {
+            Func<DivisionCacheItem, bool> expDivisionCache = null;
+            var cacheItem = await _divisionCache.GetDivisionCacheItemAsync(
+                  CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId)));
+
+            //apply User have restrictions
+            if (_customAppSession.HasProjectRestriction || _customAppSession.HasDivisionRestriction)
+            {
+                var strEntityClassification = string.Join(",", new string[] { EntityClassification.Division.ToDescription(), EntityClassification.Project.ToDescription() });
+                expDivisionCache = ExpressionBuilder.GetExpression<DivisionCacheItem>(await GetEntityAccessFilter(strEntityClassification)).Compile();
+            }
+
+            return cacheItem.ToList().WhereIf(!ReferenceEquals(expDivisionCache, null), expDivisionCache)
+                .Where(p => p.IsDivision==false && p.TypeOfJobStatusId != ProjectStatus.Closed && p.TypeOfJobStatusId != ProjectStatus.WrLockedap)
+                .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.JobNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
+                p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();
+        }
+
+
 
     }
 }

@@ -206,6 +206,7 @@
     <Compile Include="Common\IMayHaveAttachments.cs" />
     <Compile Include="Common\IMayHaveNotes.cs" />
     <Compile Include="Masters\AccountLinks.cs" />
+    <Compile Include="Masters\AccountLinksManager.cs" />
     <Compile Include="Notes\NotedObjectUnit.cs" />
     <Compile Include="Notes\NotedObjectUnitManager.cs" />
     <Compile Include="Common\ProfitVariableUnit.cs" />

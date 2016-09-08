@@ -13,7 +13,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the AccountNumber field. </summary>
         [StringLength(AccountUnit.MaxAccountSize)]
-        [Required(ErrorMessage = "Number Field is required.")]
+        [Required(ErrorMessage = "The Number Field is required.")]
         public string AccountNumber { get; set; }
 
         /// <summary>Gets or sets the Caption field. </summary>
@@ -66,6 +66,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public int? RollupJobId { get; set; }
 
         /// <summary>Gets or sets the TypeOfAccountId field. </summary>
+        [Required(ErrorMessage = "The Classification field is required")]
         public int? TypeOfAccountId { get; set; }
 
         /// <summary>Gets or sets the IsDocControlled field. </summary>

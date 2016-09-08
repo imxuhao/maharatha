@@ -142,6 +142,11 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the ErrorMessage field. </summary>
         public string ErrorMessage { get; set; }
 
+        /// <summary>Gets or sets the AccountLinkId field. 
+        /// This field is useful only in Mapping the accounts in ReportingCOa
+        /// </summary>
+        public long? AccountLinkId { get; set; }
+
 
     }
 }

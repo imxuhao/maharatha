@@ -41,10 +41,13 @@ namespace CAPS.CORPACCOUNTING.Accounts
         private readonly AccountCache _accountcache;
         private readonly ICustomAccountRepository _customAccountRepository;
         private readonly ICacheManager _cacheManager;
+        private readonly IRepository<AccountLinks, long> _accountLinkRepository;
+        private readonly AccountLinksManager _accountLinksManager;
+
         public AccountUnitAppService(AccountUnitManager accountUnitManager, IRepository<AccountUnit, long> accountUnitRepository,
             UserManager userManager, IUnitOfWorkManager unitOfWorkManager, IRepository<TypeOfAccountUnit, int> typeOfAccountRepository,
             IRepository<TypeOfCurrencyRateUnit, short> typeOfCurrencyRateRepository, IRepository<TypeOfCurrencyUnit, short> typeOfCurrencyRepository,
-            IRepository<CoaUnit, int> coaRepository, AccountCache accountcache, CustomAppSession customAppSession, ICustomAccountRepository customAccountRepository, ICacheManager cacheManager)
+            IRepository<CoaUnit, int> coaRepository, AccountCache accountcache, CustomAppSession customAppSession, ICustomAccountRepository customAccountRepository, ICacheManager cacheManager, IRepository<AccountLinks, long> accountLinkRepository, AccountLinksManager accountLinksManager)
         {
             _accountUnitManager = accountUnitManager;
             _accountUnitRepository = accountUnitRepository;
@@ -58,6 +61,8 @@ namespace CAPS.CORPACCOUNTING.Accounts
             _customAppSession = customAppSession;
             _customAccountRepository = customAccountRepository;
             _cacheManager = cacheManager;
+            _accountLinkRepository = accountLinkRepository;
+            _accountLinksManager = accountLinksManager;
         }
 
         /// <summary>
@@ -245,7 +250,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
                 var typeOfCurrency =
                     await
                         _typeOfCurrencyRepository.GetAll()
-                            .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).OrderBy(p=>p.Name)
+                            .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).OrderBy(p => p.Name)
                             .ToListAsync();
                 return typeOfCurrency;
             }
@@ -257,10 +262,10 @@ namespace CAPS.CORPACCOUNTING.Accounts
         /// <returns></returns>
         public async Task<List<NameValueDto>> GetTypeOfAccountList()
         {
-                var typeOfAccounts = await _typeOfAccountRepository.GetAll()
-                            .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() })
-                            .OrderBy(p => p.Name).ToListAsync();
-                return typeOfAccounts;
+            var typeOfAccounts = await _typeOfAccountRepository.GetAll()
+                        .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() })
+                        .OrderBy(p => p.Name).ToListAsync();
+            return typeOfAccounts;
         }
 
         /// <summary>
@@ -308,7 +313,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
                     linkAccountList.Where(u => u.AccountNumber.Contains(input.Query) || u.Caption.Contains(input.Query));
 
             var result = await linkAccountList.Select(
-                u => new AccountUnitDto {Caption = u.Caption,Description = u.Description,AccountNumber = u.AccountNumber,AccountId = u.Id,ChartOfAccountId = u.ChartOfAccountId}
+                u => new AccountUnitDto { Caption = u.Caption, Description = u.Description, AccountNumber = u.AccountNumber, AccountId = u.Id, ChartOfAccountId = u.ChartOfAccountId }
                 ).OrderBy(p => p.Caption).ToListAsync();
             return result;
         }
@@ -349,14 +354,14 @@ namespace CAPS.CORPACCOUNTING.Accounts
         public async Task<List<AccountUnitDto>> BulkAccountInsert(CreateAccountListInput listAccountUnitDtos)
         {
             List<AccountUnit> accountList = new List<AccountUnit>();
-           var createAccountList = listAccountUnitDtos.AccountList.Select((item, index) => { item.ExcelRowNumber = index; return item; }).ToList();
-           
+            var createAccountList = listAccountUnitDtos.AccountList.Select((item, index) => { item.ExcelRowNumber = index; return item; }).ToList();
+
             //ErrorAccountList
             var erroredAccountList = await ValidateDuplicateRecords(createAccountList);
-            
+
             //ValidAccountList
             var accounts = listAccountUnitDtos.AccountList.Where(p => erroredAccountList.All(p2 => p2.AccountNumber != p.AccountNumber)).ToList();
-            int  accountCode = Convert.ToInt32(await _accountUnitManager.GetNextChildCodeAsync(parentId: null, coaId: listAccountUnitDtos.AccountList[0].ChartOfAccountId));
+            int accountCode = Convert.ToInt32(await _accountUnitManager.GetNextChildCodeAsync(parentId: null, coaId: listAccountUnitDtos.AccountList[0].ChartOfAccountId));
             foreach (var accountUnit in accounts)
             {
                 accountUnit.ParentId = accountUnit.ParentId != 0 ? accountUnit.ParentId : null;
@@ -401,7 +406,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
             //Constructing Duplicate AccountEntity List with Error
             var duplicateAccountsAccountNumberList = (from p in accountsList
                                                       join p2 in duplicateAccountList on p.AccountNumber equals p2.AccountNumber
-                                                      select new {account=p, ErrorMesage = L("DuplicateAccountNumber") + p.AccountNumber }).ToList();
+                                                      select new { account = p, ErrorMesage = L("DuplicateAccountNumber") + p.AccountNumber }).ToList();
 
             //Constructing OutPutDto with ErrorMessage
             foreach (var account in duplicateAccountsAccountNumberList)
@@ -417,6 +422,111 @@ namespace CAPS.CORPACCOUNTING.Accounts
                 accountunitDtoList.Add(accountdto);
             }
             return accountunitDtoList;
+        }
+
+        /// <summary>
+        /// Get MappedAccounts By coaId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+
+        [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_Accounts)]
+        public async Task<PagedResultOutput<AccountUnitDto>> GetLinkedAccountUnitsByCoaId(GetAccountInput input)
+        {
+            //get Coa record by coaId
+            var coa = await _coaRepository.FirstOrDefaultAsync(p => p.Id == input.CoaId);
+            var linkedcoaId = coa.LinkChartOfAccountID;
+
+            //Get all linkedchartofaccount accounts.
+            var query =
+                from au in _accountUnitRepository.GetAll()
+                join linkaccount in
+                (from account in _accountUnitRepository.GetAll()
+                 join homeAc in _accountLinkRepository.GetAll() on account.Id equals homeAc.MapAccountId.Value
+                 select new { account.AccountNumber, homeAc })
+                on au.Id equals linkaccount.homeAc.HomeAccountId.Value
+                into linkaccountunit
+                from linkaccounts in linkaccountunit.DefaultIfEmpty()
+                join typeOfAccount in _typeOfAccountRepository.GetAll() on au.TypeOfAccountId equals typeOfAccount.Id
+                into accounts
+                from typeofaccounts in accounts.DefaultIfEmpty()
+                join currencytype in _typeOfCurrencyRepository.GetAll() on au.TypeOfCurrencyId equals currencytype.Id
+                into currencyt
+                from currency in currencyt.DefaultIfEmpty()
+                join currencyrate in _typeOfCurrencyRateRepository.GetAll() on au.TypeOfCurrencyRateId equals currencyrate.Id
+                into ratecurrency
+                from accountresults in ratecurrency.DefaultIfEmpty()
+                select new
+                {
+                    Account = au,
+                    TypeOfAccount = typeofaccounts.Description,
+                    TypeOfAccountRate = accountresults.Description,
+                    TypeOfCurrency = currency.Description,
+                    LinkAccount = linkaccounts.AccountNumber,
+                    LinkedAccountUnit = linkaccounts.homeAc
+
+                };
+
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                if (!ReferenceEquals(mapSearchFilters, null))
+                    query = Helper.CreateFilters(query, mapSearchFilters);
+            }
+            query = query.Where(item => item.Account.ChartOfAccountId == linkedcoaId);
+
+
+            var resultCount = await query.CountAsync();
+            var results = await query
+                .AsNoTracking()
+                .OrderBy(Helper.GetSort("Account.AccountNumber ASC", input.Sorting))
+                .PageBy(input)
+                .ToListAsync();
+
+            return new PagedResultOutput<AccountUnitDto>(resultCount, results.Select(item =>
+            {
+                var dto = item.Account.MapTo<AccountUnitDto>();
+                dto.AccountId = item.Account.Id;
+                dto.TypeofConsolidation = item.Account.TypeofConsolidationId != null ? item.Account.TypeofConsolidationId.ToDisplayName() : "";
+                dto.TypeOfAccount = item.TypeOfAccount;
+                dto.TypeOfCurrency = item.TypeOfCurrency;
+                dto.TypeOfCurrencyRate = item.TypeOfAccountRate;
+                dto.LinkAccount = item.LinkAccount;
+                dto.AccountLinkId = ReferenceEquals(item.LinkedAccountUnit, null)
+                    ? (long?)null
+                    : item.LinkedAccountUnit.Id;
+                return dto;
+            }).ToList());
+        }
+
+        /// <summary>
+        /// Get Accounts List By CoaId for autofills
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<List<AccountCacheItem>> GetAccountListByCoaId(AutoSearchInput input)
+        {
+            var accountList = await _accountcache.GetAccountCacheItemAsync(
+                CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId)));
+            return accountList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query),
+            p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.AccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
+            || p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).Where(p => p.ChartOfAccountId == input.Id).ToList();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task CreateOrUpdateAccountLinkUnit(CreateOrUpdateAccountLinkUnit input)
+        {
+            var accountUnit = input.MapTo<AccountLinks>();
+            if (input.AccountLinkId == 0)
+                await _accountLinksManager.CreateAsync(accountUnit);
+            else
+                await _accountLinksManager.UpdateAsync(accountUnit);
+
+            await CurrentUnitOfWork.SaveChangesAsync();
         }
     }
 }

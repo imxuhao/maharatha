@@ -108,6 +108,23 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <param name="input"></param>
         /// <returns>Account unit</returns>
         Task<List<AccountUnitDto>> GetAccountsForMapping(AutoSearchInput input);
+
+        /// <summary>
+        /// Get LinkedAccounts List
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<PagedResultOutput<AccountUnitDto>> GetLinkedAccountUnitsByCoaId(GetAccountInput input);
+
+        /// <summary>
+        /// Get AccountList by CoaId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<List<AccountCacheItem>> GetAccountListByCoaId(AutoSearchInput input);
+
+
+        Task CreateOrUpdateAccountLinkUnit(CreateOrUpdateAccountLinkUnit input);
     }
     
 }

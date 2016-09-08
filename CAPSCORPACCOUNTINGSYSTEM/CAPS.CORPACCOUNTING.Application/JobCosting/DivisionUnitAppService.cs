@@ -57,16 +57,16 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_Divisions_Create)]
         public async Task<IdOutputDto<int>> CreateDivisionUnit(CreateJobUnitInput input)
         {
-            var chartofaccount = _coaUnitRepository.FirstOrDefault(p => p.IsCorporate == true);
+            var chartofaccount = _coaUnitRepository.FirstOrDefault(p => p.IsCorporate);
             if (ReferenceEquals(chartofaccount, null))
             {
-                throw new UserFriendlyException(L("Please setup chartofaccount"));
+                throw new UserFriendlyException(L("Pleasesetupchartofaccount"));
             }
             var jobUnit = new JobUnit(jobnumber: input.JobNumber, caption: input.Caption, iscorporatedefault: input.IsCorporateDefault, rollupaccountid: input.RollupAccountId,
                 typeofcurrencyid: input.TypeOfCurrencyId, rollupjobid: input.RollupJobId, typeofjobstatusid: input.TypeOfJobStatusId, typeofbidsoftwareid: input.TypeOfBidSoftwareId,
                 isapproved: input.IsApproved, isactive: input.IsActive, isictdivision: input.IsICTDivision, organizationunitid: input.OrganizationUnitId, typeofprojectid: input.TypeofProjectId,
                 taxrecoveryid: input.TaxRecoveryId, chartofaccountid: chartofaccount.Id, rollupcenterid: input.RollupCenterId, isdivision: true, taxcreditid: input.TaxCreditId);
-            IdOutputDto<int> response = new IdOutputDto<int>()
+            IdOutputDto<int> response = new IdOutputDto<int>
             {
                 JobId = await _jobUnitManager.CreateAsync(jobUnit)
             };

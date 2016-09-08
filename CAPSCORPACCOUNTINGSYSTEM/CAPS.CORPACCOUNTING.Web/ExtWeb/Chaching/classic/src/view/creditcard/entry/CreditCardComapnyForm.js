@@ -223,7 +223,7 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyForm', {
             ui: 'fieldLabelTop',
             tabIndex: 9,
             emptyText: app.localize('Batch'),
-            displayField: 'description',
+            displayField: 'batchDesc',
             valueField: 'batchId',
             queryMode: 'local',
             store: Ext.create('Chaching.store.utilities.BatchListStore')

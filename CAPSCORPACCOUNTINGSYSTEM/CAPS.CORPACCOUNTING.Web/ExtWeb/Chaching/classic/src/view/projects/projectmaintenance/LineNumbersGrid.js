@@ -203,11 +203,18 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
              },
              editor: {
                  xtype: 'chachingcombobox',
-                 store: new Chaching.store.utilities.autofill.RollupAccountListStore(),
+                 store: Ext.create('Chaching.store.utilities.autofill.RollupAccountListStore', {
+                     fields: [{ name: 'accountId', type: 'int', isPrimaryKey: true },
+                            { name: 'accountNumber', type: 'string', headerText: 'AccountNumber', hidden: false, width: '12%', minWidth: 90 },
+                            { name: 'caption', type: 'string', headerText: 'Caption', hidden: false, width: '8%', minWidth: 50 },
+                            { name: 'isCorporate', type: 'boolean', headerText: 'IsCorporate', hidden: false, width: '10%' },
+                            { name: 'rollupAccountId', type: 'int', defaultValue: null, convert: nullHandler, mapping: 'accountId' },
+                            { name: 'rollUpAccountCaption', type: 'string', mapping: 'accountNumber' }
+                     ]
+                 }),
                  width: '100%',
-                 name:'rollUpAccountEditor',
                  valueField: 'rollupAccountId',
-                 displayField: 'rollUpAccountNumber',
+                 displayField: 'rollUpAccountCaption',
                  forceSelection: true,
                  minChars: 2,
                  modulePermissions: {
@@ -269,8 +276,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
                  xtype: 'chachingcombobox',
                  store: new Chaching.store.utilities.autofill.DivisionListStore(),
                  valueField: 'rollupJobId',
-                 name: 'rollUpDivisionEditor',
-                 displayField: 'jobNumber',
+                 displayField: 'rollUpDivision',
                  queryMode: 'remote',
                  forceSelection: true,
                  minChars: 2,

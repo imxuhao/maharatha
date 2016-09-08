@@ -88,6 +88,7 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyForm', {
             mouseWheelEnabled: false,
             width: '100%',
             ui: 'fieldLabelTop',
+            maxLength : 7,
             emptyText: app.localize('MandatoryField')
         },
         {

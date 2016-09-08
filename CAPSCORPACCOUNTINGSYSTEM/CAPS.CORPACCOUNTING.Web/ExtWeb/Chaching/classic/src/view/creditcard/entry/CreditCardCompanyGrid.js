@@ -108,7 +108,14 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyGrid', {
                   xtype: 'textfield',
                   width: '100%'
               }, editor: {
-                  xtype: 'textfield'
+                  xtype: 'numberfield',
+                  allowBlank: false,
+                  minValue: 0, //prevents negative numbers
+                  // Remove spinner buttons, and arrow key and mouse wheel listeners
+                  hideTrigger: true,
+                  keyNavEnabled: false,
+                  mouseWheelEnabled: false,
+                  maxLength: 7
               }
           },
           {

@@ -61,7 +61,7 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyForm', {
             fieldLabel: app.localize('AccountName'),
             width: '100%',
             ui: 'fieldLabelTop',
-            emptyText: app.localize('MandatoryField')
+            emptyText: app.localize('AccountName')
         }, {
             xtype: 'combobox',
             name: 'typeOfBankAccountId',
@@ -88,8 +88,9 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyForm', {
             mouseWheelEnabled: false,
             width: '100%',
             ui: 'fieldLabelTop',
-            maxLength : 7,
-            emptyText: app.localize('MandatoryField')
+           emptyText: app.localize('CreditCardAccountNumber'),
+            maxLength : 7
+           
         },
         {
             xtype: 'chachingcombobox',

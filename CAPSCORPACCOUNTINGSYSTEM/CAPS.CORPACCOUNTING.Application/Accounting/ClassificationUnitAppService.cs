@@ -24,6 +24,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
     /// Classification Application Service
     /// </summary>
     /// 
+    [AbpAuthorize]
     public class ClassificationUnitAppService : CORPACCOUNTINGAppServiceBase, IClassificationUnitAppService
     {
 

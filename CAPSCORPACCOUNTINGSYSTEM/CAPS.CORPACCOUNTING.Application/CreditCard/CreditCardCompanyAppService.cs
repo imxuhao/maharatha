@@ -22,6 +22,7 @@ using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.Sessions;
 using CAPS.CORPACCOUNTING.Banking;
 using System;
+using CAPS.CORPACCOUNTING.CreditCard.Dto;
 
 namespace CAPS.CORPACCOUNTING.CreditCard
 {
@@ -36,13 +37,10 @@ namespace CAPS.CORPACCOUNTING.CreditCard
         private readonly IRepository<BankAccountUnit, long> _bankAccountUnitRepository;
         private readonly IRepository<AddressUnit, long> _addressUnitRepository;
         private readonly IRepository<AccountUnit, long> _accountUnitRepository;
-        private readonly IRepository<JobUnit, int> _jobUnitRepository;
         private readonly IRepository<TypeOfUploadFileUnit, int> _typeOfUploadFileUnitRepository;
         private readonly IRepository<TypeOfCheckStockUnit, int> _typeOfCheckStockUnitRepository;
         private readonly IRepository<VendorUnit, int> _vendorUnitRepository;
         private readonly IRepository<BatchUnit, int> _batchUnitRepository;
-        private readonly IRepository<BankAccountPaymentRangeUnit> _bankAccountPaymentRangeRepository;
-        private readonly BankAccountPaymentRangeUnitManager _bankAccountPaymentRangeUnitManager;
         private readonly IRepository<CoaUnit> _coaUnitRepository;
         private readonly IAccountCache _accountCache;
         private readonly CustomAppSession _customAppSession;
@@ -67,10 +65,9 @@ namespace CAPS.CORPACCOUNTING.CreditCard
         /// <param name="coaUnitRepository"></param>
         public CreditCardCompanyAppService(BankAccountUnitManager bankAccountUnitManager, IRepository<BankAccountUnit, long> bankAccountUnitRepository,
             IAddressUnitAppService addressAppService, IRepository<AddressUnit, long> addressUnitRepository, IRepository<AccountUnit, long> accountUnitRepository,
-            IRepository<JobUnit, int> jobUnitRepository, IRepository<TypeOfUploadFileUnit, int> typeOfUploadFileUnitRepository,
+             IRepository<TypeOfUploadFileUnit, int> typeOfUploadFileUnitRepository,
             IRepository<TypeOfCheckStockUnit, int> typeOfCheckStockUnitRepository, IRepository<VendorUnit, int> vendorUnitRepository,
-            IRepository<BatchUnit, int> batchUnitRepository, IRepository<BankAccountPaymentRangeUnit> bankAccountPaymentRangeUnit,
-            BankAccountPaymentRangeUnitManager bankAccountPaymentRangeUnitManager, IAccountCache accountCache, CustomAppSession customAppSession,
+            IRepository<BatchUnit, int> batchUnitRepository, IAccountCache accountCache, CustomAppSession customAppSession,
             IRepository<CoaUnit> coaUnitRepository)
         {
             _bankAccountUnitManager = bankAccountUnitManager;
@@ -78,16 +75,14 @@ namespace CAPS.CORPACCOUNTING.CreditCard
             _addressUnitRepository = addressUnitRepository;
             _addressAppService = addressAppService;
             _accountUnitRepository = accountUnitRepository;
-            _jobUnitRepository = jobUnitRepository;
             _typeOfCheckStockUnitRepository = typeOfCheckStockUnitRepository;
             _typeOfUploadFileUnitRepository = typeOfUploadFileUnitRepository;
             _vendorUnitRepository = vendorUnitRepository;
             _batchUnitRepository = batchUnitRepository;
-            _bankAccountPaymentRangeRepository = bankAccountPaymentRangeUnit;
-            _bankAccountPaymentRangeUnitManager = bankAccountPaymentRangeUnitManager;
             _accountCache = accountCache;
             _customAppSession = customAppSession;
             _coaUnitRepository = coaUnitRepository;
+            _bankAccountUnitManager.ServiceFrom = "CreditCardCompany";
         }
 
 
@@ -98,7 +93,7 @@ namespace CAPS.CORPACCOUNTING.CreditCard
         /// <returns></returns>
         [UnitOfWork]
         [AbpAuthorize(AppPermissions.Pages_CreditCard_Entry_CreditCardCompanies_Create)]
-        public async Task<IdOutputDto<long>> CreateCreditCardCompanyUnit(CreateBankAccountUnitInput input)
+        public async Task<IdOutputDto<long>> CreateCreditCardCompanyUnit(CreateCreditCardCompanyUnitInput input)
         {
             var bankAccountUnit = input.MapTo<BankAccountUnit>();
             long id = await _bankAccountUnitManager.CreateAsync(bankAccountUnit);
@@ -134,7 +129,7 @@ namespace CAPS.CORPACCOUNTING.CreditCard
         /// <returns></returns>
         [UnitOfWork]
         [AbpAuthorize(AppPermissions.Pages_CreditCard_Entry_CreditCardCompanies_Edit)]
-        public async Task UpdateCreditCardCompanyUnit(UpdateBankAccountUnitInput input)
+        public async Task UpdateCreditCardCompanyUnit(UpdateCreditCardCompanyUnitInput input)
         {
             var bankAccountUnit = await _bankAccountUnitRepository.GetAsync(input.BankAccountId);
 
@@ -180,7 +175,6 @@ namespace CAPS.CORPACCOUNTING.CreditCard
         [AbpAuthorize(AppPermissions.Pages_CreditCard_Entry_CreditCardCompanies_Delete)]
         public async Task DeleteCreditCardCompanyUnit(IdInput<long> input)
         {
-            await _bankAccountPaymentRangeRepository.DeleteAsync(p => p.BankAccountId == input.Id);
             DeleteAddressUnitInput dto = new DeleteAddressUnitInput
             {
                 TypeofObjectId = TypeofObject.CreditCardBank,
@@ -196,7 +190,7 @@ namespace CAPS.CORPACCOUNTING.CreditCard
         /// <param name="input"></param>
         /// <returns></returns>
         [AbpAuthorize(AppPermissions.Pages_CreditCard_Entry_CreditCardCompanies)]
-        public async Task<PagedResultOutput<BankAccountUnitDto>> GetCreditCardCompanies(SearchInputDto input)
+        public async Task<PagedResultOutput<CreditCardCompanyUnitDto>> GetCreditCardCompanies(SearchInputDto input)
         {
             var ccCompanyQuery = CreateCcCompanyQuery(input);
             var resultCount = await ccCompanyQuery.CountAsync();
@@ -208,7 +202,7 @@ namespace CAPS.CORPACCOUNTING.CreditCard
 
             var response = ConvertToCcCompanyDtos(results);
 
-            return new PagedResultOutput<BankAccountUnitDto>(resultCount, response);
+            return new PagedResultOutput<CreditCardCompanyUnitDto>(resultCount, response);
         }
 
         /// <summary>
@@ -216,12 +210,12 @@ namespace CAPS.CORPACCOUNTING.CreditCard
         /// </summary>
         /// <param name="results"></param>
         /// <returns></returns>
-        private List<BankAccountUnitDto> ConvertToCcCompanyDtos(List<BankAccountAndAddressDto> results)
+        private List<CreditCardCompanyUnitDto> ConvertToCcCompanyDtos(List<BankAccountAndAddressDto> results)
         {
             return results.Select(
                 result =>
                 {
-                    var dto = result.BankAccount.MapTo<BankAccountUnitDto>();
+                    var dto = result.BankAccount.MapTo<CreditCardCompanyUnitDto>();
                     dto.BankAccountId = result.BankAccount.Id;
                     dto.BatchDesc = result.BatchDesc;
                     dto.TypeOfBankAccountDesc = result.BankAccount.TypeOfBankAccountId.ToDisplayName();

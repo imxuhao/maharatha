@@ -1,28 +1,31 @@
-﻿using Abp.Application.Services.Dto;
-using Abp.AutoMapper;
+﻿using Abp.AutoMapper;
+using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace CAPS.CORPACCOUNTING.Banking.Dto
+namespace CAPS.CORPACCOUNTING.CreditCard.Dto
 {
     /// <summary>
     /// 
     /// </summary>
+
     [AutoMapTo(typeof(BankAccountUnit))]
-    public class CreateBankAccountUnitInput
+    public class UpdateCreditCardCompanyUnitInput
     {
+        /// <summary>Gets or sets the BankAccountId field. </summary>
+        public long BankAccountId { get; set; }
 
         /// <summary>Gets or sets the Description field. </summary>
-        [Required(ErrorMessage = "Bank Name Field is required.")]
-        [StringLength(BankAccountUnit.MaxLength, ErrorMessage = "Bank Name Field length should not exceed 200 characters.")]
+        [Required(ErrorMessage = "Credit Card Company Field is required.")]
+        [StringLength(BankAccountUnit.MaxLength, ErrorMessage = "Credit Card Company Field length should not exceed 200 characters.")]
         public string Description { get; set; }
 
         /// <summary>Gets or sets the DisplaySequence field. </summary>
         public short? DisplaySequence { get; set; }
 
         /// <summary>Gets or sets the TypeOfBankAccountId field. </summary>
-        [EnumDataType(typeof(TypeOfBankAccount), ErrorMessage = "Account Type Field is required.")]
+        [EnumDataType(typeof(TypeOfBankAccount), ErrorMessage = "Card Type Field is required.")]
         public TypeOfBankAccount TypeOfBankAccountId { get; set; }
 
         /// <summary>Gets or sets the AccountId field. </summary>
@@ -40,7 +43,7 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
         public string BankAccountNumber { get; set; }
 
         /// <summary>Gets or sets the RoutingNumber field. </summary>
-        [StringLength(BankAccountUnit.MaxLength, ErrorMessage = "Routing Number Field length should not exceed 200 characters.")]
+        [StringLength(BankAccountUnit.MaxLength)]
         public string RoutingNumber { get; set; }
 
         /// <summary>Gets or sets the TypeOfCheckStockId field. </summary>
@@ -126,13 +129,7 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
 
-        /// <summary>Gets or Sets Addresses of the Employee. </summary>
-        public List<CreateAddressUnitInput> Addresses { get; set; }
-
-        /// <summary>Gets or Sets BankAccountPaymentRangeList. </summary>
-        public List<BankAccountPaymentRangeInput> BankAccountPaymentRangeList { get; set; }
-
-
+        /// <summary>Gets or Sets Addresses of the Credit Card Company. </summary>
+        public List<UpdateAddressUnitInput> Addresses { get; set; }
     }
 }
-

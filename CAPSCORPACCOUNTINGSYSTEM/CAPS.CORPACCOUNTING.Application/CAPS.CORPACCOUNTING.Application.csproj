@@ -277,11 +277,14 @@
     <Compile Include="Configuration\Tenants\Dto\LdapSettingsEditDto.cs" />
     <Compile Include="CreditCard\CreditCardCompanyAppService.cs" />
     <Compile Include="CreditCard\CreditCardEntryDocumentAppService.cs" />
+    <Compile Include="CreditCard\Dto\CreateCreditCardCompanyUnitInput.cs" />
+    <Compile Include="CreditCard\Dto\CreditCardCompanyUnitDto.cs" />
     <Compile Include="CreditCard\Dto\CreditCardEntryDetailInputUnit.cs" />
     <Compile Include="CreditCard\Dto\CreditCardEntryDetailUnitDto.cs" />
     <Compile Include="CreditCard\Dto\CreditCardEntryDocumentInputUnit.cs" />
     <Compile Include="CreditCard\Dto\CreditCardEntryDocumentUnitDto.cs" />
     <Compile Include="CreditCard\Dto\CreditCardStatementDto.cs" />
+    <Compile Include="CreditCard\Dto\UpdateCreditCardCompanyUnitInput.cs" />
     <Compile Include="CreditCard\ICreditCardCompanyAppService.cs" />
     <Compile Include="CreditCard\ICreditCardEntryDocumentAppService.cs" />
     <Compile Include="CustomDtoMapper.cs" />

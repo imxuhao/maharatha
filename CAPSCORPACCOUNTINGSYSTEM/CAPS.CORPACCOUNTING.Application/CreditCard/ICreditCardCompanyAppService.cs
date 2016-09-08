@@ -1,6 +1,7 @@
 ﻿using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Banking.Dto;
+using CAPS.CORPACCOUNTING.CreditCard.Dto;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using System;
@@ -11,6 +12,10 @@ using System.Threading.Tasks;
 
 namespace CAPS.CORPACCOUNTING.CreditCard
 {
+
+    /// <summary>
+    /// 
+    /// </summary>
    public interface ICreditCardCompanyAppService: IApplicationService
     {
         /// <summary>
@@ -18,14 +23,14 @@ namespace CAPS.CORPACCOUNTING.CreditCard
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<IdOutputDto<long>> CreateCreditCardCompanyUnit(CreateBankAccountUnitInput input);
+        Task<IdOutputDto<long>> CreateCreditCardCompanyUnit(CreateCreditCardCompanyUnitInput input);
 
         /// <summary>
         /// Update the CreditCard Company based on Id.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task UpdateCreditCardCompanyUnit(UpdateBankAccountUnitInput input);
+        Task UpdateCreditCardCompanyUnit(UpdateCreditCardCompanyUnitInput input);
 
         /// <summary>
         ///  Delete the CreditCard Company
@@ -41,7 +46,7 @@ namespace CAPS.CORPACCOUNTING.CreditCard
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<PagedResultOutput<BankAccountUnitDto>> GetCreditCardCompanies(SearchInputDto input);
+        Task<PagedResultOutput<CreditCardCompanyUnitDto>> GetCreditCardCompanies(SearchInputDto input);
 
 
     }

@@ -5,106 +5,109 @@ using System.Collections.ObjectModel;
 
 namespace CAPS.CORPACCOUNTING.Banking.Dto
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [AutoMapFrom(typeof(BankAccountUnit))]
-    public class BankAccountUnitDto : IOutputDto
+    public class BankAccountUnitDto
     {
         /// <summary>Overriding the Id column with BankAccountId</summary>
-        public virtual long BankAccountId { get; set; }
+        public long BankAccountId { get; set; }
 
         /// <summary>Gets or sets the Description field. </summary>
-        public virtual string Description { get; set; }
+        public string Description { get; set; }
         /// <summary>Gets or sets the DisplaySequence field. </summary>
-        public virtual short? DisplaySequence { get; set; }
+        public short? DisplaySequence { get; set; }
 
         /// <summary>Gets or sets the TypeOfBankAccountId field. </summary>
-        public virtual TypeOfBankAccount TypeOfBankAccountId { get; set; }
+        public TypeOfBankAccount TypeOfBankAccountId { get; set; }
 
         /// <summary>Gets or sets the AccountId field. </summary>
-        public virtual long? AccountId { get; set; }
+        public long? AccountId { get; set; }
 
         /// <summary>Gets or sets the JobId field. </summary>
-        public virtual int? JobId { get; set; }
+        public int? JobId { get; set; }
 
         /// <summary>Gets or sets the BankAccountName field. </summary>
-        public virtual string BankAccountName { get; set; }
+        public string BankAccountName { get; set; }
 
         /// <summary>Gets or sets the BankAccountNumber field. </summary>
-        public virtual string BankAccountNumber { get; set; }
+        public string BankAccountNumber { get; set; }
 
         /// <summary>Gets or sets the RoutingNumber field. </summary>
-        public virtual string RoutingNumber { get; set; }
+        public string RoutingNumber { get; set; }
 
         /// <summary>Gets or sets the TypeOfCheckStockId field. </summary>
-        public virtual int? TypeOfCheckStockId { get; set; }
+        public int? TypeOfCheckStockId { get; set; }
 
         /// <summary>Gets or sets the LastCheckNumberGenerated field. </summary>
-        public virtual long? LastCheckNumberGenerated { get; set; }
+        public long? LastCheckNumberGenerated { get; set; }
 
         /// <summary>Gets or sets the ControlAccount field. </summary>
-        public virtual string ControlAccount { get; set; }
+        public string ControlAccount { get; set; }
 
         /// <summary>Gets or sets the ClearingAccountId field. </summary>
-        public virtual long? ClearingAccountId { get; set; }
+        public long? ClearingAccountId { get; set; }
 
         /// <summary>Gets or sets the ClearingJobId field. </summary>
-        public virtual int? ClearingJobId { get; set; }
+        public int? ClearingJobId { get; set; }
 
         /// <summary>Gets or sets the MaxExpirationLength field. </summary>
-        public virtual string ExpirationMMYYYY { get; set; }
+        public string ExpirationMMYYYY { get; set; }
 
         /// <summary>Gets or sets the TypeOfUploadFileId field. </summary>
-        public virtual int? TypeOfUploadFileId { get; set; }
+        public int? TypeOfUploadFileId { get; set; }
 
         /// <summary>Gets or sets the VendorId field. </summary>
-        public virtual int? VendorId { get; set; }
+        public int? VendorId { get; set; }
 
         /// <summary>Gets or sets the ControllingBankAccountId field. </summary>
-        public virtual long? ControllingBankAccountId { get; set; }
+        public long? ControllingBankAccountId { get; set; }
 
         /// <summary>Gets or sets the IsClosed field. </summary>
-        public virtual bool IsClosed { get; set; }
+        public bool IsClosed { get; set; }
 
         /// <summary>Gets or sets the IsActive field. </summary>
-        public virtual bool IsActive { get; set; }
+        public bool IsActive { get; set; }
 
         /// <summary>Gets or sets the IsApproved field. </summary>
-        public virtual bool IsApproved { get; set; }
+        public bool IsApproved { get; set; }
 
         /// <summary>Gets or sets the TypeOfInactiveStatusId field. </summary>
-        public virtual TypeOfInactiveStatus? TypeOfInactiveStatusId { get; set; }
+        public TypeOfInactiveStatus? TypeOfInactiveStatusId { get; set; }
 
         /// <summary>Gets or sets the PositivePayTypeOfUploadFileId field. </summary>
-        public virtual int? PositivePayTypeOfUploadFileId { get; set; }
+        public int? PositivePayTypeOfUploadFileId { get; set; }
 
         /// <summary>Gets or sets the PositivePayTransmitterInfo field. </summary>
-        public virtual string PositivePayTransmitterInfo { get; set; }
+        public string PositivePayTransmitterInfo { get; set; }
 
         /// <summary>Gets or sets the PettyCashAccountId field. </summary>
-        public virtual long? PettyCashAccountId { get; set; }
+        public long? PettyCashAccountId { get; set; }
 
         /// <summary>Gets or sets the IsACHEnabled field. </summary>
-        public virtual bool? IsACHEnabled { get; set; }
+        public bool? IsACHEnabled { get; set; }
 
         /// <summary>Gets or sets the ACHDestinationCode field. </summary>
-        public virtual string ACHDestinationCode { get; set; }
+        public string ACHDestinationCode { get; set; }
 
         /// <summary>Gets or sets the ACHDestinationName field. </summary>
-        public virtual string ACHDestinationName { get; set; }
+        public string ACHDestinationName { get; set; }
 
         /// <summary>Gets or sets the ACHOriginCode field. </summary>
-        public virtual string ACHOriginCode { get; set; }
+        public string ACHOriginCode { get; set; }
 
         /// <summary>Gets or sets the ACHOriginName field. </summary>
-        public virtual string ACHOriginName { get; set; }
+        public string ACHOriginName { get; set; }
 
         /// <summary>Gets or sets the BatchId field. </summary>
-        public virtual int? BatchId { get; set; }
+        public int? BatchId { get; set; }
 
         /// <summary>Gets or sets the CCFullAccountNO field. </summary>
-        public virtual string CCFullAccountNO { get; set; }
+        public string CCFullAccountNO { get; set; }
 
         /// <summary>Gets or sets the CCFootNote field. </summary>     
-        public virtual string CCFootNote { get; set; }
+        public string CCFootNote { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }

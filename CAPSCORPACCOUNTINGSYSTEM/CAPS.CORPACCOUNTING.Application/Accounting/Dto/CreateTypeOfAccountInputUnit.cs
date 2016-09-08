@@ -17,12 +17,13 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
     {
 
         /// <summary>Gets or sets the Description field. </summary>
-        [Required]
-        [StringLength(TypeOfAccountUnit.MaxDescLength)]
+
+        [Required(ErrorMessage = "Description Field is required.")]
+        [StringLength(TypeOfAccountUnit.MaxDescLength, ErrorMessage = "Description Field length should not exceed 100 characters.")]
         public  string Description { get; set; }
 
         /// <summary>Gets or sets the Caption field. </summary>
-        [StringLength(TypeOfAccountUnit.MaxCaptionLength)]
+        [StringLength(TypeOfAccountUnit.MaxCaptionLength, ErrorMessage = "Caption Field length should not exceed 20 characters.")]
         public  string Caption { get; set; }
 
         /// <summary>Gets or sets the DisplaySequence field. </summary>

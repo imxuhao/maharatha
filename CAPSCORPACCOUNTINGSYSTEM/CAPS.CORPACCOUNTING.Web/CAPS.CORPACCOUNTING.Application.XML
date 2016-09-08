@@ -2380,6 +2380,11 @@
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountPaymentRangeDto.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.BankAccountId">
             <summary>Overriding the Id column with BankAccountId</summary>
         </member>
@@ -2659,6 +2664,11 @@
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BatchUnitDto.BatchAmount">
             <summary>Gets or sets the BatchAmount field. </summary>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.Banking.Dto.CreateBankAccountUnitInput">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.CreateBankAccountUnitInput.Description">
             <summary>Gets or sets the Description field. </summary>
         </member>
@@ -2823,6 +2833,11 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountPaymentRangeInput.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Banking.Dto.UpdateBankAccountUnitInput">
+            <summary>
+            
+            </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.UpdateBankAccountUnitInput.BankAccountId">
             <summary>Gets or sets the BankAccountId field. </summary>
@@ -3234,7 +3249,7 @@
             
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardCompanyAppService.#ctor(CAPS.CORPACCOUNTING.Banking.BankAccountUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.BankAccountUnit,System.Int64},CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AddressUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.JobCosting.JobUnit,System.Int32},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.TypeOfUploadFileUnit,System.Int32},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.TypeOfCheckStockUnit,System.Int32},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit,System.Int32},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.BatchUnit,System.Int32},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.BankAccountPaymentRangeUnit},CAPS.CORPACCOUNTING.Banking.BankAccountPaymentRangeUnitManager,CAPS.CORPACCOUNTING.Helpers.CacheItems.IAccountCache,CAPS.CORPACCOUNTING.Sessions.CustomAppSession,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CoaUnit})">
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardCompanyAppService.#ctor(CAPS.CORPACCOUNTING.Banking.BankAccountUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.BankAccountUnit,System.Int64},CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AddressUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.TypeOfUploadFileUnit,System.Int32},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.TypeOfCheckStockUnit,System.Int32},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit,System.Int32},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.BatchUnit,System.Int32},CAPS.CORPACCOUNTING.Helpers.CacheItems.IAccountCache,CAPS.CORPACCOUNTING.Sessions.CustomAppSession,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CoaUnit})">
             <summary>
             
             </summary>
@@ -3254,14 +3269,14 @@
             <param name="customAppSession"></param>
             <param name="coaUnitRepository"></param>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardCompanyAppService.CreateCreditCardCompanyUnit(CAPS.CORPACCOUNTING.Banking.Dto.CreateBankAccountUnitInput)">
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardCompanyAppService.CreateCreditCardCompanyUnit(CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput)">
             <summary>
             Create the CreditCard Company.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardCompanyAppService.UpdateCreditCardCompanyUnit(CAPS.CORPACCOUNTING.Banking.Dto.UpdateBankAccountUnitInput)">
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardCompanyAppService.UpdateCreditCardCompanyUnit(CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput)">
             <summary>
              Update the CreditCard Company 
             </summary>
@@ -3375,6 +3390,262 @@
             </summary>
             <param name="input"></param>
             <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.Description">
+            <summary>Gets or sets the Description field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.DisplaySequence">
+            <summary>Gets or sets the DisplaySequence field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.TypeOfBankAccountId">
+            <summary>Gets or sets the TypeOfBankAccountId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.AccountId">
+            <summary>Gets or sets the AccountId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.JobId">
+            <summary>Gets or sets the JobId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.BankAccountName">
+            <summary>Gets or sets the BankAccountName field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.BankAccountNumber">
+            <summary>Gets or sets the BankAccountNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.RoutingNumber">
+            <summary>Gets or sets the RoutingNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.TypeOfCheckStockId">
+            <summary>Gets or sets the TypeOfCheckStockId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.LastCheckNumberGenerated">
+            <summary>Gets or sets the LastCheckNumberGenerated field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.ControlAccount">
+            <summary>Gets or sets the ControlAccount field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.ClearingAccountId">
+            <summary>Gets or sets the ClearingAccountId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.ClearingJobId">
+            <summary>Gets or sets the ClearingJobId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.ExpirationMMYYYY">
+            <summary>Gets or sets the MaxExpirationLength field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.TypeOfUploadFileId">
+            <summary>Gets or sets the TypeOfUploadFileId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.VendorId">
+            <summary>Gets or sets the VendorId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.ControllingBankAccountId">
+            <summary>Gets or sets the ControllingBankAccountId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.IsClosed">
+            <summary>Gets or sets the IsClosed field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.IsActive">
+            <summary>Gets or sets the IsActive field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.IsApproved">
+            <summary>Gets or sets the IsApproved field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.TypeOfInactiveStatusId">
+            <summary>Gets or sets the TypeOfInactiveStatusId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.PositivePayTypeOfUploadFileId">
+            <summary>Gets or sets the PositivePayTypeOfUploadFileId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.PositivePayTransmitterInfo">
+            <summary>Gets or sets the PositivePayTransmitterInfo field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.PettyCashAccountId">
+            <summary>Gets or sets the PettyCashAccountId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.IsACHEnabled">
+            <summary>Gets or sets the IsACHEnabled field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.ACHDestinationCode">
+            <summary>Gets or sets the ACHDestinationCode field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.ACHDestinationName">
+            <summary>Gets or sets the ACHDestinationName field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.ACHOriginCode">
+            <summary>Gets or sets the ACHOriginCode field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.ACHOriginName">
+            <summary>Gets or sets the ACHOriginName field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.BatchId">
+            <summary>Gets or sets the BatchId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.CCFullAccountNO">
+            <summary>Gets or sets the CCFullAccountNO field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.CCFootNote">
+            <summary>Gets or sets the CCFootNote field. </summary>     
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.OrganizationUnitId">
+            <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput.Addresses">
+            <summary>Gets or Sets Addresses of the Credit Card Company. </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.BankAccountId">
+            <summary>Gets or sets the BankAccountId field</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.Description">
+            <summary>Gets or sets the Description field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.DisplaySequence">
+            <summary>Gets or sets the DisplaySequence field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.TypeOfBankAccountId">
+            <summary>Gets or sets the TypeOfBankAccountId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.AccountId">
+            <summary>Gets or sets the AccountId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.JobId">
+            <summary>Gets or sets the JobId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.BankAccountName">
+            <summary>Gets or sets the BankAccountName field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.BankAccountNumber">
+            <summary>Gets or sets the BankAccountNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.RoutingNumber">
+            <summary>Gets or sets the RoutingNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.TypeOfCheckStockId">
+            <summary>Gets or sets the TypeOfCheckStockId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.LastCheckNumberGenerated">
+            <summary>Gets or sets the LastCheckNumberGenerated field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.ControlAccount">
+            <summary>Gets or sets the ControlAccount field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.ClearingAccountId">
+            <summary>Gets or sets the ClearingAccountId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.ClearingJobId">
+            <summary>Gets or sets the ClearingJobId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.ExpirationMMYYYY">
+            <summary>Gets or sets the MaxExpirationLength field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.TypeOfUploadFileId">
+            <summary>Gets or sets the TypeOfUploadFileId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.VendorId">
+            <summary>Gets or sets the VendorId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.ControllingBankAccountId">
+            <summary>Gets or sets the ControllingBankAccountId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.IsClosed">
+            <summary>Gets or sets the IsClosed field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.IsActive">
+            <summary>Gets or sets the IsActive field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.IsApproved">
+            <summary>Gets or sets the IsApproved field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.TypeOfInactiveStatusId">
+            <summary>Gets or sets the TypeOfInactiveStatusId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.PositivePayTypeOfUploadFileId">
+            <summary>Gets or sets the PositivePayTypeOfUploadFileId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.PositivePayTransmitterInfo">
+            <summary>Gets or sets the PositivePayTransmitterInfo field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.PettyCashAccountId">
+            <summary>Gets or sets the PettyCashAccountId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.IsACHEnabled">
+            <summary>Gets or sets the IsACHEnabled field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.ACHDestinationCode">
+            <summary>Gets or sets the ACHDestinationCode field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.ACHDestinationName">
+            <summary>Gets or sets the ACHDestinationName field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.ACHOriginCode">
+            <summary>Gets or sets the ACHOriginCode field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.ACHOriginName">
+            <summary>Gets or sets the ACHOriginName field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.BatchId">
+            <summary>Gets or sets the BatchId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.CCFullAccountNO">
+            <summary>Gets or sets the CCFullAccountNO field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.CCFootNote">
+            <summary>Gets or sets the CCFootNote field. </summary>     
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.OrganizationUnitId">
+            <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.Address">
+            <summary>Gets or sets the Address field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.TypeOfBankAccountDesc">
+            <summary>Gets or sets the TypeOfBankAccountDesc.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.LedgerAccount">
+            <summary>Gets or sets the Account.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.JobNumber">
+            <summary>Gets or sets the Job.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.TypeofCheckStockDesc">
+            <summary>Gets or sets the TypeofCheckStockDesc.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.ClearingAccountNumber">
+            <summary>Gets or sets the ClearingAccount.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.ClearingJobNumber">
+            <summary>Gets or sets the ClearingJob.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.TypeOfUploadFileDesc">
+            <summary>Gets or sets the TypeOfUploadFileDesc.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.VendorNumber">
+            <summary>Gets or sets the Vendor.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.ControllingBankAccountDesc">
+            <summary>Gets or sets the ControllingBankAccounts.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.TypeOfInactiveStatus">
+            <summary>Gets or sets the TypeOfInactiveStatus.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.PositivePayTypeOfUploadFileDesc">
+            <summary>Gets or sets the PositivePayTypeOfUploadFileDesc.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.PettyCashAccount">
+            <summary>Gets or sets the PettyCashAccount.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardCompanyUnitDto.BatchDesc">
+            <summary>Gets or sets the Batch.</summary>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailInputUnit">
             <summary>
@@ -3570,14 +3841,129 @@
         <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardStatementDto.ControlTotal">
             <summary>Get Sets the ControlTotal field.</summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardCompanyAppService.CreateCreditCardCompanyUnit(CAPS.CORPACCOUNTING.Banking.Dto.CreateBankAccountUnitInput)">
+        <member name="T:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.BankAccountId">
+            <summary>Gets or sets the BankAccountId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.Description">
+            <summary>Gets or sets the Description field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.DisplaySequence">
+            <summary>Gets or sets the DisplaySequence field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.TypeOfBankAccountId">
+            <summary>Gets or sets the TypeOfBankAccountId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.AccountId">
+            <summary>Gets or sets the AccountId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.JobId">
+            <summary>Gets or sets the JobId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.BankAccountName">
+            <summary>Gets or sets the BankAccountName field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.BankAccountNumber">
+            <summary>Gets or sets the BankAccountNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.RoutingNumber">
+            <summary>Gets or sets the RoutingNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.TypeOfCheckStockId">
+            <summary>Gets or sets the TypeOfCheckStockId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.LastCheckNumberGenerated">
+            <summary>Gets or sets the LastCheckNumberGenerated field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.ControlAccount">
+            <summary>Gets or sets the ControlAccount field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.ClearingAccountId">
+            <summary>Gets or sets the ClearingAccountId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.ClearingJobId">
+            <summary>Gets or sets the ClearingJobId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.ExpirationMMYYYY">
+            <summary>Gets or sets the MaxExpirationLength field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.TypeOfUploadFileId">
+            <summary>Gets or sets the TypeOfUploadFileId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.VendorId">
+            <summary>Gets or sets the VendorId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.ControllingBankAccountId">
+            <summary>Gets or sets the ControllingBankAccountId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.IsClosed">
+            <summary>Gets or sets the IsClosed field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.IsActive">
+            <summary>Gets or sets the IsActive field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.IsApproved">
+            <summary>Gets or sets the IsApproved field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.TypeOfInactiveStatusId">
+            <summary>Gets or sets the TypeOfInactiveStatusId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.PositivePayTypeOfUploadFileId">
+            <summary>Gets or sets the PositivePayTypeOfUploadFileId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.PositivePayTransmitterInfo">
+            <summary>Gets or sets the PositivePayTransmitterInfo field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.PettyCashAccountId">
+            <summary>Gets or sets the PettyCashAccountId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.IsACHEnabled">
+            <summary>Gets or sets the IsACHEnabled field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.ACHDestinationCode">
+            <summary>Gets or sets the ACHDestinationCode field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.ACHDestinationName">
+            <summary>Gets or sets the ACHDestinationName field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.ACHOriginCode">
+            <summary>Gets or sets the ACHOriginCode field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.ACHOriginName">
+            <summary>Gets or sets the ACHOriginName field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.BatchId">
+            <summary>Gets or sets the BatchId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.CCFullAccountNO">
+            <summary>Gets or sets the CCFullAccountNO field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.CCFootNote">
+            <summary>Gets or sets the CCFootNote field. </summary>     
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.OrganizationUnitId">
+            <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput.Addresses">
+            <summary>Gets or Sets Addresses of the Credit Card Company. </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.CreditCard.ICreditCardCompanyAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardCompanyAppService.CreateCreditCardCompanyUnit(CAPS.CORPACCOUNTING.CreditCard.Dto.CreateCreditCardCompanyUnitInput)">
             <summary>
              Create the CreditCard Company.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardCompanyAppService.UpdateCreditCardCompanyUnit(CAPS.CORPACCOUNTING.Banking.Dto.UpdateBankAccountUnitInput)">
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardCompanyAppService.UpdateCreditCardCompanyUnit(CAPS.CORPACCOUNTING.CreditCard.Dto.UpdateCreditCardCompanyUnitInput)">
             <summary>
             Update the CreditCard Company based on Id.
             </summary>

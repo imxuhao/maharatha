@@ -1,28 +1,25 @@
-﻿using Abp.Application.Services.Dto;
-using Abp.AutoMapper;
+﻿using Abp.AutoMapper;
+using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.Masters.Dto;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
 
-namespace CAPS.CORPACCOUNTING.Banking.Dto
+namespace CAPS.CORPACCOUNTING.CreditCard.Dto
 {
     /// <summary>
     /// 
     /// </summary>
-    [AutoMapTo(typeof(BankAccountUnit))]
-    public class CreateBankAccountUnitInput
+    [AutoMapFrom(typeof(BankAccountUnit))]
+    public class CreditCardCompanyUnitDto
     {
+        /// <summary>Gets or sets the BankAccountId field</summary>
+        public long BankAccountId { get; set; }
 
         /// <summary>Gets or sets the Description field. </summary>
-        [Required(ErrorMessage = "Bank Name Field is required.")]
-        [StringLength(BankAccountUnit.MaxLength, ErrorMessage = "Bank Name Field length should not exceed 200 characters.")]
         public string Description { get; set; }
-
         /// <summary>Gets or sets the DisplaySequence field. </summary>
         public short? DisplaySequence { get; set; }
 
         /// <summary>Gets or sets the TypeOfBankAccountId field. </summary>
-        [EnumDataType(typeof(TypeOfBankAccount), ErrorMessage = "Account Type Field is required.")]
         public TypeOfBankAccount TypeOfBankAccountId { get; set; }
 
         /// <summary>Gets or sets the AccountId field. </summary>
@@ -32,15 +29,12 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
         public int? JobId { get; set; }
 
         /// <summary>Gets or sets the BankAccountName field. </summary>
-        [StringLength(BankAccountUnit.MaxLength, ErrorMessage = "Account Name Field length should not exceed 200 characters.")]
         public string BankAccountName { get; set; }
 
         /// <summary>Gets or sets the BankAccountNumber field. </summary>
-        [StringLength(BankAccountUnit.MaxLength, ErrorMessage = "Account Number Field length should not exceed 200 characters.")]
         public string BankAccountNumber { get; set; }
 
         /// <summary>Gets or sets the RoutingNumber field. </summary>
-        [StringLength(BankAccountUnit.MaxLength, ErrorMessage = "Routing Number Field length should not exceed 200 characters.")]
         public string RoutingNumber { get; set; }
 
         /// <summary>Gets or sets the TypeOfCheckStockId field. </summary>
@@ -50,7 +44,6 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
         public long? LastCheckNumberGenerated { get; set; }
 
         /// <summary>Gets or sets the ControlAccount field. </summary>
-        [StringLength(BankAccountUnit.MaxLength)]
         public string ControlAccount { get; set; }
 
         /// <summary>Gets or sets the ClearingAccountId field. </summary>
@@ -60,7 +53,6 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
         public int? ClearingJobId { get; set; }
 
         /// <summary>Gets or sets the MaxExpirationLength field. </summary>
-        [StringLength(BankAccountUnit.MaxExpirationLength)]
         public string ExpirationMMYYYY { get; set; }
 
         /// <summary>Gets or sets the TypeOfUploadFileId field. </summary>
@@ -88,7 +80,6 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
         public int? PositivePayTypeOfUploadFileId { get; set; }
 
         /// <summary>Gets or sets the PositivePayTransmitterInfo field. </summary>
-        [StringLength(BankAccountUnit.MaxLength)]
         public string PositivePayTransmitterInfo { get; set; }
 
         /// <summary>Gets or sets the PettyCashAccountId field. </summary>
@@ -98,26 +89,21 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
         public bool? IsACHEnabled { get; set; }
 
         /// <summary>Gets or sets the ACHDestinationCode field. </summary>
-        [StringLength(BankAccountUnit.MaxAccountLength)]
         public string ACHDestinationCode { get; set; }
 
         /// <summary>Gets or sets the ACHDestinationName field. </summary>
-        [StringLength(BankAccountUnit.MaxLength)]
         public string ACHDestinationName { get; set; }
 
         /// <summary>Gets or sets the ACHOriginCode field. </summary>
-        [StringLength(BankAccountUnit.MaxAccountLength)]
         public string ACHOriginCode { get; set; }
 
         /// <summary>Gets or sets the ACHOriginName field. </summary>
-        [StringLength(BankAccountUnit.MaxLength)]
         public string ACHOriginName { get; set; }
 
         /// <summary>Gets or sets the BatchId field. </summary>
         public int? BatchId { get; set; }
 
         /// <summary>Gets or sets the CCFullAccountNO field. </summary>
-        [StringLength(BankAccountUnit.MaxAccountLength)]
         public string CCFullAccountNO { get; set; }
 
         /// <summary>Gets or sets the CCFootNote field. </summary>     
@@ -126,13 +112,47 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
 
-        /// <summary>Gets or Sets Addresses of the Employee. </summary>
-        public List<CreateAddressUnitInput> Addresses { get; set; }
+        /// <summary>Gets or sets the Address field. </summary>
+        public Collection<AddressUnitDto> Address { get; set; }
 
-        /// <summary>Gets or Sets BankAccountPaymentRangeList. </summary>
-        public List<BankAccountPaymentRangeInput> BankAccountPaymentRangeList { get; set; }
+        /// <summary>Gets or sets the TypeOfBankAccountDesc.</summary>
+        public string TypeOfBankAccountDesc { get; set; }
 
+        /// <summary>Gets or sets the Account.</summary>
+        public string LedgerAccount { get; set; }
+
+        /// <summary>Gets or sets the Job.</summary>
+        public string JobNumber { get; set; }
+
+        /// <summary>Gets or sets the TypeofCheckStockDesc.</summary>
+        public string TypeofCheckStockDesc { get; set; }
+
+        /// <summary>Gets or sets the ClearingAccount.</summary>
+        public string ClearingAccountNumber { get; set; }
+
+        /// <summary>Gets or sets the ClearingJob.</summary>
+        public string ClearingJobNumber { get; set; }
+
+        /// <summary>Gets or sets the TypeOfUploadFileDesc.</summary>
+        public string TypeOfUploadFileDesc { get; set; }
+
+        /// <summary>Gets or sets the Vendor.</summary>
+        public string VendorNumber { get; set; }
+
+        /// <summary>Gets or sets the ControllingBankAccounts.</summary>
+        public string ControllingBankAccountDesc { get; set; }
+
+        /// <summary>Gets or sets the TypeOfInactiveStatus.</summary>
+        public string TypeOfInactiveStatus { get; set; }
+
+        /// <summary>Gets or sets the PositivePayTypeOfUploadFileDesc.</summary>
+        public string PositivePayTypeOfUploadFileDesc { get; set; }
+
+        /// <summary>Gets or sets the PettyCashAccount.</summary>
+        public string PettyCashAccount { get; set; }
+
+        /// <summary>Gets or sets the Batch.</summary>
+        public string BatchDesc { get; set; }
 
     }
 }
-

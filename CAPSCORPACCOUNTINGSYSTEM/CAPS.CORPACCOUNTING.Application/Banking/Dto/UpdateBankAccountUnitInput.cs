@@ -6,129 +6,132 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.Banking.Dto
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [AutoMapTo(typeof(BankAccountUnit))]
-    public class UpdateBankAccountUnitInput:IInputDto
+    public class UpdateBankAccountUnitInput
     {
 
         /// <summary>Gets or sets the BankAccountId field. </summary>
         public long BankAccountId { get; set; }
 
         /// <summary>Gets or sets the Description field. </summary>
-        [Required]
-        [StringLength(BankAccountUnit.MaxLength)]
-        public virtual string Description { get; set; }
+        [Required(ErrorMessage = "Bank Name Field is required.")]
+        [StringLength(BankAccountUnit.MaxLength, ErrorMessage = "Bank Name Field length should not exceed 200 characters.")]
+        public string Description { get; set; }
 
         /// <summary>Gets or sets the DisplaySequence field. </summary>
-        public virtual short? DisplaySequence { get; set; }
+        public short? DisplaySequence { get; set; }
 
         /// <summary>Gets or sets the TypeOfBankAccountId field. </summary>
-        [EnumDataType(typeof(TypeOfBankAccount))]
-        public virtual TypeOfBankAccount TypeOfBankAccountId { get; set; }
+        [EnumDataType(typeof(TypeOfBankAccount), ErrorMessage = "Account Type Field is required.")]
+        public TypeOfBankAccount TypeOfBankAccountId { get; set; }
 
         /// <summary>Gets or sets the AccountId field. </summary>
-        public virtual long? AccountId { get; set; }
+        public long? AccountId { get; set; }
 
         /// <summary>Gets or sets the JobId field. </summary>
-        public virtual int? JobId { get; set; }
+        public int? JobId { get; set; }
 
         /// <summary>Gets or sets the BankAccountName field. </summary>
-        [StringLength(BankAccountUnit.MaxLength)]
-        public virtual string BankAccountName { get; set; }
+        [StringLength(BankAccountUnit.MaxLength, ErrorMessage = "Account Name Field length should not exceed 200 characters.")]
+        public string BankAccountName { get; set; }
 
         /// <summary>Gets or sets the BankAccountNumber field. </summary>
-        [StringLength(BankAccountUnit.MaxLength)]
-        public virtual string BankAccountNumber { get; set; }
+        [StringLength(BankAccountUnit.MaxLength, ErrorMessage = "Account Number Field length should not exceed 200 characters.")]
+        public string BankAccountNumber { get; set; }
 
         /// <summary>Gets or sets the RoutingNumber field. </summary>
-        [StringLength(BankAccountUnit.MaxLength)]
-        public virtual string RoutingNumber { get; set; }
+        [StringLength(BankAccountUnit.MaxLength, ErrorMessage = "Routing Number Field length should not exceed 200 characters.")]
+        public string RoutingNumber { get; set; }
 
         /// <summary>Gets or sets the TypeOfCheckStockId field. </summary>
-        public virtual int? TypeOfCheckStockId { get; set; }
+        public int? TypeOfCheckStockId { get; set; }
 
         /// <summary>Gets or sets the LastCheckNumberGenerated field. </summary>
-        public virtual long? LastCheckNumberGenerated { get; set; }
+        public long? LastCheckNumberGenerated { get; set; }
 
         /// <summary>Gets or sets the ControlAccount field. </summary>
         [StringLength(BankAccountUnit.MaxLength)]
-        public virtual string ControlAccount { get; set; }
+        public string ControlAccount { get; set; }
 
         /// <summary>Gets or sets the ClearingAccountId field. </summary>
-        public virtual long? ClearingAccountId { get; set; }
+        public long? ClearingAccountId { get; set; }
 
         /// <summary>Gets or sets the ClearingJobId field. </summary>
-        public virtual int? ClearingJobId { get; set; }
+        public int? ClearingJobId { get; set; }
 
         /// <summary>Gets or sets the MaxExpirationLength field. </summary>
         [StringLength(BankAccountUnit.MaxExpirationLength)]
-        public virtual string ExpirationMMYYYY { get; set; }
+        public string ExpirationMMYYYY { get; set; }
 
         /// <summary>Gets or sets the TypeOfUploadFileId field. </summary>
-        public virtual int? TypeOfUploadFileId { get; set; }
+        public int? TypeOfUploadFileId { get; set; }
 
         /// <summary>Gets or sets the VendorId field. </summary>
-        public virtual int? VendorId { get; set; }
+        public int? VendorId { get; set; }
 
         /// <summary>Gets or sets the ControllingBankAccountId field. </summary>
-        public virtual long? ControllingBankAccountId { get; set; }
+        public long? ControllingBankAccountId { get; set; }
 
         /// <summary>Gets or sets the IsClosed field. </summary>
-        public virtual bool IsClosed { get; set; }
+        public bool IsClosed { get; set; }
 
         /// <summary>Gets or sets the IsActive field. </summary>
-        public virtual bool IsActive { get; set; }
+        public bool IsActive { get; set; }
 
         /// <summary>Gets or sets the IsApproved field. </summary>
-        public virtual bool IsApproved { get; set; }
+        public bool IsApproved { get; set; }
 
         /// <summary>Gets or sets the TypeOfInactiveStatusId field. </summary>
-        public virtual TypeOfInactiveStatus? TypeOfInactiveStatusId { get; set; }
+        public TypeOfInactiveStatus? TypeOfInactiveStatusId { get; set; }
 
         /// <summary>Gets or sets the PositivePayTypeOfUploadFileId field. </summary>
-        public virtual int? PositivePayTypeOfUploadFileId { get; set; }
+        public int? PositivePayTypeOfUploadFileId { get; set; }
 
         /// <summary>Gets or sets the PositivePayTransmitterInfo field. </summary>
         [StringLength(BankAccountUnit.MaxLength)]
-        public virtual string PositivePayTransmitterInfo { get; set; }
+        public string PositivePayTransmitterInfo { get; set; }
 
         /// <summary>Gets or sets the PettyCashAccountId field. </summary>
-        public virtual long? PettyCashAccountId { get; set; }
+        public long? PettyCashAccountId { get; set; }
 
         /// <summary>Gets or sets the IsACHEnabled field. </summary>
-        public virtual bool? IsACHEnabled { get; set; }
+        public bool? IsACHEnabled { get; set; }
 
         /// <summary>Gets or sets the ACHDestinationCode field. </summary>
         [StringLength(BankAccountUnit.MaxAccountLength)]
-        public virtual string ACHDestinationCode { get; set; }
+        public string ACHDestinationCode { get; set; }
 
         /// <summary>Gets or sets the ACHDestinationName field. </summary>
         [StringLength(BankAccountUnit.MaxLength)]
-        public virtual string ACHDestinationName { get; set; }
+        public string ACHDestinationName { get; set; }
 
         /// <summary>Gets or sets the ACHOriginCode field. </summary>
         [StringLength(BankAccountUnit.MaxAccountLength)]
-        public virtual string ACHOriginCode { get; set; }
+        public string ACHOriginCode { get; set; }
 
         /// <summary>Gets or sets the ACHOriginName field. </summary>
         [StringLength(BankAccountUnit.MaxLength)]
-        public virtual string ACHOriginName { get; set; }
+        public string ACHOriginName { get; set; }
 
         /// <summary>Gets or sets the BatchId field. </summary>
-        public virtual int? BatchId { get; set; }
+        public int? BatchId { get; set; }
 
         /// <summary>Gets or sets the CCFullAccountNO field. </summary>
         [StringLength(BankAccountUnit.MaxAccountLength)]
-        public virtual string CCFullAccountNO { get; set; }
+        public string CCFullAccountNO { get; set; }
 
         /// <summary>Gets or sets the CCFootNote field. </summary>     
-        public virtual string CCFootNote { get; set; }
+        public string CCFootNote { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
 
         /// <summary>Gets or Sets Addresses of the Employee. </summary>
         public List<UpdateAddressUnitInput> Addresses { get; set; }
-      
+
         /// <summary>Gets or Sets BankAccountPaymentRangeList. </summary>
         public List<BankAccountPaymentRangeInput> BankAccountPaymentRangeList { get; set; }
 

@@ -8,7 +8,10 @@
             record=context.record,
             linkAccount = form.findField('linkAccount');
         if (linkAccount && !grid.allowAccountMapping) {
-            linkAccount.hide();
+            linkAccount.extraParams = undefined;
+            Ext.defer(function() {
+                    linkAccount.hide(true);
+                },50);
         } else {
             linkAccount.extraParams = {
                 "id": grid.coaId,

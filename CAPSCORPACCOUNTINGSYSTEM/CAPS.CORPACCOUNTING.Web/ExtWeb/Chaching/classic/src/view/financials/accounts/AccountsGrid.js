@@ -411,6 +411,7 @@
                 displayField: 'linkAccount',
                 queryMode: 'remote',
                 minChars: 2,
+                hidden:true,
                 modulePermissions: {
                     read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
                     create: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),

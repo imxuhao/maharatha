@@ -7696,6 +7696,27 @@
             <param name="accountsList"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.GetLinkedAccountUnitsByCoaId(CAPS.CORPACCOUNTING.Masters.Dto.GetAccountInput)">
+            <summary>
+            Get MappedAccounts By coaId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.GetAccountListByCoaId(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get Accounts List By CoaId for autofills
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.CreateOrUpdateAccountLinkUnits(CAPS.CORPACCOUNTING.Masters.Dto.CreateOrUpdateAccountLinkUnitList)">
+            <summary>
+            Create or Update AccountLinks
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.CoaUnitAppService.GetCoaUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
             <summary>
             Get the Records for Grid with paging and  sorting
@@ -7778,6 +7799,28 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CountryListDto.IsoCode">
             <summary>
             Gets or Sets TwoLetterAbbreviation
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateOrUpdateAccountLinkUnit.AccountLinkId">
+            <summary>
+            Gets or sets AccountLinkId field
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateOrUpdateAccountLinkUnit.HomeAccountId">
+            <summary>
+            Gets or sets HomeAccountId field
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateOrUpdateAccountLinkUnit.MapAccountId">
+            <summary>
+            Gets or sets MapAccountId field
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateOrUpdateAccountLinkUnitList.CreateOrUpdateAccountLinkList">
+            <summary>
+            CreateOrUpdateAccountLinkList
             </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateTerritoriesUnitInput.Description">
@@ -9238,6 +9281,11 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto.ErrorMessage">
             <summary>Gets or sets the ErrorMessage field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto.AccountLinkId">
+            <summary>Gets or sets the AccountLinkId field. 
+            This field is useful only in Mapping the accounts in ReportingCOa
+            </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto.CoaId">
             <summary>Gets or sets the CoaId field. </summary>
         </member>
@@ -10552,6 +10600,27 @@
             </summary>
             <param name="input"></param>
             <returns>Account unit</returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.GetLinkedAccountUnitsByCoaId(CAPS.CORPACCOUNTING.Masters.Dto.GetAccountInput)">
+            <summary>
+            Get LinkedAccounts List
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.GetAccountListByCoaId(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get AccountList by CoaId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.CreateOrUpdateAccountLinkUnits(CAPS.CORPACCOUNTING.Masters.Dto.CreateOrUpdateAccountLinkUnitList)">
+            <summary>
+            Create or Update AccountLinks
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService">
             <summary>

@@ -324,7 +324,13 @@ Ext.define('Chaching.Application', {
         });
         return deferred.promise;
     },
-    onAppUpdate: function() {
+    onAppUpdate: function () {
+        abp.notify.info(app.localize('AppUpdate'), "Application has new features. Your page will be refreshed to load those new features.");
+        Ext.defer(function() {
+                window.location.reload();
+            },
+            100);
+
         //abp.message.confirm(app.localize('AppUpdate'),
         //    app.localize('AppUpdateMessage'),
         //    function(isConfirmed) {

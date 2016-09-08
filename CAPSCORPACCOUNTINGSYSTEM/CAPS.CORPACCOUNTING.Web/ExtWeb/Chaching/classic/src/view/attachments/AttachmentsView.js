@@ -71,7 +71,7 @@ Ext.define('Chaching.view.attachments.AttachmentsView',
                         emptyText: app.localize('NoFilesAttached_Message'),
                         deferEmptyText: false
                     },
-                    store: 'attachments.AttachmentsStore',
+                    store: new Chaching.store.attachments.AttachmentsStore(),
                     plugins:[
                     {
                         ptype: 'chachingCellediting',

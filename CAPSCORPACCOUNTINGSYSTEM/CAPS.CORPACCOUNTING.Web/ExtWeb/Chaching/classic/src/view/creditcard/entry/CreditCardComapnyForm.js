@@ -69,7 +69,7 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyForm', {
             width: '100%',
             ui: 'fieldLabelTop',
             tabIndex: 3,
-            emptyText: app.localize('CreditCardType'),
+            emptyText: app.localize('MandatoryField'),
             displayField: 'typeOfBankAccount',
             valueField: 'typeOfBankAccountId',
             queryMode: 'local',

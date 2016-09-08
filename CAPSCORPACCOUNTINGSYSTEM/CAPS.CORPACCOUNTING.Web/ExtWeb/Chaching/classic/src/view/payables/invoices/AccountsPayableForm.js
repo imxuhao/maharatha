@@ -441,12 +441,16 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableForm',{
                                 emptyText: app.localize('SelectOption')
                             }, {
 ////TODO: Replace with combo once batch is ready
-                                xtype: 'textfield',
+                                xtype: 'combobox',
                                 name: 'batchId',
                                 itemId: 'batchId',
                                 ui: 'fieldLabelTop',
+                                forceSelection: true,
                                 fieldLabel: app.localize('Batch'),
-                                emptyText: app.localize('SelectOption')
+                                emptyText: app.localize('SelectOption'),
+                                valueField: 'batchId',
+                                displayField: 'description',
+                                store: new Chaching.store.batchposting.batches.BatchesStore()
                             }, {
                                 xtype: 'textfield',
                                 name: 'memoLine',

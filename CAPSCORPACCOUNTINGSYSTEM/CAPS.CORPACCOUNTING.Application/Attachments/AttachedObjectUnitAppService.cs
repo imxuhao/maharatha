@@ -109,7 +109,8 @@ namespace CAPS.CORPACCOUNTING.Attachments
             foreach (var item in attachedObjectUnit)
             {
                 AttachedObjectUnitDto attachedObjectDto = new AttachedObjectUnitDto();
-               
+                attachedObjectDto.AttachedObjectId = item.Id;
+
                 Mapper.Map(item, attachedObjectDto);
 
                 //TODO: If you want to return bytes also then uncomment below and also in AttachedObjectUnitDto Byte field.

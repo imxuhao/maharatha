@@ -158,17 +158,24 @@ Ext.define('Chaching.Application', {
                     }
                     //create viewPort once all dependencies are loaded
                     var mainView = Ext.create('Chaching.view.main.ChachingViewport');
-                    if (me && window.location.hash && window.location.hash !== "#dashboard" && mainView) {
-                        var mainViewController = mainView.getController(),
+                    var mainViewController = mainView.getController(),
                             refs = mainViewController.getReferences(),
-                            mainCardPanel = refs.mainCardPanel,
-                            hashTag = window.location.hash.replace('#', ''),
+                            mainCardPanel = refs.mainCardPanel;
+                    ChachingGlobals.setCenterPanel(mainCardPanel);
+                    ChachingGlobals.setWestPanel(refs.treelistContainer);
+                    ChachingGlobals.setMenuList(refs.navigationTreeList);
+                    ChachingGlobals.setAppViewPort(mainView);
+                    if (me && window.location.hash && window.location.hash !== "#dashboard" && mainView) {
+                        //var mainViewController = mainView.getController(),
+                        //    refs = mainViewController.getReferences(),
+                        //    mainCardPanel = refs.mainCardPanel,
+                        var hashTag = window.location.hash.replace('#', ''),
                             hasComponent = mainCardPanel.child('component[routeId=' + hashTag + ']');
-                        ChachingGlobals.setCenterPanel(mainCardPanel);
-                        ChachingGlobals.setWestPanel(refs.treelistContainer);
-                        ChachingGlobals.setMenuList(refs.navigationTreeList);
-                        ChachingGlobals.setAppViewPort(mainView);
-                        console.log(refs);
+                        //ChachingGlobals.setCenterPanel(mainCardPanel);
+                        //ChachingGlobals.setWestPanel(refs.treelistContainer);
+                        //ChachingGlobals.setMenuList(refs.navigationTreeList);
+                        //ChachingGlobals.setAppViewPort(mainView);
+                       // console.log(refs);
                         if (!hasComponent) {
                             mainViewController.setCurrentView(hashTag);
                             hasComponent = mainCardPanel.child('component[routeId=' + hashTag + ']');
@@ -177,7 +184,7 @@ Ext.define('Chaching.Application', {
                             var cols = hasComponent.getColumns();
                             hasComponent.applyGridViewSetting(cols, true);
                         }
-                    }
+                    } 
                 }
             },
             interval: 1000

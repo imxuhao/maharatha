@@ -45,8 +45,8 @@ namespace CAPS.CORPACCOUNTING.Attachments.Dto
         //[Column(TypeName = "smalldatetime")]
         //public virtual DateTime AttachedDate { get; set; }
 
-        /// <summary>Gets or sets the FileSize field. </summary>      
-        public virtual int? FileSize { get; set; }
+        ///// <summary>Gets or sets the FileSize field. </summary>      
+        //public virtual int? FileSize { get; set; }
 
         /// <summary>Gets or sets the FileExtension field. </summary>
         [StringLength(MaxFileExtensionLength)]

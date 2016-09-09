@@ -26,7 +26,7 @@ Ext.define('Chaching.view.attachments.AttachmentsViewController', {
         gridStore.insert(0, newUploadFile);
         var newRec = gridStore.getAt(0);
         ///TODO: Uncomment once server side is done
-        //me.postDocument(abp.appPath + 'Attachment/UploadAttachment', newRec);
+        me.postDocument(abp.appPath + 'Attachment/UploadAttachment', newRec);
     },
     getTypeOfAttachedObject: function (fileExt,newData) {
         switch (fileExt) {
@@ -200,7 +200,7 @@ Ext.define('Chaching.view.attachments.AttachmentsViewController', {
             gridStore.insert(0, newUploadFile);
             var newRec = gridStore.getAt(0);
             ///TODO: Uncomment once server side is done
-            //me.postDocument(abp.appPath + 'Attachment/UploadAttachment', newRec);
+            me.postDocument(abp.appPath + 'Attachment/UploadAttachment', newRec);
         });
         grid.removeCls('drag-over');
     }

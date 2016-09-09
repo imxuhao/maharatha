@@ -1944,12 +1944,12 @@
             
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Attachments.AttachedObjectUnitAppService.#ctor(CAPS.CORPACCOUNTING.Attachments.AttachedObjectUnitManager,CAPS.CORPACCOUNTING.Storage.IBinaryObjectManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Storage.BinaryObject,System.Guid},Abp.Domain.Uow.IUnitOfWork)">
+        <member name="M:CAPS.CORPACCOUNTING.Attachments.AttachedObjectUnitAppService.#ctor(CAPS.CORPACCOUNTING.Attachments.AttachedObjectUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Attachments.AttachedObjectUnit,System.Int64},CAPS.CORPACCOUNTING.Storage.IBinaryObjectManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Storage.BinaryObject,System.Guid},Abp.Domain.Uow.IUnitOfWork)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Attachments.AttachedObjectUnitAppService.CreateAttachedObjectUnit(CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Attachments.AttachedObjectUnitAppService.CreateAttachedObjectUnit(CAPS.CORPACCOUNTING.Attachments.Dto.CreateAttachedObjectInputUnit)">
             <summary>
             Create Attached Object Unit 
             </summary>
@@ -1962,23 +1962,120 @@
             </summary>
             <returns>Returns NameValueDto Collection.</returns>
         </member>
-        <member name="T:CAPS.CORPACCOUNTING.Attachments.IAttachedObjectUnitAppService">
+        <member name="M:CAPS.CORPACCOUNTING.Attachments.AttachedObjectUnitAppService.UpdateAttachedOjectUnit(CAPS.CORPACCOUNTING.Attachments.Dto.UpdateAttachedObjectInputUnit)">
             <summary>
             
-            </summary>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Attachments.IAttachedObjectUnitAppService.CreateAttachedObjectUnit(CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitInput)">
-            <summary>
-            Create Attached Object Unit 
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Attachments.IAttachedObjectUnitAppService.GetTypeofAttachedObjectList">
+        <member name="M:CAPS.CORPACCOUNTING.Attachments.AttachedObjectUnitAppService.DeleteAttachedObjectUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
             <summary>
-            Get list of available attachment object types.
+            
             </summary>
-            <returns>Returns NameValueDto Collection.</returns>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Attachments.AttachedObjectUnitAppService.GetAllAttachedObjectUnit(CAPS.CORPACCOUNTING.Attachments.Dto.GetAttachedObjectInputUnit)">
+            <summary>
+            Get the Attached Object Unit
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Attachments.AttachedObjectUnitAppService.GetFileAttachedObjecUnit(CAPS.CORPACCOUNTING.Attachments.Dto.GetFileAttachedObjectInputUnit)">
+            <summary>
+            GET the File for Download
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Attachments.Dto.GetAttachedObjectInputUnit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.GetAttachedObjectInputUnit.TypeOfObjectId">
+            <summary>Gets or sets the TypeOfObjectID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.GetAttachedObjectInputUnit.ObjectId">
+            <summary>Gets or sets the ObjectID field. </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Attachments.Dto.GetFileAttachedObjectInputUnit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.GetFileAttachedObjectInputUnit.AttachedObjectId">
+            <summary>Gets or sets the AttachedObjectId field. </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Attachments.Dto.ListAttachedObjectUnitInput">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.ListAttachedObjectUnitInput.attachedObjectUnitList">
+            <summary>Gets or sets the attachedObjectUnitList field. </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Attachments.Dto.UpdateAttachedObjectInputUnit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:CAPS.CORPACCOUNTING.Attachments.Dto.UpdateAttachedObjectInputUnit.MaxFileExtensionLength">
+            <summary>
+                Maximum Length of FileExtensionLength  
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.UpdateAttachedObjectInputUnit.AttachedObjectId">
+            <summary>Gets or sets the AttachedObjectId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.UpdateAttachedObjectInputUnit.TypeOfAttachedObjectId">
+            <summary>Gets or sets the TypeOfAttachedObjectID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.UpdateAttachedObjectInputUnit.TypeOfObjectId">
+            <summary>Gets or sets the TypeOfObjectID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.UpdateAttachedObjectInputUnit.ObjectId">
+            <summary>Gets or sets the ObjectID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.UpdateAttachedObjectInputUnit.Description">
+            <summary>Gets or sets the Description field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.UpdateAttachedObjectInputUnit.FileName">
+            <summary>Gets or sets the FileName field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.UpdateAttachedObjectInputUnit.FileSize">
+            <summary>Gets or sets the FileSize field. </summary>      
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.UpdateAttachedObjectInputUnit.FileExtension">
+            <summary>Gets or sets the FileExtension field. </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Attachments.Dto.UploadFileDataInput">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.UploadFileDataInput.FileName">
+            <summary>Gets or sets the FileName field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.UploadFileDataInput.Description">
+            <summary>Gets or sets the Description field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.UploadFileDataInput.TypeOfAttachedObjectId">
+            <summary>Gets or sets the TypeOfAttachedObjectId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.UploadFileDataInput.FileExtension">
+            <summary>Gets or sets the FileExtension field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.UploadFileDataInput.FileSize">
+            <summary>Gets or sets the FileSize field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.UploadFileDataInput.TypeOfObjectId">
+            <summary>Gets or sets the TypeOfObjectId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.UploadFileDataInput.ObjectId">
+            <summary>Gets or sets the ObjectId field. </summary>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Attachments.Dto.CreateAttachedObjectInputUnit">
             <summary>
@@ -2005,9 +2102,6 @@
         <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.CreateAttachedObjectInputUnit.FileName">
             <summary>Gets or sets the FileName field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.CreateAttachedObjectInputUnit.AttachedDate">
-            <summary>Gets or sets the AttachedDate field. </summary>
-        </member>
         <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.CreateAttachedObjectInputUnit.FileSize">
             <summary>Gets or sets the FileSize field. </summary>      
         </member>
@@ -2028,7 +2122,14 @@
             
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "F:CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitDto.MaxFileExtensionLength" -->
+        <member name="F:CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitDto.MaxFileExtensionLength">
+            <summary>
+                Maximum Length of FileExtensionLength  
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitDto.AttachedObjectId">
+            <summary>Gets or sets the AttachedObjectId field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitDto.TypeOfAttachedObjectId">
             <summary>Gets or sets the TypeOfAttachedObjectID field. </summary>
         </member>
@@ -2059,6 +2160,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitDto.IsSystemGenerated">
             <summary>Gets or sets the IsSystemGenerated field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitDto.Bytes">
+            <summary>Gets or sets the ByteArray field. </summary>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitInput">
             <summary>
             
@@ -2066,6 +2170,52 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.AttachedObjectUnitInput.CreateAttachedObjectUnit">
             <summary>Gets or sets the AttachedObject </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Attachments.IAttachedObjectUnitAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Attachments.IAttachedObjectUnitAppService.CreateAttachedObjectUnit(CAPS.CORPACCOUNTING.Attachments.Dto.CreateAttachedObjectInputUnit)">
+            <summary>
+            Create Attached Object Unit 
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Attachments.IAttachedObjectUnitAppService.GetTypeofAttachedObjectList">
+            <summary>
+            Get list of available attachment object types.
+            </summary>
+            <returns>Returns NameValueDto Collection.</returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Attachments.IAttachedObjectUnitAppService.UpdateAttachedOjectUnit(CAPS.CORPACCOUNTING.Attachments.Dto.UpdateAttachedObjectInputUnit)">
+            <summary>
+            Update Attached Object Unit
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Attachments.IAttachedObjectUnitAppService.DeleteAttachedObjectUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            Delete Attached Object Unit
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Attachments.IAttachedObjectUnitAppService.GetAllAttachedObjectUnit(CAPS.CORPACCOUNTING.Attachments.Dto.GetAttachedObjectInputUnit)">
+            <summary>
+            GET all  Attached Attachments
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Attachments.IAttachedObjectUnitAppService.GetFileAttachedObjecUnit(CAPS.CORPACCOUNTING.Attachments.Dto.GetFileAttachedObjectInputUnit)">
+            <summary>
+            Downloads the attachment
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Auditing.AuditLogAndUser">
             <summary>
@@ -11595,27 +11745,44 @@
         <member name="F:CAPS.CORPACCOUNTING.Net.MimeTypes.MimeTypeNames.ApplicationZip">
             <summary>ZIP archive files; Registered[7]</summary>
         </member>
-        <member name="T:CAPS.CORPACCOUNTING.Notes.NotedObjectUnitAppService">
+        <member name="T:CAPS.CORPACCOUNTING.Notes.Dto.GetNotedObjectUnitInput">
+            <summary>
+            This is used to GET the Noted Object Unit 
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Notes.Dto.GetNotedObjectUnitInput.TypeOfObjectId">
+            <summary>Gets or sets the TypeOfObjectId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Notes.Dto.GetNotedObjectUnitInput.ObjectId">
+            <summary>Gets or sets the ObjectId field. </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Notes.Dto.UpdateNotedObjectUnitInput">
             <summary>
             
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Notes.NotedObjectUnitAppService.#ctor(CAPS.CORPACCOUNTING.Notes.NotedObjectUnitManager)">
-            <summary>
-            
-            </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Notes.Dto.UpdateNotedObjectUnitInput.NotedObjectId">
+            <summary>Gets or sets the NotedObjectId field. </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Notes.NotedObjectUnitAppService.CreateNotedObjectUnit(CAPS.CORPACCOUNTING.Notes.Dto.NotedObjectUnitInput)">
-            <summary>
-            Create noted Object Unit
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
+        <member name="P:CAPS.CORPACCOUNTING.Notes.Dto.UpdateNotedObjectUnitInput.TypeOfObjectId">
+            <summary>Gets or sets the TypeOfObjectId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Notes.Dto.UpdateNotedObjectUnitInput.ObjectId">
+            <summary>Gets or sets the ObjectId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Notes.Dto.UpdateNotedObjectUnitInput.Notes">
+            <summary>Gets or sets the Notes field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Notes.Dto.UpdateNotedObjectUnitInput.IsSharedUpdate">
+            <summary>Gets or sets the IsSharedUpdate field. </summary>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Notes.Dto.NotedObjectUnitDto">
             <summary>
             
             </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Notes.Dto.NotedObjectUnitDto.NotedObjectId">
+            <summary>Gets or sets the NotedObjectId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Notes.Dto.NotedObjectUnitDto.TypeOfObjectId">
             <summary>Gets or sets the TypeOfObjectId field. </summary>
@@ -11646,6 +11813,44 @@
         <member name="P:CAPS.CORPACCOUNTING.Notes.Dto.NotedObjectUnitInput.IsSharedUpdate">
             <summary>Gets or sets the IsSharedUpdate field. </summary>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.Notes.NotedObjectUnitAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Notes.NotedObjectUnitAppService.#ctor(CAPS.CORPACCOUNTING.Notes.NotedObjectUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Notes.NotedObjectUnit,System.Int64})">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Notes.NotedObjectUnitAppService.CreateNotedObjectUnit(CAPS.CORPACCOUNTING.Notes.Dto.NotedObjectUnitInput)">
+            <summary>
+            Create noted Object Unit
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Notes.NotedObjectUnitAppService.UpdateNotedObjectUnit(CAPS.CORPACCOUNTING.Notes.Dto.UpdateNotedObjectUnitInput)">
+            <summary>
+            Update the Noted Object Unit
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Notes.NotedObjectUnitAppService.DeleteNotedObjectUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            Delete the Noted Object Unit
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Notes.NotedObjectUnitAppService.GetNotedObjectUnit(CAPS.CORPACCOUNTING.Notes.Dto.GetNotedObjectUnitInput)">
+            <summary>
+            GET the Noted Object Unit
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Notes.INotedObjectUnitAppService">
             <summary>
             
@@ -11653,7 +11858,28 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Notes.INotedObjectUnitAppService.CreateNotedObjectUnit(CAPS.CORPACCOUNTING.Notes.Dto.NotedObjectUnitInput)">
             <summary>
-            Create noted Object Unit
+            Create Noted Object Unit
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Notes.INotedObjectUnitAppService.UpdateNotedObjectUnit(CAPS.CORPACCOUNTING.Notes.Dto.UpdateNotedObjectUnitInput)">
+            <summary>
+            Update the Noted Object Unit
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Notes.INotedObjectUnitAppService.DeleteNotedObjectUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            Delete the Noted Object Unit
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Notes.INotedObjectUnitAppService.GetNotedObjectUnit(CAPS.CORPACCOUNTING.Notes.Dto.GetNotedObjectUnitInput)">
+            <summary>
+            Get the Noted Object Unit
             </summary>
             <param name="input"></param>
             <returns></returns>

@@ -1,4 +1,5 @@
 ﻿using Abp.Application.Services;
+using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Attachments.Dto;
 using CAPS.CORPACCOUNTING.Notes.Dto;
 using System;
@@ -16,10 +17,31 @@ namespace CAPS.CORPACCOUNTING.Notes
     {
 
         /// <summary>
-        /// Create noted Object Unit
+        /// Create Noted Object Unit
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task CreateNotedObjectUnit(NotedObjectUnitInput input);
+
+        /// <summary>
+        /// Update the Noted Object Unit
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task UpdateNotedObjectUnit(UpdateNotedObjectUnitInput input);
+
+        /// <summary>
+        /// Delete the Noted Object Unit
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task DeleteNotedObjectUnit(IdInput<long> input);
+
+        /// <summary>
+        /// Get the Noted Object Unit
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<NotedObjectUnitDto> GetNotedObjectUnit(GetNotedObjectUnitInput input);
     }
 }

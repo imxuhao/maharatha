@@ -1,4 +1,5 @@
-﻿using Abp.Domain.Repositories;
+﻿using Abp.Application.Services.Dto;
+using Abp.Domain.Repositories;
 using Abp.Domain.Services;
 using Abp.Domain.Uow;
 using Abp.Zero;
@@ -25,6 +26,16 @@ namespace CAPS.CORPACCOUNTING.Attachments
         public virtual async Task<long> CreateAsync(AttachedObjectUnit attachedObjectUnit)
         {
             return await _attachedObjectUnitRepository.InsertAndGetIdAsync(attachedObjectUnit);
+        }
+
+        public virtual async Task UpdateAsync(AttachedObjectUnit attachedObjectUnit)
+        {
+           await _attachedObjectUnitRepository.UpdateAsync(attachedObjectUnit);
+        }
+
+        public virtual async Task DeleteAsync(IdInput<long> input)
+        {
+            await _attachedObjectUnitRepository.DeleteAsync(input.Id);
         }
     }
 }

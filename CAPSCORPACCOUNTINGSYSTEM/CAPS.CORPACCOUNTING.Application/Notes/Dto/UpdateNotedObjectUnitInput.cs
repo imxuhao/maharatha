@@ -1,8 +1,5 @@
-﻿using Abp.Application.Services.Dto;
-using Abp.AutoMapper;
-using CAPS.CORPACCOUNTING.Common;
+﻿using Abp.AutoMapper;
 using CAPS.CORPACCOUNTING.Masters;
-using CAPS.CORPACCOUNTING.Notes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +11,8 @@ namespace CAPS.CORPACCOUNTING.Notes.Dto
     /// <summary>
     /// 
     /// </summary>
-    [AutoMapFrom(typeof(NotedObjectUnit))]
-    public class NotedObjectUnitDto
+    [AutoMapTo(typeof(NotedObjectUnit))]
+    public class UpdateNotedObjectUnitInput
     {
         /// <summary>Gets or sets the NotedObjectId field. </summary>
         public long NotedObjectId { get; set; }

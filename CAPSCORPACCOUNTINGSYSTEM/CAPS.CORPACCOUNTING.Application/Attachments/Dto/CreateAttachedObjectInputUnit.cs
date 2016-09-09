@@ -40,9 +40,9 @@ namespace CAPS.CORPACCOUNTING.Attachments.Dto
         /// <summary>Gets or sets the FileName field. </summary>
         public virtual string FileName { get; set; }
 
-        /// <summary>Gets or sets the AttachedDate field. </summary>
-        [Column(TypeName = "smalldatetime")]
-        public virtual DateTime AttachedDate { get; set; }
+        ///// <summary>Gets or sets the AttachedDate field. </summary>
+        //[Column(TypeName = "smalldatetime")]
+        //public virtual DateTime AttachedDate { get; set; }
 
         /// <summary>Gets or sets the FileSize field. </summary>      
         public virtual int? FileSize { get; set; }

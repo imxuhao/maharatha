@@ -1,7 +1,5 @@
 ﻿using Abp.AutoMapper;
-using CAPS.CORPACCOUNTING.Common;
 using CAPS.CORPACCOUNTING.Masters;
-using CAPS.CORPACCOUNTING.Notes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,18 +10,16 @@ using System.Threading.Tasks;
 
 namespace CAPS.CORPACCOUNTING.Attachments.Dto
 {
-
     /// <summary>
     /// 
     /// </summary>
-    [AutoMapFrom(typeof(AttachedObjectUnit))]
-    public class AttachedObjectUnitDto
+    [AutoMapTo(typeof(AttachedObjectUnit))]
+    public class UpdateAttachedObjectInputUnit
     {
         /// <summary>
         ///     Maximum Length of FileExtensionLength  
         /// </summary>
         public const int MaxFileExtensionLength = 20;
-
 
         #region Declaration of Properties
 
@@ -45,9 +41,9 @@ namespace CAPS.CORPACCOUNTING.Attachments.Dto
         /// <summary>Gets or sets the FileName field. </summary>
         public virtual string FileName { get; set; }
 
-        /// <summary>Gets or sets the AttachedDate field. </summary>
-        [Column(TypeName = "smalldatetime")]
-        public virtual DateTime AttachedDate { get; set; }
+        ///// <summary>Gets or sets the AttachedDate field. </summary>
+        //[Column(TypeName = "smalldatetime")]
+        //public virtual DateTime AttachedDate { get; set; }
 
         /// <summary>Gets or sets the FileSize field. </summary>      
         public virtual int? FileSize { get; set; }
@@ -56,17 +52,6 @@ namespace CAPS.CORPACCOUNTING.Attachments.Dto
         [StringLength(MaxFileExtensionLength)]
         public virtual string FileExtension { get; set; }
 
-        /// <summary>Gets or sets the UserAttachmentFilesID field. </summary>
-        public virtual Guid? UserAttachmentFilesId { get; set; }
-
-        /// <summary>Gets or sets the IsSystemGenerated field. </summary>
-        public virtual bool? IsSystemGenerated { get; set; }
-
-
-        //TODO: If you want to return bytes to UI then uncomment and also uncomment in service.
-        /// <summary>Gets or sets the ByteArray field. </summary>
-        public byte[] Bytes { get; set; }
         #endregion
-
     }
 }

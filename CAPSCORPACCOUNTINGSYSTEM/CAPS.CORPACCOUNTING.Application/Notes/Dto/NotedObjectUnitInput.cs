@@ -16,6 +16,9 @@ namespace CAPS.CORPACCOUNTING.Notes.Dto
     [AutoMapTo(typeof(NotedObjectUnit))]
     public class NotedObjectUnitInput
     {
+        // <summary>Gets or sets the NotedObjectId field. </summary>
+        // public long NotedObjectId { get; set; }
+
         /// <summary>Gets or sets the TypeOfObjectId field. </summary>
         public virtual TypeofObject TypeOfObjectId { get; set; }
 

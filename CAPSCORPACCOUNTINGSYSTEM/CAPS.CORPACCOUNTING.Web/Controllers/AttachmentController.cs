@@ -1,4 +1,5 @@
-﻿using Abp.UI;
+﻿using Abp.Application.Services.Dto;
+using Abp.UI;
 using Abp.Web.Models;
 using Abp.Web.Mvc.Authorization;
 using CAPS.CORPACCOUNTING.Attachments;
@@ -25,18 +26,17 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
         }
 
         /// <summary>
-        /// Method for saving the multiple uploaded attachment
+        /// Action for saving the uploaded attachment
         /// </summary>
-        /// <param name="attachedObjectInput"></param>
+        /// <param name="fileData"></param>
         /// <returns></returns>
-        public async Task<JsonResult> SaveUploadedAttachments(AttachedObjectUnitInput attachedObjectInput)
+        public async Task<JsonResult> UploadAttachment(UploadFileDataInput fileData)
         {
+
             try
             {
-                AttachedObjectUnitInput attachedObjectUnitInputLocal = new AttachedObjectUnitInput();
-
                 int iFileCount = Request.Files.Count;
-                int iCount = 0;
+                var file = Request.Files[0];
 
                 //Check input
                 if (iFileCount <= 0 || Request.Files[0] == null)
@@ -44,53 +44,44 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                     throw new UserFriendlyException(L("NoFilesAttached_Message"));
                 }
 
-                foreach (var item in attachedObjectInput.CreateAttachedObjectUnit)
+                var createAttachedObjectInputUnit = new CreateAttachedObjectInputUnit()
                 {
-                    var file = Request.Files[iCount];
-                    var fileInfo = new FileInfo(file.FileName);
+                    FileName = fileData.FileName,
+                    Description = fileData.Description,
+                    TypeOfAttachedObjectId = fileData.TypeOfAttachedObjectId,
+                    FileExtension = fileData.FileExtension,
+                    FileSize = Convert.ToInt32(fileData.FileSize),
+                    TypeOfObjectId = fileData.TypeOfObjectId,
+                    ObjectId = fileData.ObjectId
+                };
 
-                    item.FileName = file.FileName;
-                    item.FileExtension = fileInfo.Extension;
-
-                    using (var binaryReader = new BinaryReader(file.InputStream))
-                    {
-                        item.Bytes = binaryReader.ReadBytes(file.ContentLength);
-                    }
-
-                    attachedObjectUnitInputLocal.CreateAttachedObjectUnit.Add(item);
-
-                    iCount++;
+                using (var binaryReader = new BinaryReader(file.InputStream))
+                {
+                    createAttachedObjectInputUnit.Bytes = binaryReader.ReadBytes(file.ContentLength);
                 }
 
-               await _attachedObjectUnitAppService.CreateAttachedObjectUnit(attachedObjectUnitInputLocal);
+                await _attachedObjectUnitAppService.CreateAttachedObjectUnit(createAttachedObjectInputUnit);
 
-                //Return success
-                return Json(new AjaxResponse());
+                return Json(new { success = true });
             }
             catch (UserFriendlyException ex)
             {
                 return Json(new AjaxResponse(new ErrorInfo(ex.Message)));
             }
         }
-        public async Task<JsonResult> UploadAttachment(UploadFileData fileData)
+
+
+        /// <summary>
+        /// GET the file and downloads it.
+        /// </summary>
+        /// <param name="getFileAttachedInputUnitId"></param>
+        /// <returns></returns>
+        public async Task<FileResult> GetFilesById(GetFileAttachedObjectInputUnit getFileAttachedInputUnitId)
         {
-            int iFileCount = Request.Files.Count;
-            //TODO: Implement this method to accept single file only. Cannot post multiple files due to size restrictions.
-            //Use uploadFileData as input dto. Move it to attachment dto folder i.e. create new file for class.
-            return Json(new {success = true});
+            var attachedObjectUnit = await _attachedObjectUnitAppService.GetFileAttachedObjecUnit(getFileAttachedInputUnitId);
+
+            return File(attachedObjectUnit.Bytes, attachedObjectUnit.FileExtension);
         }
     }
 }
 
-public class UploadFileData
-{
-    public UploadFileData()
-    { }
-    public string FileName { get; set; }
-    public string Description { get; set; }
-    public TypeOfAttachedObject TypeOfAttachedObjectId { get; set; }
-    public string FileExtension { get; set; }
-    public decimal FileSize { get; set; }
-    public TypeofObject TypeOfObjectId { get; set; }
-    public long ObjectId { get; set; }
-}

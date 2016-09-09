@@ -225,7 +225,7 @@ Ext.define('Chaching.view.financials.accounts.AccountsMapCoaGrid', {
             }
         }, {
             xtype: 'gridcolumn',
-            text: app.localize('NewAccount'),
+            text: app.localize('ReportingCoaAccount'),
             dataIndex: 'linkAccount',
             sortable: true,
             groupable: true,
@@ -264,32 +264,42 @@ Ext.define('Chaching.view.financials.accounts.AccountsMapCoaGrid', {
                     beforequery: function (query, eOpts) {
                         var grid = this.up().grid;
                         if (grid) {
-                            var coaId = grid.coaId;
-                            var myStore = this.getStore();
-                            myStore.getProxy().setExtraParam('id', coaId);
+                            var gridStore = grid.getStore(),
+                                proxy = gridStore.getProxy();
+                            if (gridStore) {
+                                var coaId = proxy.getExtraParams().coaId;
+                                var myStore = query.combo.getStore();
+                                myStore.getProxy().setExtraParam('id', coaId);
+                            }
                         }
                     }
                 }
             },
             editor: {
                 xtype: 'chachingcombobox',
-                store: new Chaching.store.utilities.autofill.MappingAccountStore(),
+                store: Ext.create('Chaching.store.utilities.autofill.MappingAccountStore',{
+                    fields: [{ name: 'accountId', type: 'int' },
+                            { name: 'accountNumber', type: 'string', hidden: false, headerText: app.localize('AccountNumber') },
+                            { name: 'caption', type: 'string', hidden: false, headerText: app.localize('Caption') },
+                            { name: 'linkAccountId', type: 'int', mapping: 'accountId' },
+                            { name: 'linkAccount', type: 'string', mapping: 'accountNumber' },
+                            { name: 'mapAccountId', type: 'int', mapping: 'accountId' }
+                    ]
+                }),
+
                 width: '100%',
-                valueField: 'linkAccountId',
+                valueField: 'mapAccountId',
                 displayField: 'linkAccount',
                 queryMode: 'remote',
                 minChars: 2,
                 modulePermissions: {
                     read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
-                    create: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),
-                    edit: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Edit'),
-                    destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete')
+                    create: false
+                    //edit: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Edit'),
+                    //destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete')
                 },
                 primaryEntityCrudApi: {
-                    read: abp.appPath + 'api/services/app/accountUnit/GetAccountsForMapping',
-                    create: abp.appPath + 'api/services/app/accountUnit/CreateAccountUnit',
-                    update: abp.appPath + 'api/services/app/accountUnit/UpdateAccountUnit',
-                    destroy: abp.appPath + 'api/services/app/accountUnit/DeleteAccountUnit'
+                    read: abp.appPath + 'api/services/app/accountUnit/GetAccountListByCoaId',
                 },
                 createEditEntityType: 'financials.accounts.accounts',
                 createEditEntityGridController: 'financials-accounts-accountsgrid',
@@ -299,9 +309,13 @@ Ext.define('Chaching.view.financials.accounts.AccountsMapCoaGrid', {
                     beforequery: function (query, eOpts) {
                         var grid = this.up('grid');
                         if (grid) {
-                            var coaId = grid.coaId;
-                            var myStore = query.combo.getStore();
-                            myStore.getProxy().setExtraParam('id', coaId);
+                            var gridStore = grid.getStore(),
+                                proxy = gridStore.getProxy();
+                            if (gridStore){
+                                var coaId = proxy.getExtraParams().coaId;
+                                var myStore = query.combo.getStore();
+                                myStore.getProxy().setExtraParam('id', coaId);
+                            }
                         }
                     }
                 }

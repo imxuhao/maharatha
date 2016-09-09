@@ -25,6 +25,7 @@
         var me = this;
         var viewModel = formView.getViewModel();
         var form = formView.getForm();
+        form.findField("chartOfAccountId").setValue(formView.parentGrid.coaId);
         var typeOfCurrency = viewModel.getStore('typeOfCurrencyList');
         typeOfCurrency.load();
         var typeOfCurrencyRate = viewModel.getStore('typeOfCurrencyRateList');

@@ -12,9 +12,9 @@ Ext.define('Chaching.store.financials.accounts.AccountsMapToCOAStore', {
             coaId: 0
         },
         api: {
-            read: abp.appPath + 'api/services/app/accountUnit/GetAccountListByCoaId',
-            update: abp.appPath + 'api/services/app/accountUnit/CreateOrUpdateAccountLinkUnits'
+            read: abp.appPath + 'api/services/app/accountUnit/GetLinkedAccountUnitsByCoaId', //GetAccountsForMapping',
+            update: abp.appPath + 'api/services/app/accountUnit/CreateOrUpdateAccountLinkUnit'
         }
     },
-    idPropertyField: 'accountId'//important to set for add/update of records
+    idPropertyField: 'accountId'
 });

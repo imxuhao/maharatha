@@ -495,7 +495,7 @@
     <text name="CustomerNumber" value="Customer #" />
     <text name="CreatingNewCustomers" value="Creating New Customers" />
     <text name="ConvertToNewCOA" value="Convert To New COA" />
-    <text name="StdGroupTotal" value="Std Group Total" />
+    <text name="StdGroupTotal" value="Std. Group Total" />
     <text name="IsCorporate" value="Corporate" />
     <text name="IsNumeric" value="Numeric" />
     <text name="IsPrivate" value="Private" />
@@ -1446,5 +1446,7 @@
     <text name="Saturday" value="Saturday" />
     <text name="RepeatOn" value="Repeat On" /> 
     <text name="EndRecurrence" value="End Recurrence" />
+    <text name="ReportingCoaAccount" value="Reporting COA Account"/>
+
   </texts>
 </localizationDictionary>

@@ -53,7 +53,10 @@ Ext.define('Chaching.model.financials.accounts.AccountsModel', {
             { name: 'rollUpAccountCaption', type: 'string' },
             { name: 'rollUpAccountNumber', type: 'string', mapping : 'accountNumber' },
             { name: 'rollUpDivision', type: 'string' },
-            { name: 'jobNumber', type: 'string', mapping: 'rollUpDivision' }
+            { name: 'jobNumber', type: 'string', mapping: 'rollUpDivision' },
+            { name: 'accountLinkId', type: 'int' },
+            { name: 'homeAccountId', type: 'int', mapping: 'accountId' },
+            { name: 'mapAccountId', type: 'int', defaultValue: null, convert: nullHandler }
             
     ]
 });

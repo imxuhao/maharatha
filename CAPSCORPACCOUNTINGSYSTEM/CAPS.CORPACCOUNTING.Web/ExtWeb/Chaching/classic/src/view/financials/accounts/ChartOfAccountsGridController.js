@@ -95,8 +95,8 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGridController', {
     doRowSpecificEditDelete: function (button, grid) {
         var record = button.widgetRec;
         if (record) {
-            var linkCoaId = record.get('linkChartOfAccountID');
-            if (button.menu && (linkCoaId === 1 || linkCoaId === 4)) {
+            var typeOfChartId = record.get('typeOfChartId');
+            if (button.menu && (typeOfChartId === 1 || typeOfChartId === 4)) {
                     var mapCoa = button.menu.down('menuitem#mapCoa'),
                         seperatorBar = button.menu.down('menuitem#actionMenuSeparator');
                     if ((mapCoa && button.widgetRec)) {
@@ -118,7 +118,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGridController', {
             var gridPanel = window.down('gridpanel');
             var gridStore = gridPanel.getStore();
             //gridStore.getProxy().api.read = abp.appPath + 'api/services/app/accountUnit/Servicename';
-            gridStore.getProxy().setExtraParam('id', coaId);
+            gridStore.getProxy().setExtraParam('coaId', coaId);
             gridStore.load();
         }
     }

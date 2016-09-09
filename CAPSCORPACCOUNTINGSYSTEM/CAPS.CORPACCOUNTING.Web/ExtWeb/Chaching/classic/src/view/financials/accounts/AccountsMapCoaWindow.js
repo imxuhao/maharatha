@@ -22,16 +22,16 @@ Ext.define('Chaching.view.financials.accounts.AccountsMapCoaWindow', {
     },
     buttonAlign: 'center',
     buttons: [
+        //{
+        //    text: abp.localization.localize("Save").toUpperCase(),
+        //    scale: 'small',
+        //    ui: 'actionButton',
+        //    iconCls: 'fa fa-save',
+        //    iconAlign: 'left',
+        //    handler: 'onMapSaveClicked'
+        //},
         {
-            text: abp.localization.localize("Save").toUpperCase(),
-            scale: 'small',
-            ui: 'actionButton',
-            iconCls: 'fa fa-save',
-            iconAlign: 'left',
-            handler: 'onMapSaveClicked'
-        },
-        {
-            text: abp.localization.localize("Cancel").toUpperCase(),
+            text: abp.localization.localize("Close").toUpperCase(),
             scale: 'small',
             ui: 'actionButton',
             iconCls: 'fa fa-close',
@@ -39,6 +39,5 @@ Ext.define('Chaching.view.financials.accounts.AccountsMapCoaWindow', {
             handler: 'onCancelClicked'
         }
     ]
-
 
 });

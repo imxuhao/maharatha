@@ -8,6 +8,7 @@ Ext.define('Chaching.model.utilities.autofill.MappingAccountModel',
         { name: 'description', type: 'string' },
         { name: 'chartOfAccountId', type: 'int' },
         { name: 'linkAccountId', type: 'int', convert: nullHandler, mapping: 'accountId' },
-        { name: 'linkAccount', type: 'string', mapping: 'accountNumber' }
+        { name: 'linkAccount', type: 'string', mapping: 'accountNumber' },
+        { name: 'mapAccountId', type: 'string', mapping: 'linkAccountId' }
     ]
 });

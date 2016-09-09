@@ -79,12 +79,10 @@
             var treeStore = treePanel.getStore();
             var proxy = treeStore.getProxy();
             if (treePanel.itemId === 'permissionsListItemId') {
-                treeStore.getProxy().setExtraParam('tenantId', abp.session.tenantId);
-                treeStore.getProxy().setExtraParam('roleId', record.get('id'));
+                treeStore.getProxy().setExtraParams({ 'tenantId': abp.session.tenantId, 'roleId': record.get('id')});
             }
             else {
-                treeStore.getProxy().setExtraParam('tenantId', record.get('tenantId'));
-                treeStore.getProxy().setExtraParam('roleId', record.get('roleId'));
+                treeStore.getProxy().setExtraParams({'tenantId': record.get('tenantId'), 'roleId': record.get('roleId')});
             }
             treeStore.reload();
         }
@@ -141,9 +139,9 @@
         var rolesGrid = view.down('gridpanel[itemId=companyRolesListGridItemId]');
         var rolesStore = rolesGrid.getStore();
         var proxy = rolesStore.getProxy();
-        proxy.api.read = abp.appPath + 'api/services/app/user/GetRolesByTenant',
         rolesStore.removeAll();
-        rolesStore.getProxy().setExtraParams({ id: record.get('tenantId') });
+        proxy.api.read = abp.appPath + 'api/services/app/user/GetRolesByTenant',
+        proxy.setExtraParams({ id: record.get('tenantId') });
         rolesStore.load();
     },
     doPreSaveOperation: function (record, values, idPropertyField) {

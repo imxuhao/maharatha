@@ -1256,6 +1256,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.GetJobListByStatus(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get Jobs lIst by status
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.ISubAccountUnitAppService.CreateSubAccountUnit(CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput)">
             <summary>
             Create the SubAccount.
@@ -1515,6 +1522,13 @@
             <summary>
             Get BatchList By TypeOfBatch
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetJobListByStatus(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get Jobs or Divisions List by using OrganizationUnitId
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService">

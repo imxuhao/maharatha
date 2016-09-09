@@ -99,9 +99,14 @@ Ext.define('Chaching.view.financials.journals.JournalEntryForm',
                         name: 'journalTypeId',
                         fieldLabel: app.localize('JournalType'),
                         itemId: 'journalTypeId',
-                        valueField: 'value',
-                        displayField:'name',
-                        store: 'utilities.JournalTypeListStore'                       
+                        valueField: 'journalTypeId',
+                        displayField: 'journalType',
+                        queryMode: 'local',
+                        store: 'utilities.JournalTypeListStore',
+                        listeners: {
+                            select : 'onJournalTypeSelect'
+                        }
+
                     }, {////TODO: Replace with combo once batch is ready
                         xtype: 'combobox',
                         name: 'batchId',

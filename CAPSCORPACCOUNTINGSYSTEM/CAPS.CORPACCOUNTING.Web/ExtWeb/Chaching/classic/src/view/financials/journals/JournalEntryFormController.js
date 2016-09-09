@@ -1,9 +1,15 @@
 Ext.define('Chaching.view.financials.journals.JournalEntryFormController', {
     extend: 'Chaching.view.common.form.ChachingTransactionFormPanelController',
     alias: 'controller.financials-journals-journalentryform',
+    requires : ['Chaching.view.recurrence.RecurrenceView'],
     doPreSaveOperation: function (record, values, idPropertyField) {
         record.set('typeOfAccountingDocumentId', 1);
         return record;
+    },
+    onJournalTypeSelect : function(combo, record, eOpts) {
+        if (combo.getValue() && combo.getValue() === '4') { //4 : recurring
+            Ext.create('Chaching.view.recurrence.RecurrenceView');
+        }
     },
     onFormResize: function (formPanel, width, height, oldWidth, oldHeight, eOpts) {
         if (formPanel) {

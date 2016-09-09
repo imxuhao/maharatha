@@ -4099,6 +4099,10 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\receivables\invoices\ReceivableInvoiceBuilderFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\receivables\ReceivableInvoiceFormPanel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\receivables\ReceivableInvoiceFormPanelController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\recurrence\RecurrenceForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\recurrence\RecurrenceFormController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\recurrence\RecurrenceView.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\recurrence\RecurrenceViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesGrid.js" />

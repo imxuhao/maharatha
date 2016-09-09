@@ -1411,5 +1411,40 @@
     <text name="FileName" value="File Name"/>
     <text name="DocType" value="File Type"/>
     <text name="Size" value="Size"/>
+    
+    <text name="Recurrence" value="Recurrence" />
+    <text name="RecurrencePattern" value="Recurrence Pattern" />
+    <text name="Daily" value="Daily" />
+    <text name="Every" value="Every" />
+    <text name="RecurrenceDays" value="day(s)" />
+    <text name="EveryWeekDay" value="Every Weekday" />
+    <text name="Weekly" value="Weekly" />
+    <text name="RecurEvery" value="Repeat Every" />
+    <text name="Weekson" value="Week(s)" />
+    <text name="Monthly" value="Monthly" />
+    <text name="OfEvery" value="OfEvery" />
+    <text name="Months" value="Month(s)" />
+    <text name="The" value="The" />
+    <text name="Yearly" value="Yearly" />
+    <text name="Years" value="Year(s)" />
+    <text name="RecurrenceOn" value="On" />
+    <text name="Onthe" value="Onthe" />
+    <text name="Of" value="Of" />
+    <text name="RecurrenceRange" value="Range of recurrence" />
+    <text name="InValidDateText" value="Invalid date" />
+    <text name="NoEndDate" value="Never" />
+    <text name="EndAfter" value="After" />
+    <text name="Occurrences" value="occurrence(s)" />
+    <text name="EndBy" value="On" />
+    <text name="OfTheMonth" value="of the month" />
+    <text name="Sunday" value="Sunday" />
+    <text name="Monday" value="Monday" />
+    <text name="Tuesday" value="Tuesday" />
+    <text name="Wednesday" value="Wednesday" />
+    <text name="Thursday" value="Thursday" />
+    <text name="Friday" value="Friday" />
+    <text name="Saturday" value="Saturday" />
+    <text name="RepeatOn" value="Repeat On" /> 
+    <text name="EndRecurrence" value="End Recurrence" />
   </texts>
 </localizationDictionary>

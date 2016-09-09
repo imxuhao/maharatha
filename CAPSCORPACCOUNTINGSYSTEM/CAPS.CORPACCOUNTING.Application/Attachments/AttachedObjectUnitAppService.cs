@@ -9,6 +9,8 @@ using CAPS.CORPACCOUNTING.Storage;
 using Abp.Domain.Repositories;
 using Abp.AutoMapper;
 using System.IO;
+using Abp.Application.Services.Dto;
+using CAPS.CORPACCOUNTING.Helpers;
 
 namespace CAPS.CORPACCOUNTING.Attachments
 {
@@ -59,6 +61,14 @@ namespace CAPS.CORPACCOUNTING.Attachments
                     await _iUnitOfWork.SaveChangesAsync();
                 }
             }
+        }
+        /// <summary>
+        /// Get list of available attachment object types.
+        /// </summary>
+        /// <returns>Returns NameValueDto Collection.</returns>
+        public List<NameValueDto> GetTypeofAttachedObjectList()
+        {
+            return EnumList.GetTypeOfAttachedObjectList();
         }
     }
 }

@@ -1942,6 +1942,12 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Attachments.AttachedObjectUnitAppService.GetTypeofAttachedObjectList">
+            <summary>
+            Get list of available attachment object types.
+            </summary>
+            <returns>Returns NameValueDto Collection.</returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Attachments.IAttachedObjectUnitAppService">
             <summary>
             
@@ -1953,6 +1959,12 @@
             </summary>
             <param name="input"></param>
             <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Attachments.IAttachedObjectUnitAppService.GetTypeofAttachedObjectList">
+            <summary>
+            Get list of available attachment object types.
+            </summary>
+            <returns>Returns NameValueDto Collection.</returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Attachments.Dto.CreateAttachedObjectInputUnit">
             <summary>
@@ -5081,6 +5093,12 @@
             Get TypeofObject Enum as List
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.EnumList.GetTypeOfAttachedObjectList">
+            <summary>
+            Get type of attachments object available.
+            </summary>
+            <returns>Returns NameValueDto Collection</returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Helpers.ExpressionBuilder">
             <summary>

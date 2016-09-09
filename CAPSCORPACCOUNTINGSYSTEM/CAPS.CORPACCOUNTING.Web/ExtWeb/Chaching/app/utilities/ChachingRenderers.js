@@ -456,14 +456,23 @@
         itemRendered.iconCls = renderIcon;
         return '';
     },
-    fileStatusRenderer:function(value) {
+    fileStatusRenderer: function(value) {
         var itemRendered = this.items[0];
-        if (value>0) {
+        switch (value) {
+        case "-1":
+        case -1:
+            itemRendered.iconCls = 'fileStatusUploadError';
+            itemRendered.tooltip = app.localize('Error');
+            break;
+        case "0":
+        case 0:
+            itemRendered.iconCls = 'fileStatusNew';
+            itemRendered.tooltip = app.localize('Uploading');
+            break;
+        default:
             itemRendered.iconCls = 'fileStatusUploaded';
             itemRendered.tooltip = app.localize('Uploaded');
-        } else {
-            itemRendered.iconCls = 'fileStatusNew';
-            itemRendered.tooltip = app.localize('NotUploaded');
+            break;
         }
         return '';
     }

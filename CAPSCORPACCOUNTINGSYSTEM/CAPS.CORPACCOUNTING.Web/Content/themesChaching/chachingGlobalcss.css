@@ -508,12 +508,17 @@ h1, h2, h3, h4, h5, h6 {
     padding: 20px;
 }
 .fileStatusUploaded:before {
-    content: "\f192";
+    content: "\f0a6";
     font: 18px/1 FontAwesome;
     color: green;
 }
 .fileStatusNew:before {
-    content: "\f192";
+    content: "\f0a4";
+    font: 18px/1 FontAwesome;
+    color: #ef9e04;
+}
+.fileStatusUploadError:before {
+    content: "\f0a7";
     font: 18px/1 FontAwesome;
     color: red;
 }

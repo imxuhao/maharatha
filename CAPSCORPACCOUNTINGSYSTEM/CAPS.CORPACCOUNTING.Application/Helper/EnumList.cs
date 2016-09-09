@@ -6,6 +6,7 @@ using System.Linq;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.Accounting;
+using CAPS.CORPACCOUNTING.Attachments;
 using CAPS.CORPACCOUNTING.JobCosting;
 using CAPS.CORPACCOUNTING.Journals;
 
@@ -190,6 +191,16 @@ namespace CAPS.CORPACCOUNTING.Helpers
         public static List<NameValueDto> GetCheckTypeList()
         {
             var listEnums = (from CheckType n in Enum.GetValues(typeof(CheckType))
+                             select new NameValueDto { Value = ((int)n).ToString(), Name = EnumHelper.ToDisplayName(n) }).OrderBy(p => p.Name).ToList();
+            return listEnums;
+        }
+        /// <summary>
+        /// Get type of attachments object available.
+        /// </summary>
+        /// <returns>Returns NameValueDto Collection</returns>
+        public static List<NameValueDto> GetTypeOfAttachedObjectList()
+        {
+            var listEnums = (from TypeOfAttachedObject n in Enum.GetValues(typeof(TypeOfAttachedObject))
                              select new NameValueDto { Value = ((int)n).ToString(), Name = EnumHelper.ToDisplayName(n) }).OrderBy(p => p.Name).ToList();
             return listEnums;
         }

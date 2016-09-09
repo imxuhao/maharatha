@@ -9,9 +9,10 @@ Ext.define('Chaching.view.attachments.AttachmentsView',
 
     controller: 'attachments-attachmentsview',
     height: '55%',
-    width: '85%',
+    width: '75%',
     title: app.localize('Attachment'),
     iconCls: 'fa fa-dropbox',
+    closeAction:'destroy',
     initComponent: function() {
         var me = this;
         me.callParent(arguments);
@@ -21,7 +22,7 @@ Ext.define('Chaching.view.attachments.AttachmentsView',
         width: '8%',
         ui: 'actionButton',
         iconCls: 'fa fa-cloud-upload',
-        text: app.localize('Upload').toUpperCase()
+        text: app.localize('Save').toUpperCase()
     },{
             xtype: 'button',
             scale: 'small',
@@ -61,6 +62,12 @@ Ext.define('Chaching.view.attachments.AttachmentsView',
                         change: 'onFileAttached'
                     }
                 }, {
+                    xtype: 'hiddenfield',
+                    name: 'typeOfObjectId'
+                }, {
+                    xtype: 'hiddenfield',
+                    name: 'objectId'
+                }, {
                     xtype: 'gridpanel',
                     itemId: 'attachmentsGrid',
                     padding: '10 0 0 0',
@@ -81,7 +88,7 @@ Ext.define('Chaching.view.attachments.AttachmentsView',
                     columns: [
                         {
                             text: app.localize('FileName'),
-                            dataIndex:'filename',
+                            dataIndex:'fileName',
                             flex: 1
                         }, {
                             text: app.localize('Decription'),
@@ -90,6 +97,22 @@ Ext.define('Chaching.view.attachments.AttachmentsView',
                             editor: {
                                 xtype:'textfield'
                             }
+                        }, {
+                            text: app.localize('DocType'),
+                            dataIndex: 'typeOfAttachedObject',
+                            flex: 1,
+                            editor: {
+                                xtype: 'combo',
+                                valueField: 'typeOfAttachedObjectId',
+                                displayField: 'typeOfAttachedObject',
+                                store: new Chaching.store.attachments.TypeOfAttachmentsStore(),
+                                queryMode:'local'
+                            }
+                        }, {
+                            text: app.localize('Size'),
+                            dataIndex: 'fileSize',
+                            flex: 1,
+                            maxWidth:100
                         }, {
                             text: app.localize('AttachedOn'),
                             dataIndex: 'creationTime',
@@ -103,7 +126,7 @@ Ext.define('Chaching.view.attachments.AttachmentsView',
                             flex: 1
                         }, {
                             xtype: 'actioncolumn',
-                            dataIndex: 'filestatus',
+                            dataIndex: 'fileStatus',
                             sortable: false,
                             menuDisabled: true,
                             maxWidth: 25,
@@ -116,7 +139,7 @@ Ext.define('Chaching.view.attachments.AttachmentsView',
                             }]
                         }, {
                             xtype: 'actioncolumn',
-                            dataIndex: 'filetype',
+                            dataIndex: 'fileExtension',
                             sortable: false,
                             menuDisabled:true,
                             maxWidth: 50,

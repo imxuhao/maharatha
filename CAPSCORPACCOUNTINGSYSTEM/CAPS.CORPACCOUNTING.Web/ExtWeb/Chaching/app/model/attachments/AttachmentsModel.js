@@ -3,10 +3,15 @@ Ext.define('Chaching.model.attachments.AttachmentsModel', {
     
     fields: [
         { name: 'id', type: 'int', isPrimaryKey: true },
-        { name: 'filename', type: 'string' },
+        { name: 'fileName', type: 'string' },
         { name: 'description', type: 'string' },
-        { name: 'filetype', type: 'string' },
+        { name: 'fileExtension', type: 'string' },
         { name: 'file', type: 'auto' },
-        { name: 'filestatus', type: 'string', mapping: 'id' }
+        { name: 'fileStatus', type: 'string',mapping:'id'},
+        { name: 'fileSize', type: 'float' },
+        { name: 'typeOfAttachedObject', type: 'string' },
+        { name: 'typeOfAttachedObjectId', type: 'int', defaultValue: null, convert: nullHandler },
+        { name: 'typeOfObjectId', type: 'int', defaultValue: null, convert: nullHandler },
+        {name:'objectId', type: 'int', defaultValue: null, convert: nullHandler}
     ]
 });

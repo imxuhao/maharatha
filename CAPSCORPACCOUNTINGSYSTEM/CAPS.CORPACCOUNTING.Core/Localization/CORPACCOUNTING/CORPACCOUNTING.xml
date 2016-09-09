@@ -1408,5 +1408,8 @@
     
     <text name="MapCOA" value="Map COA"/>
     
+    <text name="FileName" value="File Name"/>
+    <text name="DocType" value="File Type"/>
+    <text name="Size" value="Size"/>
   </texts>
 </localizationDictionary>

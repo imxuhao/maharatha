@@ -411,6 +411,12 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
 
         if (primaryKeyField && widgetRec && widgetRec.get(primaryKeyField)) {
             var attachmentWnd = Ext.create('Chaching.view.attachments.AttachmentsView');
+            var rec = {
+                objectId: widgetRec.get(primaryKeyField),
+                typeOfObjectId: 1///TODO:Remove static object type
+            };
+            var form = attachmentWnd.down('form').getForm();
+            form.setValues(rec);
             attachmentWnd.show();
         }
 

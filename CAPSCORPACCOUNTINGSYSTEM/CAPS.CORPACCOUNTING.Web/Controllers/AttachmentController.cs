@@ -6,7 +6,9 @@ using CAPS.CORPACCOUNTING.Attachments.Dto;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
+using CAPS.CORPACCOUNTING.Masters;
 
 namespace CAPS.CORPACCOUNTING.Web.Controllers
 {
@@ -70,5 +72,25 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 return Json(new AjaxResponse(new ErrorInfo(ex.Message)));
             }
         }
+        public async Task<JsonResult> UploadAttachment(UploadFileData fileData)
+        {
+            int iFileCount = Request.Files.Count;
+            //TODO: Implement this method to accept single file only. Cannot post multiple files due to size restrictions.
+            //Use uploadFileData as input dto. Move it to attachment dto folder i.e. create new file for class.
+            return Json(new {success = true});
+        }
     }
+}
+
+public class UploadFileData
+{
+    public UploadFileData()
+    { }
+    public string FileName { get; set; }
+    public string Description { get; set; }
+    public TypeOfAttachedObject TypeOfAttachedObjectId { get; set; }
+    public string FileExtension { get; set; }
+    public decimal FileSize { get; set; }
+    public TypeofObject TypeOfObjectId { get; set; }
+    public long ObjectId { get; set; }
 }

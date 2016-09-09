@@ -3727,6 +3727,7 @@
     <Content Include="ExtWeb\Chaching\app\store\APPaymentTermsListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\ARPaymentTermsListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\attachments\AttachmentsStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\attachments\TypeOfAttachmentsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\banking\banksetup\BankSetupStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\banking\banksetup\BankCheckNumberStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\base\BaseTreeStore.js" />

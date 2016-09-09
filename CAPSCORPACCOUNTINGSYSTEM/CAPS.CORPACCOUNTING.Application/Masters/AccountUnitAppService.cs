@@ -24,6 +24,7 @@ using CAPS.CORPACCOUNTING.Masters.CustomRepository;
 using CAPS.CORPACCOUNTING.Sessions;
 using Abp.Runtime.Caching;
 
+
 namespace CAPS.CORPACCOUNTING.Accounts
 {
     public class AccountUnitAppService : CORPACCOUNTINGAppServiceBase, IAccountUnitAppService
@@ -434,13 +435,13 @@ namespace CAPS.CORPACCOUNTING.Accounts
         {
             //get Coa record by coaId
             var coa = await _coaRepository.FirstOrDefaultAsync(p => p.Id == input.CoaId);
-            var linkedcoaId = coa.LinkChartOfAccountID;
-
+            int? linkedcoaId = coa.LinkChartOfAccountID;
+            
             //Get all linkedchartofaccount accounts.
             var query =
                 from au in _accountUnitRepository.GetAll()
                 join linkaccount in
-                (from account in _accountUnitRepository.GetAll()
+                (from account in _accountUnitRepository.GetAll().Where(p => p.ChartOfAccountId == linkedcoaId)
                  join homeAc in _accountLinkRepository.GetAll() on account.Id equals homeAc.MapAccountId.Value
                  select new { account.AccountNumber, homeAc })
                 on au.Id equals linkaccount.homeAc.HomeAccountId.Value
@@ -517,17 +518,14 @@ namespace CAPS.CORPACCOUNTING.Accounts
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task CreateOrUpdateAccountLinkUnits(CreateOrUpdateAccountLinkUnitList input)
+        public async Task CreateOrUpdateAccountLinkUnit(CreateOrUpdateAccountLinkUnit input)
         {
-            foreach (var accountLink in input.CreateOrUpdateAccountLinkList)
-            {
-                var accountUnit = accountLink.MapTo<AccountLinks>();
-                if (accountLink.AccountLinkId == 0)
-                    await _accountLinksManager.CreateAsync(accountUnit);
-                else
-                    await _accountLinksManager.UpdateAsync(accountUnit);
+            var accountUnit = input.MapTo<AccountLinks>();
+            if (input.AccountLinkId == 0)
+                await _accountLinksManager.CreateAsync(accountUnit);
+            else
+                await _accountLinksManager.UpdateAsync(accountUnit);
 
-            }
             await CurrentUnitOfWork.SaveChangesAsync();
         }
     }

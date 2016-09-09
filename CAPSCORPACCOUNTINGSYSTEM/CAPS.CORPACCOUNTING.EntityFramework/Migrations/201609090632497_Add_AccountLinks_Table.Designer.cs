@@ -7,13 +7,13 @@ namespace CAPS.CORPACCOUNTING.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Add_AccountLinksTable : IMigrationMetadata
+    public sealed partial class Add_AccountLinks_Table : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Add_AccountLinksTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Add_AccountLinks_Table));
         
         string IMigrationMetadata.Id
         {
-            get { return "201609071902064_Add_AccountLinksTable"; }
+            get { return "201609090632497_Add_AccountLinks_Table"; }
         }
         
         string IMigrationMetadata.Source

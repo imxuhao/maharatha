@@ -1383,9 +1383,9 @@
     <Compile Include="Migrations\201609071829496_Update_to_Abp0.11.2and0.11.3.Designer.cs">
       <DependentUpon>201609071829496_Update_to_Abp0.11.2and0.11.3.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201609071902064_Add_AccountLinksTable.cs" />
-    <Compile Include="Migrations\201609071902064_Add_AccountLinksTable.Designer.cs">
-      <DependentUpon>201609071902064_Add_AccountLinksTable.cs</DependentUpon>
+    <Compile Include="Migrations\201609090632497_Add_AccountLinks_Table.cs" />
+    <Compile Include="Migrations\201609090632497_Add_AccountLinks_Table.Designer.cs">
+      <DependentUpon>201609090632497_Add_AccountLinks_Table.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
@@ -2340,8 +2340,8 @@
     <EmbeddedResource Include="Migrations\201609071829496_Update_to_Abp0.11.2and0.11.3.resx">
       <DependentUpon>201609071829496_Update_to_Abp0.11.2and0.11.3.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609071902064_Add_AccountLinksTable.resx">
-      <DependentUpon>201609071902064_Add_AccountLinksTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201609090632497_Add_AccountLinks_Table.resx">
+      <DependentUpon>201609090632497_Add_AccountLinks_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

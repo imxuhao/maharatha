@@ -128,7 +128,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task CreateOrUpdateAccountLinkUnits(CreateOrUpdateAccountLinkUnitList input);
+        Task CreateOrUpdateAccountLinkUnit(CreateOrUpdateAccountLinkUnit input);
     }
     
 }

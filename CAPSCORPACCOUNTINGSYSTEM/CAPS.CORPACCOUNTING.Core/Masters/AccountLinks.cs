@@ -16,12 +16,12 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Column("AccountLinkID")]
         public override long Id { get; set; }
 
-        [ForeignKey("Id")]
+        [ForeignKey("HomeAccountId")]
         public AccountUnit HomeAccount { get; set; }
 
         public long? HomeAccountId { get; set; }
 
-        [ForeignKey("Id")]
+        [ForeignKey("MapAccountId")]
         public AccountUnit MappingAccount { get; set; }
 
         public long? MapAccountId { get; set; }

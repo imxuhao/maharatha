@@ -1,4 +1,0 @@
-1 - ASP.NET Boilerplate (the framework) and module-zero (base domain logic for user, role, tenant... management). They can be easily updated since they are distributed on nuget. Here, a list of all nuget packages: 
-
-http://www.aspnetboilerplate.com/Pages/Documents/Nuget-Packages
-http://www.aspnetboilerplate.com/Pages/Documents/Zero/Nuget-Packages 

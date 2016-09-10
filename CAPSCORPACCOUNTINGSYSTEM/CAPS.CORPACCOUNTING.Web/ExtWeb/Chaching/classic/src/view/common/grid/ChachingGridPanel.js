@@ -194,6 +194,11 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
  * Set to true if need in view mode.
  */
     isImportDataGrid: false,
+    /**
+     * 
+     * @cfg {object} attachmentConfig
+     */
+    attachmentConfig:null,
     initComponent: function () {
         var me = this,
             controller = me.getController(),
@@ -706,7 +711,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             defaultMenuItems.push(deleteMenuItem);
         }
         //add attachments menu item
-        if (me.modulePermissions.attach) {
+        if (me.modulePermissions.attach&&me.attachmentConfig) {
             var attachmentMenu= {
                 text: app.localize('Attach'),
                 iconCls: 'fa fa-paperclip',

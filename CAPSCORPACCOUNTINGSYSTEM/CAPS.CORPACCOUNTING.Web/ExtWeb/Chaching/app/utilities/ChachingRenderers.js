@@ -410,7 +410,11 @@
     genericAttachment:function(value, metadata, record, rowIndex, colIndex, store, view) {
         var itemRendered = this.items[0],
             renderIcon = '';
-
+        if (record && !record.get('typeOfAttachedObjectId')) {
+            itemRendered.iconCls = 'invalidUploadFileType';
+            itemRendered.tooltip = app.localize('Error');
+            return '';
+        }
         switch (value) {
         case "txt":
             renderIcon = "txt";
@@ -456,8 +460,13 @@
         itemRendered.iconCls = renderIcon;
         return '';
     },
-    fileStatusRenderer: function(value) {
+    fileStatusRenderer: function (value, metadata, record, rowIndex, colIndex, store, view) {
         var itemRendered = this.items[0];
+        if (record && !record.get('typeOfAttachedObjectId')) {
+            itemRendered.iconCls = 'fileStatusInvalidUploadError';
+            itemRendered.tooltip = app.localize('Error');
+            return '';
+        }
         switch (value) {
         case "-1":
         case -1:
@@ -475,6 +484,17 @@
             break;
         }
         return '';
+    },
+    attachmentColumnRenderer: function (value, metadata, record, rowIndex, colIndex, store, view) {
+        var itemRendered = this.items[0];
+        if (record.get('accountingItemId')) {
+            itemRendered.iconCls = 'btn-attach';
+            itemRendered.tooltip = app.localize('Attach');
+        } else {
+            itemRendered.iconCls = '';
+            itemRendered.tooltip = '';
+        }
+        return '<div role="button" tabIndex="-1"></div>';
     }
 
 });

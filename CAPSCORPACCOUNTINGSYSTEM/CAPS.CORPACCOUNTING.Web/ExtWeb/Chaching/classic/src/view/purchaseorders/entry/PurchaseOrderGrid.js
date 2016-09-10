@@ -16,6 +16,10 @@ Ext.define('Chaching.view.purchaseorders.entry.PurchaseOrderGrid',{
         destroy: abp.auth.isGranted('Pages.PurchaseOrders.Entry.Delete'),
         attach: abp.auth.isGranted('Pages.PurchaseOrders.Entry.Attach')
     },
+    attachmentConfig: {
+        objectType: 'AccountingDocument',
+        objectIdField: 'accountingDocumentId'
+    },
     gridId: 26,
     headerButtonsConfig: [
         {

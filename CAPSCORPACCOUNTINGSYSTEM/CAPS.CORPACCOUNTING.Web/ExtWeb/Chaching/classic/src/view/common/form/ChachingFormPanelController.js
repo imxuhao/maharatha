@@ -208,6 +208,30 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
     },
     onFormPanelResize: function (formPanel, width, height, oldWidth, oldHeight, eOpts) {
         formPanel.updateLayout();
+    },
+    onAttachmentClick: function () {
+        var me = this,
+            view = me.getView(),
+            attForm = view.getForm(),
+            attachmentCfg = view.attachmentConfig,
+            primaryKeyField = attachmentCfg.objectIdField,
+            idValue = attForm.findField(primaryKeyField).getValue();
+
+
+        if (idValue) {
+            var attachmentWnd = Ext.create('Chaching.view.attachments.AttachmentsView');
+            var rec = {
+                objectId: idValue,
+                typeOfObjectId: ChachingGlobals.getTypeOfObjectId(attachmentCfg.objectType)
+            };
+            var attachmentGrid = attachmentWnd.down('gridpanel'),
+                attachmentStore = attachmentGrid.getStore();
+            attachmentStore.getProxy().setExtraParams(rec);
+            attachmentStore.load();
+            var form = attachmentWnd.down('form').getForm();
+            form.setValues(rec);
+            attachmentWnd.show();
+        }
     }
     
 });

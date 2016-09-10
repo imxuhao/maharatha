@@ -17,6 +17,10 @@
         attach: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Attach'),
         imports: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Import')
     },
+    attachmentConfig: {
+        objectType: 'Accounts',
+        objectIdField: 'accountId'
+    },
     padding: 5,
     gridId: 11,
     headerButtonsConfig: [

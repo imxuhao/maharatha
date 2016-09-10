@@ -27,6 +27,10 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersForm',{
         attach: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Lines.Attach'),
         imports: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Lines.Import')
     },
+    attachmentConfig: {
+        objectType: 'Accounts',
+        objectIdField: 'accountId'
+    },
     items: [{
         xtype: 'hiddenfield',
         name: 'accountId',

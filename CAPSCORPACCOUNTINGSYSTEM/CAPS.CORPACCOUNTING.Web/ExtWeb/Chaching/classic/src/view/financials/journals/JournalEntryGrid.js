@@ -11,6 +11,10 @@ Ext.define('Chaching.view.financials.journals.JournalEntryGrid', {
         destroy: abp.auth.isGranted('Pages.Financials.Journals.Entry.Delete'),
         attach: abp.auth.isGranted('Pages.Financials.Journals.Entry.Attach')
     },
+    attachmentConfig: {
+        objectType: 'AccountingDocument',
+        objectIdField: 'accountingDocumentId'
+    },
     controller: 'financials-journals-journalentrygrid',
     gridId: 18,
     headerButtonsConfig: [

@@ -16,6 +16,10 @@ Ext.define('Chaching.view.financials.journals.JournalEntryForm',
         destroy: abp.auth.isGranted('Pages.Financials.Journals.Entry.Delete'),
         attach: abp.auth.isGranted('Pages.Financials.Journals.Entry.Attach')
     },
+    attachmentConfig: {
+        objectType: 'AccountingDocument',
+        objectIdField: 'accountingDocumentId'
+    },
     openInPopupWindow: false,
     layout: 'fit',
     autoScroll: false,

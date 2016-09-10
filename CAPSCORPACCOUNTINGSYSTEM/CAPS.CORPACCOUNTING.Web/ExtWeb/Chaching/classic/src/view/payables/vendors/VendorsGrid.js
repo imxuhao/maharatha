@@ -18,6 +18,10 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
         destroy: abp.auth.isGranted('Pages.Payables.Vendors.Delete'),
         attach: abp.auth.isGranted('Pages.Payables.Vendors.Attach')
     },
+    attachmentConfig: {
+        objectType: 'Vendor',
+        objectIdField: 'vendorId'
+    },
     padding: 5,
     gridId: 15,
     headerButtonsConfig: [

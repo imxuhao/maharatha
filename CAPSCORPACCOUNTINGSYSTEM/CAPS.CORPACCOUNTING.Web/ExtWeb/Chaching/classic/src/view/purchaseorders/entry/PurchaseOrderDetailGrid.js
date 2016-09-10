@@ -12,6 +12,10 @@ Ext.define('Chaching.view.purchaseorders.entry.PurchaseOrderDetailGrid',{
         destroy: abp.auth.isGranted('Pages.PurchaseOrders.Entry.Delete'),
         attach: abp.auth.isGranted('Pages.PurchaseOrders.Entry.Attach')
     },
+    attachmentConfig: {
+        objectType: 'AccountingItem',
+        objectIdField: 'accountingItemId'
+    },
     controller: 'purchaseorders-entry-purchaseorderdetailgrid',
     store: 'purchaseorders.entry.PurchaseOrderDetailsStore',
     moduleColumns: [

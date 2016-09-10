@@ -2,20 +2,20 @@
 {
     extend: 'Ext.data.Store',
     model: 'Chaching.model.attachments.AttachmentsModel',
-
-    data: {
-        items: [
-            { id: 1, filename: 'Jean Luc', filetype: "txt",description:'Dummy Data', creationTime: new Date(), createdUser: 'Krishna Garad' },
-            { id: 2, filename: 'Worf', filetype: "xls", description: 'Dummy Data', creationTime: new Date(), createdUser: 'Krishna Garad' },
-            { id: 3, filename: 'Deanna', filetype: "mp3", description: 'Dummy Data', creationTime: new Date(), createdUser: 'Krishna Garad' }
-        ]
-    },
-
     proxy: {
-        type: 'memory',
+        type: 'chachingProxy',
+        url: abp.appPath + 'api/services/app/attachedObjectUnit/GetAllAttachedObjectUnit',
+        actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+        api: {
+            read: abp.appPath + 'api/services/app/attachedObjectUnit/GetAllAttachedObjectUnit',
+            create: abp.appPath + 'Attachment/UploadAttachment',
+            update: abp.appPath + 'api/services/app/attachedObjectUnit/UpdateAttachedOjectUnit',
+            destroy: abp.appPath + 'api/services/app/attachedObjectUnit/DeleteAttachedObjectUnit'
+        },
         reader: {
             type: 'json',
-            rootProperty: 'items'
+            rootProperty: 'result.attachedObjectUnitList'
         }
-    }
+    },
+    idPropertyField: 'attachedObjectId'
 });

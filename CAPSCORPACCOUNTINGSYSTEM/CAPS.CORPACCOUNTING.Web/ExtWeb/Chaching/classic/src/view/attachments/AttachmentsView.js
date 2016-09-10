@@ -17,18 +17,12 @@ Ext.define('Chaching.view.attachments.AttachmentsView',
         var me = this;
         me.callParent(arguments);
     },
-    buttons: [ {
-        xtype: 'button',
-        width: '8%',
-        ui: 'actionButton',
-        iconCls: 'fa fa-cloud-upload',
-        text: app.localize('Save').toUpperCase()
-    },{
+    buttons: [{
             xtype: 'button',
             scale: 'small',
             iconCls: 'fa fa-close',
             iconAlign: 'left',
-            text: app.localize('Cancel').toUpperCase(),
+            text: app.localize('Close').toUpperCase(),
             ui: 'actionButton',
             name: 'CancelAttachment',
             itemId: 'BtnCancelAttachment',
@@ -76,14 +70,24 @@ Ext.define('Chaching.view.attachments.AttachmentsView',
                     border: false,
                     viewConfig: {
                         emptyText: app.localize('NoFilesAttached_Message'),
-                        deferEmptyText: false
+                        deferEmptyText: false,
+                        getRowClass: function (record) {
+                            if (record && !record.get('typeOfAttachedObjectId')) {
+                                return 'invalid-File-Upload';
+                            }
+                            return '';
+                        }
                     },
                     store: new Chaching.store.attachments.AttachmentsStore(),
                     plugins:[
                     {
-                        ptype: 'chachingCellediting',
+                        ptype: 'chachingRowediting',
                         pluginId: 'editingPlugin',
-                        clicksToEdit: 2
+                        clicksToEdit: 2,
+                        listeners: {
+                            beforeedit:'onAttachmentBeforeEdit',
+                            edit: 'onAttachmentEditComplete'
+                        }
                     }],
                     columns: [
                         {
@@ -115,7 +119,7 @@ Ext.define('Chaching.view.attachments.AttachmentsView',
                             maxWidth:100
                         }, {
                             text: app.localize('AttachedOn'),
-                            dataIndex: 'creationTime',
+                            dataIndex: 'attachedDate',
                             maxWidth:140,
                             renderer: Chaching.utilities.ChachingRenderers.renderDateOnly,
                             flex: 1
@@ -148,7 +152,8 @@ Ext.define('Chaching.view.attachments.AttachmentsView',
                             items:[
                             {
                                 iconCls: '',
-                                tooltip:app.localize('Download')
+                                tooltip: app.localize('Download'),
+                                handler:'onDownloadFileClicked'
                             }]
                         }, {
                             xtype: 'actioncolumn',
@@ -160,7 +165,8 @@ Ext.define('Chaching.view.attachments.AttachmentsView',
                             items:[
                             {
                                 iconCls: 'deleteCls',
-                                tooltip:app.localize('Delete')
+                                tooltip: app.localize('Delete'),
+                                handler:'onAttachmentDelete'
                             }]
                         }
 

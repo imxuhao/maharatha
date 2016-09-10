@@ -2045,9 +2045,6 @@
         <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.UpdateAttachedObjectInputUnit.FileName">
             <summary>Gets or sets the FileName field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.UpdateAttachedObjectInputUnit.FileSize">
-            <summary>Gets or sets the FileSize field. </summary>      
-        </member>
         <member name="P:CAPS.CORPACCOUNTING.Attachments.Dto.UpdateAttachedObjectInputUnit.FileExtension">
             <summary>Gets or sets the FileExtension field. </summary>
         </member>
@@ -7892,7 +7889,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.CreateOrUpdateAccountLinkUnits(CAPS.CORPACCOUNTING.Masters.Dto.CreateOrUpdateAccountLinkUnitList)">
+        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.CreateOrUpdateAccountLinkUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateOrUpdateAccountLinkUnit)">
             <summary>
             Create or Update AccountLinks
             </summary>
@@ -10797,7 +10794,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.CreateOrUpdateAccountLinkUnits(CAPS.CORPACCOUNTING.Masters.Dto.CreateOrUpdateAccountLinkUnitList)">
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.CreateOrUpdateAccountLinkUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateOrUpdateAccountLinkUnit)">
             <summary>
             Create or Update AccountLinks
             </summary>

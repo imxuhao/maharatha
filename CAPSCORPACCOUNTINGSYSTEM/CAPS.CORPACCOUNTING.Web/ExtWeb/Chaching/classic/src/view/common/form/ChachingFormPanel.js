@@ -233,7 +233,24 @@ Ext.define('Chaching.view.common.form.ChachingFormPanel',{
                     }
                 });
             }
-
+            if (me.modulePermissions.attach && me.attachmentConfig) {
+                //attachments
+                buttons.push({
+                    xtype: 'button',
+                    scale: 'small',
+                    iconCls: 'fa fa-paperclip',
+                    iconAlign: 'left',
+                    text: app.localize('Attachment').toUpperCase(),
+                    ui: 'actionButton',
+                    name: 'Attachment',
+                    itemId: 'BtnAttachment',
+                    reference: 'BtnAttachment',
+                    hidden: true,
+                    listeners: {
+                        click: 'onAttachmentClick'
+                    }
+                });
+            }
             var cancelButton= {
                 xtype: 'button',
                 scale: 'small',

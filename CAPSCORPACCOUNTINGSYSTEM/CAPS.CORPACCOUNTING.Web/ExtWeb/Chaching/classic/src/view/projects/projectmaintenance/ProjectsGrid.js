@@ -24,6 +24,10 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
         attach: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Attach'),
         imports: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Import')
     },
+    attachmentConfig: {
+        objectType: 'Projects',
+        objectIdField: 'jobId'
+    },
     padding: 5,
     gridId:16,
     store:'projects.projectmaintenance.ProjectsStore',

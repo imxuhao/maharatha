@@ -5893,6 +5893,53 @@ html.x-big {
 .x-list-indexed .x-list-disclosure {
     margin-right: 1.8em;
 }
+/* http://localhost:1841/ext/modern/theme-neptune/sass/src/field/Checkbox.scss:1 */
+.x-field-checkbox .x-input-el {
+    padding: 0;
+    height: 2.31em;
+}
+/* http://localhost:1841/ext/modern/theme-neptune/sass/src/field/Checkbox.scss:6 */
+.x-big .x-field-checkbox .x-input-el {
+    height: 2.625em;
+}
+/* http://localhost:1841/ext/modern/theme-neptune/sass/src/field/Checkbox.scss:12 */
+.x-field-checkbox .x-field-mask:after {
+    color: #919191;
+    position: absolute;
+    right: 0.4em;
+    height: 1em;
+    width: 1em;
+    font-size: 1.24rem;
+    top: 50%;
+    margin-top: -0.5em;
+    content: "\f096";
+    font: 1.24rem/1 FontAwesome;
+    text-align: center;
+}
+/* http://localhost:1841/ext/modern/theme-neptune/sass/src/field/Checkbox.scss:22 */
+.x-big .x-field-checkbox .x-field-mask:after {
+    font-size: 1.2rem;
+}
+/* http://localhost:1841/ext/modern/theme-neptune/sass/src/field/Checkbox.scss:30 */
+.x-input-checkbox {
+    visibility: hidden;
+}
+/* http://localhost:1841/ext/modern/theme-neptune/sass/src/field/Checkbox.scss:34 */
+.x-field-checkbox .x-input-el:checked + .x-field-mask:after {
+    content: "\f046";
+    font: 1.24rem/1 FontAwesome;
+}
+/* http://localhost:1841/ext/modern/theme-neptune/sass/src/field/Checkbox.scss:38 */
+.x-big .x-field-checkbox .x-input-el:checked + .x-field-mask:after {
+    font-size: 1.2rem;
+}
+/* http://localhost:1841/ext/modern/theme-neptune/sass/src/form/Panel.scss:5 */
+.x-form-inner {
+    /**
+ * @class Ext.form.Panel
+ */
+    background-color: #ececec;
+}
 /* http://localhost:1841/ext/modern/theme-neptune/sass/src/panel/Tool.scss:1 */
 .x-tool-close {
     font-family: FontAwesome;

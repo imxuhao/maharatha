@@ -13,6 +13,10 @@
         destroy: abp.auth.isGranted('Pages.Receivables.Customers.Delete'),
         attach: abp.auth.isGranted('Pages.Receivables.Customers.Attach')
     },
+    attachmentConfig: {
+        objectType: 'Customers',
+        objectIdField: 'customerId'
+    },
     name: 'Customers',
     openInPopupWindow: false,
     hideDefaultButtons: false,

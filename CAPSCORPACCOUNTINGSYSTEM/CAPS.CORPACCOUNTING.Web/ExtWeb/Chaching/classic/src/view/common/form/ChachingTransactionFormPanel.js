@@ -167,7 +167,12 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanel',{
     frame: false,
     showFormTitle: false,
     titleConfig: null,
-    isTransactionForm:true,
+    isTransactionForm: true,
+    /**
+    * 
+    * @cfg {object} attachmentConfig
+    */
+    attachmentConfig: null,
     initComponent: function() {
         var me = this,
             controller = me.getController();
@@ -239,22 +244,6 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanel',{
                     click: 'onSaveCloneClicked'
                 }
             });
-            //attachments
-            buttons.push({
-                xtype: 'button',
-                scale: 'small',
-                iconCls: 'fa fa-paperclip',
-                iconAlign: 'left',
-                text: app.localize('Attachment').toUpperCase(),
-                ui: 'actionButton',
-                name: 'Attachment',
-                itemId: 'BtnAttachment',
-                reference: 'BtnAttachment'
-                //listeners: {
-                //    click: 'onCancelClicked'
-                //}
-            });
-
             //edit
             buttons.push({
                 xtype: 'button',
@@ -269,6 +258,24 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanel',{
                 hidden:true,
                 listeners: {
                     click: 'onEditButtonClicked'
+                }
+            });
+        }
+        if (me.modulePermissions.attach && me.attachmentConfig) {
+            //attachments
+            buttons.push({
+                xtype: 'button',
+                scale: 'small',
+                iconCls: 'fa fa-paperclip',
+                iconAlign: 'left',
+                text: app.localize('Attachment').toUpperCase(),
+                ui: 'actionButton',
+                name: 'Attachment',
+                itemId: 'BtnAttachment',
+                reference: 'BtnAttachment',
+                hidden:true,
+                listeners: {
+                    click: 'onAttachmentClick'
                 }
             });
         }

@@ -16,6 +16,11 @@
     color: #CA0909;
     content: "\f1f8";
 }
+.attachmentCls:before {
+    font: 18px/1 FontAwesome;
+    color: #0717f5;
+    content: "\f0c6";
+}
 
 .unlinkUserCls:before {
     font: 22px/1 FontAwesome;
@@ -525,4 +530,19 @@ h1, h2, h3, h4, h5, h6 {
 .chaching-transactiongrid .x-grid-empty {
     font-weight: 700;
      color: #56CFDA;
+}
+.invalid-File-Upload .x-grid-cell {
+    background-color: #d05757 !important;
+    color: white;
+    font-weight: 600;
+}
+.fileStatusInvalidUploadError:before {
+    content: "\f0a7";
+    font: 18px/1 FontAwesome;
+    color: white;
+}
+.invalidUploadFileType:before {
+     content: "\f264";
+    font: 18px/1 FontAwesome;
+    color: white;
 }

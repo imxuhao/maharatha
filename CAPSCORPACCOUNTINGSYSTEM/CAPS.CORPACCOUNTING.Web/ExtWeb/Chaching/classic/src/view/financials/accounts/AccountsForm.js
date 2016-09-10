@@ -16,6 +16,10 @@ Ext.define('Chaching.view.financials.accounts.AccountsForm', {
         attach: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Attach'),
         imports: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Import')
     },
+    attachmentConfig: {
+        objectType: 'Accounts',
+        objectIdField: 'accountId'
+    },
     openInPopupWindow: false,
     hideDefaultButtons: false,
     layout: 'column',

@@ -20,6 +20,10 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableForm',{
     autoScroll: false,
     border: false,
     frame: false,
+    attachmentConfig: {
+        objectType: 'AccountingDocument',
+        objectIdField: 'accountingDocumentId'
+    },
     bbar: [
     {
         xtype: 'panel',

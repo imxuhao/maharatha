@@ -18,6 +18,10 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
         attach: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Lines.Attach'),
         imports: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Lines.Import')
     },
+    attachmentConfig: {
+        objectType: 'Accounts',
+        objectIdField: 'accountId'
+    },
     padding: 5,
     gridId: 14,
     headerButtonsConfig: [

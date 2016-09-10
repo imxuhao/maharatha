@@ -15,6 +15,10 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
         destroy: abp.auth.isGranted('Pages.Financials.Journals.Entry.Delete'),
         attach: abp.auth.isGranted('Pages.Financials.Journals.Entry.Attach')
     },
+    attachmentConfig: {
+        objectType: 'AccountingItem',
+        objectIdField: 'accountingItemId'
+    },
     groupedHeaderBaseConfig: [{
         groupHeaderText: app.localize('Debits'),
         columnName:'debits',

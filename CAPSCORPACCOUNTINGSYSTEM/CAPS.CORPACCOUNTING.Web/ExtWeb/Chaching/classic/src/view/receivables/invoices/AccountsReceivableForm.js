@@ -18,6 +18,10 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableForm', {
         destroy: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Delete'),
         attach: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Attach')
     },
+    attachmentConfig: {
+        objectType: 'AccountingDocument',
+        objectIdField: 'accountingDocumentId'
+    },
     openInPopupWindow: false,
     layout: 'fit',
     autoScroll: false,

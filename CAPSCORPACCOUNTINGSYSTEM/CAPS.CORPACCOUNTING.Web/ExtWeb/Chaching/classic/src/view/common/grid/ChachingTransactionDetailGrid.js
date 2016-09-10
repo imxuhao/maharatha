@@ -115,6 +115,11 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
     },
     cls: 'chaching-transactiongrid',
     isTransactionDetailsGrid: true,
+    /**
+    * 
+    * @cfg {object} attachmentConfig
+    */
+    attachmentConfig: null,
     viewConfig: {
         getRowClass: function(record) {
             if (record && record.get('isAccountingItemSplit')) {
@@ -146,6 +151,10 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
             }
             if (modulePermissions.destroy) {
                 columns.push(me.getDeleteActionColumn());
+            }
+            if (modulePermissions.attach && me.attachmentConfig) {
+                var attachmentCol = me.getAttachmentColumn();
+                columns.push(attachmentCol);
             }
             me.columns = columns;
         }
@@ -305,6 +314,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
             iconCls: 'deleteCls',
             tooltip: app.localize('Delete'),
             width: 50,
+            align: 'center',
             hideable: false,
             movable: false,
             resizable: false,
@@ -312,6 +322,29 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
             groupable: false,
             menuDisabled: true,
             handler: 'onDeleteClicked'
+        };
+    },
+    getAttachmentColumn:function() {
+        return {
+            xtype: 'actioncolumn',
+            name: 'Attachment',
+            dataIndex: 'Attachment',
+            scale: 'small',
+            hideable: false,
+            movable: false,
+            resizable: false,
+            sortable: false,
+            groupable: false,
+            menuDisabled: true,
+            width: 50,
+            align: 'center',
+            renderer: Chaching.utilities.ChachingRenderers.attachmentColumnRenderer,
+            items:[
+            {
+                iconCls: '',
+                tooltip: app.localize('Attach'),
+                handler: 'onAttachmentClicked'
+            }]
         };
     },
     getSplitColumn: function () {

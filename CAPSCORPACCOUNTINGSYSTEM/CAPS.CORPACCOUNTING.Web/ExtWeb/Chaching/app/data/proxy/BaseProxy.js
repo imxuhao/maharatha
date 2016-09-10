@@ -141,23 +141,26 @@ Ext.define('Chaching.data.proxy.BaseProxy', {
     listeners:
     {
         exception: function(proxy, request, operation) {
-            if (request.responseText != undefined) {
-                // responseText was returned, decode it
-                try {
-                    var responseObj = Ext.decode(request.responseText, true);
-                    var message = responseObj.message;
-                    if (!message) message = responseObj.error.message;
-                    if (!message) message=responseObj.exceptionMessage;
-                    abp.message.error(message, app.localize('Error'));
-                } catch (e) {
-                    abp.message.error('Unknown error: The server did not send any information about the error.', 'Error');
-                    //Ext.Msg.alert('Error', 'Unknown error: The server did not send any information about the error.');
-                }
+            if (operation.getAction() === "read") {
+                if (request.responseText != undefined) {
+                    // responseText was returned, decode it
+                    try {
+                        var responseObj = Ext.decode(request.responseText, true);
+                        var message = responseObj.message;
+                        if (!message) message = responseObj.error.message;
+                        if (!message) message = responseObj.exceptionMessage;
+                        abp.message.error(message, app.localize('Error'));
+                    } catch (e) {
+                        abp.message.error('Unknown error: The server did not send any information about the error.',
+                            'Error');
+                        //Ext.Msg.alert('Error', 'Unknown error: The server did not send any information about the error.');
+                    }
 
-            } else {
-                abp.message.error('Unknown error: Unable to understand the response from the server', 'Error');
-                // no responseText sent
-                // Ext.Msg.alert('Error', 'Unknown error: Unable to understand the response from the server');
+                } else {
+                    abp.message.error('Unknown error: Unable to understand the response from the server', 'Error');
+                    // no responseText sent
+                    // Ext.Msg.alert('Error', 'Unknown error: Unable to understand the response from the server');
+                }
             }
         }
     }

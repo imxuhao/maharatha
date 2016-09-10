@@ -16,6 +16,10 @@ Ext.define('Chaching.view.financials.accounts.DivisionsForm', {
         attach: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Attach'),
         imports: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Import')
     },
+    attachmentConfig: {
+        objectType: 'Projects',
+        objectIdField: 'jobId'
+    },
     openInPopupWindow: false,
     hideDefaultButtons: false,
     layout: 'column',

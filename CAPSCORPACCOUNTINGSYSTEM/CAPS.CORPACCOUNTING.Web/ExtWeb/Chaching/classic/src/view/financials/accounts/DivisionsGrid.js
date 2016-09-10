@@ -15,6 +15,10 @@ Ext.define('Chaching.view.financials.accounts.DivisionsGrid', {
         attach: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Attach'),
         imports:abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Import')
     },
+    attachmentConfig: {
+        objectType: 'Projects',
+        objectIdField: 'jobId'
+    },
     store:'financials.accounts.DivisionsStore',
     padding: 5,
     gridId: 12,

@@ -15,6 +15,10 @@ Ext.define('Chaching.view.purchaseorders.entry.PurchaseOrderForm',{
         destroy: abp.auth.isGranted('Pages.PurchaseOrders.Entry.Delete'),
         attach: abp.auth.isGranted('Pages.PurchaseOrders.Entry.Attach')
     },
+    attachmentConfig: {
+        objectType: 'AccountingDocument',
+        objectIdField: 'accountingDocumentId'
+    },
     openInPopupWindow: false,
     layout: 'fit',
     autoScroll: false,

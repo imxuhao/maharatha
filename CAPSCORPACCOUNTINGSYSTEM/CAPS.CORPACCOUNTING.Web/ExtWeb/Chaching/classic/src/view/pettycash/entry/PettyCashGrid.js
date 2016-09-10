@@ -14,6 +14,10 @@ Ext.define('Chaching.view.pettycash.entry.PettyCashGrid',{
         destroy: abp.auth.isGranted('Pages.PettyCash.Entry.Delete'),
         attach: abp.auth.isGranted('Pages.PettyCash.Entry.Attach')
     },
+    attachmentConfig: {
+        objectType: 'AccountingDocument',
+        objectIdField: 'accountingDocumentId'
+    },
     gridId: 30,
     headerButtonsConfig: [
         {

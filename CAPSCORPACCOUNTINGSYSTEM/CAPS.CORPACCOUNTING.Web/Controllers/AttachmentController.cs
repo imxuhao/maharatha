@@ -79,7 +79,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
         public async Task<FileResult> GetFilesById(GetFileAttachedObjectInputUnit getFileAttachedInputUnitId)
         {
             var attachedObjectUnit = await _attachedObjectUnitAppService.GetFileAttachedObjecUnit(getFileAttachedInputUnitId);
-
+            Response.AddHeader("Content-Disposition", "attachment; filename=\"" + attachedObjectUnit.FileName + "\"");
             return File(attachedObjectUnit.Bytes, attachedObjectUnit.FileExtension);
         }
     }

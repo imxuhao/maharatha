@@ -16,6 +16,10 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableDetailGrid',{
         attach: abp.auth.isGranted('Pages.Payables.Invoices.Attach')
     },
     store: 'payables.invoices.AccountsPayableDetailsStore',
+    attachmentConfig: {
+        objectType: 'AccountingItem',
+        objectIdField: 'accountingItemId'
+    },
     moduleColumns:[
     {
         xtype: 'gridcolumn',

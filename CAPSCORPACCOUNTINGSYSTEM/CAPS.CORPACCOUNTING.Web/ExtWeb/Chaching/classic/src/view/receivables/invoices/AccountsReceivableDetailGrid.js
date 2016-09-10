@@ -15,6 +15,10 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableDetailGrid', {
         destroy: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Delete'),
         attach: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Attach')
     },
+    attachmentConfig: {
+        objectType: 'AccountingItem',
+        objectIdField: 'accountingItemId'
+    },
     store: 'receivables.invoices.AccountsReceivableDetailsStore',
     moduleColumns: [
     {

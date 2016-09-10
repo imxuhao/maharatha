@@ -28,6 +28,10 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm', {
         attach: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Attach'),
         imports: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Import')
     },
+    attachmentConfig: {
+        objectType: 'Projects',
+        objectIdField: 'jobId'
+    },
     controller: 'projects-projectmaintenance-projectsform',
     name: 'Projects',
     openInPopupWindow: false,
@@ -269,6 +273,20 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm', {
                         actionButton: true,
                         listeners: {
                             click: 'onSaveClicked'
+                        }
+                    }, {
+                        xtype: 'button',
+                        scale: 'small',
+                        iconCls: 'fa fa-paperclip',
+                        iconAlign: 'left',
+                        text: app.localize('Attachment').toUpperCase(),
+                        ui: 'actionButton',
+                        name: 'Attachment',
+                        itemId: 'BtnAttachment',
+                        reference: 'BtnAttachment',
+                        hidden: true,
+                        listeners: {
+                            click: 'onAttachmentClick'
                         }
                     }, {
                         xtype: 'button',

@@ -16,9 +16,12 @@ Ext.define('Chaching.view.attachments.AttachmentsViewController', {
             fileStatus: 0,
             fileExtension: me.getFileType(impFile.name),
             creationTime: new Date(),
+            attachedDate: new Date(),
             createdUser: ChachingGlobals.loggedInUserInfo.name
         }
         newUploadFile = me.getTypeOfAttachedObject(newUploadFile.fileExtension, newUploadFile);
+        if (newUploadFile.typeOfAttachedObjectId === 0) newUploadFile.fileStatus = -1;
+
         var typeOfObject = form.findField('typeOfObjectId').getValue();
         newUploadFile.typeOfObjectId = typeOfObject;
         var objectId = form.findField('objectId').getValue();
@@ -26,7 +29,8 @@ Ext.define('Chaching.view.attachments.AttachmentsViewController', {
         gridStore.insert(0, newUploadFile);
         var newRec = gridStore.getAt(0);
         ///TODO: Uncomment once server side is done
-        me.postDocument(abp.appPath + 'Attachment/UploadAttachment', newRec);
+        if (newUploadFile.typeOfAttachedObjectId > 0)
+            me.postDocument(abp.appPath + 'Attachment/UploadAttachment', newRec, gridStore);
     },
     getTypeOfAttachedObject: function (fileExt,newData) {
         switch (fileExt) {
@@ -71,6 +75,14 @@ Ext.define('Chaching.view.attachments.AttachmentsViewController', {
             newData.typeOfAttachedObjectId = 14;
             newData.typeOfAttachedObject = "Miscellaneous";
             break;
+        case "exe":
+        case "application":
+        case "host":
+        case "lnk":
+        case "msi":
+            newData.typeOfAttachedObjectId = 0;
+            newData.typeOfAttachedObject = "Invalid File";
+            break;
         default:
             newData.typeOfAttachedObjectId = 14;
             newData.typeOfAttachedObject = "Miscellaneous";
@@ -83,7 +95,7 @@ Ext.define('Chaching.view.attachments.AttachmentsViewController', {
             view = me.getView();
         Ext.destroy(view);
     },
-    postDocument: function (url, newUploadFile) {
+    postDocument: function (url, newUploadFile,uploadStore) {
         var xhr = new XMLHttpRequest();
         var fd = new FormData();
         //fd.append("serverTimeDiff", 0);
@@ -103,6 +115,7 @@ Ext.define('Chaching.view.attachments.AttachmentsViewController', {
                 if ((xhr.readyState === 4 || xhr.readyState === 2) && xhr.status === 200) {
                     //handle the answer, in order to detect any server side error
                     if (xhr.responseText && Ext.decode(xhr.responseText).success) {
+                        uploadStore.reload();
                         newUploadFile.set('fileStatus', 1);
                     }
                 } else if (xhr.readyState === 4 && xhr.status === 404) {
@@ -188,9 +201,11 @@ Ext.define('Chaching.view.attachments.AttachmentsViewController', {
                 fileStatus:0,
                 fileExtension: me.getFileType(file.name),
                 creationTime: new Date(),
+                attachedDate: new Date(),
                 createdUser: ChachingGlobals.loggedInUserInfo.name
             };
             newUploadFile = me.getTypeOfAttachedObject(newUploadFile.fileExtension, newUploadFile);
+            if (newUploadFile.typeOfAttachedObjectId === 0) newUploadFile.fileStatus = -1;
 
             var typeOfObject = form.findField('typeOfObjectId').getValue();
             newUploadFile.typeOfObjectId = typeOfObject;
@@ -200,8 +215,105 @@ Ext.define('Chaching.view.attachments.AttachmentsViewController', {
             gridStore.insert(0, newUploadFile);
             var newRec = gridStore.getAt(0);
             ///TODO: Uncomment once server side is done
-            me.postDocument(abp.appPath + 'Attachment/UploadAttachment', newRec);
+            if (newUploadFile.typeOfAttachedObjectId > 0)
+                me.postDocument(abp.appPath + 'Attachment/UploadAttachment', newRec, gridStore);
         });
         grid.removeCls('drag-over');
+    },
+    onAttachmentDelete: function (tableView,rowIdx,colIdx,evt,e,record,targetCell) {
+        var me = this,
+            view = me.getView(),
+            attachGrid = view.down('gridpanel'),
+            attachStore = attachGrid.getStore();
+        if (record && record.get('attachedObjectId')) {
+            abp.message.confirm(
+              app.localize('DeleteWarningMessage'),
+              function (isConfirmed) {
+                  if (isConfirmed) {
+                      record.set('id', record.get('attachedObjectId'));
+                      //Delete record
+                      if (attachStore) {
+                          var operation = Ext.data.Operation({
+                              params: { id: record.get('id') },
+                              controller: me,
+                              action: 'destroy',
+                              records: [record],
+                              callback: me.onOperationCompleteCallBack
+                          });
+                          attachStore.erase(operation);
+                      }
+                  }
+              }
+          );
+        } else if(record) {
+            attachStore.remove(record);
+        }
+    },
+    onAttachmentBeforeEdit:function(editor, context, eOpts) {
+        var record = context.record;
+        if (record&&record.get('typeOfAttachedObjectId')>0) {
+            return true;
+        }
+        return false;
+    },
+    onAttachmentEditComplete:function(editor,context,eOpts) {
+        var me = this,
+            view = me.getView(),
+            attachGrid = view.down('gridpanel'),
+            attachStore = attachGrid.getStore(),
+            idPropertyField=attachStore.idPropertyField,
+            record = context.record;
+        if (record && record.get(idPropertyField)) {
+            record.set('id', record.get(idPropertyField));
+            //TODO:Remove once output dto contains typeofobject value
+            if (!record.get('typeOfAttachedObjectId')) {
+                var obj = {
+                    typeOfAttachedObjectId: 0,
+                    typeOfAttachedObject:''
+                };
+                var typeOfAttachObj = me.getTypeOfAttachedObject(record.get('fileExtension'), obj);
+                if (typeOfAttachObj) record.set('typeOfAttachedObjectId', typeOfAttachObj.typeOfAttachedObjectId);
+            }
+            var operation = Ext.data.Operation({
+                params: record.data,
+                records: [record],
+                controller: me,
+                callback: me.onOperationCompleteCallBack
+            });
+            attachStore.update(operation);
+        }
+
+    },
+    onOperationCompleteCallBack: function(records, operation, success) {
+        var controller = operation.controller,
+            view = controller.getView();
+
+        if (success) {
+            controller.doReloadGrid();
+            abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
+        } else {
+            // show error validation if any 
+            ChachingGlobals.showErrorMessage(operation);
+        }
+    },
+    doReloadGrid:function() {
+        var me = this,
+            view = me.getView(),
+            attachGrid = view.down('gridpanel'),
+            attachStore = attachGrid.getStore();
+        attachStore.reload();
+    },
+    onDownloadFileClicked:function(tableView, rowIdx, colIdx, evt, e, record, targetCell) {
+        if (record && record.get('attachedObjectId')) {
+            var params= {
+                attachedObjectId: record.get('attachedObjectId')
+            }
+            var config = {
+                method: 'POST',
+                url: abp.appPath + 'Attachment/GetFilesById',
+                params:params
+            }
+            ChachingGlobals.downloadExtUtility(config);
+        }
     }
 });

@@ -515,6 +515,28 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
             }
         }
         return isValid;
+    },
+    onAttachmentClicked: function (grid, rowIndex, colIndex) {
+        var me = this,
+            view = me.getView(),
+            detailStore = view.getStore(),
+            attachmentCfg = view.attachmentConfig,
+            primaryKeyField = attachmentCfg.objectIdField;
+        var record = detailStore.getAt(rowIndex);
+        if (record && record.get(primaryKeyField)) {
+            var attachmentWnd = Ext.create('Chaching.view.attachments.AttachmentsView');
+            var rec = {
+                objectId: record.get(primaryKeyField),
+                typeOfObjectId: ChachingGlobals.getTypeOfObjectId(attachmentCfg.objectType)
+            };
+            var attachmentGrid = attachmentWnd.down('gridpanel'),
+                attachmentStore = attachmentGrid.getStore();
+            attachmentStore.getProxy().setExtraParams(rec);
+            attachmentStore.load();
+            var form = attachmentWnd.down('form').getForm();
+            form.setValues(rec);
+            attachmentWnd.show();
+        }
     }
 
 });

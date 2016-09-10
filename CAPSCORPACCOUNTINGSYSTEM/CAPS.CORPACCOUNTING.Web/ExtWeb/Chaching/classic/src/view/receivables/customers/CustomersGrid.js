@@ -18,6 +18,10 @@ Ext.define('Chaching.view.receivables.customers.CustomersGrid', {
         destroy: abp.auth.isGranted('Pages.Receivables.Customers.Delete'),
         attach: abp.auth.isGranted('Pages.Receivables.Customers.Attach')
     },
+    attachmentConfig: {
+        objectType: 'Customers',
+        objectIdField: 'customerId'
+    },
     padding: 5,
     gridId: 24,
     headerButtonsConfig: [

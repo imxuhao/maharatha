@@ -274,10 +274,28 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                 //form.setValues(widgetRec.data);
                 form.loadRecord(widgetRec);
             }
+            if (form) {
+                controller.showAttachment(widgetRec, formView);
+            }
             if (form && isView) {
                 controller.openInViewMode(formView,controller);
             }
         }
+    },
+    showAttachment:function(record, formView) {
+        var me = this,
+            view = me.getView(),
+            attachmentCfg = view.attachmentConfig;
+
+        if (record&&formView&&attachmentCfg) {
+            var attachmentBtn = formView.down('button[itemId=BtnAttachment]');
+            if (attachmentBtn && record.get(attachmentCfg.objectIdField)) {
+                attachmentBtn.show();
+            } else {
+                attachmentBtn.hide();
+            }
+        }
+
     },
     openInViewMode:function(formView,controller) {
         var form = undefined, formPanel = undefined;
@@ -404,8 +422,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
     attachmentActionClicked: function (menu, item, e, eOpts) {
         var me = this,
             view = me.getView(),
-            gridStore = view.getStore(),
-            primaryKeyField = gridStore.idPropertyField,
+            attachmentCfg=view.attachmentConfig,
+            primaryKeyField = attachmentCfg.objectIdField,
             widgetRec = menu.parentMenu.widgetRecord;
 
 
@@ -413,8 +431,12 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             var attachmentWnd = Ext.create('Chaching.view.attachments.AttachmentsView');
             var rec = {
                 objectId: widgetRec.get(primaryKeyField),
-                typeOfObjectId: 1///TODO:Remove static object type
+                typeOfObjectId: ChachingGlobals.getTypeOfObjectId(attachmentCfg.objectType)
             };
+            var attachmentGrid = attachmentWnd.down('gridpanel'),
+                attachmentStore = attachmentGrid.getStore();
+            attachmentStore.getProxy().setExtraParams(rec);
+            attachmentStore.load();
             var form = attachmentWnd.down('form').getForm();
             form.setValues(rec);
             attachmentWnd.show();

@@ -15,6 +15,10 @@ Ext.define('Chaching.view.pettycash.entry.PettyCashForm',{
         destroy: abp.auth.isGranted('Pages.PettyCash.Entry.Delete'),
         attach: abp.auth.isGranted('Pages.PettyCash.Entry.Attach')
     },
+    attachmentConfig: {
+        objectType: 'AccountingDocument',
+        objectIdField: 'accountingDocumentId'
+    },
     openInPopupWindow: false,
     layout: 'fit',
     autoScroll: false,

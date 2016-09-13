@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Abp.Domain.Repositories;
 using Abp.Domain.Services;
@@ -129,10 +130,11 @@ namespace CAPS.CORPACCOUNTING.Masters
         public virtual async Task ValidateAccountUnitAsync(AccountUnit accountUnit)
         {
             var coaUnit = await CoaUnitRepository.FirstOrDefaultAsync(p => p.Id == accountUnit.ChartOfAccountId);
-            long accountNumber;
             //Validating Numeric AccountNumbers
             //In Coa IsNumberic is true, AccountNumber shold be Numeric
-            if (coaUnit.IsNumeric && !long.TryParse(accountUnit.AccountNumber, out accountNumber))
+            Regex rgx = new Regex(@"^([0-9]+-)*[0-9]+$");//This expression will accpet only Numbers and "-" ex:11-11
+
+            if (coaUnit.IsNumeric && !rgx.IsMatch(accountUnit.AccountNumber))
             {
                 throw new UserFriendlyException(L("Account Number should be numeric.", accountUnit.Caption));
             }

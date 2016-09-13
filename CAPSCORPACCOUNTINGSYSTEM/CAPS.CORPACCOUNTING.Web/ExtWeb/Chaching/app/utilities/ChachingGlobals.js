@@ -51,6 +51,7 @@
         minWidth: 250,
         width: 250
     },
+    isDefaultForRoles: true,
     displayNegAmtInBrackets: true,
     splitGroupCls: ['split-group1', 'split-group2', 'split-group3', 'split-group4', 'split-group5', 'split-group6', 'split-group7', 'split-group8'],
     isUserAuthorized : function(modulePermissions) {

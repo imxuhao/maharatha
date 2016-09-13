@@ -132,7 +132,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             var coaUnit = await CoaUnitRepository.FirstOrDefaultAsync(p => p.Id == accountUnit.ChartOfAccountId);
             //Validating Numeric AccountNumbers
             //In Coa IsNumberic is true, AccountNumber shold be Numeric
-            Regex rgx = new Regex(@"^([0-9]+-)*[0-9]+$");//This expression will accpet only Numbers and "-" ex:11-11
+            Regex rgx = new Regex(@"^([0-9]+-)*[0-9]+$");//This expression will accpet  only Numbers and "-" ex:11-11
 
             if (coaUnit.IsNumeric && !rgx.IsMatch(accountUnit.AccountNumber))
             {

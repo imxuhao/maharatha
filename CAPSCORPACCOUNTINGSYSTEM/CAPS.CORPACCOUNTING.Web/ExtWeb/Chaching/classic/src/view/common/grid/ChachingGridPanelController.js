@@ -396,14 +396,18 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                                    }
                                });
                            }
-                           var operation = Ext.data.Operation({
-                               params: { id: widgetRec.get('id') },
-                               controller: me,
-                               action: 'destroy',
-                               records: [widgetRec],
-                               callback: me.onDeleteOperationCompleteCallBack
-                           });
-                           gridStore.erase(operation);
+                           if (Ext.isEmpty(widgetRec.get('id')) || widgetRec.get('id') == '0') {
+                               gridStore.remove(widgetRec);
+                           } else {
+                               var operation = Ext.data.Operation({
+                                   params: { id: widgetRec.get('id') },
+                                   controller: me,
+                                   action: 'destroy',
+                                   records: [widgetRec],
+                                   callback: me.onDeleteOperationCompleteCallBack
+                               });
+                               gridStore.erase(operation);
+                           }
                            //gridStore.remove(widgetRec);
                            //Sync consider CRUD and store must need four of the urls
                            /*gridStore.sync({

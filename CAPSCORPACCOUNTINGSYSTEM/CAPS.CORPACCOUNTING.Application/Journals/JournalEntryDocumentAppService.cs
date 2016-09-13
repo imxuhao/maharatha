@@ -123,7 +123,7 @@ namespace CAPS.CORPACCOUNTING.Journals
                 //await Helper.GetCron("x");
                 await _recurringJobManager.AddOrUpdateAsync<JournalEntryBackGroundJob, BackgroundJobInput<long>>(
                     $"RecurringJournalID{accountDocumentId}",
-                    new BackgroundJobInput<long>() { Id = accountDocumentId, tenantId = journalEntryDocumentUnit.TenantId }, Cron.Minutely(),
+                    new BackgroundJobInput<long>() { Id = accountDocumentId, tenantId = journalEntryDocumentUnit.TenantId }, input.CronExpression,
                     BackgroundJobPriority.Normal);
             }
             return new IdOutputDto<long>() { Id = accountDocumentId };
@@ -151,7 +151,7 @@ namespace CAPS.CORPACCOUNTING.Journals
             {
                 await _recurringJobManager.AddOrUpdateAsync<JournalEntryBackGroundJob, BackgroundJobInput<long>>(
                       $"RecurringJournalID{input.AccountingDocumentId}",
-                      new BackgroundJobInput<long>() { Id = input.AccountingDocumentId, tenantId = journalEntryDocumentUnit.TenantId }, Cron.Minutely(),
+                      new BackgroundJobInput<long>() { Id = input.AccountingDocumentId, tenantId = journalEntryDocumentUnit.TenantId }, input.CronExpression,
                       BackgroundJobPriority.Normal);
             }
             else

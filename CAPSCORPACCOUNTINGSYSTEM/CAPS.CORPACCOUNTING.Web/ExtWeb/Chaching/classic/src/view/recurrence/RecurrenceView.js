@@ -25,6 +25,30 @@ Ext.define('Chaching.view.recurrence.RecurrenceView', {
            // width: '100%',
             name: 'Recurrence'
         });
+        me.buttonAlign = 'center',
+        me.buttons = [{
+            xtype: 'button',
+            scale: 'small',
+            iconCls: 'fa fa-save',
+            iconAlign: 'left',
+            text: app.localize('SaveRecurrence').toUpperCase(),
+            ui: 'actionButton',
+            reference: 'btnSaveRecurrence',
+            listeners: {
+                click: 'onSaveRecurrenceClicked'
+            }
+        }, {
+            xtype: 'button',
+            scale: 'small',
+            iconCls: 'fa fa-close',
+            iconAlign: 'left',
+            text: app.localize('Cancel').toUpperCase(),
+            ui: 'actionButton',
+            reference: 'btnCancelRecurrence',
+            listeners: {
+                click: 'onCancelRecurrenceClicked'
+            }
+        }],
         me.items = [form];
         me.callParent(arguments);
     }

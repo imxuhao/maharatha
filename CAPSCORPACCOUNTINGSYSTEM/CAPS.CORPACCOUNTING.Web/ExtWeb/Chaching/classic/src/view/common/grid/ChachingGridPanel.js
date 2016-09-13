@@ -615,7 +615,13 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             var settingCol = defaultSettingColumns[i];
             for (var j = 0; j < definedColumns.length; j++) {
                 var definedCol = definedColumns[j];
-                if (settingCol.dataIndex===definedCol.dataIndex) {
+                if (settingCol.dataIndex === definedCol.dataIndex) {
+                    if (settingCol.width) { // when column is resized 
+                        definedCol.flex = null;
+                    }
+                    if (!settingCol.width && settingCol.flex == null) { // when column is resized and switch to different manage view, resized column view settings is applied
+                        definedCol.flex = 1;
+                    }
                     definedCol.width = settingCol.width;
                     definedCol.hidden = settingCol.hidden;
                     outValue.push(definedCol);

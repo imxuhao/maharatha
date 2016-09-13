@@ -37,28 +37,56 @@ namespace CAPS.CORPACCOUNTING.Masters
     /// </summary>
     public enum TypeofObject
     {
+        [Display(Name = "Accounting Document")]
+        AccountingHeaderTransactionsUnit = 1,
+
+        [Display(Name = "Accounting Item")]
+        AccountingItemUnit = 2,
+
         [Display(Name = "Vendor")]
-        Vendor = 1,
-        [Display(Name = "Customer")]
-        Customer = 2,
+        VendorUnit = 3,
+
         [Display(Name = "Bank")]
-        Bank = 3,
-        [Display(Name = "Credit Card Bank")]
-        CreditCardBank = 4,
-        [Display(Name = "Payroll Company")]
-        PayrollCompany = 5,
+        BankAccountUnit = 4,
+
+        [Display(Name = "Project")]
+        Projects = 5,
+
+        [Display(Name = "Customer")]
+        CustomerUnit = 6,
+
         [Display(Name = "Employee")]
-        Emp = 6,
-        [Display(Name = "Organization")]
-        Org = 7,
+        EmployeeUnit = 7,
+
         [Display(Name = "User")]
         User = 8,
-        [Display(Name = "Director")]
-        Director = 9,
-        [Display(Name = "PurchaseOrderEntryDocument")]
-        PurchaseOrderEntryDocument =240,
-        [Display(Name = "InvoiceEntryDocument")]
-        InvoiceEntryDocument = 239
+
+        [Display(Name = "Organization")]
+        OrganizationUnit = 9
+
+        //------------------------------
+        //[Display(Name = "Vendor")]
+        //Vendor = 1,
+        //[Display(Name = "Customer")]
+        //Customer = 2,
+        //[Display(Name = "Bank")]
+        //Bank = 3,
+        //[Display(Name = "Credit Card Bank")]
+        //CreditCardBank = 4,
+        //[Display(Name = "Payroll Company")]
+        //PayrollCompany = 5,
+        //[Display(Name = "Employee")]
+        //Emp = 6,
+        //[Display(Name = "Organization")]
+        //Org = 7,
+        //[Display(Name = "User")]
+        //User = 8,
+        //[Display(Name = "Director")]
+        //Director = 9,
+        //[Display(Name = "PurchaseOrderEntryDocument")]
+        //PurchaseOrderEntryDocument =240,
+        //[Display(Name = "InvoiceEntryDocument")]
+        //InvoiceEntryDocument = 239
     }
 
     /// <summary>

@@ -278,7 +278,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                     {
                         if (input.Address.AddressId != 0)
                         {
-                            input.Address.TypeofObjectId = TypeofObject.Org;
+                            input.Address.TypeofObjectId = TypeofObject.OrganizationUnit;
                             await _addressAppService.UpdateAddressUnit(input.Address);
                             companyLogo.AddressId = input.Address.AddressId;
                         }
@@ -290,7 +290,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                 !string.IsNullOrEmpty(input.Address.Email) || !string.IsNullOrEmpty(input.Address.Phone1 )||
                                 !string.IsNullOrEmpty(input.Address.Website))
                             {
-                                input.Address.TypeofObjectId = TypeofObject.Org;
+                                input.Address.TypeofObjectId = TypeofObject.OrganizationUnit;
                                 input.Address.ObjectId = input.TenantExtendedId;
                                // AutoMapper.Mapper.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
                                 //var config = new MapperConfiguration(cfg => {
@@ -322,7 +322,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                          !string.IsNullOrEmpty(input.Address.Email) || !string.IsNullOrEmpty(input.Address.Phone1) ||
                          !string.IsNullOrEmpty(input.Address.ContactNumber))
                         {
-                            input.Address.TypeofObjectId = TypeofObject.Org;
+                            input.Address.TypeofObjectId = TypeofObject.OrganizationUnit;
                             input.Address.ObjectId = id;
                             // AutoMapper.Mapper.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
                             var config = new MapperConfiguration(cfg => {
@@ -364,7 +364,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
             using (_unitOfWorkManager.Current.SetTenantId(tenantid))
             {
                 var extendedcompany = await (from company in _tenantExtendedUnitRepository.GetAll()
-                                             join address in _addressRepository.GetAll().Where(u => u.TypeofObjectId == TypeofObject.Org) on
+                                             join address in _addressRepository.GetAll().Where(u => u.TypeofObjectId == TypeofObject.OrganizationUnit) on
                                                  company.Id equals address.ObjectId into addresss
                                              from address in addresss.DefaultIfEmpty()
                                              select new { company, address }).FirstOrDefaultAsync();

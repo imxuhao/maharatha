@@ -369,6 +369,7 @@
         public const string Pages_Banking_Reconciliation_Create = "Pages.Banking.Reconciliation.Create";
         public const string Pages_Banking_Reconciliation_Edit = "Pages.Banking.Reconciliation.Edit";
         public const string Pages_Banking_Reconciliation_Delete = "Pages.Banking.Reconciliation.Delete";
+        public const string Pages_Banking_Reconciliation_Attach = "Pages.Banking.Reconciliation.Attach";
 
         // PERMISSIONS FOR BANKING POSTIVE PAY
         public const string Pages_Banking_PostivePay = "Pages.Banking.PostivePay";
@@ -381,6 +382,7 @@
         public const string Pages_Banking_BankSetup_Create = "Pages.Banking.BankSetup.Create";
         public const string Pages_Banking_BankSetup_Edit = "Pages.Banking.BankSetup.Edit";
         public const string Pages_Banking_BankSetup_Delete = "Pages.Banking.BankSetup.Delete";
+        public const string Pages_Banking_BankSetup_Attach = "Pages.Banking.BankSetup.Attach";
 
 
         #endregion

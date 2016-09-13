@@ -90,7 +90,7 @@ namespace CAPS.CORPACCOUNTING.Banking
                           !string.IsNullOrEmpty(address.Website))
                     {
                         address.ObjectId = id;
-                        address.TypeofObjectId = TypeofObject.Bank;
+                        address.TypeofObjectId = TypeofObject.BankAccountUnit;
                         await _addressAppService.CreateAddressUnit(address);
                     }
                 }
@@ -140,7 +140,7 @@ namespace CAPS.CORPACCOUNTING.Banking
                          !string.IsNullOrEmpty(address.Email) || !string.IsNullOrEmpty(address.Phone1) ||
                          !string.IsNullOrEmpty(address.Website))
                         {
-                            address.TypeofObjectId = TypeofObject.Bank;
+                            address.TypeofObjectId = TypeofObject.BankAccountUnit;
                             address.ObjectId = input.BankAccountId;
                             //AutoMapper.Mapper.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
                             await
@@ -189,7 +189,7 @@ namespace CAPS.CORPACCOUNTING.Banking
             await _bankAccountPaymentRangeRepository.DeleteAsync(p => p.BankAccountId == input.Id);
             DeleteAddressUnitInput dto = new DeleteAddressUnitInput
             {
-                TypeofObjectId = TypeofObject.Bank,
+                TypeofObjectId = TypeofObject.BankAccountUnit,
                 ObjectId = input.Id
             };
             await _addressAppService.DeleteAddressUnitByEntity(dto);
@@ -256,7 +256,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         public async Task<BankAccountUnitDto> GetBankAccountUnitsById(IdInput<long> input)
         {
             var bankAccountItem = await _bankAccountUnitRepository.GetAsync(input.Id);
-            var addressitems = await _addressUnitRepository.GetAllListAsync(p => p.ObjectId == input.Id && p.TypeofObjectId == TypeofObject.Bank);
+            var addressitems = await _addressUnitRepository.GetAllListAsync(p => p.ObjectId == input.Id && p.TypeofObjectId == TypeofObject.BankAccountUnit);
             var result = bankAccountItem.MapTo<BankAccountUnitDto>();
             result.BankAccountId = bankAccountItem.Id;
             result.Address = new Collection<AddressUnitDto>();
@@ -272,7 +272,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         {
             var bankAccountUnitQuery = from bankAccount in _bankAccountUnitRepository.GetAll()
                                        join address in _addressUnitRepository.GetAll() on bankAccount.Id equals address.ObjectId into bank
-                                       from addr in bank.Where(p => p.IsPrimary == true && p.TypeofObjectId == TypeofObject.Bank).DefaultIfEmpty()
+                                       from addr in bank.Where(p => p.IsPrimary == true && p.TypeofObjectId == TypeofObject.BankAccountUnit).DefaultIfEmpty()
                                        join account in _accountUnitRepository.GetAll() on bankAccount.AccountId equals account.Id into acc
                                        from pt in acc.DefaultIfEmpty()
                                        join job in _jobUnitRepository.GetAll() on bankAccount.JobId equals job.Id into job

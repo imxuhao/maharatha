@@ -119,7 +119,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                         !string.IsNullOrEmpty(address.Email ) || !string.IsNullOrEmpty(address.Phone1 )||
                         !string.IsNullOrEmpty(address.ContactNumber))
                     {
-                        address.TypeofObjectId = TypeofObject.Vendor;
+                        address.TypeofObjectId = TypeofObject.VendorUnit;
                         address.ObjectId = vendorUnit.Id;
                         await _addressAppService.CreateAddressUnit(address);
                     }
@@ -176,7 +176,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         {
             DeleteAddressUnitInput dto = new DeleteAddressUnitInput
             {
-                TypeofObjectId = TypeofObject.Vendor,
+                TypeofObjectId = TypeofObject.VendorUnit,
                 ObjectId = input.Id
             };
             await _addressAppService.DeleteAddressUnitByEntity(dto);
@@ -192,7 +192,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task<VendorUnitDto> GetVendorUnitsById(IdInput input)
         {
             var vendorItem = await _vendorUnitRepository.GetAsync(input.Id);
-            var addressitems = await _addresRepository.GetAllListAsync(p => p.ObjectId == input.Id && p.TypeofObjectId == TypeofObject.Vendor);
+            var addressitems = await _addresRepository.GetAllListAsync(p => p.ObjectId == input.Id && p.TypeofObjectId == TypeofObject.VendorUnit);
             var result = vendorItem.MapTo<VendorUnitDto>();
             result.VendorId = vendorItem.Id;
             result.Address = new Collection<AddressUnitDto>();
@@ -266,7 +266,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             var query = from vendor in _vendorUnitRepository.GetAll()
                         join addr in _addresRepository.GetAll() on vendor.Id equals addr.ObjectId
                             into temp
-                        from rt in temp.Where(p => p.IsPrimary == true && p.TypeofObjectId == TypeofObject.Vendor).DefaultIfEmpty()
+                        from rt in temp.Where(p => p.IsPrimary == true && p.TypeofObjectId == TypeofObject.VendorUnit).DefaultIfEmpty()
                         join payterms in _vendorPaytermRepository.GetAll() on vendor.PaymentTermsId equals payterms.Id
                             into paymentperms
                         from pt in paymentperms.DefaultIfEmpty()
@@ -315,7 +315,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                         !string.IsNullOrEmpty(address.Email) || !string.IsNullOrEmpty(address.Phone1) ||
                         !string.IsNullOrEmpty(address.ContactNumber))
                         {
-                            address.TypeofObjectId = TypeofObject.Vendor;
+                            address.TypeofObjectId = TypeofObject.VendorUnit;
                             address.ObjectId = input.VendorId;
                             //AutoMapper.Mapper.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
                             //var config = new MapperConfiguration(cfg => {

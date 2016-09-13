@@ -111,7 +111,7 @@ namespace CAPS.CORPACCOUNTING.CreditCard
                           !string.IsNullOrEmpty(address.Website))
                     {
                         address.ObjectId = id;
-                        address.TypeofObjectId = TypeofObject.CreditCardBank;
+                        address.TypeofObjectId = TypeofObject.BankAccountUnit;
                         await _addressAppService.CreateAddressUnit(address);
                     }
                 }
@@ -151,7 +151,7 @@ namespace CAPS.CORPACCOUNTING.CreditCard
                          !string.IsNullOrEmpty(address.Email) || !string.IsNullOrEmpty(address.Phone1) ||
                          !string.IsNullOrEmpty(address.Website))
                         {
-                            address.TypeofObjectId = TypeofObject.CreditCardBank;
+                            address.TypeofObjectId = TypeofObject.BankAccountUnit;
                             address.ObjectId = input.BankAccountId;
                             //AutoMapper.Mapper.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
                             await
@@ -177,7 +177,7 @@ namespace CAPS.CORPACCOUNTING.CreditCard
         {
             DeleteAddressUnitInput dto = new DeleteAddressUnitInput
             {
-                TypeofObjectId = TypeofObject.CreditCardBank,
+                TypeofObjectId = TypeofObject.BankAccountUnit,
                 ObjectId = input.Id
             };
            // await _addressAppService.DeleteAddressUnit(dto);
@@ -231,7 +231,7 @@ namespace CAPS.CORPACCOUNTING.CreditCard
         public async Task<BankAccountUnitDto> GetCcCompanyById(IdInput<long> input)
         {
             var bankAccountItem = await _bankAccountUnitRepository.GetAsync(input.Id);
-            var addressitems = await _addressUnitRepository.GetAllListAsync(p => p.ObjectId == input.Id && p.TypeofObjectId == TypeofObject.CreditCardBank);
+            var addressitems = await _addressUnitRepository.GetAllListAsync(p => p.ObjectId == input.Id && p.TypeofObjectId == TypeofObject.BankAccountUnit);
             var result = bankAccountItem.MapTo<BankAccountUnitDto>();
             result.BankAccountId = bankAccountItem.Id;
             result.Address = new Collection<AddressUnitDto>();

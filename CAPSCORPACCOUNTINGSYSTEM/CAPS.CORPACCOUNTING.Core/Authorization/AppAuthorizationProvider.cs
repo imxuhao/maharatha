@@ -293,7 +293,7 @@ namespace CAPS.CORPACCOUNTING.Authorization
             creditCardCompanies.CreateChildPermission(AppPermissions.Pages_CreditCard_Entry_CreditCardCompanies_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
             creditCardCompanies.CreateChildPermission(AppPermissions.Pages_CreditCard_Entry_CreditCardCompanies_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
             creditCardCompanies.CreateChildPermission(AppPermissions.Pages_CreditCard_Entry_CreditCardCompanies_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
-
+            creditCardCompanies.CreateChildPermission(AppPermissions.Pages_CreditCard_Entry_CreditCardCompanies_Attach, L("Attach"), multiTenancySides: MultiTenancySides.Tenant);
 
             var creditCardInquiry = creditCard.CreateChildPermission(AppPermissions.Pages_CreditCard_Inquiry, L("Inquiry"), multiTenancySides: MultiTenancySides.Tenant);
             var creditCardPreferences = creditCard.CreateChildPermission(AppPermissions.Pages_CreditCard_Preferences, L("Preferences"), multiTenancySides: MultiTenancySides.Tenant);
@@ -336,6 +336,7 @@ namespace CAPS.CORPACCOUNTING.Authorization
             reconciliation.CreateChildPermission(AppPermissions.Pages_Banking_Reconciliation_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
             reconciliation.CreateChildPermission(AppPermissions.Pages_Banking_Reconciliation_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
             reconciliation.CreateChildPermission(AppPermissions.Pages_Banking_Reconciliation_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
+            reconciliation.CreateChildPermission(AppPermissions.Pages_Banking_Reconciliation_Attach, L("Attach"), multiTenancySides: MultiTenancySides.Tenant);
 
             var postivepay = banking.CreateChildPermission(AppPermissions.Pages_Banking_PostivePay, L("PostivePay"), multiTenancySides: MultiTenancySides.Tenant);
             postivepay.CreateChildPermission(AppPermissions.Pages_Banking_PostivePay_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
@@ -346,6 +347,7 @@ namespace CAPS.CORPACCOUNTING.Authorization
             bankSetup.CreateChildPermission(AppPermissions.Pages_Banking_BankSetup_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
             bankSetup.CreateChildPermission(AppPermissions.Pages_Banking_BankSetup_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
             bankSetup.CreateChildPermission(AppPermissions.Pages_Banking_BankSetup_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
+            bankSetup.CreateChildPermission(AppPermissions.Pages_Banking_BankSetup_Attach, L("Attach"), multiTenancySides: MultiTenancySides.Tenant);
 
             #endregion
 

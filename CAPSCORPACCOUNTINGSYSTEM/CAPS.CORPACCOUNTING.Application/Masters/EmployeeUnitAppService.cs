@@ -59,7 +59,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             await _employeeUnitManager.DeleteAsync(input.Id);
             DeleteAddressUnitInput dto = new DeleteAddressUnitInput
             {
-                TypeofObjectId = TypeofObject.Emp,
+                TypeofObjectId = TypeofObject.EmployeeUnit,
                 ObjectId = input.Id
             };
             await _addressAppService.DeleteAddressUnitByEntity(dto);
@@ -142,7 +142,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             var query = from emp in _employeeUnitRepository.GetAll()
                         join addr in _addressUnitRepository.GetAll() on emp.Id equals addr.ObjectId
                                  into temp
-                        from adrs in temp.Where(p => p.IsPrimary == true && p.TypeofObjectId == TypeofObject.Emp).DefaultIfEmpty()
+                        from adrs in temp.Where(p => p.IsPrimary == true && p.TypeofObjectId == TypeofObject.EmployeeUnit).DefaultIfEmpty()
                         select new EmployeeAndAddressDto { Employee = emp, Address = adrs };
 
             if (!ReferenceEquals(input.Filters, null))
@@ -202,7 +202,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                          !string.IsNullOrEmpty(address.Email) || !string.IsNullOrEmpty(address.Phone1) ||
                          !string.IsNullOrEmpty(address.Website))
                     {
-                        address.TypeofObjectId = TypeofObject.Emp;
+                        address.TypeofObjectId = TypeofObject.EmployeeUnit;
                         address.ObjectId = input.EmployeeId;
                         await
                             _addressAppService.CreateAddressUnit(
@@ -230,7 +230,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task<EmployeeUnitDto> GetEmployeeUnitsById(IdInput input)
         {
             var empItem = await _employeeUnitRepository.GetAsync(input.Id);
-            var addressitems = await _addressUnitRepository.GetAllListAsync(p => p.ObjectId == input.Id && p.TypeofObjectId == TypeofObject.Emp);
+            var addressitems = await _addressUnitRepository.GetAllListAsync(p => p.ObjectId == input.Id && p.TypeofObjectId == TypeofObject.EmployeeUnit);
             var result = empItem.MapTo<EmployeeUnitDto>();
             result.EmployeeId = empItem.Id;
             result.Addresses = new Collection<AddressUnitDto>();

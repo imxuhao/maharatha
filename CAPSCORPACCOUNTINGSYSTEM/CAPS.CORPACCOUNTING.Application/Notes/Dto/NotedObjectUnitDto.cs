@@ -31,5 +31,13 @@ namespace CAPS.CORPACCOUNTING.Notes.Dto
 
         /// <summary>Gets or sets the IsSharedUpdate field. </summary>
         public virtual bool IsSharedUpdate { get; set; }
+
+        /// <summary>Gets or sets the CreatedUser field. </summary>
+        public string CreatedUser { get; set; }
+
+        /// <summary>Gets or sets the CreateDateTime field. </summary>
+        public DateTime CreateDateTime { get; set; }
+
+
     }
 }

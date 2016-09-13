@@ -576,6 +576,7 @@
     <Compile Include="Net\MimeTypes\MimeTypeNames.cs" />
     <Compile Include="Attachments\Dto\CreateAttachedObjectInputUnit.cs" />
     <Compile Include="Notes\Dto\GetNotedObjectUnitInput.cs" />
+    <Compile Include="Notes\Dto\NotedObjectUnitListDto.cs" />
     <Compile Include="Notes\Dto\UpdateNotedObjectUnitInput.cs" />
     <Compile Include="Notes\NotedObjectUnitAppService.cs" />
     <Compile Include="Attachments\Dto\AttachedObjectUnitDto.cs" />

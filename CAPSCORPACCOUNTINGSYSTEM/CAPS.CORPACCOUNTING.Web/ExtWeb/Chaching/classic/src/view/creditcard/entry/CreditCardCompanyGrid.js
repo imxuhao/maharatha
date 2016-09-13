@@ -21,7 +21,12 @@ Ext.define('Chaching.view.creditcard.entry.CreditCardCompanyGrid', {
         read: abp.auth.isGranted('Pages.CreditCard.Entry.CreditCardCompanies'),
         create: abp.auth.isGranted('Pages.CreditCard.Entry.CreditCardCompanies.Create'),
         edit: abp.auth.isGranted('Pages.CreditCard.Entry.CreditCardCompanies.Edit'),
-        destroy: abp.auth.isGranted('Pages.CreditCard.Entry.CreditCardCompanies.Delete')
+        destroy: abp.auth.isGranted('Pages.CreditCard.Entry.CreditCardCompanies.Delete'),
+        attach: abp.auth.isGranted('Pages.CreditCard.Entry.CreditCardCompanies.Attach')
+    },
+    attachmentConfig: {
+        objectType: 'BankAccountUnit',
+        objectIdField: 'bankAccountId'
     },
     padding: 5,
     gridId: 34,

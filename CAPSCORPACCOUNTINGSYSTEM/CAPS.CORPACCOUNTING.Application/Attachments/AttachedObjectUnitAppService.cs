@@ -13,6 +13,8 @@ using System.IO;
 using AutoMapper;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Helpers;
+using CAPS.CORPACCOUNTING.Authorization.Users;
+using System.Data.Entity;
 
 namespace CAPS.CORPACCOUNTING.Attachments
 {
@@ -26,18 +28,20 @@ namespace CAPS.CORPACCOUNTING.Attachments
         private readonly IBinaryObjectManager _binaryObjectManager;
         private readonly IRepository<BinaryObject, Guid> _binaryObjectRepository;
         private readonly IUnitOfWork _iUnitOfWork;
+        private readonly IRepository<User, long> _userUnitRepository;
 
         /// <summary>
         /// 
         /// </summary>
         public AttachedObjectUnitAppService(AttachedObjectUnitManager attachedObjectUnitManager, IRepository<AttachedObjectUnit, long> attachedObjectUnitRepository,
-           IBinaryObjectManager binaryObjectManager, IRepository<BinaryObject, Guid> binaryObject, IUnitOfWork iUnitOfWork)
+           IBinaryObjectManager binaryObjectManager, IRepository<BinaryObject, Guid> binaryObject, IUnitOfWork iUnitOfWork, IRepository<User, long> userUnitRepository)
         {
             _attachedObjectUnitManager = attachedObjectUnitManager;
             _attachedObjectUnitRepository = attachedObjectUnitRepository;
             _binaryObjectManager = binaryObjectManager;
             _binaryObjectRepository = binaryObject;
             _iUnitOfWork = iUnitOfWork;
+            _userUnitRepository = userUnitRepository;
         }
 
         /// <summary>
@@ -105,13 +109,20 @@ namespace CAPS.CORPACCOUNTING.Attachments
             ListAttachedObjectUnitInput lstAttachedObjectInput = new ListAttachedObjectUnitInput();
             lstAttachedObjectInput.attachedObjectUnitList = new List<AttachedObjectUnitDto>();
 
-            var attachedObjectUnit = await _attachedObjectUnitRepository.GetAllListAsync(o => o.TypeOfObjectId == input.TypeOfObjectId && o.ObjectId == input.ObjectId);
-            foreach (var item in attachedObjectUnit)
+            var attachedObjectUnitList = await (from file in _attachedObjectUnitRepository.GetAll()
+                                             join user in _userUnitRepository.GetAll() on file.CreatorUserId equals user.Id into notes
+                                             from noteinner in notes.DefaultIfEmpty()
+                                             where file.TypeOfObjectId == input.TypeOfObjectId && file.ObjectId == input.ObjectId
+                                             select new {file, noteinner.UserName }).ToListAsync();
+
+            foreach (var item in attachedObjectUnitList)
             {
                 AttachedObjectUnitDto attachedObjectDto = new AttachedObjectUnitDto();
-                attachedObjectDto.AttachedObjectId = item.Id;
+                attachedObjectDto.AttachedObjectId = item.file.Id;
+                attachedObjectDto.CreatedUser = item.UserName;
+                attachedObjectDto.CreateDateTime = item.file.CreationTime;
 
-                Mapper.Map(item, attachedObjectDto);
+                Mapper.Map(item.file, attachedObjectDto);
 
                 //TODO: If you want to return bytes also then uncomment below and also in AttachedObjectUnitDto Byte field.
 

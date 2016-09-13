@@ -42,6 +42,6 @@ namespace CAPS.CORPACCOUNTING.Notes
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<NotedObjectUnitDto> GetNotedObjectUnit(GetNotedObjectUnitInput input);
+        Task<NotedObjectUnitListDto> GetNotedObjectUnit(GetNotedObjectUnitInput input);
     }
 }

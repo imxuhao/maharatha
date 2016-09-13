@@ -257,7 +257,7 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
                         from vendors in vendor.DefaultIfEmpty()
                         join approvedsox in
                             _approvedSoxUnitRepository.GetAll()
-                                .Where(u => u.TypeOfObjectId == TypeofObject.PurchaseOrderEntryDocument) on purchaseOrder.Id
+                                .Where(u => u.TypeOfObjectId == TypeofObject.AccountingHeaderTransactionsUnit) on purchaseOrder.Id
                             equals approvedsox.ObjectId into approvedsoxs
                         from approvedsox in approvedsoxs.DefaultIfEmpty()
                         join approvedUser in _vendorUnitRepository.GetAll() on approvedsox.ApprovedByUserId equals

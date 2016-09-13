@@ -6,8 +6,7 @@
         westPanel: null,
         northPanel: null,
         appViewPort: null,
-        menuList: null,
-        test:null
+        menuList:null
     },
     settingsScope : {
         application: 1, //Represents a setting that can be configured/changed for the application level.
@@ -51,7 +50,6 @@
         minWidth: 250,
         width: 250
     },
-    isDefaultForRoles: true,
     displayNegAmtInBrackets: true,
     splitGroupCls: ['split-group1', 'split-group2', 'split-group3', 'split-group4', 'split-group5', 'split-group6', 'split-group7', 'split-group8'],
     isUserAuthorized : function(modulePermissions) {
@@ -187,15 +185,27 @@
          { code: 'YER', symbol: '﷼' },{ code: 'ZWD', symbol: 'Z$' }
     ],
     ///TODO: change once server side enum modified with actual entity names.
+    //typeOfObjects: {
+    //    AccountingDocument: 1,
+    //    AccountingItem: 2,
+    //    Vendor: 3,
+    //    Bank: 4,
+    //    Accounts: 5,
+    //    Projects: 6,
+    //    Customers:7
+    //},
     typeOfObjects: {
-        AccountingDocument: 1,
-        AccountingItem: 2,
-        Vendor: 3,
-        Bank: 4,
-        Accounts: 5,
-        Projects: 6,
-        Customers:7
+        AccountingHeaderTransactionsUnit: 1,
+        AccountingItemUnit: 2,
+        VendorUnit: 3,
+        BankAccountUnit: 4,
+        Projects: 5,
+        CustomerUnit: 6,
+        EmployeeUnit: 7,
+        User: 8,
+        OrganizationUnit: 9
     },
+
     getTypeOfObjectId:function(objectName) {
         var me = this,
             typeOfObject = me.typeOfObjects;

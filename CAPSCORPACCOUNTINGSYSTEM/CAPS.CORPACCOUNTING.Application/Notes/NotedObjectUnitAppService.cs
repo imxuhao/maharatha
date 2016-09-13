@@ -16,6 +16,7 @@ using CAPS.CORPACCOUNTING.Attachments;
 using Abp.Application.Services.Dto;
 using AutoMapper;
 using System.Data.Entity;
+using CAPS.CORPACCOUNTING.Authorization.Users;
 
 namespace CAPS.CORPACCOUNTING.Notes
 {
@@ -27,13 +28,16 @@ namespace CAPS.CORPACCOUNTING.Notes
     {
         private readonly NotedObjectUnitManager _notedObjectUnitManager;
         private readonly IRepository<NotedObjectUnit, long> _notedObjectUnitRepository;
+        private readonly IRepository<User, long> _userUnitRepository;
+
         /// <summary>
         /// 
         /// </summary>
-        public NotedObjectUnitAppService(NotedObjectUnitManager notedObjectUnitManager, IRepository<NotedObjectUnit, long> notedObjectUnitRepository)
+        public NotedObjectUnitAppService(NotedObjectUnitManager notedObjectUnitManager, IRepository<NotedObjectUnit, long> notedObjectUnitRepository, IRepository<User, long> userUnitRepository)
         {
             _notedObjectUnitManager = notedObjectUnitManager;
             _notedObjectUnitRepository = notedObjectUnitRepository;
+            _userUnitRepository = userUnitRepository;
         }
 
         /// <summary>
@@ -80,12 +84,32 @@ namespace CAPS.CORPACCOUNTING.Notes
         /// <param name="input"></param>
         /// <returns></returns>
         [UnitOfWork]
-        public async Task<NotedObjectUnitDto> GetNotedObjectUnit(GetNotedObjectUnitInput input)
+        public async Task<NotedObjectUnitListDto> GetNotedObjectUnit(GetNotedObjectUnitInput input)
         {
-            var notedObjectUnit = await _notedObjectUnitRepository.GetAll().Where(r => r.TypeOfObjectId == input.TypeOfObjectId && r.ObjectId == input.ObjectId).FirstOrDefaultAsync();
-            NotedObjectUnitDto notedObjectUnitDto = notedObjectUnit.MapTo<NotedObjectUnitDto>();
+            NotedObjectUnitListDto notedObjectUnitListDto = new NotedObjectUnitListDto();
+            notedObjectUnitListDto.NotedObjectUnitDto = new List<NotedObjectUnitDto>();
 
-            return notedObjectUnitDto;
+            var notedObjectUnitList = await (from note in _notedObjectUnitRepository.GetAll()
+                                                join user in _userUnitRepository.GetAll() on note.CreatorUserId equals user.Id into notes
+                                                from noteinner in notes.DefaultIfEmpty()
+                                                where note.TypeOfObjectId == input.TypeOfObjectId && note.ObjectId == input.ObjectId
+                                                select new { note, noteinner.UserName }).ToListAsync();
+
+            if (notedObjectUnitList.Any())
+            {
+                foreach (var item in notedObjectUnitList)
+                {
+                    NotedObjectUnitDto notedObjectUnitDto = new NotedObjectUnitDto();
+                    notedObjectUnitDto.NotedObjectId = item.note.Id;
+                    notedObjectUnitDto.CreatedUser = item.UserName;
+                    notedObjectUnitDto.CreateDateTime = item.note.CreationTime;
+                    
+                    Mapper.Map(item.note, notedObjectUnitDto);
+                    notedObjectUnitListDto.NotedObjectUnitDto.Add(notedObjectUnitDto);
+                }
+            }
+
+            return notedObjectUnitListDto;
         }
     }
 }

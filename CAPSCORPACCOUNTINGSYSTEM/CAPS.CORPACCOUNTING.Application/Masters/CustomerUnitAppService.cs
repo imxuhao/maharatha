@@ -84,7 +84,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                         !string.IsNullOrEmpty(address.Email) || !string.IsNullOrEmpty(address.Phone1) ||
                         !string.IsNullOrEmpty(address.ContactNumber))
                     {
-                        address.TypeofObjectId = TypeofObject.Customer;
+                        address.TypeofObjectId = TypeofObject.CustomerUnit;
                         address.ObjectId = customerUnit.Id;
                         await _addressAppService.CreateAddressUnit(address);
                     }
@@ -106,7 +106,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         {
             DeleteAddressUnitInput dto = new DeleteAddressUnitInput
             {
-                TypeofObjectId = TypeofObject.Customer,
+                TypeofObjectId = TypeofObject.CustomerUnit,
                 ObjectId = input.Id
             };
             await _addressUnitAppService.DeleteAddressUnitByEntity(dto);
@@ -160,7 +160,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             var query = from customer in _customerUnitRepository.GetAll()
                         join addr in _addressRepository.GetAll() on customer.Id equals addr.ObjectId
                             into temp
-                        from rt in temp.Where(p => p.IsPrimary == true && p.TypeofObjectId == TypeofObject.Customer).DefaultIfEmpty()
+                        from rt in temp.Where(p => p.IsPrimary == true && p.TypeofObjectId == TypeofObject.CustomerUnit).DefaultIfEmpty()
                         join payterms in _customerPaymentTermRepository.GetAll() on customer.Id equals payterms.Id
                             into paymentperms
                         from pt in paymentperms.DefaultIfEmpty()
@@ -212,7 +212,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                          !string.IsNullOrEmpty(address.Email) || !string.IsNullOrEmpty(address.Phone1) ||
                          !string.IsNullOrEmpty(address.Website))
                         {
-                            address.TypeofObjectId = TypeofObject.Customer;
+                            address.TypeofObjectId = TypeofObject.CustomerUnit;
                             address.ObjectId = input.CustomerId;
                             //AutoMapper.Mapper.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
                             //var config = new MapperConfiguration(cfg => {
@@ -266,7 +266,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task<CustomerUnitDto> GetCustomerUnitsById(IdInput input)
         {
             var customerUnit = await _customerUnitRepository.GetAsync(input.Id);
-            var addressitems = await _addressRepository.GetAllListAsync(p => p.ObjectId == input.Id && p.TypeofObjectId == TypeofObject.Customer);
+            var addressitems = await _addressRepository.GetAllListAsync(p => p.ObjectId == input.Id && p.TypeofObjectId == TypeofObject.CustomerUnit);
 
             var result = customerUnit.MapTo<CustomerUnitDto>();
             result.CustomerId = customerUnit.Id;

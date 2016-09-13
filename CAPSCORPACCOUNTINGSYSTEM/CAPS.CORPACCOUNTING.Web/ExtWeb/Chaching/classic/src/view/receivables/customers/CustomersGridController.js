@@ -24,7 +24,7 @@
                 if (vendoraddressGrid) {
                     var addressStore = vendoraddressGrid.getStore();
                     Ext.apply(addressStore.getProxy().extraParams, {
-                        typeofObjectId: 2,
+                        typeofObjectId: 6,
                         objectId: record.get('customerId')
                     });
                     addressStore.load();

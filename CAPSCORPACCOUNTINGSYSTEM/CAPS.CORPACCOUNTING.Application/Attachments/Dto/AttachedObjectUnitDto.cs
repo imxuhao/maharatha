@@ -66,6 +66,13 @@ namespace CAPS.CORPACCOUNTING.Attachments.Dto
         //TODO: If you want to return bytes to UI then uncomment and also uncomment in service.
         /// <summary>Gets or sets the ByteArray field. </summary>
         public byte[] Bytes { get; set; }
+
+        /// <summary>Gets or sets the CreatedUser field. </summary>
+        public string CreatedUser { get; set; }
+
+        /// <summary>Gets or sets the CreateDateTime field. </summary>
+        public DateTime CreateDateTime { get; set; }
+
         #endregion
 
     }

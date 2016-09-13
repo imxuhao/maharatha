@@ -27,7 +27,7 @@
                     addressId: rec.get('addressId'),
                     organizationUnitId: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userOrganizationId,
                     objectId: values.customerId,
-                    typeofObjectId: 2, // typeofObjectId = 2 for customer
+                    typeofObjectId: 6, // typeofObjectId = 6 for customer
                     addressTypeId: rec.get('addressTypeId'),
                     contactNumber: rec.get('contactNumber'),
                     line1: rec.get('line1'),

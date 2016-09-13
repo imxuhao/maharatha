@@ -102,12 +102,12 @@
     <text name="Send" value="Send" />
     <text name="PasswordReset" value="Password reset" />
     <text name="InvalidUserNameOrEmailAddress" value="Invalid user name or email address" />
-    <text name="PasswordResetEmail_Subject" value="CORPACCOUNTING password reset" />
-    <text name="PasswordResetEmail_Title" value="CORPACCOUNTING password reset." />
+    <text name="PasswordResetEmail_Subject" value="SUMIT password reset" />
+    <text name="PasswordResetEmail_Title" value="SUMIT password reset." />
     <text name="PasswordResetEmail_SubTitle" value="This email is sent you to reset and re-create your password." />
     <text name="PasswordResetEmail_ClickTheLinkBelowToResetYourPassword" value="Please click the link below to reset your password:" />
-    <text name="EmailActivation_Subject" value="CORPACCOUNTING account email activation" />
-    <text name="EmailActivation_Title" value="Welcome to CORPACCOUNTING." />
+    <text name="EmailActivation_Subject" value="SUMIT account email activation" />
+    <text name="EmailActivation_Title" value="Welcome to SUMIT" />
     <text name="EmailActivation_SubTitle" value="This email is sent you to verify your email." />
     <text name="EmailActivation_ClickTheLinkBelowToVerifyYourEmail" value="Please click the link below to verify your email address:" />
     <text name="InvalidEmailAddress" value="Invalid email address" />
@@ -1447,6 +1447,6 @@
     <text name="RepeatOn" value="Repeat On" /> 
     <text name="EndRecurrence" value="End Recurrence" />
     <text name="ReportingCoaAccount" value="Reporting COA Account"/>
-
+<text name="EmailUserName" value="Name"/>
   </texts>
 </localizationDictionary>

@@ -25,9 +25,9 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
         private readonly IRepository<Tenant> _tenantRepository;
         private readonly ICurrentUnitOfWorkProvider _unitOfWorkProvider;
 
-        public UserEmailer(IEmailTemplateProvider emailTemplateProvider, 
+        public UserEmailer(IEmailTemplateProvider emailTemplateProvider,
             IEmailSender emailSender,
-            IWebUrlService webUrlService, 
+            IWebUrlService webUrlService,
             IRepository<Tenant> tenantRepository,
             ICurrentUnitOfWorkProvider unitOfWorkProvider)
         {
@@ -59,22 +59,22 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
                        "?userId=" + Uri.EscapeDataString(SimpleStringCipher.Instance.Encrypt(user.Id.ToString())) +
                        "&tenantId=" + (user.TenantId == null ? "" : Uri.EscapeDataString(SimpleStringCipher.Instance.Encrypt(user.TenantId.Value.ToString()))) +
                        "&confirmationCode=" + Uri.EscapeDataString(user.EmailConfirmationCode);
-            
+
             var emailTemplate = new StringBuilder(_emailTemplateProvider.GetDefaultTemplate());
             emailTemplate.Replace("{EMAIL_TITLE}", L("EmailActivation_Title"));
             emailTemplate.Replace("{EMAIL_SUB_TITLE}", L("EmailActivation_SubTitle"));
 
             var mailMessage = new StringBuilder();
 
-            mailMessage.AppendLine("<b>" + L("NameSurname") + "</b>: " + user.Name + " " + user.Surname + "<br />");
-            
+            mailMessage.AppendLine("<b>" + L("EmailUserName") + "</b>: " + user.Name + " " + user.Surname + "<br />");
+
             if (!tenancyName.IsNullOrEmpty())
             {
                 mailMessage.AppendLine("<b>" + L("TenancyName") + "</b>: " + tenancyName + "<br />");
             }
 
             mailMessage.AppendLine("<b>" + L("UserName") + "</b>: " + user.UserName + "<br />");
-            
+
             if (!plainPassword.IsNullOrEmpty())
             {
                 mailMessage.AppendLine("<b>" + L("Password") + "</b>: " + plainPassword + "<br />");
@@ -112,7 +112,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
 
             var mailMessage = new StringBuilder();
 
-            mailMessage.AppendLine("<b>" + L("NameSurname") + "</b>: " + user.Name + " " + user.Surname + "<br />");
+            mailMessage.AppendLine("<b>" + L("EmailUserName") + "</b>: " + user.Name + " " + user.Surname + "<br />");
 
             if (!tenancyName.IsNullOrEmpty())
             {

@@ -14,7 +14,7 @@
         attach: abp.auth.isGranted('Pages.Receivables.Customers.Attach')
     },
     attachmentConfig: {
-        objectType: 'Customers',
+        objectType: 'CustomerUnit',
         objectIdField: 'customerId'
     },
     name: 'Customers',

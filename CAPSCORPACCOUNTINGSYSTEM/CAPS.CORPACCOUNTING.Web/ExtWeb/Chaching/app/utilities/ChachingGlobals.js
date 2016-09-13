@@ -184,16 +184,6 @@
          { code: 'UYU', symbol: '$U' },{ code: 'UZS', symbol: 'лв' },{ code: 'VEF', symbol: 'Bs' },{ code: 'VND', symbol: '₫' },
          { code: 'YER', symbol: '﷼' },{ code: 'ZWD', symbol: 'Z$' }
     ],
-    ///TODO: change once server side enum modified with actual entity names.
-    //typeOfObjects: {
-    //    AccountingDocument: 1,
-    //    AccountingItem: 2,
-    //    Vendor: 3,
-    //    Bank: 4,
-    //    Accounts: 5,
-    //    Projects: 6,
-    //    Customers:7
-    //},
     typeOfObjects: {
         AccountingHeaderTransactionsUnit: 1,
         AccountingItemUnit: 2,
@@ -203,7 +193,8 @@
         CustomerUnit: 6,
         EmployeeUnit: 7,
         User: 8,
-        OrganizationUnit: 9
+        OrganizationUnit: 9,
+        Accounts:10
     },
 
     getTypeOfObjectId:function(objectName) {

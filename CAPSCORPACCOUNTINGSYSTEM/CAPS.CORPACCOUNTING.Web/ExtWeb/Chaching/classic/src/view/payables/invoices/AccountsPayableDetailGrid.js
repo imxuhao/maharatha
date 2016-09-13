@@ -17,7 +17,7 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableDetailGrid',{
     },
     store: 'payables.invoices.AccountsPayableDetailsStore',
     attachmentConfig: {
-        objectType: 'AccountingItem',
+        objectType: 'AccountingItemUnit',
         objectIdField: 'accountingItemId'
     },
     moduleColumns:[

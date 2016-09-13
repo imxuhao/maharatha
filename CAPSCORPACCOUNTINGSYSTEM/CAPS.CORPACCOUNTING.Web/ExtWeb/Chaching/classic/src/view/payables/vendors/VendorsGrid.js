@@ -19,7 +19,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
         attach: abp.auth.isGranted('Pages.Payables.Vendors.Attach')
     },
     attachmentConfig: {
-        objectType: 'Vendor',
+        objectType: 'VendorUnit',
         objectIdField: 'vendorId'
     },
     padding: 5,

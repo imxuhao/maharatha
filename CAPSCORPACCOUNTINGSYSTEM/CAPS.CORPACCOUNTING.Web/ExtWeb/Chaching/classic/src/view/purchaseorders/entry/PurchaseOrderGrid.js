@@ -17,7 +17,7 @@ Ext.define('Chaching.view.purchaseorders.entry.PurchaseOrderGrid',{
         attach: abp.auth.isGranted('Pages.PurchaseOrders.Entry.Attach')
     },
     attachmentConfig: {
-        objectType: 'AccountingDocument',
+        objectType: 'AccountingHeaderTransactionsUnit',
         objectIdField: 'accountingDocumentId'
     },
     gridId: 26,

@@ -21,7 +21,8 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupGrid', {
         read: abp.auth.isGranted('Pages.Banking.BankSetup'),
         create: abp.auth.isGranted('Pages.Banking.BankSetup.Create'),
         edit: abp.auth.isGranted('Pages.Banking.BankSetup.Edit'),
-        destroy: abp.auth.isGranted('Pages.Banking.BankSetup.Delete')
+        destroy: abp.auth.isGranted('Pages.Banking.BankSetup.Delete'),
+        attach: abp.auth.isGranted('Pages.Banking.BankSetup.Attach')
     },
     padding: 5,
     gridId: 21,
@@ -61,6 +62,10 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupGrid', {
     viewWndTitleConfig: {
         title: app.localize('ViewBank'),
         iconCls: 'fa fa-th'
+    },
+    attachmentConfig: {
+        objectType: 'BankAccountUnit',
+        objectIdField: 'bankAccountId'
     },
     createNewMode: 'tab',
     isSubMenuItemTab: true,

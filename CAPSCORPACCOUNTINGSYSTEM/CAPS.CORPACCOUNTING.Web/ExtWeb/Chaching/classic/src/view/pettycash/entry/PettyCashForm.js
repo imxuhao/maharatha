@@ -16,7 +16,7 @@ Ext.define('Chaching.view.pettycash.entry.PettyCashForm',{
         attach: abp.auth.isGranted('Pages.PettyCash.Entry.Attach')
     },
     attachmentConfig: {
-        objectType: 'AccountingDocument',
+        objectType: 'AccountingHeaderTransactionsUnit',
         objectIdField: 'accountingDocumentId'
     },
     openInPopupWindow: false,

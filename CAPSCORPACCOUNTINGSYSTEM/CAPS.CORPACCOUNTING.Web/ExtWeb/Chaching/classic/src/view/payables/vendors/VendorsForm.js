@@ -18,7 +18,7 @@
         attach: abp.auth.isGranted('Pages.Payables.Vendors.Attach')
     },
     attachmentConfig: {
-        objectType: 'Vendor',
+        objectType: 'VendorUnit',
         objectIdField: 'vendorId'
     },
     openInPopupWindow: false,

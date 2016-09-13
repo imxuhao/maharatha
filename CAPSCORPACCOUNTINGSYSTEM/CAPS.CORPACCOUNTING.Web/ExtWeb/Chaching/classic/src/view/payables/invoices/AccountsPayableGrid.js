@@ -55,7 +55,7 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableGrid', {
     isSubMenuItemTab: true,
     store: 'payables.invoices.AccountsPayableStore',
     attachmentConfig: {
-        objectType: 'AccountingDocument',
+        objectType: 'AccountingHeaderTransactionsUnit',
         objectIdField: 'accountingDocumentId'
     },
     columns: [

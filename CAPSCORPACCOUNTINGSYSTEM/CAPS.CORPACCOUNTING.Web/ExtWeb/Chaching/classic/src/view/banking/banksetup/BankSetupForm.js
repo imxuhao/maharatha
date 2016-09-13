@@ -9,7 +9,8 @@
         read: abp.auth.isGranted('Pages.Banking.BankSetup'),
         create: abp.auth.isGranted('Pages.Banking.BankSetup.Create'),
         edit: abp.auth.isGranted('Pages.Banking.BankSetup.Edit'),
-        destroy: abp.auth.isGranted('Pages.Banking.BankSetup.Delete')
+        destroy: abp.auth.isGranted('Pages.Banking.BankSetup.Delete'),
+        attach: abp.auth.isGranted('Pages.Banking.BankSetup.Attach')
     },
     name: 'banksetup',
     openInPopupWindow: false,
@@ -19,6 +20,10 @@
     showFormTitle: false,
     titleConfig: {
         title: abp.localization.localize("CreateBank").initCap()
+    },
+    attachmentConfig: {
+        objectType: 'BankAccountUnit',
+        objectIdField: 'bankAccountId'
     },
     items: {
         xtype: 'tabpanel',

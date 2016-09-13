@@ -15,7 +15,7 @@ Ext.define('Chaching.view.pettycash.entry.PettyCashGrid',{
         attach: abp.auth.isGranted('Pages.PettyCash.Entry.Attach')
     },
     attachmentConfig: {
-        objectType: 'AccountingDocument',
+        objectType: 'AccountingHeaderTransactionsUnit',
         objectIdField: 'accountingDocumentId'
     },
     gridId: 30,

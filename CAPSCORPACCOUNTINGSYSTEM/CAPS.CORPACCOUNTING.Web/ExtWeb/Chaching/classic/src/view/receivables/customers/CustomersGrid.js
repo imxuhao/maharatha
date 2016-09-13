@@ -19,7 +19,7 @@ Ext.define('Chaching.view.receivables.customers.CustomersGrid', {
         attach: abp.auth.isGranted('Pages.Receivables.Customers.Attach')
     },
     attachmentConfig: {
-        objectType: 'Customers',
+        objectType: 'CustomerUnit',
         objectIdField: 'customerId'
     },
     padding: 5,

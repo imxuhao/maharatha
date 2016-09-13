@@ -21,7 +21,7 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableForm',{
     border: false,
     frame: false,
     attachmentConfig: {
-        objectType: 'AccountingDocument',
+        objectType: 'AccountingHeaderTransactionsUnit',
         objectIdField: 'accountingDocumentId'
     },
     bbar: [

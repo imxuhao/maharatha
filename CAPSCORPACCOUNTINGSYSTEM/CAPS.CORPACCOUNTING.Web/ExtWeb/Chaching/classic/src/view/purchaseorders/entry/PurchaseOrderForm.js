@@ -16,7 +16,7 @@ Ext.define('Chaching.view.purchaseorders.entry.PurchaseOrderForm',{
         attach: abp.auth.isGranted('Pages.PurchaseOrders.Entry.Attach')
     },
     attachmentConfig: {
-        objectType: 'AccountingDocument',
+        objectType: 'AccountingHeaderTransactionsUnit',
         objectIdField: 'accountingDocumentId'
     },
     openInPopupWindow: false,
@@ -227,7 +227,7 @@ Ext.define('Chaching.view.purchaseorders.entry.PurchaseOrderForm',{
                                 title: app.localize('DistributionDetails').initCap(),
                                 iconCls: 'fa fa-list',
                                 isTransactionDetailGrid: true
-                            }, {
+                            },{
                                 title: app.localize('DetailHistory').initCap(),
                                 iconCls: 'fa fa-history',
                                 xtype: 'purchaseorders.entry.transactionDetailsHistory',

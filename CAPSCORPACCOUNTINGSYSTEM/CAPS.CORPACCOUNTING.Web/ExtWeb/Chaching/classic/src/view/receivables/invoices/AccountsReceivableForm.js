@@ -19,7 +19,7 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableForm', {
         attach: abp.auth.isGranted('Pages.Receivables.Invoices.Entry.Attach')
     },
     attachmentConfig: {
-        objectType: 'AccountingDocument',
+        objectType: 'AccountingHeaderTransactionsUnit',
         objectIdField: 'accountingDocumentId'
     },
     openInPopupWindow: false,

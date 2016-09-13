@@ -22,7 +22,6 @@ Ext.define('Chaching.view.purchaseorders.entry.PurchaseOrderGridController', {
                     vendorStore.getProxy().setExtraParam('query', record.get('vendorName'));
                     vendorStore.load();
                 }
-
                 if (record.get('isRetired')) {
                     var historyGrid = formPanel.down('gridpanel[isHistoryGrid=true]'),
                         historyStore = historyGrid.getStore();

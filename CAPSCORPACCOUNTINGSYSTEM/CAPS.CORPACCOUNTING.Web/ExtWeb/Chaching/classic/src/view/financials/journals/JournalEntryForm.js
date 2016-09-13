@@ -17,7 +17,7 @@ Ext.define('Chaching.view.financials.journals.JournalEntryForm',
         attach: abp.auth.isGranted('Pages.Financials.Journals.Entry.Attach')
     },
     attachmentConfig: {
-        objectType: 'AccountingDocument',
+        objectType: 'AccountingHeaderTransactionsUnit',
         objectIdField: 'accountingDocumentId'
     },
     openInPopupWindow: false,

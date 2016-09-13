@@ -12,7 +12,7 @@ Ext.define('Chaching.view.financials.journals.JournalEntryGrid', {
         attach: abp.auth.isGranted('Pages.Financials.Journals.Entry.Attach')
     },
     attachmentConfig: {
-        objectType: 'AccountingDocument',
+        objectType: 'AccountingHeaderTransactionsUnit',
         objectIdField: 'accountingDocumentId'
     },
     controller: 'financials-journals-journalentrygrid',

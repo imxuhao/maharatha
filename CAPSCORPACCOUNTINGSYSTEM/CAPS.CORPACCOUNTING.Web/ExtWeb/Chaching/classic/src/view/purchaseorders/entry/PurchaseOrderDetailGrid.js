@@ -13,7 +13,7 @@ Ext.define('Chaching.view.purchaseorders.entry.PurchaseOrderDetailGrid',{
         attach: abp.auth.isGranted('Pages.PurchaseOrders.Entry.Attach')
     },
     attachmentConfig: {
-        objectType: 'AccountingItem',
+        objectType: 'AccountingItemUnit',
         objectIdField: 'accountingItemId'
     },
     controller: 'purchaseorders-entry-purchaseorderdetailgrid',

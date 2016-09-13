@@ -62,8 +62,10 @@ namespace CAPS.CORPACCOUNTING.Masters
         User = 8,
 
         [Display(Name = "Organization")]
-        OrganizationUnit = 9
+        OrganizationUnit = 9,
 
+            [Display(Name="Accounts")]
+            Accounts=10
         //------------------------------
         //[Display(Name = "Vendor")]
         //Vendor = 1,

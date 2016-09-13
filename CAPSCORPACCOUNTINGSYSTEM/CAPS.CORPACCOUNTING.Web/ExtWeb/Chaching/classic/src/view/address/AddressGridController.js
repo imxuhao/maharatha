@@ -53,7 +53,8 @@
     doAfterCreateAction: function(createMode, formPanel, isEdit, record) {
         var me = this,
             view = me.getView(),
-            form = formPanel.down('form').getForm();
+            formView = formPanel.down('form'),
+            form = formView.getForm();
 
         var addressType = form.findField('addressTypeId').getStore();
         addressType.load();
@@ -63,6 +64,10 @@
 
         var state = form.findField('state').getStore();
         state.load();
+        if(isEdit) {
+            formView.getController().isEditAddress = true;
+        }
+        
 
     }
 });

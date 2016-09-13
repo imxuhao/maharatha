@@ -1,6 +1,7 @@
 Ext.define('Chaching.view.address.AddressFormController', {
     extend: 'Chaching.view.common.form.ChachingFormPanelController',
     alias: 'controller.address-addressform',
+    isEditAddress : false,
     doPreSaveOperation: function(record, values, idPropertyField) {
         var me = this,
             view = me.getView(),
@@ -27,7 +28,18 @@ Ext.define('Chaching.view.address.AddressFormController', {
         } else {
             Ext.apply(record.data, values);
             record.dirty = true;
-            parentStore.add(record);
+            if (me.isEditAddress && Ext.isEmpty(values.addressId)) {
+                var index = -1;
+                // get the row index;
+                index = parentGrid.getSelectionModel().selection.rowIdx;
+                if (index != -1) {
+                    parentStore.removeAt(index);
+                    parentStore.insert(index, record);
+                }
+            } else {
+                parentStore.add(record);
+            }
+            
         }
         if (view.openInPopupWindow) {
             Ext.destroy(view.up('window'));

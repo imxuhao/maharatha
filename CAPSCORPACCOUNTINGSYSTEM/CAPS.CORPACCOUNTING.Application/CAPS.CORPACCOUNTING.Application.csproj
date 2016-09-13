@@ -292,6 +292,10 @@
     <Compile Include="CreditCard\Dto\UpdateCreditCardCompanyUnitInput.cs" />
     <Compile Include="CreditCard\ICreditCardCompanyAppService.cs" />
     <Compile Include="CreditCard\ICreditCardEntryDocumentAppService.cs" />
+    <Compile Include="CronExpression\CronExpressionAppService.cs" />
+    <Compile Include="CronExpression\CronExpressionDto.cs" />
+    <Compile Include="CronExpression\CronExpressionInput.cs" />
+    <Compile Include="CronExpression\ICronExpressionAppService.cs" />
     <Compile Include="CustomDtoMapper.cs" />
     <Compile Include="DataExporting\Excel\EpPlus\EpPlusExcelExporterBase.cs" />
     <Compile Include="Dto\PagedAndFilteredInputDto.cs" />

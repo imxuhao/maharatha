@@ -54,8 +54,10 @@ Ext.define('Chaching.view.financials.journals.JournalEntryForm',
                         xtype: 'datefield',
                         name: 'transactionDate',
                         itemId: 'transactionDate',
+                        formatText : 'Expected date format mm/dd/yy',
                         allowBlank: false,
-                        format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
+                        format : 'm/d/y',
+                        submitFormat: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
                         emptyText: app.localize('MandatoryField'),
                         fieldLabel: app.localize('TransactionDate')
                     }, {
@@ -107,6 +109,8 @@ Ext.define('Chaching.view.financials.journals.JournalEntryForm',
                         displayField: 'journalType',
                         queryMode: 'local',
                         store: 'utilities.JournalTypeListStore',
+                        emptyText: app.localize('MandatoryField'),
+                        allowBlank: false,
                         listeners: {
                             select : 'onJournalTypeSelect'
                         }

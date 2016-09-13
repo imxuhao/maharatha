@@ -3687,6 +3687,7 @@
     <Content Include="ExtWeb\Chaching\app\model\manageView\ManageViewModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\address\AddressModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\batchposting\batches\BatchesModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\notes\NotesModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\payables\invoices\AccountsPayableDetailsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\payables\invoices\AccountsPayableModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\payables\vendors\VendorAliasModel.js" />
@@ -3761,6 +3762,7 @@
     <Content Include="ExtWeb\Chaching\app\store\maintenance\WebLogStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\manageView\ManageViewStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\batchposting\batches\BatchesStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\notes\NotesStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\payables\invoices\AccountsPayableDetailsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\payables\invoices\AccountsPayableStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\payables\vendors\VendorsAliasStore.js" />
@@ -3981,6 +3983,8 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\batchposting\batches\BatchesFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\batchposting\batches\BatchesGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\batchposting\batches\BatchesGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\notes\NotesView.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\notes\NotesViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\payables\invoices\AccountsPayableDetailGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\payables\invoices\AccountsPayableDetailGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\payables\invoices\AccountsPayableForm.js" />

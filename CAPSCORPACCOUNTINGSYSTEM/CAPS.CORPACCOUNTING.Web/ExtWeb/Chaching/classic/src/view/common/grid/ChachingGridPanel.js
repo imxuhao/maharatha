@@ -198,7 +198,12 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
      * 
      * @cfg {object} attachmentConfig
      */
-    attachmentConfig:null,
+    attachmentConfig: null,
+    /**
+    * 
+    * @cfg {object} notesConfig
+    */
+    notesConfig: null,
     initComponent: function () {
         var me = this,
             controller = me.getController(),
@@ -717,7 +722,10 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             defaultMenuItems.push(deleteMenuItem);
         }
         //add attachments menu item
-        if (me.modulePermissions.attach&&me.attachmentConfig) {
+        if (me.modulePermissions.attach && me.attachmentConfig) {
+            if (defaultMenuItems.length > 0) {
+                defaultMenuItems.push('-');
+            }
             var attachmentMenu= {
                 text: app.localize('Attach'),
                 iconCls: 'fa fa-paperclip',
@@ -730,6 +738,23 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                 }
             }
             defaultMenuItems.push(attachmentMenu);
+        }
+        if (me.modulePermissions.edit && me.notesConfig) {
+            if (defaultMenuItems.length > 0) {
+                defaultMenuItems.push('-');
+            }
+            var notesMenu = {
+                text: app.localize('Notes'),
+                iconCls: 'fa fa-sticky-note-o',
+                itemId: 'notesActionMenu',
+                eventListenerName: 'notesActionClicked',
+                listeners: {
+                    click: function (menu, item, e, eOpts) {
+                        return controller.notesActionClicked(menu, item, e, eOpts);
+                    }
+                }
+            }
+            defaultMenuItems.push(notesMenu);
         }
         return defaultMenuItems;
     },

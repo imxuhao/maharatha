@@ -58,6 +58,10 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableGrid', {
         objectType: 'AccountingHeaderTransactionsUnit',
         objectIdField: 'accountingDocumentId'
     },
+    notesConfig: {
+        objectType: 'AccountingHeaderTransactionsUnit',
+        objectIdField: 'accountingDocumentId'
+    },
     columns: [
         {
             text: app.localize('Post'),

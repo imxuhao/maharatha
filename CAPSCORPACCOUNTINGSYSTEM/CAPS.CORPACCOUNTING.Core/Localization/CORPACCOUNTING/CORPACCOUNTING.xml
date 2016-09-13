@@ -119,11 +119,11 @@
     <text name="InvalidEmailConfirmationCode" value="Invalid email confirmation code" />
     <text name="InvalidEmailConfirmationCode_Detail" value="Please be sure you entered this page by clicking the link sent to your email. If this not solves the problem, you can re-try to request a new confirmation code." />
     <text name="YourEmailIsConfirmedMessage" value="Your email address is successfully confirmed." />
-    <text name="ShouldChangePasswordOnNextLogin" value="Should Change Password On Next Login." />
-    <text name="SetRandomPassword" value="Set Random Password." />
+    <text name="ShouldChangePasswordOnNextLogin" value="Should Change Password On Next Login" />
+    <text name="SetRandomPassword" value="Set Random Password" />
     <text name="EmailActivation" value="Email Activation" />
     <text name="SendEmailActivationLink_Information" value="A link will be sent to your email to activate your email address. If you don't get an email within a few minutes, please re-try." />
-    <text name="SendActivationEmail" value="Send Activation Email." />
+    <text name="SendActivationEmail" value="Send Activation Email" />
     <text name="SendActivationEmailDefaultValue" value="support_sumit@capspayroll.com" />
     <text name="ChangePassword" value="Change Password" />
     <text name="CurrentPassword" value="Current Password" />

@@ -6,7 +6,8 @@
         westPanel: null,
         northPanel: null,
         appViewPort: null,
-        menuList:null
+        menuList: null,
+        test:null
     },
     settingsScope : {
         application: 1, //Represents a setting that can be configured/changed for the application level.

@@ -447,6 +447,29 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         }
 
     },
+    notesActionClicked: function (menu, item, e, eOpts) {
+        var me = this,
+          view = me.getView(),
+          notesCfg = view.notesConfig,
+          primaryKeyField = notesCfg.objectIdField,
+          widgetRec = menu.parentMenu.widgetRecord;
+
+        if (primaryKeyField && widgetRec && widgetRec.get(primaryKeyField)) {
+            var notesWnd = Ext.create('Chaching.view.notes.NotesView');
+            var notesView = notesWnd.down('dataview[itemId=notesDataview]');
+            var rec = {
+                objectId: widgetRec.get(primaryKeyField),
+                typeOfObjectId: ChachingGlobals.getTypeOfObjectId(notesCfg.objectType)
+            };
+            var notesStore = notesView.getStore();
+            notesStore.getProxy().setExtraParams(rec);
+            notesStore.load();
+            var form = notesWnd.down('form').getForm();
+            form.setValues(rec);
+            notesWnd.show();
+            notesView.setHeight(notesWnd.getHeight() - 200);
+        }
+    },
     onDeleteOperationCompleteCallBack: function (records, operation, success) {
         var controller = operation.controller,
            view = controller.getView(),

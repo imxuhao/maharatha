@@ -11817,7 +11817,7 @@
         <member name="P:CAPS.CORPACCOUNTING.Notes.Dto.NotedObjectUnitDto.CreatedUser">
             <summary>Gets or sets the CreatedUser field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Notes.Dto.NotedObjectUnitDto.CreateDateTime">
+        <member name="P:CAPS.CORPACCOUNTING.Notes.Dto.NotedObjectUnitDto.CreationTime">
             <summary>Gets or sets the CreateDateTime field. </summary>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Notes.Dto.NotedObjectUnitInput">

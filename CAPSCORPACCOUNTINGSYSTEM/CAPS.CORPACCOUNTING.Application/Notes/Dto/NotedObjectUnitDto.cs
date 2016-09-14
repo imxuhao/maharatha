@@ -36,7 +36,11 @@ namespace CAPS.CORPACCOUNTING.Notes.Dto
         public string CreatedUser { get; set; }
 
         /// <summary>Gets or sets the CreateDateTime field. </summary>
-        public DateTime CreateDateTime { get; set; }
+        public DateTime CreationTime { get; set; }
+
+        public bool AllowEdit { get; set; }
+
+        public bool AllowDelete { get; set; }
 
 
     }

@@ -16,7 +16,9 @@ using CAPS.CORPACCOUNTING.Attachments;
 using Abp.Application.Services.Dto;
 using AutoMapper;
 using System.Data.Entity;
+using System.Linq.Dynamic;
 using CAPS.CORPACCOUNTING.Authorization.Users;
+using CAPS.CORPACCOUNTING.Helpers;
 
 namespace CAPS.CORPACCOUNTING.Notes
 {
@@ -102,7 +104,7 @@ namespace CAPS.CORPACCOUNTING.Notes
                     NotedObjectUnitDto notedObjectUnitDto = new NotedObjectUnitDto();
                     notedObjectUnitDto.NotedObjectId = item.note.Id;
                     notedObjectUnitDto.CreatedUser = item.UserName;
-                    notedObjectUnitDto.CreateDateTime = item.note.CreationTime;
+                    notedObjectUnitDto.CreationTime = item.note.CreationTime;
                     
                     Mapper.Map(item.note, notedObjectUnitDto);
                     notedObjectUnitListDto.NotedObjectUnitDto.Add(notedObjectUnitDto);
@@ -110,6 +112,45 @@ namespace CAPS.CORPACCOUNTING.Notes
             }
 
             return notedObjectUnitListDto;
+        }
+
+        public async Task<List<NotedObjectUnitDto>> GetNotedObjectForRavi(GetNotedObjectUnitInput input)
+        {
+            var notedObjectUnitList = from note in _notedObjectUnitRepository.GetAll()
+                join user in _userUnitRepository.GetAll() on note.CreatorUserId equals user.Id into notes
+                from noteinner in notes.DefaultIfEmpty()
+                where note.TypeOfObjectId == input.TypeOfObjectId && note.ObjectId == input.ObjectId
+                select new
+                {
+                    NotedObjectId = note.Id,
+                    Notes=note.Notes,
+                    CreatedUser= noteinner.UserName,
+                    TypeOfObjectId=note.TypeOfObjectId,
+                    ObjectId=note.ObjectId,
+                    CreationTime=note.CreationTime,
+                    CreatedUserId=note.CreatorUserId
+                };
+            var result = await notedObjectUnitList.OrderBy(Helper.GetSort("CreationTime DESC", "")).ToListAsync();//
+            return new List<NotedObjectUnitDto>(result.Select(item =>
+            {
+                var dto = item.MapTo<NotedObjectUnitDto>();
+                dto.CreationTime = item.CreationTime;
+                //TODO:change based on history tracking. Make sure user only can edit/delete his own added notes.
+                if (item.CreatedUserId > 0)//TODO:&&item.CreatedUserId===CurrentLogin userId.
+                {
+                    dto.AllowEdit = true;
+                    dto.AllowDelete = true;
+                    dto.CreatedUser = item.CreatedUser;
+                }
+                else
+                {
+                    dto.AllowEdit = false;
+                    dto.AllowDelete = false;
+                    dto.CreatedUser = "System Generated.";
+                }
+
+                return dto;
+            }));
         }
     }
 }

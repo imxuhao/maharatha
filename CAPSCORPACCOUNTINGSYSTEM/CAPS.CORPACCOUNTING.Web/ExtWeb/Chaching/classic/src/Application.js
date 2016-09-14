@@ -136,7 +136,8 @@ Ext.define('Chaching.Application', {
         'receivables.inquiry.InquiryStore',
         'utilities.autofill.MappingAccountStore',
         'financials.accounts.AccountsMapToCOAStore',
-        'attachments.TypeOfAttachmentsStore'
+        'attachments.TypeOfAttachmentsStore',
+        'notes.NotesStore'
     ],
     //mainView: 'Chaching.view.main.ChachingViewport',
     launch: function () {

@@ -1448,5 +1448,8 @@
     <text name="EndRecurrence" value="End Recurrence" />
     <text name="ReportingCoaAccount" value="Reporting COA Account"/>
 <text name="EmailUserName" value="Name"/>
+    <text name="NewNotesInfoText" value="Enter notes here to create new note."/>
+    <text name="Note" value="Message"/>
+    <text name="EditNote" value="Edit note"/>
   </texts>
 </localizationDictionary>

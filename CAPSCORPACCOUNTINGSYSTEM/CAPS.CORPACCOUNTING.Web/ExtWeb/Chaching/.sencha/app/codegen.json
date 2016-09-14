@@ -592,6 +592,18 @@
         "modelNamespace": "Chaching.model",
         "name": "utilities.autofill.MappingAccountModel"
       }
+    },
+    "app/model/notes/NotesModel.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "31d5356142a167c72422f7902f19df3c583f3249",
+      "parameters": {
+        "appName": "Chaching",
+        "baseClass": "Ext.data.Model",
+        "fields": "id:int:null",
+        "modelFileName": "notes/NotesModel",
+        "modelNamespace": "Chaching.model",
+        "name": "notes.NotesModel"
+      }
     }
   }
 }

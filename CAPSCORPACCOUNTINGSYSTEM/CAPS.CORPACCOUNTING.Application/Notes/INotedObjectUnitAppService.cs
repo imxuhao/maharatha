@@ -43,5 +43,7 @@ namespace CAPS.CORPACCOUNTING.Notes
         /// <param name="input"></param>
         /// <returns></returns>
         Task<NotedObjectUnitListDto> GetNotedObjectUnit(GetNotedObjectUnitInput input);
+
+        Task<List<NotedObjectUnitDto>> GetNotedObjectForRavi(GetNotedObjectUnitInput input);
     }
 }
